@@ -10,12 +10,13 @@
 # The installer is not Authenticode-signed (no Windows code-signing cert), so
 # Windows SmartScreen will warn on first install until a cert is added.
 
-name: Release — Windows (user setup)
+name: Release — Windows (user setup, unsigned, manual)
 
+# Manual Windows-only build (unsigned artifact). The full signed release
+# pipeline is release.yml (triggered by tags); this stays for quick unsigned
+# Windows checks without cutting a release.
 on:
   workflow_dispatch:
-  push:
-    tags: ['v*']
 
 jobs:
   build:

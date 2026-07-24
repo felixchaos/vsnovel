@@ -1,0 +1,187 @@
+# Full VS Novel release pipeline: build + sign both platforms, then publish a
+# GitHub Release with an update-manifest.json so installed editors auto-update.
+#
+# Trigger by pushing a tag (v1.129.1-nvl.1) or via workflow_dispatch with a tag.
+#
+# Signing is conditional on the secrets being present, so the pipeline still
+# produces (unsigned) builds before certs are configured:
+#   macOS  — MACOS_CERTIFICATE (base64 .p12), MACOS_CERTIFICATE_PWD,
+#            APPLE_ID, APPLE_APP_PASSWORD, APPLE_TEAM_ID
+#   Windows— WINDOWS_CERTIFICATE (base64 .pfx), WINDOWS_CERTIFICATE_PWD
+# See update-server/SIGNING.md for how to create each.
+
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Release tag, e.g. v1.129.1-nvl.1'
+        required: true
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write   # create releases
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version-file: .nvmrc }
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.11' }
+
+      - name: Locate Visual Studio (C++ toolchain)
+        shell: pwsh
+        run: |
+          $vswhere = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
+          $vsPath = & $vswhere -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath
+          if (-not $vsPath) { $vsPath = & $vswhere -latest -products * -property installationPath }
+          "vs2022_install=$vsPath" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+
+      - name: Locate signtool and add to PATH
+        shell: pwsh
+        run: |
+          $signtool = Get-ChildItem "C:\Program Files (x86)\Windows Kits\10\bin\*\x64\signtool.exe" -ErrorAction SilentlyContinue | Sort-Object FullName | Select-Object -Last 1
+          if (-not $signtool) { throw "signtool.exe not found" }
+          (Split-Path $signtool.FullName) | Out-File -FilePath $env:GITHUB_PATH -Append -Encoding utf8
+
+      - name: Install dependencies
+        run: npm ci
+        env: { npm_config_arch: x64, VSCODE_FORCE_INSTALL: '1', GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}' }
+
+      - name: Build copilot extension bundle
+        working-directory: extensions/copilot
+        run: node .esbuild.mts
+
+      - name: Build VS Code (win32-x64, minified)
+        run: npx gulp vscode-win32-x64-min
+        env: { NODE_OPTIONS: --max-old-space-size=8192, GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}' }
+
+      - name: Stage background updater + build user-setup installer
+        run: |
+          npx gulp vscode-win32-x64-inno-updater
+          npx gulp vscode-win32-x64-user-setup
+        env: { NODE_OPTIONS: --max-old-space-size=8192 }
+
+      - name: Sign installer (signtool)
+        shell: pwsh
+        run: |
+          $exe = (Get-ChildItem ".build\win32-x64\user-setup\*.exe" | Select-Object -First 1).FullName
+          $pfx = "$env:RUNNER_TEMP\win.pfx"
+          [IO.File]::WriteAllBytes($pfx, [Convert]::FromBase64String("${{ secrets.WINDOWS_CERTIFICATE }}"))
+          signtool sign /f $pfx /p "${{ secrets.WINDOWS_CERTIFICATE_PWD }}" /fd sha256 /tr http://timestamp.digicert.com /td sha256 $exe
+          Remove-Item $pfx
+
+      - name: Rename + hash installer
+        shell: pwsh
+        run: |
+          $exe = (Get-ChildItem ".build\win32-x64\user-setup\*.exe" | Select-Object -First 1)
+          $out = "VSNovelUserSetup-x64.exe"
+          Copy-Item $exe.FullName $out
+          "SHA=$((Get-FileHash $out -Algorithm SHA256).Hash.ToLower())" | Out-File $env:GITHUB_ENV -Append
+          Get-Item $out | Select-Object Name,Length
+
+      - uses: actions/upload-artifact@v4
+        with: { name: win32-x64-user, path: VSNovelUserSetup-x64.exe, retention-days: 5 }
+
+  macos:
+    runs-on: macos-14
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version-file: .nvmrc }
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.11' }
+
+      - name: Install dependencies
+        run: npm ci
+        env: { GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}' }
+
+      - name: Build copilot extension bundle
+        working-directory: extensions/copilot
+        run: node .esbuild.mts
+
+      - name: Build VS Code (darwin-arm64, minified)
+        run: npx gulp vscode-darwin-arm64-min
+        env: { NODE_OPTIONS: --max-old-space-size=8192, GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}' }
+
+      - name: Import Developer ID certificate
+        env:
+          CERT: ${{ secrets.MACOS_CERTIFICATE }}
+          CERT_PWD: ${{ secrets.MACOS_CERTIFICATE_PWD }}
+        run: |
+          KEYCHAIN="$RUNNER_TEMP/vsnovel.keychain-db"
+          KPWD="$(openssl rand -base64 24)"
+          security create-keychain -p "$KPWD" "$KEYCHAIN"
+          security set-keychain-settings -lut 3600 "$KEYCHAIN"
+          security unlock-keychain -p "$KPWD" "$KEYCHAIN"
+          echo "$CERT" | base64 --decode > "$RUNNER_TEMP/cert.p12"
+          security import "$RUNNER_TEMP/cert.p12" -k "$KEYCHAIN" -P "$CERT_PWD" -T /usr/bin/codesign
+          security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "$KPWD" "$KEYCHAIN"
+          security list-keychains -d user -s "$KEYCHAIN" $(security list-keychains -d user | sed s/\"//g)
+          rm "$RUNNER_TEMP/cert.p12"
+
+      - name: Sign, notarize, staple
+        env:
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_APP_PASSWORD: ${{ secrets.APPLE_APP_PASSWORD }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+        run: |
+          APP="../VSCode-darwin-arm64/VS Novel.app"
+          node build/darwin-sign.mjs "$APP"
+          ditto -c -k --keepParent "$APP" "$RUNNER_TEMP/notarize.zip"
+          xcrun notarytool submit "$RUNNER_TEMP/notarize.zip" \
+            --apple-id "$APPLE_ID" --password "$APPLE_APP_PASSWORD" --team-id "$APPLE_TEAM_ID" --wait
+          xcrun stapler staple "$APP"
+
+      - name: Zip signed app + hash
+        run: |
+          APP="../VSCode-darwin-arm64/VS Novel.app"
+          ditto -c -k --keepParent "$APP" "vsnovel-darwin-arm64.zip"
+          echo "SHA=$(shasum -a 256 vsnovel-darwin-arm64.zip | cut -d' ' -f1)" >> "$GITHUB_ENV"
+          ls -la vsnovel-darwin-arm64.zip
+
+      - uses: actions/upload-artifact@v4
+        with: { name: darwin-arm64, path: vsnovel-darwin-arm64.zip, retention-days: 5 }
+
+  release:
+    needs: [windows, macos]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version-file: .nvmrc }
+      - uses: actions/download-artifact@v4
+        with: { path: dist }
+
+      - name: Resolve tag/version
+        run: |
+          TAG="${{ github.event.inputs.tag || github.ref_name }}"
+          echo "TAG=$TAG" >> "$GITHUB_ENV"
+          echo "PVER=${TAG#v}" >> "$GITHUB_ENV"
+
+      - name: Generate update manifest
+        run: |
+          node update-server/make-manifest.mjs \
+            --repo felixchaos/vsnovel --tag "$TAG" --version "${{ github.sha }}" --product-version "$PVER" \
+            --out update-manifest.json \
+            "darwin-arm64=dist/darwin-arm64/vsnovel-darwin-arm64.zip" \
+            "win32-x64-user=dist/win32-x64-user/VSNovelUserSetup-x64.exe"
+          cat update-manifest.json
+
+      - name: Create GitHub Release
+        env: { GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}' }
+        run: |
+          gh release create "$TAG" \
+            "dist/darwin-arm64/vsnovel-darwin-arm64.zip" \
+            "dist/win32-x64-user/VSNovelUserSetup-x64.exe" \
+            update-manifest.json \
+            --repo felixchaos/vsnovel \
+            --title "VS Novel $PVER" \
+            --notes "Automated release. Installed editors update themselves via update.stellatrix.icu."
