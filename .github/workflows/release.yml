@@ -152,15 +152,39 @@ jobs:
             --apple-id "$APPLE_ID" --password "$APPLE_APP_PASSWORD" --team-id "$APPLE_TEAM_ID" --wait
           xcrun stapler staple "$APP"
 
-      - name: Zip signed app + hash
+      - name: Zip signed app (for auto-update)
         run: |
           APP="../VSCode-darwin-arm64/VS Novel.app"
           ditto -c -k --keepParent "$APP" "VS-Novel-macOS-AppleSilicon.zip"
-          echo "SHA=$(shasum -a 256 VS-Novel-macOS-AppleSilicon.zip | cut -d' ' -f1)" >> "$GITHUB_ENV"
           ls -la VS-Novel-macOS-AppleSilicon.zip
 
+      # Human-facing download: a standard drag-to-Applications .dmg. The updater
+      # keeps using the .zip above; the .dmg is only attached to the Release.
+      - name: Build notarized DMG (for download)
+        if: steps.cfg.outputs.sign == 'true'
+        env:
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_APP_PASSWORD: ${{ secrets.APPLE_APP_PASSWORD }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+        run: |
+          APP="../VSCode-darwin-arm64/VS Novel.app"
+          STAGE="$RUNNER_TEMP/dmg"; rm -rf "$STAGE"; mkdir -p "$STAGE"
+          cp -R "$APP" "$STAGE/"
+          ln -s /Applications "$STAGE/Applications"
+          hdiutil create -volname "VS Novel" -srcfolder "$STAGE" -ov -format UDZO "VS-Novel-macOS-AppleSilicon.dmg"
+          xcrun notarytool submit "VS-Novel-macOS-AppleSilicon.dmg" \
+            --apple-id "$APPLE_ID" --password "$APPLE_APP_PASSWORD" --team-id "$APPLE_TEAM_ID" --wait
+          xcrun stapler staple "VS-Novel-macOS-AppleSilicon.dmg"
+          ls -la VS-Novel-macOS-AppleSilicon.dmg
+
       - uses: actions/upload-artifact@v4
-        with: { name: darwin-arm64, path: VS-Novel-macOS-AppleSilicon.zip, retention-days: 5 }
+        with:
+          name: darwin-arm64
+          path: |
+            VS-Novel-macOS-AppleSilicon.zip
+            VS-Novel-macOS-AppleSilicon.dmg
+          if-no-files-found: ignore
+          retention-days: 5
 
   release:
     needs: [windows, macos]
@@ -190,8 +214,10 @@ jobs:
       - name: Create GitHub Release
         env: { GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}' }
         run: |
+          DMG=$(ls dist/darwin-arm64/*.dmg 2>/dev/null | head -1)
           gh release create "$TAG" \
             "dist/darwin-arm64/VS-Novel-macOS-AppleSilicon.zip" \
+            ${DMG:+"$DMG"} \
             "dist/win32-x64-user/VS-Novel-Windows-x64-Setup.exe" \
             update-manifest.json \
             --repo felixchaos/vsnovel \
