@@ -50,6 +50,11 @@ jobs:
           if (-not $signtool) { throw "signtool.exe not found" }
           (Split-Path $signtool.FullName) | Out-File -FilePath $env:GITHUB_PATH -Append -Encoding utf8
 
+      - name: Detect Windows signing cert
+        id: cfg
+        shell: bash
+        run: echo "sign=${{ secrets.WINDOWS_CERTIFICATE != '' }}" >> "$GITHUB_OUTPUT"
+
       - name: Install dependencies
         run: npm ci
         env: { npm_config_arch: x64, VSCODE_FORCE_INSTALL: '1', GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}' }
@@ -69,6 +74,7 @@ jobs:
         env: { NODE_OPTIONS: --max-old-space-size=8192 }
 
       - name: Sign installer (signtool)
+        if: steps.cfg.outputs.sign == 'true'
         shell: pwsh
         run: |
           $exe = (Get-ChildItem ".build\win32-x64\user-setup\*.exe" | Select-Object -First 1).FullName
@@ -99,6 +105,10 @@ jobs:
       - uses: actions/setup-python@v5
         with: { python-version: '3.11' }
 
+      - name: Detect macOS signing cert
+        id: cfg
+        run: echo "sign=${{ secrets.MACOS_CERTIFICATE != '' }}" >> "$GITHUB_OUTPUT"
+
       - name: Install dependencies
         run: npm ci
         env: { GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}' }
@@ -112,6 +122,7 @@ jobs:
         env: { NODE_OPTIONS: --max-old-space-size=8192, GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}' }
 
       - name: Import Developer ID certificate
+        if: steps.cfg.outputs.sign == 'true'
         env:
           CERT: ${{ secrets.MACOS_CERTIFICATE }}
           CERT_PWD: ${{ secrets.MACOS_CERTIFICATE_PWD }}
@@ -128,6 +139,7 @@ jobs:
           rm "$RUNNER_TEMP/cert.p12"
 
       - name: Sign, notarize, staple
+        if: steps.cfg.outputs.sign == 'true'
         env:
           APPLE_ID: ${{ secrets.APPLE_ID }}
           APPLE_APP_PASSWORD: ${{ secrets.APPLE_APP_PASSWORD }}
