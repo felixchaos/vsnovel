@@ -87,13 +87,13 @@ jobs:
         shell: pwsh
         run: |
           $exe = (Get-ChildItem ".build\win32-x64\user-setup\*.exe" | Select-Object -First 1)
-          $out = "VSNovelUserSetup-x64.exe"
+          $out = "VS-Novel-Windows-x64-Setup.exe"
           Copy-Item $exe.FullName $out
           "SHA=$((Get-FileHash $out -Algorithm SHA256).Hash.ToLower())" | Out-File $env:GITHUB_ENV -Append
           Get-Item $out | Select-Object Name,Length
 
       - uses: actions/upload-artifact@v4
-        with: { name: win32-x64-user, path: VSNovelUserSetup-x64.exe, retention-days: 5 }
+        with: { name: win32-x64-user, path: VS-Novel-Windows-x64-Setup.exe, retention-days: 5 }
 
   macos:
     runs-on: macos-14
@@ -155,12 +155,12 @@ jobs:
       - name: Zip signed app + hash
         run: |
           APP="../VSCode-darwin-arm64/VS Novel.app"
-          ditto -c -k --keepParent "$APP" "vsnovel-darwin-arm64.zip"
-          echo "SHA=$(shasum -a 256 vsnovel-darwin-arm64.zip | cut -d' ' -f1)" >> "$GITHUB_ENV"
-          ls -la vsnovel-darwin-arm64.zip
+          ditto -c -k --keepParent "$APP" "VS-Novel-macOS-AppleSilicon.zip"
+          echo "SHA=$(shasum -a 256 VS-Novel-macOS-AppleSilicon.zip | cut -d' ' -f1)" >> "$GITHUB_ENV"
+          ls -la VS-Novel-macOS-AppleSilicon.zip
 
       - uses: actions/upload-artifact@v4
-        with: { name: darwin-arm64, path: vsnovel-darwin-arm64.zip, retention-days: 5 }
+        with: { name: darwin-arm64, path: VS-Novel-macOS-AppleSilicon.zip, retention-days: 5 }
 
   release:
     needs: [windows, macos]
@@ -183,16 +183,16 @@ jobs:
           node update-server/make-manifest.mjs \
             --repo felixchaos/vsnovel --tag "$TAG" --version "${{ github.sha }}" --product-version "$PVER" \
             --out update-manifest.json \
-            "darwin-arm64=dist/darwin-arm64/vsnovel-darwin-arm64.zip" \
-            "win32-x64-user=dist/win32-x64-user/VSNovelUserSetup-x64.exe"
+            "darwin-arm64=dist/darwin-arm64/VS-Novel-macOS-AppleSilicon.zip" \
+            "win32-x64-user=dist/win32-x64-user/VS-Novel-Windows-x64-Setup.exe"
           cat update-manifest.json
 
       - name: Create GitHub Release
         env: { GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}' }
         run: |
           gh release create "$TAG" \
-            "dist/darwin-arm64/vsnovel-darwin-arm64.zip" \
-            "dist/win32-x64-user/VSNovelUserSetup-x64.exe" \
+            "dist/darwin-arm64/VS-Novel-macOS-AppleSilicon.zip" \
+            "dist/win32-x64-user/VS-Novel-Windows-x64-Setup.exe" \
             update-manifest.json \
             --repo felixchaos/vsnovel \
             --title "VS Novel $PVER" \
