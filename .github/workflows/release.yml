@@ -92,7 +92,7 @@ jobs:
           "SHA=$((Get-FileHash $out -Algorithm SHA256).Hash.ToLower())" | Out-File $env:GITHUB_ENV -Append
           Get-Item $out | Select-Object Name,Length
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with: { name: win32-x64-user, path: VS-Novel-Windows-x64-Setup.exe, retention-days: 5 }
 
   macos:
@@ -177,7 +177,7 @@ jobs:
           xcrun stapler staple "VS-Novel-macOS-AppleSilicon.dmg"
           ls -la VS-Novel-macOS-AppleSilicon.dmg
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: darwin-arm64
           path: |
