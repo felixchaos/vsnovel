@@ -1,0 +1,254 @@
+{
+	"anchor": "1.129.1",
+	"note": "Semantic seams for structured-data files. Each entry records the value UPSTREAM holds at the anchor tag, not the value we write. Verification asks: does upstream still hold this? If not, our edit was written against a fact that no longer exists — re-derive it. Hunk-level text fingerprints are useless here because JSON boilerplate repeats hundreds of times.",
+	"seams": [
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "contributes.languageModelTools[name=copilot_searchCodebase].when",
+			"upstream": null,
+			"absent": true,
+			"note": "dev tool, ungated upstream; we add the novelBuilder.developerTools gate"
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "contributes.languageModelTools[name=copilot_searchWorkspaceSymbols].when",
+			"upstream": null,
+			"absent": true,
+			"note": "dev tool, ungated upstream"
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "contributes.languageModelTools[name=copilot_getVSCodeAPI].when",
+			"upstream": null,
+			"absent": true,
+			"note": "dev tool, ungated upstream"
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "contributes.languageModelTools[name=copilot_getErrors].when",
+			"upstream": null,
+			"absent": true,
+			"note": "dev tool, ungated upstream"
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "contributes.languageModelTools[name=copilot_runVscodeCommand].when",
+			"upstream": null,
+			"absent": true,
+			"note": "dev tool, ungated upstream"
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "contributes.languageModelTools[name=copilot_createNewJupyterNotebook].when",
+			"upstream": null,
+			"absent": true,
+			"note": "dev tool, ungated upstream"
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "contributes.languageModelTools[name=copilot_editNotebook].when",
+			"upstream": null,
+			"absent": true,
+			"note": "dev tool, ungated upstream"
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "contributes.languageModelTools[name=copilot_runNotebookCell].when",
+			"upstream": null,
+			"absent": true,
+			"note": "dev tool, ungated upstream"
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "contributes.languageModelTools[name=copilot_getNotebookSummary].when",
+			"upstream": null,
+			"absent": true,
+			"note": "dev tool, ungated upstream"
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "contributes.languageModelTools[name=copilot_readNotebookCellOutput].when",
+			"upstream": null,
+			"absent": true,
+			"note": "dev tool, ungated upstream"
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "contributes.languageModelTools[name=copilot_findTestFiles].when",
+			"upstream": null,
+			"absent": true,
+			"note": "dev tool, ungated upstream"
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "contributes.languageModelTools[name=copilot_githubTextSearch].when",
+			"upstream": null,
+			"absent": true,
+			"note": "dev tool, ungated upstream"
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "contributes.languageModelTools[name=execution_subagent].when",
+			"upstream": "config.github.copilot.chat.executionSubagent.enabled",
+			"note": "we AND our gate onto an existing upstream when — if upstream changes this expression our conjunction is stale"
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "contributes.languageModelTools[name=copilot_installExtension].when",
+			"upstream": "!config.github.copilot.chat.installExtensionSkill.enabled",
+			"note": "we AND our gate onto an existing upstream when"
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "contributes.languageModelTools[name=copilot_githubRepo].when",
+			"upstream": "!config.github.copilot.chat.githubMcpServer.enabled",
+			"note": "we AND our gate onto an existing upstream when"
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "contributes.configuration[0].properties['github.copilot.enable'].default",
+			"upstream": {
+				"*": true,
+				"plaintext": false,
+				"markdown": false,
+				"scminput": false
+			},
+			"note": "we flip plaintext/markdown to true; if upstream restructures this default our flip may drop a key it added"
+		},
+		{
+			"file": "product.json",
+			"selector": "defaultChatAgent.chatExtensionId",
+			"upstream": "GitHub.copilot-chat",
+			"note": "Deliberately unchanged. The product is the copilot extension modified in place, so this id is already ours. Changing it would require builtInExtensionsEnabledWithAutoUpdates to move in lockstep or chatSetupController's unconditional install() resolves nothing and setup retries forever (extensionsWorkbenchService.ts:2650-2727).",
+			"depends": true
+		},
+		{
+			"file": "product.json",
+			"selector": "defaultChatAgent.provider.default.id",
+			"upstream": "github",
+			"note": "A4 replaces this with our authentication provider id. trustedExtensionAuthAccess must stay keyed to the same value or the extension gets a consent prompt for its own product."
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "contributes.configuration[0].properties['github.copilot.chat.novelBuilder.developerTools']",
+			"absent": true,
+			"note": "our own setting id, declaring the 16 developer-tool gates. Upstream holds nothing here; if it ever claims this id our declaration would silently lose to or clobber theirs, and every gated tool would change behaviour at once."
+		},
+		{
+			"file": "product.json",
+			"selector": "defaultChatAgent.provider.default.name",
+			"upstream": "GitHub",
+			"note": "A4 replaces this. It is rendered verbatim in the setup dialog and the chat disclaimer."
+		},
+		{
+			"file": "product.json",
+			"selector": "defaultChatAgent.providerExtensionId",
+			"upstream": "vscode.github-authentication",
+			"note": "A4 sets this empty on purpose. Core uses it to re-enable the extension that contributes the provider (chatSetup.ts:98-120) — but ours is contributed by the extension that is already running, so there is nothing to enable, and attempting it fails with \"Cannot change enablement ... because Settings Sync depends on it\" and blocks setup. An empty value makes core skip the step outright."
+		},
+		{
+			"file": "product.json",
+			"selector": "defaultChatAgent.providerScopes",
+			"upstream": [
+				[
+					"read:user",
+					"user:email",
+					"repo",
+					"workflow"
+				],
+				[
+					"user:email"
+				],
+				[
+					"read:user"
+				]
+			],
+			"note": "A4 replaces this. scopes[0] is what core requests; scopesMatch is a subset test against what our provider issues."
+		},
+		{
+			"file": "product.json",
+			"selector": "defaultChatAgent.entitlementUrl",
+			"upstream": "https://api.github.com/copilot_internal/user",
+			"note": "A4 points this at our deployment. The gate on the whole chat surface: 401/404 here resolves the entitlement to Unknown and renders as signed out."
+		},
+		{
+			"file": "product.json",
+			"selector": "defaultChatAgent.tokenEntitlementUrl",
+			"upstream": "https://api.github.com/copilot_internal/v2/token",
+			"note": "A4 points this at our deployment. Where the session token comes from."
+		},
+		{
+			"file": "product.json",
+			"selector": "defaultChatAgent.entitlementSignupLimitedUrl",
+			"upstream": "https://api.github.com/copilot_internal/subscribe_limited_user",
+			"note": "A4 points this at our deployment. POSTed only for users we report as able to sign up for the limited tier."
+		},
+		{
+			"file": "product.json",
+			"selector": "defaultChatAgent.mcpRegistryDataUrl",
+			"upstream": "https://api.github.com/copilot/mcp_registry",
+			"note": "A4 points this at our deployment. Fetched after entitlement when chat_enabled is true."
+		},
+		{
+			"file": "product.json",
+			"selector": "defaultChatAgent.managedSettingsUrl",
+			"upstream": "https://api.github.com/copilot_internal/managed_settings",
+			"note": "A4 points this at our deployment. Enterprise policy blob, fetched alongside the token entitlements."
+		},
+		{
+			"file": "product.json",
+			"selector": "defaultChatAgent.extensionId",
+			"upstream": "GitHub.copilot",
+			"note": "Deliberately unchanged, same reason as chatExtensionId. Also dereferenced without a guard at extensionGalleryService.ts:1992.",
+			"depends": true
+		},
+		{
+			"file": "product.json",
+			"selector": "builtInExtensionsEnabledWithAutoUpdates",
+			"upstream": [
+				"GitHub.copilot-chat"
+			],
+			"note": "Deliberately unchanged. Must list chatExtensionId, or setup's install() throws NotFound and the dialog loops.",
+			"depends": true
+		},
+		{
+			"file": "product.json",
+			"selector": "defaultChatAgent.provider.google",
+			"upstream": {
+				"id": "google",
+				"name": "Google"
+			},
+			"note": "Unreachable but mandatory. chatSetupRunner.ts:265 dereferences .name with no guard; the ?? fallback covers only a missing `provider` object entirely.",
+			"depends": true
+		},
+		{
+			"file": "product.json",
+			"selector": "defaultChatAgent.provider.apple",
+			"upstream": {
+				"id": "apple",
+				"name": "Apple"
+			},
+			"note": "Unreachable but mandatory, same as provider.google.",
+			"depends": true
+		},
+		{
+			"file": "product.json",
+			"selector": "trustedExtensionAuthAccess",
+			"upstream": {
+				"github": [
+					"GitHub.copilot-chat"
+				],
+				"github-enterprise": [
+					"GitHub.copilot-chat"
+				]
+			},
+			"note": "A4 re-keys this from the GitHub provider ids to ours. It is keyed by authentication provider id (authenticationAccessService.ts:51); without an entry matching provider.default.id the extension gets a consent prompt for its own product's account on first use. If upstream adds a provider key here, ours would silently drop it."
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "contributes.configurationDefaults['workbench.welcomePage.experimentalOnboarding']",
+			"absent": true,
+			"note": "Turns off the experimental welcome page. Its sign-in button label is a literal \"Continue with GitHub\" and the provider it signs into is a hardcoded 'github' (onboardingVariationA.ts:707), while the surrounding terms text correctly reads Novel Builder because that part comes from product.json. On this product it therefore signs into a provider that does not exist, which is what produced two disagreeing states: an account menu showing a valid Novel Builder session and a chat surface insisting the user is signed out. Upstream holds nothing at this key."
+		}
+	]
+}

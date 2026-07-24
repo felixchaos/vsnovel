@@ -1,0 +1,221 @@
+{
+	"anchor": "1.129.1",
+	"note": "Generated from the committed diff, then annotated by hand. Regenerate ONLY when adding a rule deliberately — this file is the source of truth for what the transform does, not a cache.",
+	"delegations": [
+		{
+			"file": "extensions/copilot/src/extension/prompts/node/base/copilotIdentity.tsx",
+			"expect": "NovelIdentityRules",
+			"why": "Restructured to delegate to src/novel/prompts/novelRules.tsx. These two slots are shared by every model family, so editing them here reaches all of them at once. A rewrite, not a substitution — the check asserts the delegation is still in place rather than replaying a diff."
+		},
+		{
+			"file": "extensions/copilot/src/extension/prompts/node/base/safetyRules.tsx",
+			"expect": "NovelSafetyRules",
+			"why": "Restructured to delegate to src/novel/prompts/novelRules.tsx. These two slots are shared by every model family, so editing them here reaches all of them at once. A rewrite, not a substitution — the check asserts the delegation is still in place rather than replaying a diff."
+		}
+	],
+	"rules": [
+		{
+			"id": "you-are-a-highly-sophisticated-automated",
+			"from": "You are a highly sophisticated automated coding agent with expert-level knowledge across many different programming languages and frameworks.<br />",
+			"to": "You are a highly sophisticated automated writing agent with expert-level knowledge across many different genres and narrative forms.<br />",
+			"files": [
+				"extensions/copilot/src/extension/prompts/node/agent/anthropicPrompts.tsx",
+				"extensions/copilot/src/extension/prompts/node/agent/defaultAgentInstructions.tsx",
+				"extensions/copilot/src/extension/prompts/node/agent/geminiPrompts.tsx",
+				"extensions/copilot/src/extension/prompts/node/agent/openai/defaultOpenAIPrompt.tsx",
+				"extensions/copilot/src/extension/prompts/node/agent/xAIPrompts.tsx"
+			],
+			"exclude": [
+				"extensions/copilot/src/extension/prompts/node/panel/editCodePrompt2.tsx",
+				"extensions/copilot/src/extension/prompts/node/panel/notebookInlinePrompt.tsx"
+			],
+			"excludeWhy": "Both are inline code-edit prompts whose entire body is about code blocks and diagnostics. Reframing only the role sentence would leave a prompt that calls itself a writing agent and then explains how to emit a code patch. Whether inline edit needs a prose variant is a product question, tracked separately — not something this rule decides by matching one shared sentence.",
+			"marker": "{/* NOVEL-BUILDER: \"highly sophisticated automated coding agent\" -> \"highly sophisticated automated writing agent\". The surrounding per-family prompt engineering is upstream's and must survive the rebase. */}"
+		},
+		{
+			"id": "you-are-a-coding-agent-running",
+			"from": "You are a coding agent running in VS Code. You are expected to be precise, safe, and helpful.<br />",
+			"to": "You are a writing agent running in VS Code. You are expected to be precise, safe, and helpful.<br />",
+			"files": [
+				"extensions/copilot/src/extension/prompts/node/agent/openai/gpt51Prompt.tsx",
+				"extensions/copilot/src/extension/prompts/node/agent/openai/gpt52Prompt.tsx",
+				"extensions/copilot/src/extension/prompts/node/agent/openai/gpt53CodexPrompt.tsx",
+				"extensions/copilot/src/extension/prompts/node/agent/openai/gpt54Prompt.tsx",
+				"extensions/copilot/src/extension/prompts/node/agent/openai/gpt5Prompt.tsx"
+			],
+			"marker": "{/* NOVEL-BUILDER: \"coding agent\" -> \"writing agent\". The surrounding per-family prompt engineering is upstream's and must survive the rebase. */}"
+		},
+		{
+			"id": "you-are-an-expert-ai-programming",
+			"from": "You are an expert AI programming assistant, working with a user in the VS Code editor.<br />",
+			"to": "You are an expert AI writing assistant, working with an author in their manuscript.<br />",
+			"files": [
+				"extensions/copilot/src/extension/prompts/node/agent/agentPrompt.tsx",
+				"extensions/copilot/src/extension/prompts/node/agent/familyHPrompts.tsx",
+				"extensions/copilot/src/extension/prompts/node/agent/minimaxPrompts.tsx",
+				"extensions/copilot/src/extension/prompts/node/agent/vscModelPrompts.tsx"
+			],
+			"marker": "{/* NOVEL-BUILDER: \"expert AI programming assistant\" -> \"expert AI writing assistant\". The surrounding per-family prompt engineering is upstream's and must survive the rebase. */}"
+		},
+		{
+			"id": "you-are-a-coding-agent-you",
+			"from": "You are a coding agent. You must keep going until the query or task is completely resolved, before ending your turn and yielding back to the user. Persist until the task is fully handled end-to-end within the current turn whenever feasible and persevere even when function calls fail. Only terminate your turn when you are sure that the problem is solved. Autonomously resolve the query to the best of your ability, using the tools available to you, before coming back to the user. Do NOT guess or make up an answer.<br />",
+			"to": "You are a writing agent. You must keep going until the query or task is completely resolved, before ending your turn and yielding back to the user. Persist until the task is fully handled end-to-end within the current turn whenever feasible and persevere even when function calls fail. Only terminate your turn when you are sure that the problem is solved. Autonomously resolve the query to the best of your ability, using the tools available to you, before coming back to the user. Do NOT guess or make up an answer.<br />",
+			"files": [
+				"extensions/copilot/src/extension/prompts/node/agent/openai/gpt51Prompt.tsx",
+				"extensions/copilot/src/extension/prompts/node/agent/openai/gpt52Prompt.tsx",
+				"extensions/copilot/src/extension/prompts/node/agent/openai/gpt53CodexPrompt.tsx",
+				"extensions/copilot/src/extension/prompts/node/agent/openai/gpt54Prompt.tsx"
+			],
+			"marker": "{/* NOVEL-BUILDER: \"coding agent\" -> \"writing agent\". The surrounding per-family prompt engineering is upstream's and must survive the rebase. */}"
+		},
+		{
+			"id": "you-are-a-coding-agent-running-2",
+			"from": "You are a coding agent running in VS Code. You and the user share one workspace, and your job is to collaborate with them until their goal is genuinely handled.<br />",
+			"to": "You are a writing agent running in VS Code. You and the user share one workspace, and your job is to collaborate with them until their goal is genuinely handled.<br />",
+			"files": [
+				"extensions/copilot/src/extension/prompts/node/agent/openai/gpt55BasePrompt.tsx",
+				"extensions/copilot/src/extension/prompts/node/agent/openai/gpt55Prompt.tsx",
+				"extensions/copilot/src/extension/prompts/node/agent/openai/gpt56Prompt.tsx"
+			],
+			"marker": "{/* NOVEL-BUILDER: \"coding agent\" -> \"writing agent\". The surrounding per-family prompt engineering is upstream's and must survive the rebase. */}"
+		},
+		{
+			"id": "keep-your-answers-short-and-impersonal",
+			"from": "Keep your answers short and impersonal.",
+			"to": "",
+			"files": [
+				"extensions/copilot/src/extension/prompts/node/agent/familyHPrompts.tsx",
+				"extensions/copilot/src/extension/prompts/node/agent/minimaxPrompts.tsx"
+			],
+			"exclude": [
+				"extensions/copilot/src/extension/prompts/node/base/safetyRules.tsx"
+			],
+			"excludeWhy": "safetyRules.tsx delegates to NovelSafetyRules, which does not carry this line. Covered by the delegation, not by this rule.",
+			"markerWhy": "A deletion has no line to mark. The removal is covered by the seam manifest and by the other markers in these files.",
+			"deleteLine": true
+		},
+		{
+			"id": "you-are-a-highly-sophisticated-automated-2",
+			"from": "You are a highly sophisticated automated coding agent with expert-level knowledge across many different programming languages and frameworks and software engineering tasks - this encompasses debugging issues, implementing new features, restructuring code, and providing code explanations, among other engineering activities.<br />",
+			"to": "You are a highly sophisticated automated writing agent with expert-level knowledge across many different genres and narrative forms and long-form storytelling - this encompasses drafting scenes, revising prose, keeping continuity across chapters, and translating between languages, among other authorial work.<br />",
+			"files": [
+				"extensions/copilot/src/extension/prompts/node/agent/anthropicPrompts.tsx"
+			],
+			"marker": "{/* NOVEL-BUILDER: \"highly sophisticated automated coding agent\" -> \"highly sophisticated automated writing agent\". The surrounding per-family prompt engineering is upstream's and must survive the rebase. */}"
+		},
+		{
+			"id": "you-are-a-highly-sophisticated-automated-3",
+			"from": "You are a highly sophisticated automated coding agent with expert-level knowledge across many different programming languages and frameworks and software engineering tasks.<br />",
+			"to": "You are a highly sophisticated automated writing agent with expert-level knowledge across many different genres and narrative forms and long-form storytelling.<br />",
+			"files": [
+				"extensions/copilot/src/extension/prompts/node/agent/anthropicPrompts.tsx"
+			],
+			"marker": "{/* NOVEL-BUILDER: \"highly sophisticated automated coding agent\" -> \"highly sophisticated automated writing agent\". The surrounding per-family prompt engineering is upstream's and must survive the rebase. */}"
+		},
+		{
+			"id": "you-are-a-highly-sophisticated-coding",
+			"from": "You are a highly sophisticated coding agent with expert-level knowledge across programming languages and frameworks.<br />",
+			"to": "You are a highly sophisticated writing agent with expert-level knowledge across genres and narrative forms.<br />",
+			"files": [
+				"extensions/copilot/src/extension/prompts/node/agent/defaultAgentInstructions.tsx"
+			],
+			"marker": "{/* NOVEL-BUILDER: \"highly sophisticated coding agent\" -> \"highly sophisticated writing agent\". The surrounding per-family prompt engineering is upstream's and must survive the rebase. */}"
+		},
+		{
+			"id": "you-are-a-highly-sophisticated-automated-4",
+			"from": "You are a highly sophisticated automated coding agent with expert-level knowledge.<br />",
+			"to": "You are a highly sophisticated automated writing agent with expert-level knowledge.<br />",
+			"files": [
+				"extensions/copilot/src/extension/prompts/node/agent/geminiPrompts.tsx"
+			],
+			"marker": "{/* NOVEL-BUILDER: \"highly sophisticated automated coding agent\" -> \"highly sophisticated automated writing agent\". The surrounding per-family prompt engineering is upstream's and must survive the rebase. */}"
+		},
+		{
+			"id": "you-are-an-expert-ai-programming-2",
+			"from": "You are an expert AI programming assistant, working with a user in the VS Code editor. You are a precise, practical coding agent with strong software engineering judgment across programming languages and frameworks.<br />",
+			"to": "You are an expert AI writing assistant, working with an author in their manuscript. You are a precise, practical writing agent with strong editorial judgment across genres and frameworks.<br />",
+			"files": [
+				"extensions/copilot/src/extension/prompts/node/agent/kimiPrompts.tsx"
+			],
+			"marker": "{/* NOVEL-BUILDER: \"expert AI programming assistant\" -> \"expert AI writing assistant\". The surrounding per-family prompt engineering is upstream's and must survive the rebase. */}"
+		},
+		{
+			"id": "you-are-a-coding-agent-based",
+			"from": "You are a coding agent based on GPT-5-Codex.<br />",
+			"to": "You are a writing agent based on GPT-5-Codex.<br />",
+			"files": [
+				"extensions/copilot/src/extension/prompts/node/agent/openai/gpt5CodexPrompt.tsx"
+			],
+			"marker": "{/* NOVEL-BUILDER: \"coding agent\" -> \"writing agent\". The surrounding per-family prompt engineering is upstream's and must survive the rebase. */}"
+		},
+		{
+			"id": "you-are-a-coding-agent-please",
+			"from": "You are a coding agent. Please keep going until the query is completely resolved, before ending your turn and yielding back to the user. Only terminate your turn when you are sure that the problem is solved. Autonomously resolve the query to the best of your ability, using the tools available to you, before coming back to the user. Do NOT guess or make up an answer.<br />",
+			"to": "You are a writing agent. Please keep going until the query is completely resolved, before ending your turn and yielding back to the user. Only terminate your turn when you are sure that the problem is solved. Autonomously resolve the query to the best of your ability, using the tools available to you, before coming back to the user. Do NOT guess or make up an answer.<br />",
+			"files": [
+				"extensions/copilot/src/extension/prompts/node/agent/openai/gpt5Prompt.tsx"
+			],
+			"marker": "{/* NOVEL-BUILDER: \"coding agent\" -> \"writing agent\". The surrounding per-family prompt engineering is upstream's and must survive the rebase. */}"
+		},
+		{
+			"id": "you-are-a-senior-software-architect",
+			"from": "You are a senior software architect and expert coding agent with deep knowledge across programming languages, frameworks, and software engineering best practices. Your role is to analyze problems systematically, implement solutions precisely, and deliver production-quality code.",
+			"to": "You are a seasoned developmental editor and expert writing agent with deep knowledge across genres, narrative structure, and editorial craft. Your role is to analyze problems systematically, implement solutions precisely, and deliver production-quality code.",
+			"files": [
+				"extensions/copilot/src/extension/prompts/node/agent/zaiPrompts.tsx"
+			],
+			"marker": "{/* NOVEL-BUILDER: \"senior software architect and expert coding agent\" -> \"seasoned developmental editor and expert writing agent\". The surrounding per-family prompt engineering is upstream's and must survive the rebase. */}"
+		},
+		{
+			"id": "background-task-tracker",
+			"from": "background task tracker for the main coding agent",
+			"to": "background task tracker for the main writing agent",
+			"files": [
+				"extensions/copilot/src/extension/prompts/node/agent/backgroundTodoAgent/backgroundTodoAgentPrompt.tsx"
+			],
+			"fragment": true,
+			"marker": "// NOVEL-BUILDER: the tracker serves the writing agent, not a coding one.",
+			"markerAnchor": "const BACKGROUND_TODO_SYSTEM_MESSAGE",
+			"why": "This prompt lives in a template literal assigned to a const, so a line comment is the correct form — a JSX comment would be literal text inside the string and would reach the model."
+		}
+	],
+	"reviewPatterns": [
+		"\\bcoding agent\\b",
+		"\\bprogramming assistant\\b",
+		"\\bsoftware (engineer|developer|architect)\\b",
+		"\\byou are an? [^.]*\\b(developer|programmer|engineer|coder)\\b",
+		"\\bwriting code\\b",
+		"\\bwrite code\\b",
+		"\\bcoding (partner|teammate|guidelines|knowledge|request|task)\\b",
+		"\\binner life as a? ?coding\\b",
+		"\\bhelping the user with programming\\b",
+		"\\bprogramming languages and frameworks\\b",
+		"\\bexpert coding\\b",
+		"\\bthe main coding agent\\b"
+	],
+	"accepted": [],
+	"reviewPatternsNote": "Regex sources, case-insensitive, matched against prompt TEXT lines only. Deliberately broad: a false positive costs one line in a ledger, a false negative is a prompt nobody ever judged. Every hit must end up either transformed by a rule or listed in `accepted` with a reason.",
+	"scanScope": {
+		"note": "Which prompts the unclassified scan covers. Mirrors the scoping already established in src/novel/prompts/test/novelPromptLint.spec.ts — one definition of what counts as the agent, not two that can drift apart.",
+		"outOfScope": [
+			"extensions/copilot/src/extension/prompts/node/codeMapper",
+			"extensions/copilot/src/extension/prompts/node/devcontainer",
+			"extensions/copilot/src/extension/prompts/node/git",
+			"extensions/copilot/src/extension/prompts/node/inline",
+			"extensions/copilot/src/extension/prompts/node/panel/editCodePrompt.tsx",
+			"extensions/copilot/src/extension/prompts/node/panel/editCodePrompt2.tsx",
+			"extensions/copilot/src/extension/prompts/node/panel/newNotebook.tsx",
+			"extensions/copilot/src/extension/prompts/node/panel/terminal.tsx",
+			"extensions/copilot/src/extension/prompts/node/panel/terminalExplain.tsx",
+			"extensions/copilot/src/extension/prompts/node/panel/terminalQuickFix.tsx",
+			"extensions/copilot/src/extension/prompts/node/panel/startDebugging.tsx",
+			"extensions/copilot/src/extension/prompts/node/panel/newWorkspace",
+			"extensions/copilot/src/extension/prompts/node/testing",
+			"extensions/copilot/src/novel/prompts"
+		],
+		"outOfScopeWhy": "Prompts belonging to code-only features: commit messages, dev containers, notebooks, the code mapper, terminal, debugging, inline code generation. They call themselves programming assistants because that is what they are, and the product gates the features that reach them. Rewriting their text is churn against upstream with no user-visible effect. If any of these ever becomes reachable to an author, delete it from this list — it then belongs in the scan."
+	},
+	"unclassifiedCeiling": 33,
+	"unclassifiedCeilingNote": "The backlog as of the first run in which the review patterns actually worked — they had been double-escaped and matched nothing, so this check reported clean while testing zero lines. Every entry is upstream prompt text that predates the scan and has not been judged. This number may only go down: triage an item into accepted with its reason, or transform it with a rule, then lower this by one. Raising it means accepting that nobody looked."
+}

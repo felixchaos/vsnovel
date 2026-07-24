@@ -1,0 +1,31 @@
+### User
+~~~md
+The following is a compressed version of the preceeding history in the current conversation. The first message is kept, some history may be truncated after that:
+<conversation-summary>
+summarized!
+</conversation-summary>
+<assistant>
+round 2
+</assistant>
+<tool>
+Used tool "insert_edit_into_file" with arguments: {"filePath":"/workspace/file.ts","code":"// existing code.../nconsole.log('hi')"}
+success
+</tool>
+
+
+[copilot_cache_control: { type: 'ephemeral' }]
+~~~
+
+
+### User
+~~~md
+Summarize the writing session so far, paying special attention to the most recent edits and revision results that triggered this summarization. Structure your summary using the enhanced format provided in the system message.
+Focus particularly on:
+- The specific edits and revisions that were just performed
+- The outcomes from these recent revisions (truncate if very long but preserve key information)
+- What manuscript work was underway when the token budget was exceeded
+- How these recent revisions connect to the overall narrative goals
+Include all important revisions and their outcomes as part of the appropriate sections, with special emphasis on the most recent changes.
+
+[copilot_cache_control: { type: 'ephemeral' }]
+~~~

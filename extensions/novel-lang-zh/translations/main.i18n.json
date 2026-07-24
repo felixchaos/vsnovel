@@ -1,0 +1,543 @@
+{
+	"": [
+		"翻译按 bundle 路径分组，路径相对 src/，即源文件去掉扩展名。",
+		"查一个 key：在核心源码里搜 nls.localize('<key>' 。不要凭记忆写 —— key 名极容易猜错，猜错的条目静默回落英文。",
+		"缺失的 key 自动回落英文，所以这份表不必完整，只补作者真会看到的。",
+		"改完跑 node scripts/novel-i18n-check.js，它会核对每个 key 是否仍在源码里声明。"
+	],
+	"version": "1.0.0",
+	"contents": {
+		"vs/workbench/contrib/files/browser/fileActions": {
+			"rename": "重命名…",
+			"delete": "删除",
+			"copyFile": "复制",
+			"pasteFile": "粘贴",
+			"newFile": "新建文件…",
+			"newFolder": "新建文件夹…",
+			"download": "下载…",
+			"upload": "上传…"
+		},
+		"vs/workbench/contrib/files/browser/fileCommands": {
+			"revert": "还原",
+			"retry": "重试",
+			"revertAll": "全部还原",
+			"newFileCommand.saveLabel": "创建文件"
+		},
+		"vs/workbench/browser/parts/editor/editorStatus": {
+			"singleSelection": "第 {0} 行，第 {1} 列",
+			"gotoLine": "跳转到行/列"
+		},
+		"vs/workbench/contrib/welcomeGettingStarted/browser/gettingStarted": {
+			"welcomePage.showOnStartup": "启动时显示欢迎页"
+		},
+		"vs/editor/contrib/find/browser/findWidget": {
+			"label.find": "查找",
+			"placeholder.find": "查找",
+			"label.replace": "替换",
+			"placeholder.replace": "替换",
+			"label.findDialog": "查找 / 替换",
+			"label.previousMatchButton": "上一个匹配",
+			"label.nextMatchButton": "下一个匹配"
+		},
+		"vs/workbench/contrib/files/browser/fileActions.contribution": {
+			"copyPath": "复制路径",
+			"copyRelativePath": "复制相对路径",
+			"revealInSideBar": "在资源管理器中显示",
+			"acceptLocalChanges": "保留你的改动，覆盖文件内容",
+			"revertLocalChanges": "放弃你的改动，还原为文件内容",
+			"copyPathOfActive": "复制当前文件路径",
+			"copyRelativePathOfActive": "复制当前文件相对路径",
+			"saveAllInGroup": "保存此组全部"
+		},
+		"vs/workbench/browser/actions/workspaceActions": {
+			"workspaces": "工作区",
+			"openFile": "打开文件…",
+			"openFolder": "打开文件夹…",
+			"openFileFolder": "打开…",
+			"openWorkspaceAction": "从文件打开工作区…",
+			"closeWorkspace": "关闭工作区",
+			"openWorkspaceConfigFile": "打开工作区配置文件"
+		},
+		"vs/workbench/contrib/search/browser/searchView": {
+			"moreSearch": "切换搜索详情",
+			"searchScope.includes": "要包含的文件",
+			"placeholder.includes": "例如 稿件/**, *.md",
+			"searchScope.excludes": "要排除的文件",
+			"placeholder.excludes": "例如 预览/**",
+			"replaceAll.confirmation.title": "全部替换"
+		},
+		"vs/workbench/browser/parts/editor/editorCommands": {
+			"editorGroupLayout.horizontal": "水平",
+			"editorGroupLayout.vertical": "垂直"
+		},
+		"vs/workbench/contrib/markers/browser/markersView": {
+			"clearFilter": "清除筛选"
+		},
+		"vs/workbench/browser/parts/editor/editorActions": {
+			"splitEditor": "拆分编辑器",
+			"splitEditorOrthogonal": "垂直方向拆分编辑器",
+			"splitEditorGroupLeft": "向左拆分编辑器",
+			"splitEditorGroupRight": "向右拆分编辑器",
+			"splitEditorGroupUp": "向上拆分编辑器",
+			"splitEditorGroupDown": "向下拆分编辑器"
+		},
+		"vs/workbench/contrib/files/browser/views/explorerView": {
+			"createNewFile": "新建文件…",
+			"createNewFolder": "新建文件夹…",
+			"refreshExplorer": "刷新资源管理器",
+			"refreshExplorerMetadata": "强制刷新资源管理器。",
+			"collapseExplorerFolders": "折叠资源管理器中的文件夹",
+			"collapseExplorerFoldersMetadata": "折叠资源管理器中的所有文件夹。"
+		},
+		"vs/workbench/browser/parts/notifications/notificationsCommands": {
+			"notifications": "通知",
+			"showNotifications": "显示通知",
+			"hideNotifications": "隐藏通知",
+			"clearAllNotifications": "清除全部通知",
+			"toggleDoNotDisturbMode": "切换免打扰模式",
+			"toggleNotifications": "切换通知"
+		},
+		"vs/workbench/contrib/preferences/browser/preferences.contribution": {
+			"settings": "设置",
+			"openSettings2": "打开设置（界面）",
+			"openUserSettingsJson": "打开用户设置（JSON）",
+			"openGlobalSettings": "打开用户设置",
+			"keybindingsEditor": "键盘快捷方式编辑器"
+		},
+		"vs/workbench/browser/parts/activitybar/activitybarPart": {
+			"menu": "菜单",
+			"hideMenu": "隐藏菜单",
+			"activityBarSizeDefault": "默认",
+			"activityBarSizeCompact": "紧凑",
+			"positionActivityBarDefault": "把活动栏移到侧边",
+			"positionActivityBarTop": "把活动栏移到顶部",
+			"positionActivityBarBottom": "把活动栏移到底部",
+			"top": "顶部"
+		},
+		"vs/workbench/contrib/quickaccess/browser/commandsQuickAccess": {
+			"noCommandResults": "没有匹配的命令",
+			"showTriggerActions": "显示所有命令",
+			"clearCommandHistory": "清除命令历史",
+			"confirmClearDetail": "此操作不可撤销！"
+		},
+		"vs/workbench/browser/parts/statusbar/statusbarActions": {
+			"focusStatusBar": "聚焦状态栏"
+		},
+		"vs/workbench/contrib/scm/browser/scmViewPane": {
+			"sortAction": "查看与排序",
+			"setListViewMode": "以列表显示",
+			"setTreeViewMode": "以树形显示",
+			"repositorySortByName": "按名称排序"
+		},
+		"vs/platform/dialogs/common/dialogs": {
+			"cancelButton": "取消"
+		},
+		"vs/workbench/services/textfile/browser/textFileService": {
+			"readonly": "只读",
+			"deleted": "已删除",
+			"readonlyAndDeleted": "已删除，只读",
+			"textFileCreate.source": "已创建文件",
+			"textFileOverwrite.source": "已替换文件"
+		},
+		"vs/workbench/browser/parts/editor/editorQuickAccess": {
+			"noViewResults": "没有匹配的编辑器",
+			"closeEditor": "关闭编辑器",
+			"entryAriaLabelDirty": "{0}，有未保存的改动",
+			"entryAriaLabelWithGroupDirty": "{0}，有未保存的改动，{1}"
+		},
+		"vs/workbench/contrib/files/browser/fileImportExport": {
+			"copyingFiles": "正在复制…"
+		},
+		"vs/workbench/contrib/search/browser/search.contribution": {
+			"search": "搜索",
+			"textSearchPickerPlaceholder": "在工作区文件中搜索文本。",
+			"textSearchPickerHelp": "搜索文本"
+		},
+		"vs/workbench/browser/parts/views/viewPane": {
+			"welcomeViewAriaLabel": "欢迎",
+			"viewToolbarAriaLabel": "{0} 操作"
+		},
+		"vs/workbench/contrib/output/browser/output.contribution": {
+			"output": "输出",
+			"switchToOutput.label": "切换输出"
+		},
+		"vs/workbench/browser/actions/windowActions": {
+			"remove": "从最近打开中移除",
+			"dirtyRecentlyOpenedFolder": "有未保存文件的文件夹",
+			"dirtyRecentlyOpenedWorkspace": "有未保存文件的工作区",
+			"openedRecentlyOpenedFolder": "已在某个窗口打开的文件夹",
+			"activeOpenedRecentlyOpenedFolder": "已在当前窗口打开的文件夹"
+		},
+		"vs/workbench/contrib/files/browser/editors/textFileEditor": {
+			"openFolder": "打开文件夹",
+			"reveal": "在文件夹中显示",
+			"createFile": "创建文件"
+		},
+		"vs/editor/contrib/clipboard/browser/clipboard": {
+			"actions.clipboard.cutLabel": "剪切",
+			"actions.clipboard.copyLabel": "复制",
+			"actions.clipboard.pasteLabel": "粘贴"
+		},
+		"vs/editor/contrib/find/browser/findController": {
+			"startFindAction": "查找",
+			"startFindWithSelectionAction": "用选中内容查找",
+			"findNextMatchAction": "查找下一个",
+			"findPreviousMatchAction": "查找上一个",
+			"findMatchAction.goToMatch": "跳转到匹配项…"
+		},
+		"vs/workbench/contrib/codeEditor/browser/toggleWordWrap": {
+			"toggle.wordwrap": "视图：切换自动换行",
+			"wrapMinified": "为此文件启用自动换行",
+			"unwrapMinified": "为此文件关闭自动换行"
+		},
+		"vs/workbench/contrib/themes/browser/themes.contribution": {
+			"selectTheme.label": "颜色主题",
+			"themes.selectTheme.darkScheme": "选择系统深色模式下的颜色主题",
+			"themes.selectTheme.lightScheme": "选择系统浅色模式下的颜色主题",
+			"installColorThemes": "安装更多颜色主题…"
+		},
+		"vs/workbench/browser/parts/panel/panelActions": {
+			"togglePanelVisibility": "切换面板显示",
+			"closePanel": "隐藏面板",
+			"focusPanel": "聚焦到面板"
+		},
+		"vs/workbench/browser/parts/sidebar/sidebarActions": {
+			"closeSidebar": "关闭主侧边栏",
+			"focusSideBar": "聚焦到主侧边栏"
+		},
+		"vs/platform/quickinput/browser/quickInputController": {
+			"ok": "确定",
+			"custom": "自定义",
+			"quickInput.back": "返回",
+			"quickInput.checkAll": "切换全部复选框"
+		},
+		"vs/workbench/contrib/localHistory/browser/localHistoryCommands": {
+			"localHistory.category": "本地历史",
+			"localHistory.compareWithFile": "与当前文件比较",
+			"localHistory.compareWithPrevious": "与上一版本比较",
+			"localHistory.selectForCompare": "选择以进行比较",
+			"localHistory.compareWithSelected": "与所选版本比较",
+			"localHistory.open": "查看内容",
+			"localHistory.restore": "还原为此版本",
+			"localHistoryRestore.source": "已还原文件"
+		},
+		"vs/editor/contrib/links/browser/links": {
+			"links.navigate.follow": "打开链接",
+			"links.navigate.kb.meta.mac": "cmd + 点击",
+			"links.navigate.kb.meta": "ctrl + 点击",
+			"links.navigate.kb.alt.mac": "option + 点击",
+			"links.navigate.kb.alt": "alt + 点击"
+		},
+		"vs/workbench/contrib/webviewPanel/browser/webviewCommands": {
+			"editor.action.webvieweditor.showFind": "显示查找",
+			"editor.action.webvieweditor.hideFind": "停止查找",
+			"editor.action.webvieweditor.findNext": "查找下一个",
+			"editor.action.webvieweditor.findPrevious": "查找上一个"
+		},
+		"vs/workbench/browser/parts/editor/editorTabsControl": {
+			"ariaLabelEditorActions": "编辑器操作",
+			"ariaLabelEditorActionsLayout": "编辑器布局操作"
+		},
+		"vs/workbench/contrib/markdown/browser/markdownSettingRenderer": {
+			"viewInSettings": "在设置中查看",
+			"changeSettingTitle": "查看或修改设置"
+		},
+		"vs/workbench/contrib/files/browser/views/openEditorsView": {
+			"dirtyCounter": "{0} 个未保存",
+			"openEditors": "打开的编辑器",
+			"newUntitledFile": "新建未命名文本文件"
+		},
+		"vs/workbench/browser/parts/editor/editorGroupView": {
+			"emptyEditorGroup": "{0}（空）",
+			"groupLabel": "第 {0} 组",
+			"reopenWith": "用其他方式重新打开"
+		},
+		"vs/editor/contrib/linesOperations/browser/linesOperations": {
+			"lines.copyUp": "向上复制一行",
+			"lines.copyDown": "向下复制一行",
+			"duplicateSelection": "复制所选内容",
+			"lines.moveUp": "上移一行",
+			"lines.moveDown": "下移一行",
+			"lines.sortAscending": "按升序排序行",
+			"lines.sortDescending": "按降序排序行",
+			"lines.deleteDuplicates": "删除重复行"
+		},
+		"vs/editor/contrib/multicursor/browser/multicursor": {
+			"mutlicursor.insertAbove": "在上方添加光标",
+			"mutlicursor.insertBelow": "在下方添加光标",
+			"addSelectionToNextFindMatch": "把下一个匹配项加入选区"
+		},
+		"vs/workbench/contrib/preferences/browser/settingsEditor2": {
+			"SearchSettings.AriaLabel": "搜索设置",
+			"clearInput": "清除设置搜索框",
+			"filterInput": "筛选设置",
+			"noResults": "没有找到设置",
+			"clearSearchFilters": "清除筛选"
+		},
+		"vs/workbench/contrib/extensions/browser/extensionsActions": {
+			"close": "关闭",
+			"cancel": "取消",
+			"install": "安装",
+			"installVSIX": "从 VSIX 安装…"
+		},
+		"vs/workbench/browser/parts/titlebar/titlebarPart": {
+			"focusTitleBar": "聚焦标题栏",
+			"ariaLabelTitleActions": "标题栏操作"
+		},
+		"vs/editor/contrib/suggest/browser/suggestController": {
+			"suggest.trigger.label": "触发建议",
+			"accept.insert": "插入",
+			"accept.replace": "替换"
+		},
+		"vs/workbench/contrib/update/browser/update": {
+			"checkForUpdates": "检查更新…",
+			"checkingForUpdates2": "正在检查更新…",
+			"DownloadingUpdate": "正在下载更新…",
+			"installingUpdate": "正在安装更新…"
+		},
+		"vs/workbench/contrib/logs/common/logsActions": {
+			"setLogLevel": "设置日志级别…",
+			"all": "全部",
+			"loggers": "日志"
+		},
+		"vs/workbench/browser/actions/helpActions": {
+			"keybindingsReference": "键盘快捷键参考",
+			"openDocumentationUrl": "文档",
+			"openTipsAndTricksUrl": "使用技巧"
+		},
+		"vs/platform/undoRedo/common/undoRedoService": {
+			"confirmDifferentSource.no": "否"
+		},
+		"vs/editor/contrib/folding/browser/folding": {
+			"foldAction.label": "折叠",
+			"unfoldAction.label": "展开",
+			"toggleFoldAction.label": "切换折叠",
+			"foldRecursivelyAction.label": "递归折叠",
+			"unFoldRecursivelyAction.label": "递归展开",
+			"toggleFoldRecursivelyAction.label": "递归切换折叠"
+		},
+		"vs/workbench/browser/parts/banner/bannerPart": {
+			"closeBanner": "关闭横幅",
+			"focusBanner": "聚焦横幅"
+		},
+		"vs/workbench/contrib/terminal/browser/terminal.contribution": {
+			"terminal": "终端"
+		},
+		"vs/editor/contrib/inlineCompletions/browser/controller/commands": {
+			"action.inlineSuggest.trigger": "触发行内建议",
+			"action.inlineSuggest.showNext": "显示下一条行内建议",
+			"action.inlineSuggest.showPrevious": "显示上一条行内建议",
+			"noInlineSuggestionAvailable": "当前没有行内建议。",
+			"acceptWord": "接受一个词",
+			"acceptLine": "接受一行"
+		},
+		"vs/workbench/contrib/codeEditor/browser/toggleMinimap": {
+			"toggleMinimap": "切换缩略图"
+		},
+		"vs/workbench/contrib/codeEditor/browser/toggleRenderWhitespace": {
+			"renderWhitespace.none": "不显示",
+			"renderWhitespace.boundary": "边界",
+			"renderWhitespace.selection": "仅选中处"
+		},
+		"vs/workbench/browser/parts/editor/editorGroupWatermark": {
+			"watermark.openChat": "打开对话",
+			"watermark.showCommands": "显示所有命令",
+			"watermark.quickAccess": "跳转到文件",
+			"watermark.openFile": "打开文件",
+			"watermark.openFolder": "打开文件夹",
+			"watermark.openFileFolder": "打开文件或文件夹",
+			"watermark.openRecent": "打开最近使用的",
+			"watermark.newUntitledFile": "新建未命名文本文件"
+		},
+		"vs/workbench/contrib/files/browser/views/emptyView": {
+			"noWorkspace": "尚未打开文件夹"
+		},
+		"vs/workbench/contrib/files/browser/explorerViewlet": {
+			"folders": "文件夹",
+			"explore": "资源管理器",
+			"openFolder": "打开文件夹",
+			"addAFolder": "添加一个文件夹",
+			"openRecent": "打开最近使用的"
+		},
+		"vs/workbench/contrib/welcomeViews/common/newFile.contribution": {
+			"Create": "新建",
+			"welcome.newFile": "新建文件…",
+			"newFileTitle": "新建文件…",
+			"newFilePlaceholder": "选择文件类型或输入文件名…",
+			"file": "文件"
+		},
+		"vs/workbench/browser/parts/editor/editor.contribution": {
+			"editorQuickAccessPlaceholder": "输入编辑器名称以打开它。"
+		},
+		"vs/workbench/browser/parts/editor/editorPlaceholder": {
+			"retry": "重试",
+			"showLogs": "查看日志"
+		},
+		"vs/workbench/contrib/files/browser/views/explorerViewer": {
+			"treeAriaLabel": "文件资源管理器",
+			"doNotAskAgain": "不再询问"
+		},
+		"vs/platform/actionWidget/browser/actionWidget": {
+			"selectPrevCodeAction.title": "选择上一个操作",
+			"selectNextCodeAction.title": "选择下一个操作",
+			"collapseSectionCodeAction.title": "折叠分节",
+			"expandSectionCodeAction.title": "展开分节"
+		},
+		"vs/platform/quickinput/browser/commandsQuickAccess": {
+			"recentlyUsed": "最近使用",
+			"commonlyUsed": "常用",
+			"morecCommands": "其他命令",
+			"suggested": "相似命令"
+		},
+		"vs/workbench/contrib/preferences/browser/keybindingsEditor": {
+			"recordKeysLabel": "录制按键",
+			"SearchKeybindings.FullTextSearchPlaceholder": "输入以搜索快捷键",
+			"SearchKeybindings.KeybindingsSearchPlaceholder": "正在录制按键。按 Escape 退出",
+			"clearInput": "清除快捷键搜索框",
+			"recording": "正在录制按键"
+		},
+		"vs/workbench/services/preferences/browser/keybindingsEditorModel": {
+			"default": "系统",
+			"extension": "扩展",
+			"user": "用户"
+		},
+		"vs/workbench/browser/parts/statusbar/statusbarPart": {
+			"hideStatusBar": "隐藏状态栏"
+		},
+		"vs/editor/contrib/inlineCompletions/browser/hintsWidget/inlineCompletionsHintsWidget": {
+			"previous": "上一个",
+			"next": "下一个"
+		},
+		"vs/editor/contrib/contextmenu/browser/contextmenu": {
+			"context.minimap.minimap": "缩略图",
+			"context.minimap.renderCharacters": "渲染字符",
+			"context.minimap.size": "垂直尺寸",
+			"context.minimap.size.proportional": "按比例",
+			"context.minimap.size.fill": "填满",
+			"context.minimap.size.fit": "适应"
+		},
+		"vs/editor/browser/widget/diffEditor/diffEditor.contribution": {
+			"useInlineViewWhenSpaceIsLimited": "空间不足时使用内联视图",
+			"revertHunk": "还原此块",
+			"revertSelection": "还原所选内容"
+		},
+		"vs/workbench/contrib/webview/browser/webview.contribution": {
+			"cut": "剪切",
+			"copy": "复制",
+			"paste": "粘贴"
+		},
+		"vs/workbench/browser/actions/navigationActions": {
+			"navigateLeft": "转到左侧视图",
+			"navigateRight": "转到右侧视图",
+			"navigateUp": "转到上方视图",
+			"navigateDown": "转到下方视图",
+			"focusNextPart": "聚焦下一个部件",
+			"focusPreviousPart": "聚焦上一个部件"
+		},
+		"vs/workbench/browser/parts/globalCompositeBar": {
+			"accounts": "账户",
+			"hideAccounts": "隐藏账户",
+			"manage": "管理",
+			"loading": "加载中…"
+		},
+		"vs/workbench/browser/parts/auxiliarybar/auxiliaryBarActions": {
+			"toggleAuxiliaryBar": "切换次侧边栏显示",
+			"closeSecondarySideBar": "隐藏次侧边栏",
+			"auxiliaryBarHidden": "次侧边栏已隐藏",
+			"auxiliaryBarVisible": "次侧边栏已显示"
+		},
+		"vs/workbench/browser/parts/compositeBarActions": {
+			"additionalViews": "更多视图",
+			"hideBadge": "隐藏标记"
+		},
+		"vs/workbench/browser/window": {
+			"quitMessageMac": "确定要退出吗？",
+			"quitMessage": "确定要退出吗？",
+			"doNotAskAgain": "不再询问"
+		},
+		"vs/workbench/services/textfile/common/textFileSaveParticipant": {
+			"skip": "跳过"
+		},
+		"vs/workbench/browser/parts/dialogs/dialogHandler": {
+			"ok": "确定"
+		},
+		"vs/workbench/contrib/workspace/browser/workspace.contribution": {
+			"cancelWorkspaceTrustButton": "取消",
+			"no": "否",
+			"openLooseFileWorkspaceCheckbox": "对所有工作区记住我的选择"
+		},
+		"vs/workbench/browser/parts/editor/breadcrumbs": {
+			"title": "路径导航",
+			"enabled": "启用/禁用路径导航。",
+			"icons": "路径导航项带图标显示。"
+		},
+		"vs/workbench/browser/parts/editor/breadcrumbsControl": {
+			"empty": "没有元素",
+			"cmd.toggle": "切换路径导航"
+		},
+		"vs/workbench/contrib/quickaccess/browser/viewQuickAccess": {
+			"noViewResults": "没有匹配的视图",
+			"views": "侧边栏",
+			"panels": "面板",
+			"terminals": "终端"
+		},
+		"vs/editor/contrib/quickAccess/browser/gotoSymbolQuickAccess": {
+			"noMatchingSymbolResults": "没有匹配的编辑器符号",
+			"noSymbolResults": "没有编辑器符号",
+			"openToSide": "在侧边打开",
+			"openToBottom": "在下方打开"
+		},
+		"vs/workbench/contrib/outline/browser/outlinePane": {
+			"loading": "正在加载文档结构…",
+			"no-symbols": "文档中未找到结构"
+		},
+		"vs/workbench/contrib/timeline/browser/timelinePane": {
+			"timeline": "时间线",
+			"timeline.loadingMore": "加载中…",
+			"timeline.loadMore": "加载更多",
+			"timeline.noTimelineInfo": "没有可显示的时间线信息。"
+		},
+		"vs/editor/contrib/stickyScroll/browser/stickyScrollActions": {
+			"toggleEditorStickyScroll": "切换编辑器粘性滚动",
+			"stickyScroll": "粘性滚动",
+			"focusStickyScroll": "聚焦编辑器粘性滚动"
+		},
+		"vs/workbench/contrib/codeEditor/browser/find/simpleFindWidget": {
+			"label.find": "查找",
+			"placeholder.find": "查找",
+			"label.previousMatchButton": "上一个匹配",
+			"label.nextMatchButton": "下一个匹配",
+			"label.closeButton": "关闭"
+		},
+		"vs/editor/contrib/lineSelection/browser/lineSelection": {
+			"expandLineSelection": "扩展整行选择"
+		},
+		"vs/editor/contrib/cursorUndo/browser/cursorUndo": {
+			"cursor.undo": "撤销光标位置",
+			"cursor.redo": "重做光标位置"
+		},
+		"vs/editor/contrib/smartSelect/browser/smartSelect": {
+			"smartSelect.expand": "扩展选区",
+			"smartSelect.shrink": "收缩选区"
+		},
+		"vs/workbench/contrib/outline/browser/outline.contribution": {
+			"name": "大纲"
+		},
+		"vs/workbench/contrib/welcomeGettingStarted/common/gettingStartedContent": {
+			"gettingStarted.setup.title": "开始使用 VS Novel",
+			"gettingStarted.setup.description": "把编辑器调成你顺手的样子，然后开始写",
+			"gettingStarted.copilotSetup.title": "开启写作助手",
+			"gettingStarted.copilotSetup.description": "用它续写、修改、翻译，或者问它关于这部作品的任何事。",
+			"setupCopilotButton.setup": "开启",
+			"setupCopilotButton.chatWithCopilot": "开始对话"
+		},
+		"vs/workbench/contrib/chat/browser/widget/chatWidget": {
+			"agentTitle": "与你的写作助手协作"
+		},
+		"vs/workbench/contrib/chat/browser/widget/input/chatModelPicker": {
+			"chat.modelPicker.setupRequired": "登录以使用 VS Novel",
+			"chat.modelPicker.setupRequired.signIn": "登录以使用 VS Novel…",
+			"chat.modelPicker.setupRequired.signInTooltip": "登录 VS Novel 以选择模型。"
+		}
+	}
+}

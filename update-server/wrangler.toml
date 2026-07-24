@@ -1,0 +1,19 @@
+# VS Novel — update server (Cloudflare Worker).
+#
+# Deploy:
+#   cd update-server && npx wrangler deploy
+#
+# The route must match product.json "updateUrl" (https://update.stellatrix.icu).
+# stellatrix.icu is already on Cloudflare (the prod tunnel runs there), so add
+# `update` as a proxied DNS record and this route resolves without new infra.
+#
+# No secrets, no bindings, no state: the Worker only reads public GitHub
+# Releases. If the OSS repo is ever renamed, change REPO in worker.js.
+
+name = "vsnovel-update"
+main = "worker.js"
+compatibility_date = "2026-07-01"
+
+routes = [
+  { pattern = "update.stellatrix.icu", custom_domain = true },
+]

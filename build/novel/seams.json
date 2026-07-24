@@ -1,0 +1,647 @@
+{
+	"anchor": "1.129.1",
+	"anchorCommit": "8a7abeba6e03ea3af87bfbce9a1b7e48fed567b8",
+	"generated": "2026-07-20T14:41:50.262Z",
+	"seams": [
+		{
+			"path": "extensions/copilot/src/extension/completions-core/vscode-node/lib/src/ghostText/completionsFromNetwork.ts",
+			"header": "-270 +270,2",
+			"kind": "replace",
+			"preImage": "\t\tconst temperature = getTemperatureForSamples(this.runtimeMode, n);",
+			"preImageSha": "5c410af5ed53ee2e",
+			"occurrences": 1,
+			"postImage": "\t\t// NOVEL-BUILDER: prose continuation must not stop at a newline; see src/novel/completions/proseSampling.ts. The surrounding per-family prompt engineering is upstream's and must survive the rebase.\n\t\tconst temperature = getTemperatureForSamples(this.runtimeMode, n, requestContext.languageId);",
+			"postImageSha": "fb45c67654e1c59c"
+		},
+		{
+			"path": "extensions/copilot/src/extension/completions-core/vscode-node/lib/src/openai/fetch.ts",
+			"header": "-361,2 +361,3",
+			"kind": "replace",
+			"preImage": "\t\t\tmax_tokens: getMaxSolutionTokens(),\n\t\t\ttemperature: getTemperatureForSamples(this.runtimeModeService, params.count),",
+			"preImageSha": "44ef6e527272b8f1",
+			"occurrences": 1,
+			"postImage": "\t\t\t// NOVEL-BUILDER: sampling parameters come from proseSampling for prose languages. The surrounding per-family prompt engineering is upstream's and must survive the rebase.\n\t\t\tmax_tokens: getMaxSolutionTokens(params.languageId),\n\t\t\ttemperature: getTemperatureForSamples(this.runtimeModeService, params.count, params.languageId),",
+			"postImageSha": "a30d65a5f9595cee"
+		},
+		{
+			"path": "extensions/copilot/src/extension/completions-core/vscode-node/lib/src/openai/openai.ts",
+			"header": "-13,0 +14",
+			"kind": "insert",
+			"preImage": "import { logger } from '../logger';\nimport { TelemetryWithExp, logEngineCompletion } from '../telemetry';\nimport { ICompletionsRuntimeModeService } from '../util/runtimeMode';",
+			"preImageSha": "87b64ade00150290",
+			"occurrences": 1,
+			"postImage": "import { isProseLanguage, proseMaxTokens, proseStops, proseTemperature } from '../../../../../../novel/completions/proseSampling';",
+			"postImageSha": "dc06604f0be50e39"
+		},
+		{
+			"path": "extensions/copilot/src/extension/completions-core/vscode-node/lib/src/openai/openai.ts",
+			"header": "-144 +145",
+			"kind": "replace",
+			"preImage": "export function getTemperatureForSamples(runtime: ICompletionsRuntimeModeService, numShots: number): number {",
+			"preImageSha": "a11720b07d13bc28",
+			"occurrences": 1,
+			"postImage": "export function getTemperatureForSamples(runtime: ICompletionsRuntimeModeService, numShots: number, languageId?: string): number {",
+			"postImageSha": "aa70089b9e28f424"
+		},
+		{
+			"path": "extensions/copilot/src/extension/completions-core/vscode-node/lib/src/openai/openai.ts",
+			"header": "-148,0 +150,4",
+			"kind": "insert",
+			"preImage": "\t\treturn 0.0;\n\t}",
+			"preImageSha": "acee47d6f6fc015d",
+			"occurrences": 2,
+			"postImage": "\tif (isProseLanguage(languageId)) {\n\t\treturn proseTemperature(numShots);\n\t}",
+			"postImageSha": "86511e30a8603bd8"
+		},
+		{
+			"path": "extensions/copilot/src/extension/completions-core/vscode-node/lib/src/openai/openai.ts",
+			"header": "-159,0 +165,2",
+			"kind": "insert",
+			"preImage": "\t}\n}",
+			"preImageSha": "708def3c7ff3f928",
+			"occurrences": 3,
+			"postImage": "// NOVEL-BUILDER: prose languages need different sampling than code.\n// See src/novel/completions/proseSampling.ts for the reasoning.",
+			"postImageSha": "e2eebf551111f332"
+		},
+		{
+			"path": "extensions/copilot/src/extension/completions-core/vscode-node/lib/src/openai/openai.ts",
+			"header": "-165,0 +173,3",
+			"kind": "insert",
+			"preImage": "};\n\nexport function getStops(languageId?: string) {",
+			"preImageSha": "a67596164a4b5d13",
+			"occurrences": 1,
+			"postImage": "\tif (isProseLanguage(languageId)) {\n\t\treturn proseStops();\n\t}",
+			"postImageSha": "26b4fe984ff3032d"
+		},
+		{
+			"path": "extensions/copilot/src/extension/completions-core/vscode-node/lib/src/openai/openai.ts",
+			"header": "-173 +183,4",
+			"kind": "replace",
+			"preImage": "export function getMaxSolutionTokens(): number {",
+			"preImageSha": "60ff98efe84ccbdb",
+			"occurrences": 1,
+			"postImage": "export function getMaxSolutionTokens(languageId?: string): number {\n\tif (isProseLanguage(languageId)) {\n\t\treturn proseMaxTokens();\n\t}",
+			"postImageSha": "2f0afc58a33196a8"
+		},
+		{
+			"path": "extensions/copilot/src/extension/completions-core/vscode-node/lib/src/prompt/prompt.ts",
+			"header": "-185 +185,2",
+			"kind": "replace",
+			"preImage": "\tconst maxPromptLength = maxTokens - getMaxSolutionTokens();",
+			"preImageSha": "0b9fb45415ad10db",
+			"occurrences": 1,
+			"postImage": "\t// NOVEL-BUILDER: prose needs a longer window than a code completion. The surrounding per-family prompt engineering is upstream's and must survive the rebase.\n\tconst maxPromptLength = maxTokens - getMaxSolutionTokens(languageId);",
+			"postImageSha": "03c280a829e7be1c"
+		},
+		{
+			"path": "extensions/copilot/src/extension/extension/vscode-node/contributions.ts",
+			"header": "-68,0 +69",
+			"kind": "insert",
+			"preImage": "// ###################################################################################################\n\nexport const vscodeNodeContributions: IExtensionContributionFactory[] = [",
+			"preImageSha": "33730ae1f4c93fc1",
+			"occurrences": 1,
+			"postImage": "",
+			"postImageSha": null
+		},
+		{
+			"path": "extensions/copilot/src/extension/extension/vscode-node/extension.ts",
+			"header": "-9 +9",
+			"kind": "replace",
+			"preImage": "import { ExtensionContext } from 'vscode';",
+			"preImageSha": "c9784f2d112e7484",
+			"occurrences": 1,
+			"postImage": "import { ExtensionContext, window } from 'vscode';",
+			"postImageSha": "2b9427cf6b70b5aa"
+		},
+		{
+			"path": "extensions/copilot/src/extension/extension/vscode-node/extension.ts",
+			"header": "-13,0 +14",
+			"kind": "insert",
+			"preImage": "import { baseActivate } from '../vscode/extension';\nimport { vscodeNodeContributions } from './contributions';\nimport { registerServices } from './services';",
+			"preImageSha": "103b6608bb04c718",
+			"occurrences": 1,
+			"postImage": "import { NovelAuthenticationProvider } from '../../../novel/auth/novelAuthProvider';",
+			"postImageSha": "0b8062e99825d22b"
+		},
+		{
+			"path": "extensions/copilot/src/extension/extension/vscode-node/extension.ts",
+			"header": "-38,0 +40,16",
+			"kind": "insert",
+			"preImage": "//#endregion\n\nexport function activate(context: ExtensionContext, forceActivation?: boolean) {",
+			"preImageSha": "b8d7033b3a1821f3",
+			"occurrences": 1,
+			"postImage": "\t// NOVEL-BUILDER: before everything, including the DI container.\n\t//\n\t// $ensureProvider on the main thread activates the extension that declares a\n\t// provider id and waits for that activation to complete. Registering from a\n\t// contribution puts the registration behind the activation blockers — so the\n\t// main thread waits for an activation that is itself waiting for the auth\n\t// service, and neither moves. Observed as a sign-in that succeeds and a\n\t// session that nothing can then read: getAccounts() entered three times and\n\t// never once got past ensureProvider.\n\t//\n\t// Registering here makes isAuthenticationProviderRegistered true before\n\t// anything can ask, so $ensureProvider returns without activating anything.\n\tcontext.subscriptions.push(\n\t\tnew NovelAuthenticationProvider(context, window.createOutputChannel('Novel Builder Auth', { log: true }))\n\t);",
+			"postImageSha": "012f296df67139b3"
+		},
+		{
+			"path": "extensions/copilot/src/extension/extension/vscode-node/services.ts",
+			"header": "-31,0 +32",
+			"kind": "insert",
+			"preImage": "import { IDiffService } from '../../../platform/diff/common/diffService';\nimport { DiffServiceImpl } from '../../../platform/diff/node/diffServiceImpl';\nimport { ICAPIClientService } from '../../../platform/endpoint/common/capiClient';",
+			"preImageSha": "dc36b1877c5c0aab",
+			"occurrences": 1,
+			"postImage": "import { NovelCAPIClient } from '../../../novel/endpoint/novelCapiClient';",
+			"postImageSha": "53de97a93e635820"
+		},
+		{
+			"path": "extensions/copilot/src/extension/extension/vscode-node/services.ts",
+			"header": "-35 +35,0",
+			"kind": "replace",
+			"preImage": "import { CAPIClientImpl } from '../../../platform/endpoint/node/capiClientImpl';",
+			"preImageSha": "601c12e976461200",
+			"occurrences": 1,
+			"postImage": "",
+			"postImageSha": null
+		},
+		{
+			"path": "extensions/copilot/src/extension/extension/vscode-node/services.ts",
+			"header": "-182 +182,5",
+			"kind": "replace",
+			"preImage": "\tbuilder.define(ICAPIClientService, new SyncDescriptor(CAPIClientImpl));",
+			"preImageSha": "78d00335566a04f7",
+			"occurrences": 1,
+			"postImage": "\t// NOVEL-BUILDER: the token request happens before any token exists, so it\n\t// cannot be redirected by the token's own endpoints block. NovelCAPIClient\n\t// overrides only those pre-token URLs; everything after issuance still moves\n\t// through upstream's updateDomains() unchanged.\n\tbuilder.define(ICAPIClientService, new SyncDescriptor(NovelCAPIClient));",
+			"postImageSha": "e16ee65977f9a16d"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/agent/agentPrompt.tsx",
+			"header": "-121 +121,2",
+			"kind": "replace",
+			"preImage": "\t\t\t\tYou are an expert AI programming assistant, working with a user in the VS Code editor.<br />",
+			"preImageSha": "481a2e5a15a405ad",
+			"occurrences": 1,
+			"postImage": "\t\t\t\t{/* NOVEL-BUILDER: \"expert AI programming assistant\" -> \"expert AI writing assistant\". The surrounding per-family prompt engineering is upstream's and must survive the rebase. */}\n\t\t\t\tYou are an expert AI writing assistant, working with an author in their manuscript.<br />",
+			"postImageSha": "dcaf2c6a78c1a4fe"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/agent/anthropicPrompts.tsx",
+			"header": "-84 +84,2",
+			"kind": "replace",
+			"preImage": "\t\t\t\tYou are a highly sophisticated automated coding agent with expert-level knowledge across many different programming languages and frameworks.<br />",
+			"preImageSha": "e2eb6d7ea28ff57b",
+			"occurrences": 1,
+			"postImage": "\t\t\t\t{/* NOVEL-BUILDER: \"highly sophisticated automated coding agent\" -> \"highly sophisticated automated writing agent\". The surrounding per-family prompt engineering is upstream's and must survive the rebase. */}\n\t\t\t\tYou are a highly sophisticated automated writing agent with expert-level knowledge across many different genres and narrative forms.<br />",
+			"postImageSha": "12312fa220a536da"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/agent/anthropicPrompts.tsx",
+			"header": "-192 +193,2",
+			"kind": "replace",
+			"preImage": "\t\t\t\tYou are a highly sophisticated automated coding agent with expert-level knowledge across many different programming languages and frameworks and software engineering tasks - this encompasses debugging issues, implementing new features, restructuring code, and providing code explanations, among other engineering activities.<br />",
+			"preImageSha": "493e26d7c42fe423",
+			"occurrences": 1,
+			"postImage": "\t\t\t\t{/* NOVEL-BUILDER: \"highly sophisticated automated coding agent\" -> \"highly sophisticated automated writing agent\". The surrounding per-family prompt engineering is upstream's and must survive the rebase. */}\n\t\t\t\tYou are a highly sophisticated automated writing agent with expert-level knowledge across many different genres and narrative forms and long-form storytelling - this encompasses drafting scenes, revising prose, keeping continuity across chapters, and translating between languages, among other authorial work.<br />",
+			"postImageSha": "a025b5a0b9876d95"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/agent/anthropicPrompts.tsx",
+			"header": "-325 +327,2",
+			"kind": "replace",
+			"preImage": "\t\t\t\tYou are a highly sophisticated automated coding agent with expert-level knowledge across many different programming languages and frameworks and software engineering tasks.<br />",
+			"preImageSha": "515b288ac228bc76",
+			"occurrences": 2,
+			"postImage": "\t\t\t\t{/* NOVEL-BUILDER: \"highly sophisticated automated coding agent\" -> \"highly sophisticated automated writing agent\". The surrounding per-family prompt engineering is upstream's and must survive the rebase. */}\n\t\t\t\tYou are a highly sophisticated automated writing agent with expert-level knowledge across many different genres and narrative forms and long-form storytelling.<br />",
+			"postImageSha": "9c04f20c602e07c9"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/agent/anthropicPrompts.tsx",
+			"header": "-472 +475,2",
+			"kind": "replace",
+			"preImage": "\t\t\t\tYou are a highly sophisticated automated coding agent with expert-level knowledge across many different programming languages and frameworks and software engineering tasks.<br />",
+			"preImageSha": "515b288ac228bc76",
+			"occurrences": 2,
+			"postImage": "\t\t\t\t{/* NOVEL-BUILDER: \"highly sophisticated automated coding agent\" -> \"highly sophisticated automated writing agent\". The surrounding per-family prompt engineering is upstream's and must survive the rebase. */}\n\t\t\t\tYou are a highly sophisticated automated writing agent with expert-level knowledge across many different genres and narrative forms and long-form storytelling.<br />",
+			"postImageSha": "9c04f20c602e07c9"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/agent/backgroundTodoAgent/backgroundTodoAgentPrompt.tsx",
+			"header": "-9 +9,2",
+			"kind": "replace",
+			"preImage": "const BACKGROUND_TODO_SYSTEM_MESSAGE = `You are a background task tracker for the main coding agent. Your only job is to maintain a structured todo list for the user's coding request by calling manage_todo_list.",
+			"preImageSha": "8ddd6f51a6533c33",
+			"occurrences": 1,
+			"postImage": "// NOVEL-BUILDER: the tracker serves the writing agent, not a coding one.\nconst BACKGROUND_TODO_SYSTEM_MESSAGE = `You are a background task tracker for the main writing agent. Your only job is to maintain a structured todo list for the user's coding request by calling manage_todo_list.",
+			"postImageSha": "81d5e527a86990d8"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/agent/defaultAgentInstructions.tsx",
+			"header": "-119 +119,2",
+			"kind": "replace",
+			"preImage": "\t\t\t\tYou are a highly sophisticated automated coding agent with expert-level knowledge across many different programming languages and frameworks.<br />",
+			"preImageSha": "e2eb6d7ea28ff57b",
+			"occurrences": 1,
+			"postImage": "\t\t\t\t{/* NOVEL-BUILDER: \"highly sophisticated automated coding agent\" -> \"highly sophisticated automated writing agent\". The surrounding per-family prompt engineering is upstream's and must survive the rebase. */}\n\t\t\t\tYou are a highly sophisticated automated writing agent with expert-level knowledge across many different genres and narrative forms.<br />",
+			"postImageSha": "12312fa220a536da"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/agent/defaultAgentInstructions.tsx",
+			"header": "-227 +228,2",
+			"kind": "replace",
+			"preImage": "\t\t\t\tYou are a highly sophisticated coding agent with expert-level knowledge across programming languages and frameworks.<br />",
+			"preImageSha": "441e0f0c7bf9ee9a",
+			"occurrences": 1,
+			"postImage": "\t\t\t\t{/* NOVEL-BUILDER: \"highly sophisticated coding agent\" -> \"highly sophisticated writing agent\". The surrounding per-family prompt engineering is upstream's and must survive the rebase. */}\n\t\t\t\tYou are a highly sophisticated writing agent with expert-level knowledge across genres and narrative forms.<br />",
+			"postImageSha": "03b1a09df7be4d55"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/agent/familyHPrompts.tsx",
+			"header": "-22 +22,2",
+			"kind": "replace",
+			"preImage": "\t\t\t\tYou are an expert AI programming assistant, working with a user in the VS Code editor.<br />",
+			"preImageSha": "481a2e5a15a405ad",
+			"occurrences": 1,
+			"postImage": "\t\t\t\t{/* NOVEL-BUILDER: \"expert AI programming assistant\" -> \"expert AI writing assistant\". The surrounding per-family prompt engineering is upstream's and must survive the rebase. */}\n\t\t\t\tYou are an expert AI writing assistant, working with an author in their manuscript.<br />",
+			"postImageSha": "dcaf2c6a78c1a4fe"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/agent/familyHPrompts.tsx",
+			"header": "-34 +34,0",
+			"kind": "replace",
+			"preImage": "\t\t\t\tKeep your answers short and impersonal.",
+			"preImageSha": "f97d523dfc1d663c",
+			"occurrences": 1,
+			"postImage": "",
+			"postImageSha": null
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/agent/geminiPrompts.tsx",
+			"header": "-42 +42,2",
+			"kind": "replace",
+			"preImage": "\t\t\t\tYou are a highly sophisticated automated coding agent with expert-level knowledge across many different programming languages and frameworks.<br />",
+			"preImageSha": "e2eb6d7ea28ff57b",
+			"occurrences": 1,
+			"postImage": "\t\t\t\t{/* NOVEL-BUILDER: \"highly sophisticated automated coding agent\" -> \"highly sophisticated automated writing agent\". The surrounding per-family prompt engineering is upstream's and must survive the rebase. */}\n\t\t\t\tYou are a highly sophisticated automated writing agent with expert-level knowledge across many different genres and narrative forms.<br />",
+			"postImageSha": "12312fa220a536da"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/agent/geminiPrompts.tsx",
+			"header": "-141 +142,2",
+			"kind": "replace",
+			"preImage": "\t\t\t\tYou are a highly sophisticated automated coding agent with expert-level knowledge.<br />",
+			"preImageSha": "f3750a85df9314bf",
+			"occurrences": 1,
+			"postImage": "\t\t\t\t{/* NOVEL-BUILDER: \"highly sophisticated automated coding agent\" -> \"highly sophisticated automated writing agent\". The surrounding per-family prompt engineering is upstream's and must survive the rebase. */}\n\t\t\t\tYou are a highly sophisticated automated writing agent with expert-level knowledge.<br />",
+			"postImageSha": "63573227993d5641"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/agent/kimiPrompts.tsx",
+			"header": "-25 +25,2",
+			"kind": "replace",
+			"preImage": "\t\t\t\tYou are an expert AI programming assistant, working with a user in the VS Code editor. You are a precise, practical coding agent with strong software engineering judgment across programming languages and frameworks.<br />",
+			"preImageSha": "7dece40e76f92944",
+			"occurrences": 1,
+			"postImage": "\t\t\t\t{/* NOVEL-BUILDER: \"expert AI programming assistant\" -> \"expert AI writing assistant\". The surrounding per-family prompt engineering is upstream's and must survive the rebase. */}\n\t\t\t\tYou are an expert AI writing assistant, working with an author in their manuscript. You are a precise, practical writing agent with strong editorial judgment across genres and frameworks.<br />",
+			"postImageSha": "a34b8a867b4edc73"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/agent/minimaxPrompts.tsx",
+			"header": "-23 +23,2",
+			"kind": "replace",
+			"preImage": "\t\t\t\tYou are an expert AI programming assistant, working with a user in the VS Code editor.<br />",
+			"preImageSha": "481a2e5a15a405ad",
+			"occurrences": 1,
+			"postImage": "\t\t\t\t{/* NOVEL-BUILDER: \"expert AI programming assistant\" -> \"expert AI writing assistant\". The surrounding per-family prompt engineering is upstream's and must survive the rebase. */}\n\t\t\t\tYou are an expert AI writing assistant, working with an author in their manuscript.<br />",
+			"postImageSha": "dcaf2c6a78c1a4fe"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/agent/minimaxPrompts.tsx",
+			"header": "-35 +35,0",
+			"kind": "replace",
+			"preImage": "\t\t\t\tKeep your answers short and impersonal.",
+			"preImageSha": "f97d523dfc1d663c",
+			"occurrences": 1,
+			"postImage": "",
+			"postImageSha": null
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/agent/openai/defaultOpenAIPrompt.tsx",
+			"header": "-33 +33,2",
+			"kind": "replace",
+			"preImage": "\t\t\t\tYou are a highly sophisticated automated coding agent with expert-level knowledge across many different programming languages and frameworks.<br />",
+			"preImageSha": "e2eb6d7ea28ff57b",
+			"occurrences": 1,
+			"postImage": "\t\t\t\t{/* NOVEL-BUILDER: \"highly sophisticated automated coding agent\" -> \"highly sophisticated automated writing agent\". The surrounding per-family prompt engineering is upstream's and must survive the rebase. */}\n\t\t\t\tYou are a highly sophisticated automated writing agent with expert-level knowledge across many different genres and narrative forms.<br />",
+			"postImageSha": "12312fa220a536da"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/agent/openai/gpt51Prompt.tsx",
+			"header": "-25 +25,2",
+			"kind": "replace",
+			"preImage": "\t\t\t\tYou are a coding agent running in VS Code. You are expected to be precise, safe, and helpful.<br />",
+			"preImageSha": "2d7a80d6bcdae2f5",
+			"occurrences": 1,
+			"postImage": "\t\t\t\t{/* NOVEL-BUILDER: \"coding agent\" -> \"writing agent\". The surrounding per-family prompt engineering is upstream's and must survive the rebase. */}\n\t\t\t\tYou are a writing agent running in VS Code. You are expected to be precise, safe, and helpful.<br />",
+			"postImageSha": "f34e2adb7c47c833"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/agent/openai/gpt51Prompt.tsx",
+			"header": "-141 +142,2",
+			"kind": "replace",
+			"preImage": "\t\t\t\tYou are a coding agent. You must keep going until the query or task is completely resolved, before ending your turn and yielding back to the user. Persist until the task is fully handled end-to-end within the current turn whenever feasible and persevere even when function calls fail. Only terminate your turn when you are sure that the problem is solved. Autonomously resolve the query to the best of your ability, using the tools available to you, before coming back to the user. Do NOT guess or make up an answer.<br />",
+			"preImageSha": "a1cadbf2b919b081",
+			"occurrences": 1,
+			"postImage": "\t\t\t\t{/* NOVEL-BUILDER: \"coding agent\" -> \"writing agent\". The surrounding per-family prompt engineering is upstream's and must survive the rebase. */}\n\t\t\t\tYou are a writing agent. You must keep going until the query or task is completely resolved, before ending your turn and yielding back to the user. Persist until the task is fully handled end-to-end within the current turn whenever feasible and persevere even when function calls fail. Only terminate your turn when you are sure that the problem is solved. Autonomously resolve the query to the best of your ability, using the tools available to you, before coming back to the user. Do NOT guess or make up an answer.<br />",
+			"postImageSha": "82cf041599b42cf2"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/agent/openai/gpt52Prompt.tsx",
+			"header": "-25 +25,2",
+			"kind": "replace",
+			"preImage": "\t\t\t\tYou are a coding agent running in VS Code. You are expected to be precise, safe, and helpful.<br />",
+			"preImageSha": "2d7a80d6bcdae2f5",
+			"occurrences": 1,
+			"postImage": "\t\t\t\t{/* NOVEL-BUILDER: \"coding agent\" -> \"writing agent\". The surrounding per-family prompt engineering is upstream's and must survive the rebase. */}\n\t\t\t\tYou are a writing agent running in VS Code. You are expected to be precise, safe, and helpful.<br />",
+			"postImageSha": "f34e2adb7c47c833"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/agent/openai/gpt52Prompt.tsx",
+			"header": "-142 +143,2",
+			"kind": "replace",
+			"preImage": "\t\t\t\tYou are a coding agent. You must keep going until the query or task is completely resolved, before ending your turn and yielding back to the user. Persist until the task is fully handled end-to-end within the current turn whenever feasible and persevere even when function calls fail. Only terminate your turn when you are sure that the problem is solved. Autonomously resolve the query to the best of your ability, using the tools available to you, before coming back to the user. Do NOT guess or make up an answer.<br />",
+			"preImageSha": "a1cadbf2b919b081",
+			"occurrences": 1,
+			"postImage": "\t\t\t\t{/* NOVEL-BUILDER: \"coding agent\" -> \"writing agent\". The surrounding per-family prompt engineering is upstream's and must survive the rebase. */}\n\t\t\t\tYou are a writing agent. You must keep going until the query or task is completely resolved, before ending your turn and yielding back to the user. Persist until the task is fully handled end-to-end within the current turn whenever feasible and persevere even when function calls fail. Only terminate your turn when you are sure that the problem is solved. Autonomously resolve the query to the best of your ability, using the tools available to you, before coming back to the user. Do NOT guess or make up an answer.<br />",
+			"postImageSha": "82cf041599b42cf2"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/agent/openai/gpt53CodexPrompt.tsx",
+			"header": "-38 +38,2",
+			"kind": "replace",
+			"preImage": "\t\t\t\t\tYou are a coding agent running in VS Code. You are expected to be precise, safe, and helpful.<br />",
+			"preImageSha": "b39aad71dc61715b",
+			"occurrences": 1,
+			"postImage": "\t\t\t\t\t{/* NOVEL-BUILDER: \"coding agent\" -> \"writing agent\". The surrounding per-family prompt engineering is upstream's and must survive the rebase. */}\n\t\t\t\t\tYou are a writing agent running in VS Code. You are expected to be precise, safe, and helpful.<br />",
+			"postImageSha": "2600da451000dc4f"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/agent/openai/gpt53CodexPrompt.tsx",
+			"header": "-152 +153,2",
+			"kind": "replace",
+			"preImage": "\t\t\t\tYou are a coding agent running in VS Code. You are expected to be precise, safe, and helpful.<br />",
+			"preImageSha": "2d7a80d6bcdae2f5",
+			"occurrences": 2,
+			"postImage": "\t\t\t\t{/* NOVEL-BUILDER: \"coding agent\" -> \"writing agent\". The surrounding per-family prompt engineering is upstream's and must survive the rebase. */}\n\t\t\t\tYou are a writing agent running in VS Code. You are expected to be precise, safe, and helpful.<br />",
+			"postImageSha": "f34e2adb7c47c833"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/agent/openai/gpt53CodexPrompt.tsx",
+			"header": "-256 +258,2",
+			"kind": "replace",
+			"preImage": "\t\t\t\tYou are a coding agent. You must keep going until the query or task is completely resolved, before ending your turn and yielding back to the user. Persist until the task is fully handled end-to-end within the current turn whenever feasible and persevere even when function calls fail. Only terminate your turn when you are sure that the problem is solved. Autonomously resolve the query to the best of your ability, using the tools available to you, before coming back to the user. Do NOT guess or make up an answer.<br />",
+			"preImageSha": "a1cadbf2b919b081",
+			"occurrences": 1,
+			"postImage": "\t\t\t\t{/* NOVEL-BUILDER: \"coding agent\" -> \"writing agent\". The surrounding per-family prompt engineering is upstream's and must survive the rebase. */}\n\t\t\t\tYou are a writing agent. You must keep going until the query or task is completely resolved, before ending your turn and yielding back to the user. Persist until the task is fully handled end-to-end within the current turn whenever feasible and persevere even when function calls fail. Only terminate your turn when you are sure that the problem is solved. Autonomously resolve the query to the best of your ability, using the tools available to you, before coming back to the user. Do NOT guess or make up an answer.<br />",
+			"postImageSha": "82cf041599b42cf2"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/agent/openai/gpt54Prompt.tsx",
+			"header": "-26 +26,2",
+			"kind": "replace",
+			"preImage": "\t\t\t\tYou are a coding agent running in VS Code. You are expected to be precise, safe, and helpful.<br />",
+			"preImageSha": "2d7a80d6bcdae2f5",
+			"occurrences": 1,
+			"postImage": "\t\t\t\t{/* NOVEL-BUILDER: \"coding agent\" -> \"writing agent\". The surrounding per-family prompt engineering is upstream's and must survive the rebase. */}\n\t\t\t\tYou are a writing agent running in VS Code. You are expected to be precise, safe, and helpful.<br />",
+			"postImageSha": "f34e2adb7c47c833"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/agent/openai/gpt54Prompt.tsx",
+			"header": "-176 +177,2",
+			"kind": "replace",
+			"preImage": "\t\t\t\tYou are a coding agent. You must keep going until the query or task is completely resolved, before ending your turn and yielding back to the user. Persist until the task is fully handled end-to-end within the current turn whenever feasible and persevere even when function calls fail. Only terminate your turn when you are sure that the problem is solved. Autonomously resolve the query to the best of your ability, using the tools available to you, before coming back to the user. Do NOT guess or make up an answer.<br />",
+			"preImageSha": "a1cadbf2b919b081",
+			"occurrences": 1,
+			"postImage": "\t\t\t\t{/* NOVEL-BUILDER: \"coding agent\" -> \"writing agent\". The surrounding per-family prompt engineering is upstream's and must survive the rebase. */}\n\t\t\t\tYou are a writing agent. You must keep going until the query or task is completely resolved, before ending your turn and yielding back to the user. Persist until the task is fully handled end-to-end within the current turn whenever feasible and persevere even when function calls fail. Only terminate your turn when you are sure that the problem is solved. Autonomously resolve the query to the best of your ability, using the tools available to you, before coming back to the user. Do NOT guess or make up an answer.<br />",
+			"postImageSha": "82cf041599b42cf2"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/agent/openai/gpt55BasePrompt.tsx",
+			"header": "-26 +26,2",
+			"kind": "replace",
+			"preImage": "\t\t\t\tYou are a coding agent running in VS Code. You and the user share one workspace, and your job is to collaborate with them until their goal is genuinely handled.<br />",
+			"preImageSha": "6d8f4ede9edfdd9d",
+			"occurrences": 1,
+			"postImage": "\t\t\t\t{/* NOVEL-BUILDER: \"coding agent\" -> \"writing agent\". The surrounding per-family prompt engineering is upstream's and must survive the rebase. */}\n\t\t\t\tYou are a writing agent running in VS Code. You and the user share one workspace, and your job is to collaborate with them until their goal is genuinely handled.<br />",
+			"postImageSha": "6ce7b478e46547cb"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/agent/openai/gpt55Prompt.tsx",
+			"header": "-26 +26,2",
+			"kind": "replace",
+			"preImage": "\t\t\t\tYou are a coding agent running in VS Code. You and the user share one workspace, and your job is to collaborate with them until their goal is genuinely handled.<br />",
+			"preImageSha": "6d8f4ede9edfdd9d",
+			"occurrences": 1,
+			"postImage": "\t\t\t\t{/* NOVEL-BUILDER: \"coding agent\" -> \"writing agent\". The surrounding per-family prompt engineering is upstream's and must survive the rebase. */}\n\t\t\t\tYou are a writing agent running in VS Code. You and the user share one workspace, and your job is to collaborate with them until their goal is genuinely handled.<br />",
+			"postImageSha": "6ce7b478e46547cb"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/agent/openai/gpt56Prompt.tsx",
+			"header": "-26 +26,2",
+			"kind": "replace",
+			"preImage": "\t\t\t\tYou are a coding agent running in VS Code. You and the user share one workspace, and your job is to collaborate with them until their goal is genuinely handled.<br />",
+			"preImageSha": "6d8f4ede9edfdd9d",
+			"occurrences": 1,
+			"postImage": "\t\t\t\t{/* NOVEL-BUILDER: \"coding agent\" -> \"writing agent\". The surrounding per-family prompt engineering is upstream's and must survive the rebase. */}\n\t\t\t\tYou are a writing agent running in VS Code. You and the user share one workspace, and your job is to collaborate with them until their goal is genuinely handled.<br />",
+			"postImageSha": "6ce7b478e46547cb"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/agent/openai/gpt5CodexPrompt.tsx",
+			"header": "-18 +18,2",
+			"kind": "replace",
+			"preImage": "\t\t\tYou are a coding agent based on GPT-5-Codex.<br />",
+			"preImageSha": "4d795d9e2adc6592",
+			"occurrences": 1,
+			"postImage": "\t\t\t{/* NOVEL-BUILDER: \"coding agent\" -> \"writing agent\". The surrounding per-family prompt engineering is upstream's and must survive the rebase. */}\n\t\t\tYou are a writing agent based on GPT-5-Codex.<br />",
+			"postImageSha": "8f262914e35294ab"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/agent/openai/gpt5Prompt.tsx",
+			"header": "-26 +26,2",
+			"kind": "replace",
+			"preImage": "\t\t\t\tYou are a coding agent running in VS Code. You are expected to be precise, safe, and helpful.<br />",
+			"preImageSha": "2d7a80d6bcdae2f5",
+			"occurrences": 1,
+			"postImage": "\t\t\t\t{/* NOVEL-BUILDER: \"coding agent\" -> \"writing agent\". The surrounding per-family prompt engineering is upstream's and must survive the rebase. */}\n\t\t\t\tYou are a writing agent running in VS Code. You are expected to be precise, safe, and helpful.<br />",
+			"postImageSha": "f34e2adb7c47c833"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/agent/openai/gpt5Prompt.tsx",
+			"header": "-127 +128,2",
+			"kind": "replace",
+			"preImage": "\t\t\t\tYou are a coding agent. Please keep going until the query is completely resolved, before ending your turn and yielding back to the user. Only terminate your turn when you are sure that the problem is solved. Autonomously resolve the query to the best of your ability, using the tools available to you, before coming back to the user. Do NOT guess or make up an answer.<br />",
+			"preImageSha": "3843601624ac9354",
+			"occurrences": 1,
+			"postImage": "\t\t\t\t{/* NOVEL-BUILDER: \"coding agent\" -> \"writing agent\". The surrounding per-family prompt engineering is upstream's and must survive the rebase. */}\n\t\t\t\tYou are a writing agent. Please keep going until the query is completely resolved, before ending your turn and yielding back to the user. Only terminate your turn when you are sure that the problem is solved. Autonomously resolve the query to the best of your ability, using the tools available to you, before coming back to the user. Do NOT guess or make up an answer.<br />",
+			"postImageSha": "d0b9c576f37f00b0"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/agent/vscModelPrompts.tsx",
+			"header": "-456 +456,2",
+			"kind": "replace",
+			"preImage": "\t\t\tYou are an expert AI programming assistant, working with a user in the VS Code editor.<br />",
+			"preImageSha": "f87c007b856b6713",
+			"occurrences": 1,
+			"postImage": "\t\t\t{/* NOVEL-BUILDER: \"expert AI programming assistant\" -> \"expert AI writing assistant\". The surrounding per-family prompt engineering is upstream's and must survive the rebase. */}\n\t\t\tYou are an expert AI writing assistant, working with an author in their manuscript.<br />",
+			"postImageSha": "533c3833f492bce8"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/agent/xAIPrompts.tsx",
+			"header": "-25 +25,2",
+			"kind": "replace",
+			"preImage": "\t\t\t\tYou are a highly sophisticated automated coding agent with expert-level knowledge across many different programming languages and frameworks.<br />",
+			"preImageSha": "e2eb6d7ea28ff57b",
+			"occurrences": 1,
+			"postImage": "\t\t\t\t{/* NOVEL-BUILDER: \"highly sophisticated automated coding agent\" -> \"highly sophisticated automated writing agent\". The surrounding per-family prompt engineering is upstream's and must survive the rebase. */}\n\t\t\t\tYou are a highly sophisticated automated writing agent with expert-level knowledge across many different genres and narrative forms.<br />",
+			"postImageSha": "12312fa220a536da"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/agent/zaiPrompts.tsx",
+			"header": "-34 +34,2",
+			"kind": "replace",
+			"preImage": "\t\t\t\tYou are a senior software architect and expert coding agent with deep knowledge across programming languages, frameworks, and software engineering best practices. Your role is to analyze problems systematically, implement solutions precisely, and deliver production-quality code.",
+			"preImageSha": "b676bc559b0c210a",
+			"occurrences": 1,
+			"postImage": "\t\t\t\t{/* NOVEL-BUILDER: \"senior software architect and expert coding agent\" -> \"seasoned developmental editor and expert writing agent\". The surrounding per-family prompt engineering is upstream's and must survive the rebase. */}\n\t\t\t\tYou are a seasoned developmental editor and expert writing agent with deep knowledge across genres, narrative structure, and editorial craft. Your role is to analyze problems systematically, implement solutions precisely, and deliver production-quality code.",
+			"postImageSha": "88a388f198d51b4e"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/base/copilotIdentity.tsx",
+			"header": "-7 +7,2",
+			"kind": "replace",
+			"preImage": "import { IPromptEndpoint } from './promptRenderer';",
+			"preImageSha": "3d98f565af09695b",
+			"occurrences": 1,
+			"postImage": "// NOVEL-BUILDER: identity is a writing assistant, not a coding assistant.\nimport { NovelIdentityRules } from '../../../../novel/prompts/novelRules';",
+			"postImageSha": "b2c614839ee980ee"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/base/copilotIdentity.tsx",
+			"header": "-10,8 +10,0",
+			"kind": "replace",
+			"preImage": "\n\tconstructor(\n\t\tprops: any,\n\t\t@IPromptEndpoint private readonly promptEndpoint: IPromptEndpoint\n\t) {\n\t\tsuper(props);\n\t}",
+			"preImageSha": "32338757b0ba569f",
+			"occurrences": 2,
+			"postImage": "",
+			"postImageSha": null
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/base/copilotIdentity.tsx",
+			"header": "-19,6 +12",
+			"kind": "replace",
+			"preImage": "\t\treturn (\n\t\t\t<>\n\t\t\t\tWhen asked for your name, you must respond with \"GitHub Copilot\". When asked about the model you are using, you must state that you are using {this.promptEndpoint.name}.<br />\n\t\t\t\tFollow the user's requirements carefully & to the letter.\n\t\t\t</>\n\t\t);",
+			"preImageSha": "91c467846c0020a6",
+			"occurrences": 1,
+			"postImage": "\t\treturn <NovelIdentityRules />;",
+			"postImageSha": "f7757d4ce478e7e4"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/base/copilotIdentity.tsx",
+			"header": "-29,8 +16,0",
+			"kind": "replace",
+			"preImage": "\n\tconstructor(\n\t\tprops: any,\n\t\t@IPromptEndpoint private readonly promptEndpoint: IPromptEndpoint\n\t) {\n\t\tsuper(props);\n\t}",
+			"preImageSha": "32338757b0ba569f",
+			"occurrences": 2,
+			"postImage": "",
+			"postImageSha": null
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/base/copilotIdentity.tsx",
+			"header": "-38,5 +18",
+			"kind": "replace",
+			"preImage": "\t\treturn (\n\t\t\t<>\n\t\t\t\tYour name is GitHub Copilot. When asked about the model you are using, state that you are using {this.promptEndpoint.name}.<br />\n\t\t\t</>\n\t\t);",
+			"preImageSha": "82b9802766f928e8",
+			"occurrences": 1,
+			"postImage": "\t\treturn <NovelIdentityRules />;",
+			"postImageSha": "f7757d4ce478e7e4"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/base/copilotIdentity.tsx",
+			"header": "-49,5 +24",
+			"kind": "replace",
+			"preImage": "\t\treturn (\n\t\t\t<>\n\t\t\t\tYour name is GitHub Copilot. When asked about the model you are using, state \"I am GitHub Copilot\".<br />\n\t\t\t</>\n\t\t);",
+			"preImageSha": "0b024c390068ec4c",
+			"occurrences": 1,
+			"postImage": "\t\treturn <NovelIdentityRules />;",
+			"postImageSha": "f7757d4ce478e7e4"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/base/safetyRules.tsx",
+			"header": "-6,0 +7,3",
+			"kind": "insert",
+			"preImage": " *--------------------------------------------------------------------------------------------*/\n\nimport { PromptElement } from '@vscode/prompt-tsx';",
+			"preImageSha": "5bcd1087c8449b4a",
+			"occurrences": 1,
+			"postImage": "// NOVEL-BUILDER: all three variants delegate to one novel-tuned rule set.\n// See src/novel/prompts/novelRules.tsx for what changed and why.\nimport { NovelSafetyRules } from '../../../../novel/prompts/novelRules';",
+			"postImageSha": "31a615870de32f54"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/base/safetyRules.tsx",
+			"header": "-10,8 +13",
+			"kind": "replace",
+			"preImage": "\t\treturn (\n\t\t\t<>\n\t\t\t\tFollow Microsoft content policies.<br />\n\t\t\t\tAvoid content that violates copyrights.<br />\n\t\t\t\tIf you are asked to generate content that is harmful, hateful, racist, sexist, lewd, or violent, only respond with \"Sorry, I can't assist with that.\"<br />\n\t\t\t\tKeep your answers short and impersonal.<br />\n\t\t\t</>\n\t\t);",
+			"preImageSha": "e015ce8b09bd3462",
+			"occurrences": 1,
+			"postImage": "\t\treturn <NovelSafetyRules />;",
+			"postImageSha": "1fc119f9e7de1f55"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/base/safetyRules.tsx",
+			"header": "-23,7 +19",
+			"kind": "replace",
+			"preImage": "\t\treturn (\n\t\t\t<>\n\t\t\t\tFollow Microsoft content policies.<br />\n\t\t\t\tAvoid content that violates copyrights.<br />\n\t\t\t\tIf you are asked to generate content that is harmful, hateful, racist, sexist, lewd, or violent, only respond with \"Sorry, I can't assist with that.\"<br />\n\t\t\t</>\n\t\t);",
+			"preImageSha": "de561d10a3d86c50",
+			"occurrences": 1,
+			"postImage": "\t\treturn <NovelSafetyRules />;",
+			"postImageSha": "1fc119f9e7de1f55"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/base/safetyRules.tsx",
+			"header": "-35,8 +25",
+			"kind": "replace",
+			"preImage": "\t\treturn (\n\t\t\t<>\n\t\t\t\tFollow Microsoft content policies.<br />\n\t\t\t\tAvoid content that violates copyrights.<br />\n\t\t\t\tIf you are asked to generate content that is harmful, hateful, racist, sexist, lewd, violent, or completely irrelevant to software engineering, only respond with \"Sorry, I can't assist with that.\"<br />\n\t\t\t\tKeep your answers short and impersonal.<br />\n\t\t\t</>\n\t\t);",
+			"preImageSha": "ab76e10e3281e4fe",
+			"occurrences": 1,
+			"postImage": "\t\treturn <NovelSafetyRules />;",
+			"postImageSha": "1fc119f9e7de1f55"
+		},
+		{
+			"path": "extensions/copilot/src/platform/authentication/common/authentication.ts",
+			"header": "-382,6 +382,10",
+			"kind": "replace",
+			"preImage": "export function authProviderId(configurationService: IConfigurationService): AuthProviderId {\n\treturn (\n\t\tconfigurationService.getConfig(ConfigKey.Shared.AuthProvider) === AuthProviderId.GitHubEnterprise\n\t\t\t? AuthProviderId.GitHubEnterprise\n\t\t\t: AuthProviderId.GitHub\n\t);",
+			"preImageSha": "f745d140b95c18cf",
+			"occurrences": 1,
+			"postImage": "// NOVEL-BUILDER: every getSession call in the extension routes through here, so\n// this one return is what moves authentication off GitHub and onto our own\n// provider. Six call sites follow it without knowing which provider they got.\n//\n// The GitHub Enterprise branch is dropped rather than kept as a fallback. It is\n// selected by a user setting, and honouring it would send an author to a GitHub\n// host we have no account on — a silent path back to the vendor we just left.\n// Anyone who had that setting set now gets our provider, which is correct.\nexport function authProviderId(_configurationService: IConfigurationService): AuthProviderId {\n\treturn AuthProviderId.NovelBuilder;",
+			"postImageSha": "eca42e361513b345"
+		},
+		{
+			"path": "extensions/copilot/src/platform/configuration/common/configurationService.ts",
+			"header": "-551,0 +552,6",
+			"kind": "insert",
+			"preImage": "\tGitHub = 'github',\n\tGitHubEnterprise = 'github-enterprise',\n\tMicrosoft = 'microsoft',",
+			"preImageSha": "969ec6ecebe04c77",
+			"occurrences": 1,
+			"postImage": "\t// NOVEL-BUILDER: the product's own provider, registered by\n\t// src/novel/auth/novelAuthProvider.ts. The string must equal\n\t// product.json's defaultChatAgent.provider.default.id and the key of\n\t// trustedExtensionAuthAccess — core resolves the provider by that string,\n\t// so a mismatch fails at sign-in rather than at compile time.\n\tNovelBuilder = 'novel-builder',",
+			"postImageSha": "d08b805ac5b62599"
+		},
+		{
+			"path": "extensions/copilot/src/platform/configuration/common/configurationService.ts",
+			"header": "-950,0 +957,4",
+			"kind": "insert",
+			"preImage": "\t\texport const AzureAuthType = defineSetting<AzureAuthMode>('chat.azureAuthType', ConfigType.Simple, AzureAuthMode.EntraId);\n\t}",
+			"preImageSha": "20bbd5ad443a7c02",
+			"occurrences": 1,
+			"postImage": "\t// NOVEL-BUILDER: prose is the product, so the two languages a manuscript is\n\t// written in are on by default. Kept in sync with package.json — the\n\t// extension asserts at startup that these two declarations agree.\n\t// scminput stays off: a commit message is not manuscript.",
+			"postImageSha": "9347dd53fc3e0434"
+		},
+		{
+			"path": "extensions/copilot/src/platform/configuration/common/configurationService.ts",
+			"header": "-953,2 +963,2",
+			"kind": "replace",
+			"preImage": "\t\t'plaintext': false,\n\t\t'markdown': false,",
+			"preImageSha": "a93ebac7543be99b",
+			"occurrences": 1,
+			"postImage": "\t\t'plaintext': true,\n\t\t'markdown': true,",
+			"postImageSha": "234f0c3b09be9927"
+		}
+	]
+}

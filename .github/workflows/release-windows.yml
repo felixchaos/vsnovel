@@ -1,0 +1,98 @@
+# Builds the Windows user-setup installer for a VS Novel release.
+#
+# The user-setup (Inno) installer — not the old portable zip — is what the
+# editor's updater knows how to apply in the background (platform string
+# win32-x64-user; see updateService.win32.ts). It is uploaded as a build
+# artifact, not published directly: the release is assembled locally with
+# scripts/vsnovel-release.sh, which also attaches the signed macOS build and
+# generates update-manifest.json so both platforms' sha256 come from one place.
+#
+# The installer is not Authenticode-signed (no Windows code-signing cert), so
+# Windows SmartScreen will warn on first install until a cert is added.
+
+name: Release — Windows (user setup)
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ['v*']
+
+jobs:
+  build:
+    runs-on: windows-latest
+    timeout-minutes: 180
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+
+      - name: Setup Python (node-gyp)
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Locate Visual Studio (C++ toolchain)
+        shell: pwsh
+        run: |
+          $vswhere = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
+          if (!(Test-Path $vswhere)) { throw "vswhere not found at $vswhere" }
+          $vsPath = & $vswhere -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath
+          if (-not $vsPath) { $vsPath = & $vswhere -latest -products * -property installationPath }
+          Write-Host "Visual Studio installationPath: $vsPath"
+          "vs2022_install=$vsPath" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+
+      - name: Locate signtool and add to PATH
+        shell: pwsh
+        run: |
+          $signtool = Get-ChildItem "C:\Program Files (x86)\Windows Kits\10\bin\*\x64\signtool.exe" -ErrorAction SilentlyContinue | Sort-Object FullName | Select-Object -Last 1
+          if (-not $signtool) { $signtool = Get-ChildItem "C:\Program Files (x86)\Windows Kits\10\bin\*\x86\signtool.exe" -ErrorAction SilentlyContinue | Sort-Object FullName | Select-Object -Last 1 }
+          if (-not $signtool) { throw "signtool.exe not found under Windows Kits 10 bin" }
+          $dir = Split-Path $signtool.FullName
+          Write-Host "signtool: $($signtool.FullName)"
+          $dir | Out-File -FilePath $env:GITHUB_PATH -Append -Encoding utf8
+
+      - name: Install dependencies (compiles win32 native modules natively)
+        run: npm ci
+        env:
+          npm_config_arch: x64
+          VSCODE_FORCE_INSTALL: '1'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build copilot extension bundle
+        working-directory: extensions/copilot
+        run: node .esbuild.mts
+
+      - name: Build VS Code (win32-x64, minified)
+        run: npx gulp vscode-win32-x64-min
+        env:
+          NODE_OPTIONS: --max-old-space-size=8192
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Stage the background updater into the build
+        run: npx gulp vscode-win32-x64-inno-updater
+        env:
+          NODE_OPTIONS: --max-old-space-size=8192
+
+      - name: Build the user-setup installer (Inno)
+        run: npx gulp vscode-win32-x64-user-setup
+        env:
+          NODE_OPTIONS: --max-old-space-size=8192
+
+      - name: Locate the installer
+        shell: pwsh
+        run: |
+          $exe = Get-ChildItem ".build\win32-x64\user-setup\*.exe" -ErrorAction SilentlyContinue | Select-Object -First 1
+          if (-not $exe) { throw "user-setup .exe not found under .build\win32-x64\user-setup" }
+          Write-Host "installer: $($exe.FullName) ($([math]::Round($exe.Length/1MB,1)) MB)"
+          "SETUP_EXE=$($exe.FullName)" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+
+      - name: Upload installer artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: vsnovel-win32-x64-user-setup
+          path: ${{ env.SETUP_EXE }}
+          retention-days: 14

@@ -1,0 +1,64 @@
+{
+	"extends": "./tsconfig.base.json",
+	"compilerOptions": {
+		"jsx": "react",
+		"jsxFactory": "vscpp",
+		"jsxFragmentFactory": "vscppf",
+		"rootDir": ".",
+		"types": [
+			"minimist",
+			"mocha",
+			"node",
+			"picomatch",
+			"sinon",
+			"tar"
+		],
+		// Needed for tsx to run test files
+		"paths": {
+			"vscode": [
+				"./src/util/common/test/shims/vscodeTypesShim.ts"
+			],
+			// NOVEL-BUILDER: @vscode/copilot-api ships under GitHub's own terms and
+			// cannot be redistributed in a commercial product, so it is not
+			// installed. This resolves it to our own implementation. Aliasing
+			// rather than rewriting the forty-odd import sites is deliberate:
+			// every rewritten upstream file would be a rebase conflict forever,
+			// which is the cost scripts/novel-guard.sh exists to prevent.
+			"@vscode/copilot-api": [
+				"./src/novel/vendor/copilotApi"
+			]
+		}
+	},
+	"include": [
+		"./src",
+		"./test",
+		".vscode/extensions/test-extension"
+	],
+	"exclude": [
+		"test/scenarios/**/*",
+		"test/simulation/fixtures/**/*",
+		"test/simulation/workbench/**/*",
+		"src/platform/parser/test/node/fixtures/**/*",
+		"src/extension/test/node/fixtures/**/*",
+		"src/extension/prompts/node/test/fixtures/**/*",
+		"src/extension/typescriptContext/serverPlugin/fixtures/**",
+		"src/extension/completions-core/vscode-node/extension/src/copilotPanel/webView/suggestionsPanelWebview.ts",
+		"test/aml/out",
+		// NOVEL-BUILDER: chatSessions hosts the Copilot CLI and Claude Code session
+		// types, whose npm packages are proprietary and are therefore not in
+		// dependencies. The source stays in the tree so upstream changes under it
+		// rebase cleanly, but it is not registered, not bundled, and not compiled —
+		// without this exclude a fresh install would fail to typecheck on the
+		// imports of packages we deliberately no longer install.
+		"src/extension/chatSessions/**/*",
+		// NOVEL-BUILDER: the exclude above is not sufficient on its own. TypeScript
+		// still compiles an excluded file when an included one imports it, and
+		// these two test the CLI session feature while living outside its
+		// directory — parseAttachments.spec.ts imports five modules from it and is
+		// only filed under prompts/ by location. Leaving either in place pulls the
+		// whole subtree back in and a fresh install fails with 56 errors, all of
+		// them about a package we deliberately no longer depend on.
+		"src/extension/prompts/node/agent/test/parseAttachments.spec.ts",
+		"test/e2e/cli.stest.ts"
+	]
+}
