@@ -111,7 +111,11 @@ function buildWin32Setup(arch: string, target: string): task.CallbackTask {
 			Quality: quality
 		};
 
-		if (quality === 'stable' || quality === 'insider') {
+		// NOVEL-BUILDER: only define the Appx package when the Explorer
+		// context-menu integration is actually configured. Otherwise code.iss's
+		// `#ifdef AppxPackageName` block tries to package appx\code_<arch>.appx,
+		// which this fork never builds, and ISCC fails "file not found".
+		if ((quality === 'stable' || quality === 'insider') && (product as { win32ContextMenu?: Record<string, { clsid: string }> }).win32ContextMenu) {
 			definitions['AppxPackage'] = `${quality === 'stable' ? 'code' : 'code_insider'}_${arch}.appx`;
 			definitions['AppxPackageDll'] = `${quality === 'stable' ? 'code' : 'code_insider'}_explorer_command_${arch}.dll`;
 			definitions['AppxPackageName'] = `${product.win32AppUserModelId}`;
