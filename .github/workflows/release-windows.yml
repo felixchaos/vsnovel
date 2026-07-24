@@ -92,7 +92,7 @@ jobs:
           "SETUP_EXE=$($exe.FullName)" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
 
       - name: Upload installer artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: vsnovel-win32-x64-user-setup
           path: ${{ env.SETUP_EXE }}
