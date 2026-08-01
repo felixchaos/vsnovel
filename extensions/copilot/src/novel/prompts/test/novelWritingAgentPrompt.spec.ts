@@ -130,10 +130,11 @@ describe('the reminder slot repeats what keeps slipping', () => {
 // memory. Saying what the tool cannot do is the point: an invented detail is
 // what a research question exists to avoid.
 describe('the shared writing prompt is honest about looking things up', () => {
-	it('offers the page fetch and denies search in the same breath', () => {
+	it('offers the lookup and the fetch, and denies general search in the same breath', () => {
+		expect(prompt).toMatch(/LookUpReference/);
 		expect(prompt).toMatch(/FetchWebPage/);
-		expect(prompt).toMatch(/There is no search/i);
-		expect(prompt).toMatch(/rather than writing from memory/i);
+		expect(prompt).toMatch(/There is no general web search/i);
+		expect(prompt).toMatch(/instead of writing from memory/i);
 	});
 
 	it('keeps fetched text out of the manuscript', () => {

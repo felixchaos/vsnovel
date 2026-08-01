@@ -535,6 +535,42 @@
     }
    },
    {
+    "name": "copilot_lookUpReference",
+    "displayName": "Look Up Reference",
+    "toolReferenceName": "lookUpReference",
+    "icon": "$(globe)",
+    "userDescription": "Look something up in Wikipedia \u2014 a place, a period detail, a custom, a term, a person.",
+    "modelDescription": "Look a subject up in Wikipedia and get back matching entries with a short extract and the page address. Use it for facts outside the manuscript that the author expects to be right: historical and period detail, places, customs, terminology, real people. Choose the language edition that fits the subject (zh, ja or en). This is NOT a web search \u2014 it finds encyclopaedia entries, not arbitrary pages. Open a returned address with fetch_webpage before relying on a date, a number or a quotation.",
+    "canBeReferencedInPrompt": true,
+    "when": "!isWeb",
+    "tags": [],
+    "inputSchema": {
+     "type": "object",
+     "properties": {
+      "query": {
+       "description": "What to look up.",
+       "type": "string"
+      },
+      "language": {
+       "description": "Which Wikipedia edition to ask. Defaults to zh.",
+       "type": "string",
+       "enum": [
+        "zh",
+        "ja",
+        "en"
+       ]
+      },
+      "maxResults": {
+       "description": "How many entries to return (1-10, default 5).",
+       "type": "number"
+      }
+     },
+     "required": [
+      "query"
+     ]
+    }
+   },
+   {
     "name": "copilot_novelCheck",
     "displayName": "Check Manuscript",
     "toolReferenceName": "novelCheck",

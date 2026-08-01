@@ -32,6 +32,7 @@ export enum ToolName {
 	// because there is nothing to check in a manuscript that a compiler knows about.
 	NovelCheck = 'novel_check',
 	SearchManuscript = 'search_manuscript',
+	LookUpReference = 'look_up_reference', // NOVEL-BUILDER
 	GetScmChanges = 'get_changed_files',
 	ReadProjectStructure = 'read_project_structure',
 	CreateNewWorkspace = 'create_new_workspace',
@@ -122,6 +123,7 @@ export enum ContributedToolName {
 	GetErrors = 'copilot_getErrors',
 	NovelCheck = 'copilot_novelCheck', // NOVEL-BUILDER
 	SearchManuscript = 'copilot_searchManuscript', // NOVEL-BUILDER
+	LookUpReference = 'copilot_lookUpReference', // NOVEL-BUILDER
 	GetScmChanges = 'copilot_getChangedFiles',
 	ReadProjectStructure = 'copilot_readProjectStructure',
 	CreateNewWorkspace = 'copilot_createNewWorkspace',
@@ -251,6 +253,7 @@ export const toolCategories: Record<ToolName, ToolCategory> = {
 	// NOVEL-BUILDER: Core, so it is never grouped away — it is how the agent
 	// reads the work, the same standing read_file has in a codebase.
 	[ToolName.SearchManuscript]: ToolCategory.Core,
+	[ToolName.LookUpReference]: ToolCategory.WebInteraction, // NOVEL-BUILDER
 	[ToolName.VSCodeAPI]: ToolCategory.VSCodeInteraction,
 	[ToolName.GetScmChanges]: ToolCategory.VSCodeInteraction,
 	[ToolName.CreateNewWorkspace]: ToolCategory.VSCodeInteraction,

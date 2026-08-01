@@ -43,4 +43,5 @@ import './vscodeCmdTool';
 // NOVEL-BUILDER: this product's own checker. Registration is by import, so it
 // has to be listed here — a tool file nothing imports is silently absent.
 import '../../../novel/tools/novelCheckTool';
+import '../../../novel/tools/referenceLookupTool';
 import '../../../novel/tools/searchManuscriptTool';

@@ -1,7 +1,7 @@
 {
 	"anchor": "1.129.1",
 	"anchorCommit": "8a7abeba6e03ea3af87bfbce9a1b7e48fed567b8",
-	"generated": "2026-08-01T11:16:57.319Z",
+	"generated": "2026-08-01T11:56:26.807Z",
 	"seams": [
 		{
 			"path": "README.md",
@@ -22645,43 +22645,43 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/tools/common/toolNames.ts",
-			"header": "-30,0 +31,4",
+			"header": "-30,0 +31,5",
 			"kind": "insert",
 			"preImage": "\tViewImage = 'view_image',\n\tListDirectory = 'list_dir',\n\tGetErrors = 'get_errors',",
 			"preImageSha": "dc5133d931f6b080",
 			"occurrences": 1,
-			"postImage": "\t// NOVEL-BUILDER: this product's own checker. It has no upstream counterpart\n\t// because there is nothing to check in a manuscript that a compiler knows about.\n\tNovelCheck = 'novel_check',\n\tSearchManuscript = 'search_manuscript',",
-			"postImageSha": "0eafb0f575744e27"
+			"postImage": "\t// NOVEL-BUILDER: this product's own checker. It has no upstream counterpart\n\t// because there is nothing to check in a manuscript that a compiler knows about.\n\tNovelCheck = 'novel_check',\n\tSearchManuscript = 'search_manuscript',\n\tLookUpReference = 'look_up_reference', // NOVEL-BUILDER",
+			"postImageSha": "119783f8193962db"
 		},
 		{
 			"path": "extensions/copilot/src/extension/tools/common/toolNames.ts",
-			"header": "-118,0 +123,2",
+			"header": "-118,0 +124,3",
 			"kind": "insert",
 			"preImage": "\tViewImage = 'copilot_viewImage',\n\tListDirectory = 'copilot_listDirectory',\n\tGetErrors = 'copilot_getErrors',",
 			"preImageSha": "689976cb694edccc",
 			"occurrences": 1,
-			"postImage": "\tNovelCheck = 'copilot_novelCheck', // NOVEL-BUILDER\n\tSearchManuscript = 'copilot_searchManuscript', // NOVEL-BUILDER",
-			"postImageSha": "9b8bd1a76cc3db46"
+			"postImage": "\tNovelCheck = 'copilot_novelCheck', // NOVEL-BUILDER\n\tSearchManuscript = 'copilot_searchManuscript', // NOVEL-BUILDER\n\tLookUpReference = 'copilot_lookUpReference', // NOVEL-BUILDER",
+			"postImageSha": "9093fc5ed9270a25"
 		},
 		{
 			"path": "extensions/copilot/src/extension/tools/common/toolNames.ts",
-			"header": "-243,0 +250,4",
+			"header": "-243,0 +252,5",
 			"kind": "insert",
 			"preImage": "\t// VS Code Interaction\n\t[ToolName.SearchWorkspaceSymbols]: ToolCategory.VSCodeInteraction,\n\t[ToolName.GetErrors]: ToolCategory.VSCodeInteraction,",
 			"preImageSha": "4562ccd3df9ee205",
 			"occurrences": 1,
-			"postImage": "\t[ToolName.NovelCheck]: ToolCategory.VSCodeInteraction, // NOVEL-BUILDER\n\t// NOVEL-BUILDER: Core, so it is never grouped away — it is how the agent\n\t// reads the work, the same standing read_file has in a codebase.\n\t[ToolName.SearchManuscript]: ToolCategory.Core,",
-			"postImageSha": "e2d84d2291a1e1a7"
+			"postImage": "\t[ToolName.NovelCheck]: ToolCategory.VSCodeInteraction, // NOVEL-BUILDER\n\t// NOVEL-BUILDER: Core, so it is never grouped away — it is how the agent\n\t// reads the work, the same standing read_file has in a codebase.\n\t[ToolName.SearchManuscript]: ToolCategory.Core,\n\t[ToolName.LookUpReference]: ToolCategory.WebInteraction, // NOVEL-BUILDER",
+			"postImageSha": "9bd42999d03e5964"
 		},
 		{
 			"path": "extensions/copilot/src/extension/tools/node/allTools.ts",
-			"header": "-42,0 +43,4",
+			"header": "-42,0 +43,5",
 			"kind": "insert",
 			"preImage": "import './vscodeAPITool';\nimport './vscodeCmdTool';",
 			"preImageSha": "24aa9a20a00375e3",
 			"occurrences": 1,
-			"postImage": "// NOVEL-BUILDER: this product's own checker. Registration is by import, so it\n// has to be listed here — a tool file nothing imports is silently absent.\nimport '../../../novel/tools/novelCheckTool';\nimport '../../../novel/tools/searchManuscriptTool';",
-			"postImageSha": "e970077c6f36017a"
+			"postImage": "// NOVEL-BUILDER: this product's own checker. Registration is by import, so it\n// has to be listed here — a tool file nothing imports is silently absent.\nimport '../../../novel/tools/novelCheckTool';\nimport '../../../novel/tools/referenceLookupTool';\nimport '../../../novel/tools/searchManuscriptTool';",
+			"postImageSha": "e077bd9b687d8cd7"
 		},
 		{
 			"path": "extensions/copilot/src/extension/xtab/common/inlineSuggestion.ts",
