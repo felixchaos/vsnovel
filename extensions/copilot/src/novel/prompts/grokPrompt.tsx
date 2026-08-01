@@ -23,7 +23,7 @@
  */
 
 import { IChatEndpoint } from '../../platform/networking/common/networking';
-import { DefaultReminderInstructions } from '../../extension/prompts/node/agent/defaultAgentInstructions';
+import { NovelReminderInstructions } from './novelReminderInstructions';
 import {
 	IAgentPrompt, PromptRegistry, ReminderInstructionsConstructor, SystemPrompt,
 } from '../../extension/prompts/node/agent/promptRegistry';
@@ -41,7 +41,7 @@ class GrokPromptResolver implements IAgentPrompt {
 	}
 
 	resolveReminderInstructions(_endpoint: IChatEndpoint): ReminderInstructionsConstructor | undefined {
-		return DefaultReminderInstructions;
+		return NovelReminderInstructions;
 	}
 }
 

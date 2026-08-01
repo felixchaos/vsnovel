@@ -80,10 +80,13 @@ describe('deepseek prompt resolution', () => {
 		expect((await systemPromptFor('deepseek-v5-preview')).name).toBe('NovelWritingAgentPrompt');
 	});
 
-	// Domain-neutral: it renders tool mechanics only. Reused deliberately rather
-	// than copied, so upstream tool changes reach this family too.
-	it('reuses the default reminder instructions', async () => {
+	// Was DefaultReminderInstructions until 2026-08-01. The slot renders next to
+	// the author's message every turn, and two behaviours kept slipping there
+	// that a once-read system prompt could not hold — see
+	// novelReminderInstructions.tsx. It still renders upstream's editing
+	// reminder, so upstream tool changes continue to reach this family.
+	it('uses the writing reminder instructions', async () => {
 		const resolved = await PromptRegistry.resolveAllCustomizations(instantiationService, endpoint('deepseek-v4-pro'));
-		expect(resolved.ReminderInstructionsClass.name).toBe('DefaultReminderInstructions');
+		expect(resolved.ReminderInstructionsClass.name).toBe('NovelReminderInstructions');
 	});
 });

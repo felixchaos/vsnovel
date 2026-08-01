@@ -167,7 +167,14 @@ export function isGpt53Codex(model: LanguageModelChat | IChatEndpoint | string) 
 export function isKimiFamily(model: LanguageModelChat | IChatEndpoint | string): boolean {
 	const matches = (value: string): boolean => {
 		const normalized = value.toLowerCase();
-		return normalized.includes('kimi-k2.6') || normalized.includes('kimi-k2.7-code');
+		// NOVEL-BUILDER: + the bare `kimi` family and kimi-k3. Upstream names two
+		// model ids literally, so this product's K3 — labelled with the family
+		// `kimi` — matched nothing and lost both of the things this predicate
+		// gates: the edit-tool tables below (leaving it on the whole-file rewrite
+		// path) and the forced temperature=1/top_p=0.95 in chatEndpoint that
+		// every Moonshot model 400s without.
+		return normalized === 'kimi' || normalized.startsWith('kimi-k3') ||
+			normalized.includes('kimi-k2.6') || normalized.includes('kimi-k2.7-code');
 	};
 
 	if (typeof model === 'string') {
@@ -279,14 +286,14 @@ export function modelPrefersJsonNotebookRepresentation(model: LanguageModelChat 
  * Model supports replace_string_in_file as an edit tool.
  */
 export function modelSupportsReplaceString(model: LanguageModelChat | IChatEndpoint): boolean {
-	return isGeminiFamily(model) || isXAiFamily(model) || modelSupportsMultiReplaceString(model) || isHiddenModelF(model) || isMinimaxFamily(model) || isHiddenFamilyH(model) || isKimiFamily(model);
+	return isGeminiFamily(model) || isXAiFamily(model) || modelSupportsMultiReplaceString(model) || isHiddenModelF(model) || isMinimaxFamily(model) || isHiddenFamilyH(model) || isKimiFamily(model) || isDeepSeekFamily(model); // NOVEL-BUILDER: + DeepSeek
 }
 
 /**
  * Model supports multi_replace_string_in_file as an edit tool.
  */
 export function modelSupportsMultiReplaceString(model: LanguageModelChat | IChatEndpoint): boolean {
-	return isAnthropicFamily(model) || isHiddenModelE(model) || isVSCModelReplaceStringSet(model) || isMinimaxFamily(model) || isHiddenFamilyH(model) || isKimiFamily(model);
+	return isAnthropicFamily(model) || isHiddenModelE(model) || isVSCModelReplaceStringSet(model) || isMinimaxFamily(model) || isHiddenFamilyH(model) || isKimiFamily(model) || isDeepSeekFamily(model); // NOVEL-BUILDER: + DeepSeek
 }
 
 /**
@@ -294,7 +301,7 @@ export function modelSupportsMultiReplaceString(model: LanguageModelChat | IChat
  * without needing insert_edit_into_file.
  */
 export function modelCanUseReplaceStringExclusively(model: LanguageModelChat | IChatEndpoint): boolean {
-	return isAnthropicFamily(model) || isXAiFamily(model) || isHiddenModelE(model) || model.family.toLowerCase().includes('gemini-3') || isVSCModelReplaceStringSet(model) || isHiddenModelF(model) || isMinimaxFamily(model) || isHiddenFamilyH(model) || isKimiFamily(model);
+	return isAnthropicFamily(model) || isXAiFamily(model) || isHiddenModelE(model) || model.family.toLowerCase().includes('gemini-3') || isVSCModelReplaceStringSet(model) || isHiddenModelF(model) || isMinimaxFamily(model) || isHiddenFamilyH(model) || isKimiFamily(model) || isDeepSeekFamily(model); // NOVEL-BUILDER: + DeepSeek
 }
 
 /**
@@ -374,6 +381,19 @@ export function isGeminiFamily(model: LanguageModelChat | IChatEndpoint | string
 
 export function isMinimaxFamily(model: LanguageModelChat | IChatEndpoint): boolean {
 	return model.family.toLowerCase().includes('minimax');
+}
+
+// NOVEL-BUILDER: DeepSeek V4. Absent from the edit-tool tables below, a model
+// falls through to insert_edit_into_file alone — the legacy path that rewrites
+// the whole file through the code mapper and a second speculative model call.
+// On a chapter that is minutes of streaming for a one-line change, and it was
+// the only edit tool our default model had. V4 is post-trained for coding
+// agents (the 0731 release leads on Terminal Bench / SWE, which are
+// string-replacement editing end to end), so find-replace is what it is
+// actually good at.
+export function isDeepSeekFamily(model: LanguageModelChat | IChatEndpoint | string): boolean {
+	const family = typeof model === 'string' ? model : model.family;
+	return family.toLowerCase().startsWith('deepseek');
 }
 
 export function isXAiFamily(model: LanguageModelChat | IChatEndpoint): boolean {
