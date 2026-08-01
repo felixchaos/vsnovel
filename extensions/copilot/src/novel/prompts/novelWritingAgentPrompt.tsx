@@ -80,6 +80,12 @@ export class NovelWritingAgentPrompt extends PromptElement<DefaultAgentPromptPro
 				- <Tag name='important'>Whenever you are drafting or revising a particular chapter, say which one when you search.</Tag> The search will then withhold everything from later chapters. This is not a formality: a passage from the ending, read while writing the beginning, is how a draft comes to know things its narrator cannot know yet.
 			</Tag>
 
+			{tools[ToolName.FetchWebPage] && <Tag name='lookingThingsUp'>
+				You can read a web page the author gives you — a reference article, a dictionary entry, a source they want the scene to be faithful to — and follow links from it when they bear on the question.<br />
+				There is no search: you can open a page, not find one. If a fact needs looking up and no address is at hand, say what you would need rather than writing from memory, because a plausible invented detail is exactly what an author asks a research question to avoid.<br />
+				What comes back is reference material, never prose. Take the fact and write it in this work's voice; do not paste a source's sentences into the manuscript.
+			</Tag>}
+
 			<Tag name='checkingYourWork'>
 				After you write or revise a chapter, run the manuscript check on it. It reports names that drift from the form the story bible settles on, contradictions between recorded facts, foreshadowing that has come due, and terms rendered against their pinned translation.<br />
 				Treat its output the way you would treat a failing test: something you introduced is wrong until you have looked. Findings reported for the work as a whole rather than for one chapter still concern you — a chapter you just wrote is where a contradiction with the rest of it appears.

@@ -123,3 +123,20 @@ describe('the reminder slot repeats what keeps slipping', () => {
 		expect(reminder).toMatch(/getEditingReminder\(/);
 	});
 });
+
+// Asked 2026-08-01 why web search never fires: there is no web search. The
+// product ships fetch_webpage (open a URL, locally) and nothing that finds a
+// URL, and the prompt mentioned neither — so a pasted link was answered from
+// memory. Saying what the tool cannot do is the point: an invented detail is
+// what a research question exists to avoid.
+describe('the shared writing prompt is honest about looking things up', () => {
+	it('offers the page fetch and denies search in the same breath', () => {
+		expect(prompt).toMatch(/FetchWebPage/);
+		expect(prompt).toMatch(/There is no search/i);
+		expect(prompt).toMatch(/rather than writing from memory/i);
+	});
+
+	it('keeps fetched text out of the manuscript', () => {
+		expect(prompt).toMatch(/reference material, never prose/i);
+	});
+});
