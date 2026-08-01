@@ -1813,11 +1813,19 @@ export class ChatMLFetcherImpl extends AbstractChatMLFetcher {
 			}
 
 			// HTTP 5xx Server Error
+			// NOVEL-BUILDER: prefer the message the server sent. Our gateway
+			// classifies upstream failures and writes a sentence the author can
+			// act on ("the model service is temporarily unavailable; try again
+			// shortly"); discarding it leaves "Server error: 502", which reads
+			// like our outage and says nothing about what to do. jsonData is
+			// already unwrapped from `.error` above, and the status text remains
+			// the fallback for a body that carries no message.
+			const serverMessage = typeof jsonData?.message === 'string' ? jsonData.message.trim() : '';
 			return {
 				type: FetchResponseKind.Failed,
 				modelRequestId: modelRequestIdObj,
 				failKind: ChatFailKind.ServerError,
-				reason: reasonNoText,
+				reason: serverMessage || reasonNoText,
 			};
 		}
 

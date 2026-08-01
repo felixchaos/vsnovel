@@ -1,7 +1,7 @@
 {
 	"anchor": "1.129.1",
 	"anchorCommit": "8a7abeba6e03ea3af87bfbce9a1b7e48fed567b8",
-	"generated": "2026-08-01T10:00:01.038Z",
+	"generated": "2026-08-01T11:16:57.319Z",
 	"seams": [
 		{
 			"path": "README.md",
@@ -522,6 +522,26 @@
 			"occurrences": 1,
 			"postImage": "\t\t// NOVEL-BUILDER: the conversation-wide rejection message, shown verbatim\n\t\t// when a request is declined. It named the wrong product.\n\t\trejectionMessage: l10n.t('Sorry, that request was declined.'),",
 			"postImageSha": "a7ce1a0fd3d7d08d"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompt/node/chatMLFetcher.ts",
+			"header": "-1815,0 +1816,8",
+			"kind": "insert",
+			"preImage": "\t\t\t}\n\n\t\t\t// HTTP 5xx Server Error",
+			"preImageSha": "b8cec0c153149a88",
+			"occurrences": 1,
+			"postImage": "\t\t\t// NOVEL-BUILDER: prefer the message the server sent. Our gateway\n\t\t\t// classifies upstream failures and writes a sentence the author can\n\t\t\t// act on (\"the model service is temporarily unavailable; try again\n\t\t\t// shortly\"); discarding it leaves \"Server error: 502\", which reads\n\t\t\t// like our outage and says nothing about what to do. jsonData is\n\t\t\t// already unwrapped from `.error` above, and the status text remains\n\t\t\t// the fallback for a body that carries no message.\n\t\t\tconst serverMessage = typeof jsonData?.message === 'string' ? jsonData.message.trim() : '';",
+			"postImageSha": "d811739003ff958f"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompt/node/chatMLFetcher.ts",
+			"header": "-1820 +1828",
+			"kind": "replace",
+			"preImage": "\t\t\t\treason: reasonNoText,",
+			"preImageSha": "c8156c6e33d08da3",
+			"occurrences": 1,
+			"postImage": "\t\t\t\treason: serverMessage || reasonNoText,",
+			"postImageSha": "cafc4f287b4b7701"
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/agentPrompt.tsx",
