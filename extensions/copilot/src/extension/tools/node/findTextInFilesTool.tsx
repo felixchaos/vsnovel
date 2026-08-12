@@ -23,7 +23,7 @@ import { count } from '../../../util/vs/base/common/strings';
 import { URI } from '../../../util/vs/base/common/uri';
 import { Position as EditorPosition } from '../../../util/vs/editor/common/core/position';
 import { IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';
-import { ExcludeSettingOptions, ExtendedLanguageModelToolResult, LanguageModelPromptTsxPart, Location, MarkdownString, Range } from '../../../vscodeTypes';
+import { ExcludeSettingOptions, ExtendedLanguageModelToolResult, LanguageModelPromptTsxPart, LanguageModelTextPart, Location, MarkdownString, Range } from '../../../vscodeTypes';
 import { IBuildPromptContext } from '../../prompt/common/intents';
 import { renderPromptElementJSON } from '../../prompts/node/base/promptRenderer';
 import { Tag } from '../../prompts/node/base/tag';
@@ -184,7 +184,9 @@ Then if you want to include those files you can call the tool again by setting "
 	private async renderGrepStyle(results: vscode.TextSearchResult2[], options: vscode.LanguageModelToolInvocationOptions<IFindTextInFilesToolParams>, maxResults: number, globResult: InputGlobResult | undefined, isRegExp: boolean, noMatchInstructions: string | undefined, token: CancellationToken): Promise<vscode.ExtendedLanguageModelToolResult> {
 		const groupedMatches = this.createGroupedFileMatches(results, maxResults);
 		if (!groupedMatches) {
-			return this.errorResult(noMatchInstructions ? `No matches found. ${noMatchInstructions}` : 'No matches found.');
+			return this.noMatchesResult(
+				noMatchInstructions ? `No matches found. ${noMatchInstructions}` : 'No matches found.',
+				this.getResultMessage(isRegExp, this.formatQueryString(options.input, globResult), 0));
 		}
 		const prompt = await renderPromptElementJSON(this.instantiationService,
 			FindTextInFilesGrepResult,
@@ -301,9 +303,14 @@ Then if you want to include those files you can call the tool again by setting "
 		};
 	}
 
-	private errorResult(message: string): vscode.ExtendedLanguageModelToolResult {
-		const result = new ExtendedLanguageModelToolResult([]);
-		result.toolResultMessage = new MarkdownString(message);
+	// NOVEL-BUILDER: upstream wrote the model-facing text into `toolResultMessage` (a UI-only
+	// label) and returned empty content. The author therefore saw the "search.exclude /
+	// node_modules / bower_components" paragraph in the chat, while the model received
+	// `(empty)` (the `<IfEmpty alt='(empty)'>` fallback in toolCalling.tsx) — both channels
+	// inverted. The tag-style renderer already does this correctly; mirror it here.
+	private noMatchesResult(modelMessage: string, uiMessage: MarkdownString): vscode.ExtendedLanguageModelToolResult {
+		const result = new ExtendedLanguageModelToolResult([new LanguageModelTextPart(modelMessage)]);
+		result.toolResultMessage = uiMessage;
 		return result;
 	}
 

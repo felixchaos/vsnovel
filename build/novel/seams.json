@@ -1,7 +1,7 @@
 {
 	"anchor": "1.129.1",
 	"anchorCommit": "8a7abeba6e03ea3af87bfbce9a1b7e48fed567b8",
-	"generated": "2026-08-01T11:56:26.807Z",
+	"generated": "2026-08-06T14:28:16.777Z",
 	"seams": [
 		{
 			"path": "README.md",
@@ -22682,6 +22682,46 @@
 			"occurrences": 1,
 			"postImage": "// NOVEL-BUILDER: this product's own checker. Registration is by import, so it\n// has to be listed here — a tool file nothing imports is silently absent.\nimport '../../../novel/tools/novelCheckTool';\nimport '../../../novel/tools/referenceLookupTool';\nimport '../../../novel/tools/searchManuscriptTool';",
 			"postImageSha": "e077bd9b687d8cd7"
+		},
+		{
+			"path": "extensions/copilot/src/extension/tools/node/findTextInFilesTool.tsx",
+			"header": "-26 +26",
+			"kind": "replace",
+			"preImage": "import { ExcludeSettingOptions, ExtendedLanguageModelToolResult, LanguageModelPromptTsxPart, Location, MarkdownString, Range } from '../../../vscodeTypes';",
+			"preImageSha": "cb5907159578fa67",
+			"occurrences": 1,
+			"postImage": "import { ExcludeSettingOptions, ExtendedLanguageModelToolResult, LanguageModelPromptTsxPart, LanguageModelTextPart, Location, MarkdownString, Range } from '../../../vscodeTypes';",
+			"postImageSha": "161bb8c4ad99c543"
+		},
+		{
+			"path": "extensions/copilot/src/extension/tools/node/findTextInFilesTool.tsx",
+			"header": "-187 +187,3",
+			"kind": "replace",
+			"preImage": "\t\t\treturn this.errorResult(noMatchInstructions ? `No matches found. ${noMatchInstructions}` : 'No matches found.');",
+			"preImageSha": "24e5ec0faa5cec19",
+			"occurrences": 1,
+			"postImage": "\t\t\treturn this.noMatchesResult(\n\t\t\t\tnoMatchInstructions ? `No matches found. ${noMatchInstructions}` : 'No matches found.',\n\t\t\t\tthis.getResultMessage(isRegExp, this.formatQueryString(options.input, globResult), 0));",
+			"postImageSha": "6585b51041de1fff"
+		},
+		{
+			"path": "extensions/copilot/src/extension/tools/node/findTextInFilesTool.tsx",
+			"header": "-304,3 +306,8",
+			"kind": "replace",
+			"preImage": "\tprivate errorResult(message: string): vscode.ExtendedLanguageModelToolResult {\n\t\tconst result = new ExtendedLanguageModelToolResult([]);\n\t\tresult.toolResultMessage = new MarkdownString(message);",
+			"preImageSha": "0dd32efdf1278d1e",
+			"occurrences": 1,
+			"postImage": "\t// NOVEL-BUILDER: upstream wrote the model-facing text into `toolResultMessage` (a UI-only\n\t// label) and returned empty content. The author therefore saw the \"search.exclude /\n\t// node_modules / bower_components\" paragraph in the chat, while the model received\n\t// `(empty)` (the `<IfEmpty alt='(empty)'>` fallback in toolCalling.tsx) — both channels\n\t// inverted. The tag-style renderer already does this correctly; mirror it here.\n\tprivate noMatchesResult(modelMessage: string, uiMessage: MarkdownString): vscode.ExtendedLanguageModelToolResult {\n\t\tconst result = new ExtendedLanguageModelToolResult([new LanguageModelTextPart(modelMessage)]);\n\t\tresult.toolResultMessage = uiMessage;",
+			"postImageSha": "fb55f98f2df92351"
+		},
+		{
+			"path": "extensions/copilot/src/extension/tools/node/test/findTextInFilesTool.spec.tsx",
+			"header": "-113,0 +114,20",
+			"kind": "insert",
+			"preImage": "\t\texpect(searchService.calls.every(call => call.pattern === '(?:hello)')).toBe(true);\n\t});",
+			"preImageSha": "9f697c717074c38c",
+			"occurrences": 1,
+			"postImage": "\t// NOVEL-BUILDER: locks the no-match branch of the grep renderer, which upstream\n\t// left untested and shipped with its two output channels crossed.\n\ttest('no matches: the hint goes to the model, the short label goes to the UI', async () => {\n\t\tsetup('*.ts', false);\n\n\t\tconst tool = accessor.get(IInstantiationService).createInstance(FindTextInFilesTool);\n\t\tconst result = await tool.invoke({ input: { query: 'hello', includePattern: '*.ts' }, toolInvocationToken: null!, }, CancellationToken.None);\n\n\t\t// The model has to actually be told there were no matches. An empty content array\n\t\t// renders as `(empty)` via <IfEmpty> in toolCalling.tsx, which tells it nothing.\n\t\tconst modelText = result.content.map(part => (part as { value: string }).value).join('');\n\t\texpect(modelText).toContain('No matches found.');\n\t\texpect(modelText).toContain('includeIgnoredFiles');\n\n\t\t// The author only sees the short label — never the search.exclude prose.\n\t\tconst uiMessage = (result.toolResultMessage as any as MarkdownString).value;\n\t\texpect(uiMessage).toBe('Searched for regex `hello` (`*.ts`), no results');\n\t\texpect(uiMessage).not.toContain('search.exclude');\n\t});",
+			"postImageSha": "f34c02c19a44c8c3"
 		},
 		{
 			"path": "extensions/copilot/src/extension/xtab/common/inlineSuggestion.ts",

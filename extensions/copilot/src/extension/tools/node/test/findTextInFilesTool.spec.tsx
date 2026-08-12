@@ -111,6 +111,26 @@ suite('FindTextInFiles', () => {
 		expect(searchService.calls.every(call => call.pattern === '(?:hello)')).toBe(true);
 	});
 
+	// NOVEL-BUILDER: locks the no-match branch of the grep renderer, which upstream
+	// left untested and shipped with its two output channels crossed.
+	test('no matches: the hint goes to the model, the short label goes to the UI', async () => {
+		setup('*.ts', false);
+
+		const tool = accessor.get(IInstantiationService).createInstance(FindTextInFilesTool);
+		const result = await tool.invoke({ input: { query: 'hello', includePattern: '*.ts' }, toolInvocationToken: null!, }, CancellationToken.None);
+
+		// The model has to actually be told there were no matches. An empty content array
+		// renders as `(empty)` via <IfEmpty> in toolCalling.tsx, which tells it nothing.
+		const modelText = result.content.map(part => (part as { value: string }).value).join('');
+		expect(modelText).toContain('No matches found.');
+		expect(modelText).toContain('includeIgnoredFiles');
+
+		// The author only sees the short label — never the search.exclude prose.
+		const uiMessage = (result.toolResultMessage as any as MarkdownString).value;
+		expect(uiMessage).toBe('Searched for regex `hello` (`*.ts`), no results');
+		expect(uiMessage).not.toContain('search.exclude');
+	});
+
 	test('does not retry when text pattern is invalid regex', async () => {
 		const searchService = setup('*.ts', false);
 
