@@ -51,6 +51,12 @@ export interface ConversationHistorySummarizationPromptProps extends SummarizedA
 }
 
 const SummaryPrompt = <>
+		{/* NOVEL-BUILDER: the compaction prompt, rewritten for a manuscript.
+		    Upstream summarises a coding session — tool executions, code
+		    archaeology, technical inventory — and a summary built from those
+		    headings drops exactly what a long book needs carried across a
+		    compaction: who is in the scene, what was promised, what voice the
+		    chapter is in. Structure and step numbering are upstream's. */}
 		Your task is to create a comprehensive, detailed summary of the entire writing session that captures all essential information needed to seamlessly continue the manuscript work without any loss of context. This summary will be used to compact the conversation while preserving critical narrative details, creative decisions, and progress on the manuscript.<br />
 
 	## Recent Context Analysis<br />

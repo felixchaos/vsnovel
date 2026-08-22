@@ -103,6 +103,8 @@ describe('ChatMLFetcherImpl retry logic', () => {
 		};
 	}
 
+	// NOVEL-BUILDER: this block, plus the optional argument on createMockEndpoint
+	// that lets a test name the finish reason it wants.
 	describe('finish reasons with no branch of their own', () => {
 		/** Drives one request through a stub that reports the given completion. */
 		async function fetchWith(finishReason: string, text: string) {

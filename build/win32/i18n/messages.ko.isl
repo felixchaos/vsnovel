@@ -7,4 +7,6 @@ RunAfter=설치 후 %1 실행
 Other=기타:
 SourceFile=%1 원본 파일
 OpenWithCodeContextMenu=%1(으)로 열기
-UpdatingVisualStudioCode=Visual Studio Code 업데이트 중...
+; NOVEL-BUILDER: product name only. The key is inno_updater.exe's
+; lookup name and must not change; the surrounding language is upstream's.
+UpdatingVisualStudioCode=VS Novel 업데이트 중...

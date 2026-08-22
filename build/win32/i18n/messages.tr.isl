@@ -7,4 +7,6 @@ RunAfter=Kurulumdan sonra %1 uygulamasını çalıştır.
 Other=Diğer:
 SourceFile=%1 Kaynak Dosyası
 OpenWithCodeContextMenu=%1 İle Aç
-UpdatingVisualStudioCode=Visual Studio Code güncelleniyor...
+; NOVEL-BUILDER: product name only. The key is inno_updater.exe's
+; lookup name and must not change; the surrounding language is upstream's.
+UpdatingVisualStudioCode=VS Novel güncelleniyor...

@@ -7,4 +7,6 @@ RunAfter=安装后运行 %1
 Other=其他:
 SourceFile=%1 源文件
 OpenWithCodeContextMenu=通过 %1 打开
-UpdatingVisualStudioCode=正在更新 Visual Studio Code...
+; NOVEL-BUILDER: product name only. The key is inno_updater.exe's
+; lookup name and must not change; the surrounding language is upstream's.
+UpdatingVisualStudioCode=正在更新 VS Novel...

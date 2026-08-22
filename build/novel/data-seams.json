@@ -249,6 +249,322 @@
 			"selector": "contributes.configurationDefaults['workbench.welcomePage.experimentalOnboarding']",
 			"absent": true,
 			"note": "Turns off the experimental welcome page. Its sign-in button label is a literal \"Continue with GitHub\" and the provider it signs into is a hardcoded 'github' (onboardingVariationA.ts:707), while the surrounding terms text correctly reads Novel Builder because that part comes from product.json. On this product it therefore signs into a provider that does not exist, which is what produced two disagreeing states: an account menu showing a valid Novel Builder session and a chat surface insisting the user is signed out. Upstream holds nothing at this key."
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "contributes.chatSessions[name=grok]",
+			"upstream": null,
+			"absent": true
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "contributes.commands[command=novel.enforceGlossary]",
+			"upstream": null,
+			"absent": true
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "contributes.commands[command=novel.openWritingInstructions]",
+			"upstream": null,
+			"absent": true
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "contributes.commands[command=novel.payOffForeshadow]",
+			"upstream": null,
+			"absent": true
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "contributes.commands[command=novel.plantForeshadow]",
+			"upstream": null,
+			"absent": true
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "contributes.commands[command=novel.recordFact]",
+			"upstream": null,
+			"absent": true
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "contributes.configuration[id=stable].properties.novel",
+			"upstream": null,
+			"absent": true
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "contributes.languageModelChatProviders[vendor=deepseek]",
+			"upstream": null,
+			"absent": true
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "contributes.languageModelChatProviders[vendor=kimi]",
+			"upstream": null,
+			"absent": true
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "contributes.languageModelChatProviders[vendor=minimax]",
+			"upstream": null,
+			"absent": true
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "contributes.languageModelChatProviders[vendor=novelrelay]",
+			"upstream": null,
+			"absent": true
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "contributes.languageModelChatProviders[vendor=qwen]",
+			"upstream": null,
+			"absent": true
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "contributes.languageModelChatProviders[vendor=zhipu]",
+			"upstream": null,
+			"absent": true
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "contributes.languageModelTools[name=copilot_lookUpReference]",
+			"upstream": null,
+			"absent": true
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "contributes.languageModelTools[name=copilot_novelCheck]",
+			"upstream": null,
+			"absent": true
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "contributes.languageModelTools[name=copilot_searchManuscript]",
+			"upstream": null,
+			"absent": true
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "contributes.menus.view/title[command=novel.openWritingInstructions]",
+			"upstream": null,
+			"absent": true
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "contributes.commands[command=github.copilot.chat.completions.disable].category",
+			"upstream": "GitHub Copilot"
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "contributes.commands[command=github.copilot.chat.completions.disable].title",
+			"upstream": "Disable Inline Suggestions"
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "contributes.commands[command=github.copilot.chat.completions.enable].category",
+			"upstream": "GitHub Copilot"
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "contributes.commands[command=github.copilot.chat.completions.enable].title",
+			"upstream": "Enable Inline Suggestions"
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "contributes.commands[command=github.copilot.chat.completions.toggle].category",
+			"upstream": "GitHub Copilot"
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "contributes.commands[command=github.copilot.chat.completions.toggle].title",
+			"upstream": "Toggle (Enable/Disable) Inline Suggestions"
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "contributes.commands[command=github.copilot.chat.openModelPicker].category",
+			"upstream": "GitHub Copilot"
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "contributes.commands[command=github.copilot.chat.openModelPicker].title",
+			"upstream": "Change Completions Model"
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "contributes.commands[command=github.copilot.chat.openSuggestionsPanel].category",
+			"upstream": "GitHub Copilot"
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "contributes.commands[command=github.copilot.chat.openSuggestionsPanel].title",
+			"upstream": "Open Completions Panel"
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "contributes.commands[command=github.copilot.chat.toggleStatusMenu].category",
+			"upstream": "GitHub Copilot"
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "contributes.commands[command=github.copilot.chat.toggleStatusMenu].title",
+			"upstream": "Open Status Menu"
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "contributes.languageModelTools[name=copilot_getErrors].modelDescription",
+			"upstream": "Get any compile or lint errors in a specific file or across all files. If the user mentions errors or problems in a file, they may be referring to these. Use the tool to see the same errors that the user is seeing. If the user asks you to analyze all errors, or does not specify a file, use this tool to gather errors for all files. Also use this tool after editing a file to validate the change."
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "dependencies.@anthropic-ai/claude-agent-sdk",
+			"upstream": "0.2.112"
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "dependencies.@github/copilot",
+			"upstream": "^1.0.70-0"
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "dependencies.@vscode/copilot-api",
+			"upstream": "^0.4.3"
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "description",
+			"upstream": "AI chat features powered by Copilot"
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "displayName",
+			"upstream": "GitHub Copilot"
+		},
+		{
+			"file": "extensions/copilot/package.nls.json",
+			"selector": "novel",
+			"upstream": null,
+			"absent": true
+		},
+		{
+			"file": "extensions/copilot/tsconfig.json",
+			"selector": "compilerOptions.paths.@vscode/copilot-api",
+			"upstream": null,
+			"absent": true
+		},
+		{
+			"file": "extensions/copilot/tsconfig.json",
+			"selector": "exclude[10]",
+			"upstream": null,
+			"absent": true
+		},
+		{
+			"file": "extensions/copilot/tsconfig.json",
+			"selector": "exclude[11]",
+			"upstream": null,
+			"absent": true
+		},
+		{
+			"file": "extensions/copilot/tsconfig.json",
+			"selector": "exclude[9]",
+			"upstream": null,
+			"absent": true
+		},
+		{
+			"file": "product.json",
+			"selector": "extensionsGallery",
+			"upstream": null,
+			"absent": true
+		},
+		{
+			"file": "product.json",
+			"selector": "quality",
+			"upstream": null,
+			"absent": true
+		},
+		{
+			"file": "product.json",
+			"selector": "target",
+			"upstream": null,
+			"absent": true
+		},
+		{
+			"file": "product.json",
+			"selector": "updateUrl",
+			"upstream": null,
+			"absent": true
+		},
+		{
+			"file": "product.json",
+			"selector": "applicationName",
+			"upstream": "code-oss"
+		},
+		{
+			"file": "product.json",
+			"selector": "darwinBundleIdentifier",
+			"upstream": "com.visualstudio.code.oss"
+		},
+		{
+			"file": "product.json",
+			"selector": "dataFolderName",
+			"upstream": ".vscode-oss"
+		},
+		{
+			"file": "product.json",
+			"selector": "nameLong",
+			"upstream": "Code - OSS"
+		},
+		{
+			"file": "product.json",
+			"selector": "nameShort",
+			"upstream": "Code - OSS"
+		},
+		{
+			"file": "product.json",
+			"selector": "serverApplicationName",
+			"upstream": "code-server-oss"
+		},
+		{
+			"file": "product.json",
+			"selector": "serverDataFolderName",
+			"upstream": ".vscode-server-oss"
+		},
+		{
+			"file": "product.json",
+			"selector": "urlProtocol",
+			"upstream": "code-oss"
+		},
+		{
+			"file": "product.json",
+			"selector": "win32AppUserModelId",
+			"upstream": "Microsoft.CodeOSS"
+		},
+		{
+			"file": "product.json",
+			"selector": "win32DirName",
+			"upstream": "Microsoft Code OSS"
+		},
+		{
+			"file": "product.json",
+			"selector": "win32MutexName",
+			"upstream": "vscodeoss"
+		},
+		{
+			"file": "product.json",
+			"selector": "win32NameVersion",
+			"upstream": "Microsoft Code OSS"
+		},
+		{
+			"file": "product.json",
+			"selector": "win32RegValueName",
+			"upstream": "CodeOSS"
+		},
+		{
+			"file": "product.json",
+			"selector": "win32ShellNameShort",
+			"upstream": "C&ode - OSS"
 		}
 	]
 }

@@ -142,8 +142,10 @@ const electronAssetResolver = electronFeed
 export const config = {
 	version: electronVersion,
 	productAppName: product.nameLong,
-	companyName: 'Microsoft Corporation',
-	copyright: 'Copyright (C) 2026 Microsoft. All rights reserved',
+	// NOVEL-BUILDER: with the rcedit block in gulpfile.vscode.ts, these two are
+	// what Windows shows under Properties > Details. Both named Microsoft.
+	companyName: 'Felix Chaos',
+	copyright: 'Copyright (C) 2026 Felix Chaos. Portions Copyright (C) Microsoft Corporation.',
 	darwinExecutable: product.nameShort,
 	darwinIcon: 'resources/darwin/code.icns',
 	darwinBundleIdentifier: product.darwinBundleIdentifier,

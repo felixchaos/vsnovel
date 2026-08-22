@@ -1,7 +1,7 @@
 {
 	"anchor": "1.129.1",
 	"anchorCommit": "8a7abeba6e03ea3af87bfbce9a1b7e48fed567b8",
-	"generated": "2026-08-22T15:48:52.791Z",
+	"generated": "2026-08-22T17:06:20.375Z",
 	"seams": [
 		{
 			"path": "README.md",
@@ -164,6 +164,26 @@
 			"postImageSha": "c0d2a3cad58a946c"
 		},
 		{
+			"path": "build/gulpfile.vscode.ts",
+			"header": "-612 +617",
+			"kind": "replace",
+			"preImage": "\t\t\t\t\t'CompanyName': 'Microsoft Corporation',",
+			"preImageSha": "f5634e6003d29084",
+			"occurrences": 1,
+			"postImage": "\t\t\t\t\t'CompanyName': 'Felix Chaos',",
+			"postImageSha": "da0bb88ef476625a"
+		},
+		{
+			"path": "build/gulpfile.vscode.ts",
+			"header": "-616 +621",
+			"kind": "replace",
+			"preImage": "\t\t\t\t\t'LegalCopyright': 'Copyright (C) 2026 Microsoft. All rights reserved',",
+			"preImageSha": "80ba6c47b228dac4",
+			"occurrences": 1,
+			"postImage": "\t\t\t\t\t'LegalCopyright': 'Copyright (C) 2026 Felix Chaos. Portions Copyright (C) Microsoft Corporation.',",
+			"postImageSha": "7bc1b52bb801075c"
+		},
+		{
 			"path": "build/gulpfile.vscode.win32.ts",
 			"header": "-114 +114,5",
 			"kind": "replace",
@@ -182,6 +202,176 @@
 			"occurrences": 1,
 			"postImage": "\t\t// NOVEL-BUILDER: not an error here. This step stages the Copilot CLI's\n\t\t// own ripgrep for @github/copilot, a package that ships under GitHub's\n\t\t// terms rather than an open licence and is therefore not a dependency of\n\t\t// this product. Its absence is the intended state; the CLI session type\n\t\t// that used it is unregistered.\n\t\t//\n\t\t// Left throwing, the packaged build fails on the last step after several\n\t\t// minutes of work, and the message names a path rather than the reason.\n\t\treturn;",
 			"postImageSha": "3950f380cb66b350"
+		},
+		{
+			"path": "build/lib/electron.ts",
+			"header": "-145,2 +145,2",
+			"kind": "replace",
+			"preImage": "\tcompanyName: 'Microsoft Corporation',\n\tcopyright: 'Copyright (C) 2026 Microsoft. All rights reserved',",
+			"preImageSha": "ec9dca6614c9fe7c",
+			"occurrences": 1,
+			"postImage": "\tcompanyName: 'Felix Chaos',\n\tcopyright: 'Copyright (C) 2026 Felix Chaos. Portions Copyright (C) Microsoft Corporation.',",
+			"postImageSha": "440098c62a587e0c"
+		},
+		{
+			"path": "build/win32/code.iss",
+			"header": "-11,4 +11,4",
+			"kind": "replace",
+			"preImage": "AppPublisher=Microsoft Corporation\nAppPublisherURL=https://code.visualstudio.com/\nAppSupportURL=https://code.visualstudio.com/\nAppUpdatesURL=https://code.visualstudio.com/",
+			"preImageSha": "b7548111bb51ef44",
+			"occurrences": 1,
+			"postImage": "AppPublisher=Felix Chaos\nAppPublisherURL=https://github.com/felixchaos/vsnovel\nAppSupportURL=https://github.com/felixchaos/vsnovel\nAppUpdatesURL=https://github.com/felixchaos/vsnovel",
+			"postImageSha": "a94f96689907fcdd"
+		},
+		{
+			"path": "build/win32/code.iss",
+			"header": "-18 +18",
+			"kind": "replace",
+			"preImage": "OutputBaseFilename=VSCodeSetup",
+			"preImageSha": "eea7c3088af51f8d",
+			"occurrences": 1,
+			"postImage": "OutputBaseFilename=VSNovelSetup",
+			"postImageSha": "9e2c713f9a4c4d14"
+		},
+		{
+			"path": "build/win32/code.iss",
+			"header": "-1336 +1336",
+			"kind": "replace",
+			"preImage": "      if MsgBox('This User Installer is not meant to be run as an Administrator. If you would like to install VS Code for all users in this system, download the System Installer instead from https://code.visualstudio.com. Are you sure you want to continue?', mbError, MB_OKCANCEL) = IDCANCEL then begin",
+			"preImageSha": "17c1ee5fb255dfd8",
+			"occurrences": 1,
+			"postImage": "      if MsgBox('This User Installer is not meant to be run as an Administrator. If you would like to install VS Novel for all users in this system, download the System Installer instead from https://github.com/felixchaos/vsnovel. Are you sure you want to continue?', mbError, MB_OKCANCEL) = IDCANCEL then begin",
+			"postImageSha": "85405a6ac712fefd"
+		},
+		{
+			"path": "build/win32/i18n/messages.de.isl",
+			"header": "-10 +10",
+			"kind": "replace",
+			"preImage": "UpdatingVisualStudioCode=Visual Studio Code wird aktualisiert...",
+			"preImageSha": "8fd7b3532f8c5733",
+			"occurrences": 1,
+			"postImage": "UpdatingVisualStudioCode=VS Novel wird aktualisiert...",
+			"postImageSha": "20ff4fac476ffcf8"
+		},
+		{
+			"path": "build/win32/i18n/messages.en.isl",
+			"header": "-17 +17",
+			"kind": "replace",
+			"preImage": "UpdatingVisualStudioCode=Updating Visual Studio Code...",
+			"preImageSha": "2dd3ca1234fe4a4b",
+			"occurrences": 1,
+			"postImage": "UpdatingVisualStudioCode=Updating VS Novel...",
+			"postImageSha": "55e7b4960b55c4a2"
+		},
+		{
+			"path": "build/win32/i18n/messages.es.isl",
+			"header": "-10 +10",
+			"kind": "replace",
+			"preImage": "UpdatingVisualStudioCode=Actualizando Visual Studio Code...",
+			"preImageSha": "5bb6aed0424baf9f",
+			"occurrences": 1,
+			"postImage": "UpdatingVisualStudioCode=Actualizando VS Novel...",
+			"postImageSha": "3a1192b5da347aeb"
+		},
+		{
+			"path": "build/win32/i18n/messages.fr.isl",
+			"header": "-10 +10",
+			"kind": "replace",
+			"preImage": "UpdatingVisualStudioCode=Mise à jour de Visual Studio Code...",
+			"preImageSha": "c85d57a6e7abca4c",
+			"occurrences": 1,
+			"postImage": "UpdatingVisualStudioCode=Mise à jour de VS Novel...",
+			"postImageSha": "c902d18780bb076d"
+		},
+		{
+			"path": "build/win32/i18n/messages.hu.isl",
+			"header": "-10 +10",
+			"kind": "replace",
+			"preImage": "UpdatingVisualStudioCode=A Visual Studio Code frissítése...",
+			"preImageSha": "f99a25bca8aa39df",
+			"occurrences": 1,
+			"postImage": "UpdatingVisualStudioCode=A VS Novel frissítése...",
+			"postImageSha": "d72da69a19632790"
+		},
+		{
+			"path": "build/win32/i18n/messages.it.isl",
+			"header": "-10 +10",
+			"kind": "replace",
+			"preImage": "UpdatingVisualStudioCode=Aggiornamento di Visual Studio Code...",
+			"preImageSha": "962ab6dd99e01108",
+			"occurrences": 1,
+			"postImage": "UpdatingVisualStudioCode=Aggiornamento di VS Novel...",
+			"postImageSha": "987c661b05c7c023"
+		},
+		{
+			"path": "build/win32/i18n/messages.ja.isl",
+			"header": "-10 +10",
+			"kind": "replace",
+			"preImage": "UpdatingVisualStudioCode=Visual Studio Code を更新しています...",
+			"preImageSha": "028490d9fadc00a0",
+			"occurrences": 1,
+			"postImage": "UpdatingVisualStudioCode=VS Novel を更新しています...",
+			"postImageSha": "1b81d4264cd196f7"
+		},
+		{
+			"path": "build/win32/i18n/messages.ko.isl",
+			"header": "-10 +10",
+			"kind": "replace",
+			"preImage": "UpdatingVisualStudioCode=Visual Studio Code 업데이트 중...",
+			"preImageSha": "91cd3d350943af79",
+			"occurrences": 1,
+			"postImage": "UpdatingVisualStudioCode=VS Novel 업데이트 중...",
+			"postImageSha": "4f6138aeed415509"
+		},
+		{
+			"path": "build/win32/i18n/messages.pt-br.isl",
+			"header": "-10 +10",
+			"kind": "replace",
+			"preImage": "UpdatingVisualStudioCode=Atualizando o Visual Studio Code...",
+			"preImageSha": "9871f7980c5c0edb",
+			"occurrences": 1,
+			"postImage": "UpdatingVisualStudioCode=Atualizando o VS Novel...",
+			"postImageSha": "a1c5027f37a1434c"
+		},
+		{
+			"path": "build/win32/i18n/messages.ru.isl",
+			"header": "-10 +10",
+			"kind": "replace",
+			"preImage": "UpdatingVisualStudioCode=Обновление Visual Studio Code...",
+			"preImageSha": "86025accf6784dd0",
+			"occurrences": 1,
+			"postImage": "UpdatingVisualStudioCode=Обновление VS Novel...",
+			"postImageSha": "8b1b040475f0a9fb"
+		},
+		{
+			"path": "build/win32/i18n/messages.tr.isl",
+			"header": "-10 +10",
+			"kind": "replace",
+			"preImage": "UpdatingVisualStudioCode=Visual Studio Code güncelleniyor...",
+			"preImageSha": "977eb8244b4fd4c0",
+			"occurrences": 1,
+			"postImage": "UpdatingVisualStudioCode=VS Novel güncelleniyor...",
+			"postImageSha": "a1718610672a0562"
+		},
+		{
+			"path": "build/win32/i18n/messages.zh-cn.isl",
+			"header": "-10 +10",
+			"kind": "replace",
+			"preImage": "UpdatingVisualStudioCode=正在更新 Visual Studio Code...",
+			"preImageSha": "e86e2f4b05104db4",
+			"occurrences": 1,
+			"postImage": "UpdatingVisualStudioCode=正在更新 VS Novel...",
+			"postImageSha": "23946689f41bab5d"
+		},
+		{
+			"path": "build/win32/i18n/messages.zh-tw.isl",
+			"header": "-10 +10",
+			"kind": "replace",
+			"preImage": "UpdatingVisualStudioCode=正在更新 Visual Studio Code...",
+			"preImageSha": "e86e2f4b05104db4",
+			"occurrences": 1,
+			"postImage": "UpdatingVisualStudioCode=正在更新 VS Novel...",
+			"postImageSha": "23946689f41bab5d"
 		},
 		{
 			"path": "extensions/copilot/.esbuild.mts",
@@ -222,16 +412,6 @@
 			"occurrences": 1,
 			"postImage": "",
 			"postImageSha": null
-		},
-		{
-			"path": "extensions/copilot/package.nls.json",
-			"header": "-536 +536,10",
-			"kind": "replace",
-			"preImage": "\t\"github.copilot.command.sessions.initializeRepository\": \"Initialize Repository\"",
-			"preImageSha": "d3a0d6599cbe3fff",
-			"occurrences": 1,
-			"postImage": "\t\"github.copilot.command.sessions.initializeRepository\": \"Initialize Repository\",\n\n\t\"novel.category\": \"VS Novel\",\n\t\"novel.command.openSuggestionsPanel\": \"Open Completions Panel\",\n\t\"novel.command.toggleStatusMenu\": \"Open Status Menu\",\n\t\"novel.command.completions.disable\": \"Disable Inline Suggestions\",\n\t\"novel.command.completions.enable\": \"Enable Inline Suggestions\",\n\t\"novel.command.completions.toggle\": \"Toggle (Enable/Disable) Inline Suggestions\",\n\t\"novel.command.openWritingInstructions\": \"Writing Instructions for This Book\",\n\t\"novel.command.openModelPicker\": \"Change Completions Model\"",
-			"postImageSha": "06db22b6c8acf67c"
 		},
 		{
 			"path": "extensions/copilot/script/postinstall.ts",
@@ -23084,26 +23264,6 @@
 			"postImageSha": "c5c6882f1bab1adf"
 		},
 		{
-			"path": "extensions/copilot/tsconfig.json",
-			"header": "-19,0 +20,9",
-			"kind": "insert",
-			"preImage": "\t\t\"paths\": {\n\t\t\t\"vscode\": [\n\t\t\t\t\"./src/util/common/test/shims/vscodeTypesShim.ts\"",
-			"preImageSha": "195706a99a9869bc",
-			"occurrences": 1,
-			"postImage": "\t\t\t],\n\t\t\t// NOVEL-BUILDER: @vscode/copilot-api ships under GitHub's own terms and\n\t\t\t// cannot be redistributed in a commercial product, so it is not\n\t\t\t// installed. This resolves it to our own implementation. Aliasing\n\t\t\t// rather than rewriting the forty-odd import sites is deliberate:\n\t\t\t// every rewritten upstream file would be a rebase conflict forever,\n\t\t\t// which is the cost scripts/novel-guard.sh exists to prevent.\n\t\t\t\"@vscode/copilot-api\": [\n\t\t\t\t\"./src/novel/vendor/copilotApi\"",
-			"postImageSha": "a73cb224e84fff83"
-		},
-		{
-			"path": "extensions/copilot/tsconfig.json",
-			"header": "-37 +46,17",
-			"kind": "replace",
-			"preImage": "\t\t\"test/aml/out\"",
-			"preImageSha": "c2c37e8b35757f46",
-			"occurrences": 1,
-			"postImage": "\t\t\"test/aml/out\",\n\t\t// NOVEL-BUILDER: chatSessions hosts the Copilot CLI and Claude Code session\n\t\t// types, whose npm packages are proprietary and are therefore not in\n\t\t// dependencies. The source stays in the tree so upstream changes under it\n\t\t// rebase cleanly, but it is not registered, not bundled, and not compiled —\n\t\t// without this exclude a fresh install would fail to typecheck on the\n\t\t// imports of packages we deliberately no longer install.\n\t\t\"src/extension/chatSessions/**/*\",\n\t\t// NOVEL-BUILDER: the exclude above is not sufficient on its own. TypeScript\n\t\t// still compiles an excluded file when an included one imports it, and\n\t\t// these two test the CLI session feature while living outside its\n\t\t// directory — parseAttachments.spec.ts imports five modules from it and is\n\t\t// only filed under prompts/ by location. Leaving either in place pulls the\n\t\t// whole subtree back in and a fresh install fails with 56 errors, all of\n\t\t// them about a package we deliberately no longer depend on.\n\t\t\"src/extension/prompts/node/agent/test/parseAttachments.spec.ts\",\n\t\t\"test/e2e/cli.stest.ts\"",
-			"postImageSha": "9d3e25871a251ce1"
-		},
-		{
 			"path": "src/vs/platform/actions/common/actions.ts",
 			"header": "-719,0 +720,23",
 			"kind": "insert",
@@ -23132,6 +23292,16 @@
 			"occurrences": 1,
 			"postImage": "\t\t\t// NOVEL-BUILDER: the fallback is false, not true. The signatures this\n\t\t\t// checks are Microsoft's, issued through a marketplace whose terms\n\t\t\t// restrict it to official VS Code builds — one this paid product\n\t\t\t// cannot use. Against Open VSX, which does not sign, every install\n\t\t\t// fails with \"Signature verification was not executed\" and the\n\t\t\t// extension pane is dead, including the official Chinese language\n\t\t\t// pack.\n\t\t\t//\n\t\t\t// It has to be here rather than only on the setting's registered\n\t\t\t// default: that default is registered by a workbench contribution,\n\t\t\t// and `--install-extension` runs without a workbench, so the setting\n\t\t\t// reads as undefined and this line decides. Changing only the\n\t\t\t// declared default fixes the UI and leaves the CLI failing.\n\t\t\tverifySignature = isBoolean(value) ? value : false;",
 			"postImageSha": "0573a547d27fef48"
+		},
+		{
+			"path": "src/vs/workbench/browser/media/code-icon.svg",
+			"header": "-1 +1,8",
+			"kind": "replace",
+			"preImage": "<svg id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1024 1024\"><style>.st0{fill:#f6f6f6;fill-opacity:0}.st1{fill:#fff}.st2{fill:#167abf}</style><path class=\"st0\" d=\"M1024 1024H0V0h1024v1024z\"/><path class=\"st1\" d=\"M1024 85.333v853.333H0V85.333h1024z\"/><path class=\"st2\" d=\"M0 85.333h298.667v853.333H0V85.333zm1024 0v853.333H384V85.333h640zm-554.667 160h341.333v-64H469.333v64zm341.334 533.334H469.333v64h341.333l.001-64zm128-149.334H597.333v64h341.333l.001-64zm0-149.333H597.333v64h341.333l.001-64zm0-149.333H597.333v64h341.333l.001-64z\"/></svg>",
+			"preImageSha": "d2625274e6d819a0",
+			"occurrences": 1,
+			"postImage": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1024 1024\" width=\"1024\" height=\"1024\">\n  <rect width=\"1024\" height=\"1024\" rx=\"228\" fill=\"#2f6f4f\"/>\n  <g transform=\"translate(512 540) scale(11.4) translate(-28 -26)\" fill=\"none\" stroke=\"#f6f1e4\" stroke-width=\"3.4\" stroke-linejoin=\"round\" stroke-linecap=\"round\">\n    <path d=\"M8 14C8 12 22 9 28 14L28 44C22 39 8 42 8 44Z\"/>\n    <path d=\"M48 14C48 12 34 9 28 14L28 44C34 39 48 42 48 44Z\"/>\n  </g>\n  <path transform=\"translate(512 540) scale(11.4) translate(-28 -26)\" fill=\"#f6f1e4\" d=\"M28 8L34 20L28 18L22 20Z\"/>\n</svg>",
+			"postImageSha": "013fc9547dc0a311"
 		},
 		{
 			"path": "src/vs/workbench/contrib/chat/browser/widget/input/chatModelPicker.ts",

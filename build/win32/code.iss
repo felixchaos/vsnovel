@@ -8,14 +8,19 @@
 AppId={#AppId}
 AppName={#NameLong}
 AppVerName={#NameVersion}
-AppPublisher=Microsoft Corporation
-AppPublisherURL=https://code.visualstudio.com/
-AppSupportURL=https://code.visualstudio.com/
-AppUpdatesURL=https://code.visualstudio.com/
+; NOVEL-BUILDER: publisher, the three support URLs and the output filename.
+; product.json cannot reach any of them — Inno reads them from here — so an
+; installer for this product announced Microsoft and linked to VS Code's site.
+; The publisher string matches the macOS code-signing identity, so it will
+; agree with Authenticode once a Windows certificate exists.
+AppPublisher=Felix Chaos
+AppPublisherURL=https://github.com/felixchaos/vsnovel
+AppSupportURL=https://github.com/felixchaos/vsnovel
+AppUpdatesURL=https://github.com/felixchaos/vsnovel
 DefaultGroupName={#NameLong}
 AllowNoIcons=yes
 OutputDir={#OutputDir}
-OutputBaseFilename=VSCodeSetup
+OutputBaseFilename=VSNovelSetup
 Compression=lzma
 SolidCompression=yes
 AppMutex={code:GetAppMutex}
@@ -1333,7 +1338,8 @@ begin
 
   #if "user" == InstallTarget
     if not WizardSilent() and IsAdmin() then begin
-      if MsgBox('This User Installer is not meant to be run as an Administrator. If you would like to install VS Code for all users in this system, download the System Installer instead from https://code.visualstudio.com. Are you sure you want to continue?', mbError, MB_OKCANCEL) = IDCANCEL then begin
+      // NOVEL-BUILDER: product name and download location in the message body.
+      if MsgBox('This User Installer is not meant to be run as an Administrator. If you would like to install VS Novel for all users in this system, download the System Installer instead from https://github.com/felixchaos/vsnovel. Are you sure you want to continue?', mbError, MB_OKCANCEL) = IDCANCEL then begin
         Result := False;
       end;
     end;

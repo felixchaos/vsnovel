@@ -7,4 +7,6 @@ RunAfter=Запустить %1 после установки
 Other=Другое:
 SourceFile=Исходный файл %1
 OpenWithCodeContextMenu=Открыть с помощью %1
-UpdatingVisualStudioCode=Обновление Visual Studio Code...
+; NOVEL-BUILDER: product name only. The key is inno_updater.exe's
+; lookup name and must not change; the surrounding language is upstream's.
+UpdatingVisualStudioCode=Обновление VS Novel...

@@ -410,7 +410,13 @@ function stepKey(container, key) {
 	// matters as much as `name`: contributes.commands is an array of objects
 	// keyed by `command`, and without it every entry after an upstream insertion
 	// reads as changed — the exact failure this function exists to prevent.
-	for (const field of ['name', 'command', 'id', 'key']) {
+	//
+	// `vendor` is here for the same reason, found the same way:
+	// contributes.languageModelChatProviders is keyed by it, and this product
+	// appends six entries to that array. Without it those six are addressed by
+	// index, so one vendor inserted upstream shifts every one of them and the
+	// seams report six false breakages while missing any real one.
+	for (const field of ['name', 'command', 'id', 'key', 'vendor']) {
 		if (typeof el[field] === 'string') { return `[${field}=${el[field]}]`; }
 	}
 	return `[${key}]`;

@@ -7,4 +7,6 @@ RunAfter=%1 indítása a telepítés után
 Other=Egyéb:
 SourceFile=%1 forrásfájl
 OpenWithCodeContextMenu=Megnyitás a következővel: %1
-UpdatingVisualStudioCode=A Visual Studio Code frissítése...
+; NOVEL-BUILDER: product name only. The key is inno_updater.exe's
+; lookup name and must not change; the surrounding language is upstream's.
+UpdatingVisualStudioCode=A VS Novel frissítése...

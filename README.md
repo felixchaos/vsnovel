@@ -1,3 +1,4 @@
+<!-- NOVEL-BUILDER: replaced wholesale. Nothing of upstream's readme remains. -->
 # VS Novel
 
 **English** · [中文](README.zh.md)

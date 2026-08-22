@@ -59,6 +59,25 @@ ALLOWED_FILES=(
   "extensions/copilot/src/platform/authentication/common/authentication.ts:authProviderId() is the single chokepoint every getSession in the extension routes through — one return value moves authentication off GitHub. Six call sites follow it unchanged. 1 commit across the last six release tags, and the alternative is editing all six"
   "extensions/copilot/src/extension/extension/vscode-node/services.ts:swaps the CAPI client for NovelCAPIClient, which redirects the pre-token account requests. Those cannot be moved by the token endpoints block because they happen before a token exists, and the URL getters live on a domain service the package holds privately. One import and one identifier changed; 7 commits over the last six release tags"
   "extensions/copilot/src/extension/prompt/node/chatMLFetcher.ts:the 5xx branch renders \`Server error: <status>\` and throws the response body away. Our gateway classifies every upstream failure and writes a sentence the author can act on \u2014 an overloaded model reads as \u300cthe model service is temporarily unavailable; try again shortly\u300d, not as our outage \u2014 and that sentence never reached the screen. One expression, preferring the already-parsed jsonData.message and keeping the status text as the fallback. The alternative was answering 503 instead of 502 to reach the branch above, which passes the body through but relabels an upstream capacity failure as a rate limit \u2014 the exact wording we removed from the server for being misleading"
+  "resources/win32/inno-*.bmp:the Inno wizard artwork, 7 sizes each of the banner and the header mark. product.json cannot reach them \u2014 code.iss names the files directly \u2014 so the installer showed the upstream logo on every page while the app it installed showed ours. Rendered from resources/win32/code.ico at upstream\u2019s exact dimensions. Binary; a rebase either takes ours or upstream\u2019s, and there is nothing to merge"
+  "build/win32/code.iss:AppPublisher, the three Publisher/Support/Updates URLs and the run-as-administrator warning are hardcoded to Microsoft and code.visualstudio.com. They are what Add/Remove Programs shows as the publisher and support link. OutputBaseFilename too, so the artifact in .build is not named VSCodeSetup. Six literals; the surrounding script is untouched"
+  "build/win32/i18n/messages.*.isl:UpdatingVisualStudioCode is the string the background updater paints while it swaps the install, in 13 languages, and it named Visual Studio Code in all of them. The key is left alone \u2014 inno_updater.exe looks it up by name \u2014 and only the product name inside the value changes"
+  "build/lib/electron.ts:companyName and copyright in the Electron packaging config. Together with the rcedit block in gulpfile.vscode.ts these are what Windows shows under Properties > Details; both said Microsoft Corporation. Two string literals"
+  "build/gulpfile.vscode.ts:the rcedit version-string block writes CompanyName and LegalCopyright into every packaged exe, hardcoded to Microsoft. Two literals in a block that otherwise reads its values from product.json"
+  "build/gulpfile.vscode.win32.ts:only defines the Appx package when win32ContextMenu is configured. Without the guard code.iss\u2019s #ifdef AppxPackageName block packages appx/code_<arch>.appx, which this fork never builds, and ISCC fails with a file-not-found. One condition"
+  "src/vs/workbench/browser/media/code-icon.svg:the mark in the title bar, at #167abf. Windows and Linux draw it; macOS uses the native title bar and has no such slot, which is why it survived every check done on a Mac. Replaced wholesale with this product\u2019s mark at the same viewBox"
+  "resources/win32/code.ico:the Windows app icon"
+  "resources/darwin/code.icns:the macOS app icon"
+  "resources/vsnovel/icon.svg:the source mark the two icons and the installer artwork are rendered from. New file; upstream has no such path and the conflict cost is zero"
+  "README.md:the fork\u2019s own readme"
+  "README.zh.md:its Chinese translation. New file; zero conflict cost"
+  "NOTICE.md:attribution for the upstream projects, which the MIT License requires. New file; zero conflict cost"
+  "NOTICE.zh.md:its Chinese translation. New file; zero conflict cost"
+  ".github/workflows/release.yml:the tag-triggered pipeline that builds, signs and publishes both platforms. New file; VS Code\u2019s own workflows are pruned from the export rather than edited, so this cannot collide"
+  ".github/workflows/release-windows.yml:a manual Windows-only build for checks that do not warrant cutting a release. New file; zero conflict cost"
+  "build/darwin-sign.mjs:Developer ID signing, notarisation and stapling for the macOS artifact. New file; zero conflict cost"
+  "update-server/*:the update manifest generator and the Cloudflare Worker that serves it. New directory; zero conflict cost"
+  "scripts/vsnovel-release.sh:the older manual publish path, superseded by release.yml but kept for a hand-cut release. New file; zero conflict cost"
   "scripts/vsnovel-sync.sh:pushes this tree to the public repo a release is built from. A new file in a directory upstream also has, so it is listed here rather than under src/novel/ \u2014 it has to live beside the other novel-* scripts to be findable, and it cannot live in the extension because it operates on the repository. Never touched by upstream; the conflict cost is zero"
   "extensions/copilot/src/extension/prompt/node/test/chatMLFetcherRetry.spec.ts:covers the finish-reason fall-through in chatMLFetcher.ts, which is already on this list. The tests live here rather than in a new file because the harness they need \u2014 the fetcher, the mock endpoint, the queued responses \u2014 is local to this spec and not exported. createMockEndpoint gains one optional argument so a test can name the finish reason and the text; without it every completion the stub yields is hardcoded to 'stop', which is why upstream's own tests never reached the branch. Two additive edits and one nested describe"
   "extensions/copilot/src/platform/endpoint/common/chatModelCapabilities.ts:adds isDeepSeekFamily and names it in the three edit-tool tables, and widens isKimiFamily to the bare \`kimi\` family and kimi-k3 (upstream names two model ids literally, so this product\u2019s K3 matched nothing and lost both the edit tables and the forced temperature=1/top_p=0.95 every Moonshot model 400s without) (modelSupportsReplaceString, modelSupportsMultiReplaceString, modelCanUseReplaceStringExclusively). A model absent from those tables gets insert_edit_into_file alone \u2014 the legacy code-mapper path that rewrites the entire chapter through a second speculative model call for a one-line change. The tables are a vendor list upstream extends the same way for kimi/minimax/gemini; one predicate and three appended disjuncts, which is the cheapest possible conflict on rebase. No external hook exists: agentIntent calls these functions directly, and the endpoint.supportedEditTools route the server could drive is gated on isExtensionContributed, which CAPI models are not"
@@ -206,7 +225,14 @@ while IFS= read -r f; do
   fi
   if [[ $ok -eq 0 ]]; then
     for entry in "${ALLOWED_FILES[@]}"; do
-      [[ "$f" == "${entry%%:*}" ]] && { ok=1; break; }
+      # Unquoted on the right so the entry is a pattern, not a literal. Three
+      # entries need it: the 14 Inno bitmaps, the 13 updater .isl files and the
+      # update-server directory are each one decision, and spelling them out
+      # file by file would put the same justification in the list 31 times —
+      # which reads as 31 decisions and hides the one that was actually made.
+      # Every other entry is a plain path and matches exactly as before.
+      # shellcheck disable=SC2053
+      [[ "$f" == ${entry%%:*} ]] && { ok=1; break; }
     done
   fi
 
@@ -365,6 +391,15 @@ check_markers() {
     [[ -f "$f" ]] || continue
     # JSON has no comments; data files are covered by build/novel/data-seams.json.
     case "$f" in *.json) continue ;; esac
+    # A marker has to be readable by a person to be worth anything. Binaries
+    # cannot carry one at all, and prompt snapshots are generated output — 173
+    # of them, regenerated wholesale whenever a prompt changes, so a marker
+    # there would say nothing the prompt file does not already say. Demanding
+    # one anyway is what made this check report 208 files and get ignored.
+    case "$f" in
+      *.bmp|*.ico|*.icns|*.png|*.jpg|*.gif|*.woff|*.woff2|*.ttf) continue ;;
+      */__snapshots__/*) continue ;;
+    esac
 
     if ! grep -q 'NOVEL-BUILDER' "$f"; then
       if [[ $mismatch -eq 0 ]]; then
