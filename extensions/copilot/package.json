@@ -3442,6 +3442,12 @@
 				"category": "Novel"
 			},
 			{
+				"command": "novel.openWritingInstructions",
+				"title": "%novel.command.openWritingInstructions%",
+				"category": "%novel.category%",
+				"icon": "$(book)"
+			},
+			{
 				"command": "novel.recordFact",
 				"title": "Novel: Record a Fact from Selection",
 				"category": "VS Novel"
@@ -6393,6 +6399,12 @@
 					"command": "github.copilot.debug.showChatLogView",
 					"when": "view == workbench.panel.chat.view.copilot",
 					"group": "3_show"
+				},
+				{
+					"command": "novel.openWritingInstructions",
+					"when": "view == workbench.panel.chat.view.copilot",
+					"group": "navigation",
+					"order": 7
 				}
 			],
 			"view/item/context": [

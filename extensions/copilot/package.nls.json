@@ -541,5 +541,6 @@
 	"novel.command.completions.disable": "Disable Inline Suggestions",
 	"novel.command.completions.enable": "Enable Inline Suggestions",
 	"novel.command.completions.toggle": "Toggle (Enable/Disable) Inline Suggestions",
+	"novel.command.openWritingInstructions": "Writing Instructions for This Book",
 	"novel.command.openModelPicker": "Change Completions Model"
 }

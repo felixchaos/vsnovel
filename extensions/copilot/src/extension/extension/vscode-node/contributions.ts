@@ -40,6 +40,7 @@ import { ConsistencyDiagnosticsContrib } from '../../../novel/consistency/consis
 import { GlossaryDiagnosticsContrib } from '../../../novel/glossary/glossaryDiagnostics';
 import { GlossaryCommandsContrib } from '../../../novel/glossary/enforceCommand';
 import { AuthoringCommandsContrib } from '../../../novel/authoring/authoringCommands';
+import { WritingInstructionsContrib } from '../../../novel/authoring/writingInstructions';
 import { GrokAgentContribution } from '../../../novel/grok/contribution';
 import { LogWorkspaceStateContribution } from '../../conversation/vscode-node/logWorkspaceState';
 import { RemoteAgentContribution } from '../../conversation/vscode-node/remoteAgents';
@@ -107,6 +108,10 @@ export const vscodeNodeContributions: IExtensionContributionFactory[] = [
 	asContributionFactory(GlossaryDiagnosticsContrib),
 	asContributionFactory(GlossaryCommandsContrib),
 	asContributionFactory(AuthoringCommandsContrib),
+	// NOVEL-BUILDER: the way in to `.github/copilot-instructions.md`. The
+	// mechanism is upstream's and needs nothing; what it lacks is an entry point
+	// an author who has never seen a dotted directory can find.
+	asContributionFactory(WritingInstructionsContrib),
 	// NOVEL-BUILDER: the Grok agent session. It hosts xAI's own `grok` CLI over
 	// the Agent Client Protocol, which is the integration path xAI documents,
 	// so the credential stays with the CLI and never reaches this editor.

@@ -26,38 +26,31 @@
 	"contents": {
 		"package": {
 			"github.copilot.icon": "VS Novel 图标",
-
 			"github.copilot.walkthrough.title": "VS Novel",
-
 			"github.copilot.command.triggerPermissiveSignIn": "以完整权限重新登录",
-
 			"github.copilot.viewsWelcome.offline": "连不上 VS Novel 服务器。请检查网络连接后重试。\n\n[重新连接](command:github.copilot.refreshToken)\n\n也可以查看[日志](command:github.copilot.debug.showOutputChannel.internal)或[运行诊断](command:github.copilot.debug.collectDiagnostics.internal)。",
 			"github.copilot.viewsWelcome.invalidToken": "登录凭证已失效，请重新登录。\n\n[登录](command:workbench.action.chat.triggerSetupForceSignIn)\n\n也可以查看[日志](command:github.copilot.debug.showOutputChannel.internal)或[运行诊断](command:github.copilot.debug.collectDiagnostics.internal)。",
 			"github.copilot.viewsWelcome.gitHubLoginFailed": "登录失败。请重新登录后使用。\n\n[登录](command:workbench.action.chat.triggerSetupForceSignIn)\n\n也可以查看[日志](command:github.copilot.debug.showOutputChannel.internal)或[运行诊断](command:github.copilot.debug.collectDiagnostics.internal)。",
 			"github.copilot.viewsWelcome.rateLimited": "请求过于频繁，已被限流。请等几分钟后重试。\n\n[重试](command:github.copilot.refreshToken)\n\n也可以查看[日志](command:github.copilot.debug.showOutputChannel.internal)或[运行诊断](command:github.copilot.debug.collectDiagnostics.internal)。",
 			"github.copilot.viewsWelcome.individual.expired": "订阅已过期。续订后即可继续使用。",
 			"github.copilot.viewsWelcome.contactSupport": "账户似乎有问题，请联系客服。",
-
 			"novel.category": "VS Novel",
 			"novel.command.openSuggestionsPanel": "打开补全面板",
 			"novel.command.toggleStatusMenu": "打开状态菜单",
 			"novel.command.completions.disable": "关闭行内补全",
 			"novel.command.completions.enable": "开启行内补全",
 			"novel.command.completions.toggle": "开关行内补全",
-			"novel.command.openModelPicker": "切换补全模型"
+			"novel.command.openModelPicker": "切换补全模型",
+			"novel.command.openWritingInstructions": "本作品的写作指令"
 		},
 		"bundle": {
 			"Fix using Copilot": "让助手修正",
 			"Explain using Copilot": "让助手解释",
-
 			"Copilot is currently inactive": "助手当前未启用",
 			"Copilot has encountered an error": "助手出错了",
 			"$(remote-explorer-documentation) View Copilot Documentation...": "$(remote-explorer-documentation) 查看使用文档…",
-
 			"Copilot did not provide a response. Please try again.": "助手这次没有返回内容，请重试。",
-
 			"Got a minute? Help us make GitHub Copilot better.": "有一分钟吗？帮我们把 VS Novel 做得更好。",
-
 			"Grok is not installed on this computer. Install it from https://x.ai/cli, then run `grok login` once to sign in with your Grok account.": "这台电脑上没有安装 Grok。请从 https://x.ai/cli 安装，然后执行一次 `grok login` 用你的 Grok 账号登录。",
 			"Grok is installed but not signed in. Run `grok login` in a terminal to sign in with your Grok account, then try again.": "Grok 已安装但还没登录。在终端里执行 `grok login` 用你的 Grok 账号登录，然后重试。",
 			"The Grok agent could not start: {0}": "Grok 智能体启动失败：{0}",

@@ -9,7 +9,7 @@ import { IAuthenticationService } from '../../../../platform/authentication/comm
 import { CopilotToken } from '../../../../platform/authentication/common/copilotToken';
 import { IFetchMLOptions } from '../../../../platform/chat/common/chatMLFetcher';
 import { IChatQuotaService } from '../../../../platform/chat/common/chatQuotaService';
-import { ChatFetchResponseType, ChatLocation } from '../../../../platform/chat/common/commonTypes';
+import { ChatFetchResponseType, ChatLocation, RESPONSE_CONTAINED_NO_CHOICES } from '../../../../platform/chat/common/commonTypes';
 import { IInteractionService } from '../../../../platform/chat/common/interactionService';
 import { ConfigKey } from '../../../../platform/configuration/common/configurationService';
 import { DefaultsOnlyConfigurationService } from '../../../../platform/configuration/common/defaultsOnlyConfigurationService';
@@ -102,6 +102,52 @@ describe('ChatMLFetcherImpl retry logic', () => {
 			finishedCb: undefined,
 		};
 	}
+
+	describe('finish reasons with no branch of their own', () => {
+		/** Drives one request through a stub that reports the given completion. */
+		async function fetchWith(finishReason: string, text: string) {
+			endpoint = createMockEndpoint({ finishReason, text });
+			mockFetcherService.queueResponse(createSuccessResponse('ignored'));
+			return fetcher.fetchMany(createBaseOpts(), cancellationTokenSource.token);
+		}
+
+		it('keeps the text when the stream ended without a finish_reason', async () => {
+			// `ClientDone` is what the SSE processor reports when `[DONE]` arrives
+			// and no per-choice finish_reason ever did (stream.ts:661). The author
+			// watches the answer stream in, then watches it be replaced by
+			// "Response contained no choices." and a stack trace, while the words
+			// sit unused in the completion. Throwing them away is never the right
+			// answer to a missing field.
+			const result = await fetchWith('DONE', '半夜的雨停了。');
+			expect(result.type).toBe(ChatFetchResponseType.Success);
+			expect(result.type === ChatFetchResponseType.Success && result.value).toEqual(['半夜的雨停了。']);
+		});
+
+		it('keeps the text when the stream ended without even [DONE]', async () => {
+			// `ClientIterationDone`, stream.ts:610.
+			const result = await fetchWith('Iteration Done', '雨停了。');
+			expect(result.type).toBe(ChatFetchResponseType.Success);
+			expect(result.type === ChatFetchResponseType.Success && result.value).toEqual(['雨停了。']);
+		});
+
+		it('keeps the text on a finish_reason this client has no case for', async () => {
+			// The union in stream.ts is a type annotation, not a check: the string
+			// is passed through unchanged, so any vendor-specific reason lands on
+			// the same unhandled path.
+			const result = await fetchWith('insufficient_system_resource', '风停了。');
+			expect(result.type).toBe(ChatFetchResponseType.Success);
+			expect(result.type === ChatFetchResponseType.Success && result.value).toEqual(['风停了。']);
+		});
+
+		it('still reports, unchanged, when there is genuinely nothing to return', async () => {
+			// xtab compares `reason` to RESPONSE_CONTAINED_NO_CHOICES by equality to
+			// detect "the model had no edits to suggest", so the empty case has to
+			// keep both its type and its exact wording.
+			const result = await fetchWith('DONE', '');
+			expect(result.type).toBe(ChatFetchResponseType.Unknown);
+			expect(result.type === ChatFetchResponseType.Unknown && result.reason).toBe(RESPONSE_CONTAINED_NO_CHOICES);
+		});
+	});
 
 	describe('server error retry with configured status codes', () => {
 		it('retries on 500 status code when configured', async () => {
@@ -473,7 +519,13 @@ function createMockInteractionService(): IInteractionService {
 	} as unknown as IInteractionService;
 }
 
-function createMockEndpoint(): IChatEndpoint {
+/**
+ * @param completion Overrides for the single completion the stub yields. The
+ * stub does not parse SSE — it fabricates a `ChatCompletion` directly — so this
+ * is the only seam that reaches `processSuccessfulResponse`'s finish-reason
+ * handling. Tests that queue SSE bodies are testing the queue, not the parser.
+ */
+function createMockEndpoint(completion?: { finishReason?: string; text?: string }): IChatEndpoint {
 	return {
 		url: 'https://api.github.com/copilot/chat/completions',
 		urlOrRequestMetadata: 'https://api.github.com/copilot/chat/completions',
@@ -500,7 +552,7 @@ function createMockEndpoint(): IChatEndpoint {
 		}),
 		processResponseFromChatEndpoint: async (_telemetryService: ITelemetryService, _logService: ILogService, response: Response, _expectedNumChoices: number, finishedCb: FinishedCallback, telemetryData: TelemetryData, _cancellationToken?: CancellationToken) => {
 			// Stream the response text through the callback
-			const text = await response.text();
+			const text = completion?.text ?? await response.text();
 			if (finishedCb) {
 				await finishedCb(text, 0, { text });
 			}
@@ -522,7 +574,7 @@ function createMockEndpoint(): IChatEndpoint {
 						usage: undefined,
 						model: 'test-model',
 						blockFinished: true,
-						finishReason: 'stop',
+						finishReason: completion?.finishReason ?? 'stop',
 						telemetryData: telemetryData,
 					};
 				}

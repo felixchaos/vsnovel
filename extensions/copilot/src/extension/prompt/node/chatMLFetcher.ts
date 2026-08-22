@@ -1937,6 +1937,51 @@ export class ChatMLFetcherImpl extends AbstractChatMLFetcher {
 					streamError: result.error
 				};
 		}
+		// NOVEL-BUILDER: do not throw away a response we actually received.
+		//
+		// This is the fall-through, and it is reachable with the whole answer
+		// sitting in `result`. `successFinishReasons` above lists four reasons and
+		// the switch handles three more; everything else lands here, including two
+		// values the client generates itself — `ClientDone` when the stream reached
+		// `[DONE]` without a per-choice `finish_reason`, and `ClientIterationDone`
+		// when it ended without `[DONE]` at all (stream.ts:610, :661). Both carry
+		// the accumulated solution. So does any `finish_reason` string a provider
+		// invents that we have no case for.
+		//
+		// Upstream never feels this because CAPI always sends a finish reason. The
+		// author does: the text streams into the panel, they watch it arrive, and
+		// then the turn is replaced by "Response contained no choices." with a
+		// stack trace and a file path. Nothing about that says the words are still
+		// there, and `Try Again` spends the tokens over.
+		//
+		// The precedent is `Length`, handled the same way in
+		// `languageModelAccess.ts`: partial text already delivered is a truncated
+		// success, not a failure. The genuinely empty case is left exactly as it
+		// was: xtab compares `reason` to RESPONSE_CONTAINED_NO_CHOICES by equality
+		// to detect "the model had no edits to suggest", so the finish reason that
+		// would make the next report a diagnosis goes to the log instead of into
+		// that string.
+		const salvaged = result ? getTextPart(result.message.content) : '';
+		if (result && salvaged) {
+			this._logService.warn(
+				`Model stream finished with an unhandled reason '${result.finishReason}'; returning the ${salvaged.length} characters already received rather than discarding them.`
+			);
+			return {
+				type: ChatFetchResponseType.Success,
+				resolvedModel: result.model,
+				usage: result.usage,
+				value: [salvaged],
+				requestId,
+				serverRequestId: result.requestId.headerRequestId,
+				modelCallId,
+			};
+		}
+
+		if (result) {
+			this._logService.warn(
+				`Model stream finished with an unhandled reason '${result.finishReason}' and no text to salvage.`
+			);
+		}
 		return {
 			type: ChatFetchResponseType.Unknown,
 			reason: RESPONSE_CONTAINED_NO_CHOICES,
