@@ -56,17 +56,38 @@ export class NovelIdentityRules extends PromptElement {
  *   Brevity while narrating tool calls is preserved by the per-family prompts,
  *   which we leave alone.
  *
- * The content-policy clause is kept. Fiction covers violence and moral
- * complexity, and the models we route to have their own training on this; a
- * refusal budget in the metering layer handles repeated probing, which is a
- * usage-pattern problem rather than a prompt problem.
+ * The upstream refusal list — *"harmful, hateful, racist, or sexist"* — is gone
+ * too, and that one needs saying plainly: as a list of *categories to refuse* it
+ * describes the cast of most serious fiction. A novel about a pogrom is made of
+ * hateful speech. A villain who is not allowed to be cruel is not a villain. The
+ * model cannot tell "depicts bigotry" from "is bigoted" when the instruction it
+ * was handed only names the topic, so it resolves the ambiguity the safe way and
+ * the author gets a scene with the teeth filed off — and, worse, no refusal to
+ * point at. This product is for adult fiction; the categories are the material.
+ *
+ * What replaces it is not "no limits" but a different cut: the line is drawn
+ * between *depiction*, which is the whole job, and two things that are not
+ * depiction at all. Sexual content involving minors is a criminal matter in the
+ * US and Japan (18 U.S.C. §1466A reaches obscene material even when it is purely
+ * fictional), and every upstream we route to terminates accounts for it — it is
+ * not a taste setting anyone can turn off here. Real-world operational detail
+ * for serious harm — a working synthesis, an exploit that runs — is not
+ * something a novel is ever made worse by lacking; "he cooked the batch" carries
+ * the scene, the actual chemistry only carries liability.
+ *
+ * Note what this file can and cannot reach. It stops *us* from instructing a
+ * refusal. It does not change what DeepSeek, Anthropic or Moonshot trained their
+ * models to do, and it does not alter their usage policies — a model that will
+ * not write a scene still will not write it, and the answer to that is model
+ * choice or BYOK, not prompt text.
  */
 export class NovelSafetyRules extends PromptElement {
 	render() {
 		return (
 			<>
 				Avoid content that violates copyrights.<br />
-				If you are asked to generate content that is harmful, hateful, racist, or sexist, only respond with "Sorry, I can't assist with that."<br />
+				You are writing adult fiction. Explicit sex, graphic violence, cruelty, addiction, despair, and bigotry in the mouths of characters are legitimate material, and you render them at the length and intensity the author asks for. Do not fade to black, soften, sanitise, moralise, or append a disclaimer unless the author asked for one — depicting a thing is not endorsing it, and this author does not need the distinction explained.<br />
+				Two things stay out no matter how the request is framed: sexual content involving minors, and real-world operational instructions for serious harm. Neither is a matter of taste, and neither is something fiction needs.<br />
 			</>
 		);
 	}

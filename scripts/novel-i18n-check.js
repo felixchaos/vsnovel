@@ -128,6 +128,27 @@ function bundleProbe(message) {
 	return probe.length >= 8 ? probe : undefined;
 }
 
+/**
+ * Whether `probe` appears in bundled output.
+ *
+ * esbuild writes ASCII by default, so any non-ASCII character in a message — an
+ * em dash, a CJK quote — is emitted as \uXXXX. A plain substring search misses
+ * those and reports a string that renders perfectly well as rendering nowhere,
+ * which is worse than not checking: it invites someone to delete a correct
+ * translation. Both spellings are accepted.
+ */
+function distContains(dist, probe) {
+	if (dist.includes(probe)) {
+		return true;
+	}
+	const escaped = [...probe]
+		.map(ch => (ch.codePointAt(0) > 0x7f
+			? '\\u' + ch.codePointAt(0).toString(16).padStart(4, '0')
+			: ch))
+		.join('');
+	return escaped !== probe && dist.includes(escaped);
+}
+
 function checkExtension(problems) {
 	if (!fs.existsSync(EXT_PACK)) {
 		return { checked: 0 };
@@ -161,7 +182,7 @@ function checkExtension(problems) {
 			continue;
 		}
 		const probe = dist && bundleProbe(key);
-		if (probe && !dist.includes(probe)) {
+		if (probe && !distContains(dist, probe)) {
 			problems.push(`copilot bundle: "${key.slice(0, 60)}" is in the source but not in dist/extension.js — it renders nowhere, so translating it only hides that`);
 		}
 	}

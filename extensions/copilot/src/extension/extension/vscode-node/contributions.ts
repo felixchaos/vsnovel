@@ -40,6 +40,7 @@ import { ConsistencyDiagnosticsContrib } from '../../../novel/consistency/consis
 import { GlossaryDiagnosticsContrib } from '../../../novel/glossary/glossaryDiagnostics';
 import { GlossaryCommandsContrib } from '../../../novel/glossary/enforceCommand';
 import { AuthoringCommandsContrib } from '../../../novel/authoring/authoringCommands';
+import { GrokAgentContribution } from '../../../novel/grok/contribution';
 import { LogWorkspaceStateContribution } from '../../conversation/vscode-node/logWorkspaceState';
 import { RemoteAgentContribution } from '../../conversation/vscode-node/remoteAgents';
 import { DiagnosticsContextContribution } from '../../diagnosticsContext/vscode/diagnosticsContextProvider';
@@ -106,6 +107,10 @@ export const vscodeNodeContributions: IExtensionContributionFactory[] = [
 	asContributionFactory(GlossaryDiagnosticsContrib),
 	asContributionFactory(GlossaryCommandsContrib),
 	asContributionFactory(AuthoringCommandsContrib),
+	// NOVEL-BUILDER: the Grok agent session. It hosts xAI's own `grok` CLI over
+	// the Agent Client Protocol, which is the integration path xAI documents,
+	// so the credential stays with the CLI and never reaches this editor.
+	asContributionFactory(GrokAgentContribution),
 	asContributionFactory(WalkthroughCommandContribution),
 	asContributionFactory(JointCompletionsProviderContribution),
 	// replaced by JointCompletionsProviderContribution

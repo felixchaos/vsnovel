@@ -9,6 +9,7 @@ import { ILogService } from '../../../platform/log/common/logService';
 import { IFetcherService } from '../../../platform/networking/common/fetcherService';
 import { Disposable, DisposableStore } from '../../../util/vs/base/common/lifecycle';
 import { IInstantiationService } from '../../../util/vs/platform/instantiation/common/instantiation';
+import { NOVEL_BYOK_PROVIDERS } from '../../../novel/byok/providers';
 import { BYOKKnownModels, isClientBYOKAllowed } from '../../byok/common/byokProvider';
 import { IExtensionContribution } from '../../common/contributions';
 import { AbstractLanguageModelChatProvider } from './abstractLanguageModelChatProvider';
@@ -62,6 +63,16 @@ export class BYOKContrib extends Disposable implements IExtensionContribution {
 		this._providers.set(AzureBYOKModelProvider.providerId, instantiationService.createInstance(AzureBYOKModelProvider, this._byokStorageService));
 		this._providers.set(CustomOAIBYOKModelProvider.providerId, instantiationService.createInstance(CustomOAIBYOKModelProvider, this._byokStorageService));
 		this._providers.set(CustomEndpointBYOKModelProvider.providerId, instantiationService.createInstance(CustomEndpointBYOKModelProvider, this._byokStorageService));
+
+		// NOVEL-BUILDER: the open-weight vendors this product's authors actually
+		// hold keys for. Without them the only route to a DeepSeek or Kimi key is
+		// Custom Endpoint, whose form asks a novelist for maxInputTokens and
+		// toolCalling per model — unanswerable, and every wrong answer fails in
+		// its own unreadable way. These contribute a catalogue instead, so the
+		// key is the whole configuration.
+		for (const Provider of NOVEL_BYOK_PROVIDERS) {
+			this._providers.set(Provider.providerId, instantiationService.createInstance(Provider, this._byokStorageService));
+		}
 
 		this._knownModelsRefreshTargets = [
 			[AnthropicLMProvider.providerName, anthropic],

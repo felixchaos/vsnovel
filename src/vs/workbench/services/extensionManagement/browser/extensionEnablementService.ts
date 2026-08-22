@@ -172,7 +172,16 @@ export class ExtensionEnablementService extends Disposable implements IWorkbench
 		// extension they did not ask for. In this product that extension is the
 		// product; there is nothing to protect them from. Turning AI off is still
 		// available through chat.disableAIFeatures.
-		return;
+		//
+		// Annotated boolean rather than a bare return: a bare one makes the whole
+		// migration below unreachable, and TypeScript stops narrowing inside
+		// unreachable code — which turned the upstream `if (context)` guard into
+		// four compile errors and blocked compile-client entirely. The upstream
+		// body stays byte-identical this way, and stays adjacent for rebase.
+		const novelSkipsBuiltinChatDisable: boolean = true;
+		if (novelSkipsBuiltinChatDisable) {
+			return;
+		}
 
 		const builtinChatExtensionEnablementMigrationKey = 'builtinChatExtensionEnablementMigration';
 		const builtinChatExtensionEnablementMigration = this.storageService.getBoolean(builtinChatExtensionEnablementMigrationKey, StorageScope.PROFILE) === true;

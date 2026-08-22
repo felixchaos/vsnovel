@@ -506,92 +506,92 @@
 				}
 			},
 			{
-    "name": "copilot_searchManuscript",
-    "displayName": "Search Manuscript",
-    "toolReferenceName": "searchManuscript",
-    "icon": "$(search)",
-    "userDescription": "Search the manuscript for passages about something, ranked by relevance.",
-    "modelDescription": "Search the manuscript for passages about something and get them back ranked, in chapter order. Use this when you need the passages that bear on a subject — where a character was last seen, what was established about a place, how something was described before. Use 'copilot_findTextInFiles' instead when you know the exact string you are looking for; this one ranks and that one is exhaustive. Pass 'currentChapter' whenever you are drafting or revising a specific chapter: passages from later chapters are then withheld, which is what keeps the prose from knowing things its narrator cannot know yet. Omit it when the author is asking about their own book, where there is nothing to withhold.",
-    "tags": [],
-    "inputSchema": {
-     "type": "object",
-     "properties": {
-      "query": {
-       "description": "What to look for. Natural language or a phrase from the work.",
-       "type": "string"
-      },
-      "currentChapter": {
-       "description": "The chapter being written. Passages from later chapters are withheld.",
-       "type": "number"
-      },
-      "maxResults": {
-       "description": "How many passages to return. Defaults to 12.",
-       "type": "number"
-      }
-     },
-     "required": [
-      "query"
-     ]
-    }
-   },
-   {
-    "name": "copilot_lookUpReference",
-    "displayName": "Look Up Reference",
-    "toolReferenceName": "lookUpReference",
-    "icon": "$(globe)",
-    "userDescription": "Look something up in Wikipedia \u2014 a place, a period detail, a custom, a term, a person.",
-    "modelDescription": "Look a subject up in Wikipedia and get back matching entries with a short extract and the page address. Use it for facts outside the manuscript that the author expects to be right: historical and period detail, places, customs, terminology, real people. Choose the language edition that fits the subject (zh, ja or en). This is NOT a web search \u2014 it finds encyclopaedia entries, not arbitrary pages. Open a returned address with fetch_webpage before relying on a date, a number or a quotation.",
-    "canBeReferencedInPrompt": true,
-    "when": "!isWeb",
-    "tags": [],
-    "inputSchema": {
-     "type": "object",
-     "properties": {
-      "query": {
-       "description": "What to look up.",
-       "type": "string"
-      },
-      "language": {
-       "description": "Which Wikipedia edition to ask. Defaults to zh.",
-       "type": "string",
-       "enum": [
-        "zh",
-        "ja",
-        "en"
-       ]
-      },
-      "maxResults": {
-       "description": "How many entries to return (1-10, default 5).",
-       "type": "number"
-      }
-     },
-     "required": [
-      "query"
-     ]
-    }
-   },
-   {
-    "name": "copilot_novelCheck",
-    "displayName": "Check Manuscript",
-    "toolReferenceName": "novelCheck",
-    "icon": "$(book)",
-    "userDescription": "Check the manuscript for name drift, continuity contradictions, overdue foreshadowing and glossary violations.",
-    "modelDescription": "Run the manuscript checks over one or more chapters and report what is wrong: names that drift from the form the story bible settles on, continuity and timeline contradictions between recorded facts, foreshadowing that is overdue, and terms rendered against their pinned translation. Prefer this over 'copilot_getErrors' after writing or editing a chapter — get_errors reports what the author's Problems panel currently holds, which follows their own settings and covers only open files, while this re-runs the checks over exactly the files you name. Pass the chapters you changed. Checks that read the story bible rather than the prose are always reported, because a chapter you just wrote is where a contradiction with the rest of the work appears.",
-    "tags": [],
-    "inputSchema": {
-     "type": "object",
-     "properties": {
-      "filePaths": {
-       "description": "Absolute paths of the chapters to check. Omit to check the story bible on its own.",
-       "type": "array",
-       "items": {
-        "type": "string"
-       }
-      }
-     }
-    }
-   },
-   {
+				"name": "copilot_searchManuscript",
+				"displayName": "Search Manuscript",
+				"toolReferenceName": "searchManuscript",
+				"icon": "$(search)",
+				"userDescription": "Search the manuscript for passages about something, ranked by relevance.",
+				"modelDescription": "Search the manuscript for passages about something and get them back ranked, in chapter order. Use this when you need the passages that bear on a subject — where a character was last seen, what was established about a place, how something was described before. Use 'copilot_findTextInFiles' instead when you know the exact string you are looking for; this one ranks and that one is exhaustive. Pass 'currentChapter' whenever you are drafting or revising a specific chapter: passages from later chapters are then withheld, which is what keeps the prose from knowing things its narrator cannot know yet. Omit it when the author is asking about their own book, where there is nothing to withhold.",
+				"tags": [],
+				"inputSchema": {
+					"type": "object",
+					"properties": {
+						"query": {
+							"description": "What to look for. Natural language or a phrase from the work.",
+							"type": "string"
+						},
+						"currentChapter": {
+							"description": "The chapter being written. Passages from later chapters are withheld.",
+							"type": "number"
+						},
+						"maxResults": {
+							"description": "How many passages to return. Defaults to 12.",
+							"type": "number"
+						}
+					},
+					"required": [
+						"query"
+					]
+				}
+			},
+			{
+				"name": "copilot_lookUpReference",
+				"displayName": "Look Up Reference",
+				"toolReferenceName": "lookUpReference",
+				"icon": "$(globe)",
+				"userDescription": "Look something up in Wikipedia — a place, a period detail, a custom, a term, a person.",
+				"modelDescription": "Look a subject up in Wikipedia and get back matching entries with a short extract and the page address. Use it for facts outside the manuscript that the author expects to be right: historical and period detail, places, customs, terminology, real people. Choose the language edition that fits the subject (zh, ja or en). This is NOT a web search — it finds encyclopaedia entries, not arbitrary pages. Open a returned address with fetch_webpage before relying on a date, a number or a quotation.",
+				"canBeReferencedInPrompt": true,
+				"when": "!isWeb",
+				"tags": [],
+				"inputSchema": {
+					"type": "object",
+					"properties": {
+						"query": {
+							"description": "What to look up.",
+							"type": "string"
+						},
+						"language": {
+							"description": "Which Wikipedia edition to ask. Defaults to zh.",
+							"type": "string",
+							"enum": [
+								"zh",
+								"ja",
+								"en"
+							]
+						},
+						"maxResults": {
+							"description": "How many entries to return (1-10, default 5).",
+							"type": "number"
+						}
+					},
+					"required": [
+						"query"
+					]
+				}
+			},
+			{
+				"name": "copilot_novelCheck",
+				"displayName": "Check Manuscript",
+				"toolReferenceName": "novelCheck",
+				"icon": "$(book)",
+				"userDescription": "Check the manuscript for name drift, continuity contradictions, overdue foreshadowing and glossary violations.",
+				"modelDescription": "Run the manuscript checks over one or more chapters and report what is wrong: names that drift from the form the story bible settles on, continuity and timeline contradictions between recorded facts, foreshadowing that is overdue, and terms rendered against their pinned translation. Prefer this over 'copilot_getErrors' after writing or editing a chapter — get_errors reports what the author's Problems panel currently holds, which follows their own settings and covers only open files, while this re-runs the checks over exactly the files you name. Pass the chapters you changed. Checks that read the story bible rather than the prose are always reported, because a chapter you just wrote is where a contradiction with the rest of the work appears.",
+				"tags": [],
+				"inputSchema": {
+					"type": "object",
+					"properties": {
+						"filePaths": {
+							"description": "Absolute paths of the chapters to check. Omit to check the story bible on its own.",
+							"type": "array",
+							"items": {
+								"type": "string"
+							}
+						}
+					}
+				}
+			},
+			{
 				"name": "copilot_getErrors",
 				"displayName": "%copilot.tools.getErrors.name%",
 				"toolReferenceName": "problems",
@@ -600,7 +600,7 @@
 				],
 				"icon": "$(error)",
 				"userDescription": "%copilot.tools.errors.description%",
-				"modelDescription": "Get the problems reported for a chapter or across the manuscript: name drift, continuity and timeline contradictions, overdue foreshadowing, and glossary terms rendered against their pinned translation. If the author mentions problems in a file, they are probably referring to these. Use it to see what the author sees. Omit 'filePaths' to gather problems across the whole work. Use it after editing a chapter to check the change \u2014 this is how you verify prose the way tests verify code.",
+				"modelDescription": "Get the problems reported for a chapter or across the manuscript: name drift, continuity and timeline contradictions, overdue foreshadowing, and glossary terms rendered against their pinned translation. If the author mentions problems in a file, they are probably referring to these. Use it to see what the author sees. Omit 'filePaths' to gather problems across the whole work. Use it after editing a chapter to check the change — this is how you verify prose the way tests verify code.",
 				"tags": [],
 				"inputSchema": {
 					"type": "object",
@@ -2442,6 +2442,96 @@
 						}
 					}
 				}
+			},
+			{
+				"vendor": "deepseek",
+				"displayName": "DeepSeek",
+				"configuration": {
+					"type": "object",
+					"properties": {
+						"apiKey": {
+							"type": "string",
+							"secret": true,
+							"description": "DeepSeek 开放平台的 API Key（platform.deepseek.com）",
+							"title": "API Key"
+						}
+					},
+					"required": [
+						"apiKey"
+					]
+				}
+			},
+			{
+				"vendor": "kimi",
+				"displayName": "Kimi",
+				"configuration": {
+					"type": "object",
+					"properties": {
+						"apiKey": {
+							"type": "string",
+							"secret": true,
+							"description": "Moonshot 开放平台的 API Key（platform.moonshot.cn）",
+							"title": "API Key"
+						}
+					},
+					"required": [
+						"apiKey"
+					]
+				}
+			},
+			{
+				"vendor": "zhipu",
+				"displayName": "Zhipu GLM",
+				"configuration": {
+					"type": "object",
+					"properties": {
+						"apiKey": {
+							"type": "string",
+							"secret": true,
+							"description": "智谱开放平台的 API Key（open.bigmodel.cn）",
+							"title": "API Key"
+						}
+					},
+					"required": [
+						"apiKey"
+					]
+				}
+			},
+			{
+				"vendor": "qwen",
+				"displayName": "Qwen",
+				"configuration": {
+					"type": "object",
+					"properties": {
+						"apiKey": {
+							"type": "string",
+							"secret": true,
+							"description": "阿里云百炼的 API Key（bailian.console.aliyun.com）",
+							"title": "API Key"
+						}
+					},
+					"required": [
+						"apiKey"
+					]
+				}
+			},
+			{
+				"vendor": "minimax",
+				"displayName": "MiniMax",
+				"configuration": {
+					"type": "object",
+					"properties": {
+						"apiKey": {
+							"type": "string",
+							"secret": true,
+							"description": "MiniMax 开放平台的 API Key（platform.minimaxi.com）",
+							"title": "API Key"
+						}
+					},
+					"required": [
+						"apiKey"
+					]
+				}
 			}
 		],
 		"interactiveSession": [
@@ -3321,11 +3411,11 @@
 				"category": "GitHub Copilot"
 			},
 			{
-    "command": "novel.enforceGlossary",
-    "title": "Novel: Apply Pinned Renderings to This Chapter",
-    "category": "Novel"
-   },
-   {
+				"command": "novel.enforceGlossary",
+				"title": "Novel: Apply Pinned Renderings to This Chapter",
+				"category": "Novel"
+			},
+			{
 				"command": "novel.recordFact",
 				"title": "Novel: Record a Fact from Selection",
 				"category": "VS Novel"
@@ -3669,6 +3759,14 @@
 						"markdownDescription": "Expose the software-development tools (compiler diagnostics, notebooks, symbol search, shell execution, GitHub search) to the agent. Off by default: in a manuscript they either return nothing or act on things an author never asked for.",
 						"tags": [
 							"advanced"
+						]
+					},
+					"novel.grokPath": {
+						"type": "string",
+						"default": "",
+						"markdownDescription": "Full path to the `grok` executable. Leave empty to search `PATH` and the directories the installer uses. Set this when the editor cannot find an install it should — an editor launched from Finder does not inherit your shell's `PATH`.",
+						"tags": [
+							"novel"
 						]
 					},
 					"novel.nameCheck": {
@@ -6983,6 +7081,21 @@
 			}
 		],
 		"chatSessions": [
+			{
+				"type": "grok",
+				"name": "grok",
+				"displayName": "Grok",
+				"canDelegate": true,
+				"supportsAutoModel": true,
+				"icon": "$(sparkle)",
+				"welcomeTitle": "Grok",
+				"welcomeMessage": "Powered by the grok CLI signed in on this computer. This is xAI's agent, with its own tools and prompts.",
+				"inputPlaceholder": "Ask Grok",
+				"capabilities": {
+					"supportsFileAttachments": true,
+					"supportsImageAttachments": false
+				}
+			},
 			{
 				"type": "claude-code",
 				"name": "claude",

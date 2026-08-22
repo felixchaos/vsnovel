@@ -141,3 +141,29 @@ describe('the shared writing prompt is honest about looking things up', () => {
 		expect(prompt).toMatch(/reference material, never prose/i);
 	});
 });
+
+// The shared safety slot (NovelSafetyRules) does not reach this prompt: the
+// three novel resolvers register their own system prompt and win the registry
+// race, so deepseek, grok and kimi — the models actually served — never render
+// it. Loosening that slot alone therefore changes nothing for them, which is
+// exactly the kind of edit that looks done and is not. The clause has to be here
+// too, and these assertions are what keep the two from drifting apart.
+describe('the shared writing prompt does not flinch', () => {
+	it('names adult material as material rather than as something to avoid', () => {
+		expect(prompt).toMatch(/This is adult fiction/i);
+		expect(prompt).toMatch(/at the length and intensity the author asked for/i);
+	});
+
+	// The failure this product actually sees is not a refusal — it is a scene
+	// that came back with the teeth filed off and no indication anything was
+	// withheld.
+	it('forbids the silent softening, not just the outright refusal', () => {
+		expect(prompt).toMatch(/Do not fade to black, soften, sanitise, moralise/i);
+		expect(prompt).toMatch(/unless the author asked for one/i);
+	});
+
+	it('keeps the two lines that are not matters of taste', () => {
+		expect(prompt).toMatch(/sexual content involving minors/i);
+		expect(prompt).toMatch(/real-world operational instructions for serious harm/i);
+	});
+});

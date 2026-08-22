@@ -146,6 +146,23 @@ const RULES: Rule[] = [
 		roots: [SHARED_PROMPT_SLOTS, NOVEL_PROMPTS],
 	},
 	{
+		// The upstream refusal list. Unlike the two words above it is a whole
+		// clause, and it is the one that survives a rebase most quietly: nothing
+		// about "harmful, hateful, racist, or sexist" looks code-specific, so a
+		// reviewer skimming a merge has no reason to stop on it.
+		//
+		// As *categories to refuse* they describe the cast of most serious
+		// fiction. The model cannot tell "depicts bigotry" from "is bigoted" from
+		// a topic list alone, so it resolves that the safe way, and the result is
+		// not a refusal anyone can point at — it is a scene that came back with
+		// the teeth filed off. See NovelSafetyRules for the replacement, which
+		// draws the line at depiction rather than at subject matter.
+		name: 'adult subject matter as refusal categories',
+		pattern: /harmful, hateful, racist,? or sexist/i,
+		why: 'refusing these topics outright rules out most serious fiction, and it fails silently — the author gets a softened scene rather than a refusal',
+		roots: [SHARED_PROMPT_SLOTS, NOVEL_PROMPTS],
+	},
+	{
 		// Found in platform/chat/common/commonTypes.ts, which no prompt root
 		// covers: the off-topic error told the author, verbatim in the chat, that
 		// it could only help with programming questions. A refusal string is a

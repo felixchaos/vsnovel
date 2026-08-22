@@ -56,7 +56,15 @@
 
 			"Copilot did not provide a response. Please try again.": "助手这次没有返回内容，请重试。",
 
-			"Got a minute? Help us make GitHub Copilot better.": "有一分钟吗？帮我们把 VS Novel 做得更好。"
+			"Got a minute? Help us make GitHub Copilot better.": "有一分钟吗？帮我们把 VS Novel 做得更好。",
+
+			"Grok is not installed on this computer. Install it from https://x.ai/cli, then run `grok login` once to sign in with your Grok account.": "这台电脑上没有安装 Grok。请从 https://x.ai/cli 安装，然后执行一次 `grok login` 用你的 Grok 账号登录。",
+			"Grok is installed but not signed in. Run `grok login` in a terminal to sign in with your Grok account, then try again.": "Grok 已安装但还没登录。在终端里执行 `grok login` 用你的 Grok 账号登录，然后重试。",
+			"The Grok agent could not start: {0}": "Grok 智能体启动失败：{0}",
+			"The Grok agent stopped: {0}": "Grok 智能体中断了：{0}",
+			"The Grok agent is waiting for your decision": "Grok 智能体在等你决定",
+			"Model": "模型",
+			"Thinking": "思考深度"
 		}
 	}
 }

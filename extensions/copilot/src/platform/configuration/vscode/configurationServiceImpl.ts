@@ -325,7 +325,13 @@ export class ConfigurationServiceImpl extends AbstractConfigurationService {
 			const extensionConfigProps = Object.assign({}, ...propertyGroups);
 			for (const key in extensionConfigProps) {
 				const localKey = key.replace(`${CopilotConfigPrefix}.`, '');
-				const value = localKey.split('.').reduce((o, i) => o[i], this.config);
+				// NOVEL-BUILDER: optional chaining. `this.config` is scoped to the
+				// copilot prefix, so any contributed key outside it — every `novel.*`
+				// setting this product adds — walks into undefined and throws. The
+				// throw is caught outside the loop, so one such key aborts the whole
+				// collection and *no* configuration properties are ever gathered. It
+				// also logged 13,722 times in one session before anyone noticed.
+				const value = localKey.split('.').reduce<any>((o, i) => o?.[i], this.config);
 
 				if (typeof value === 'object' && value !== null) {
 					// Dump objects as their properties, filtering secret_key

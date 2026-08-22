@@ -717,11 +717,39 @@ export abstract class Action2 {
 	abstract run(accessor: ServicesAccessor, ...args: unknown[]): void;
 }
 
+// NOVEL-BUILDER: command ids this product withholds. A withheld command is not
+// registered at all: no command, no palette entry, no menu item, no
+// keybinding. registerAction2 is the single point all four are derived from
+// (palette and menu below, keybinding after them), so filtering here reaches
+// the whole set without editing the file that declares the action.
+//
+// The Agents Window is an upstream feature this product does not wire. It is a
+// second workbench (src/vs/sessions/) that hosts agent CLI sessions through
+// copilotcli and claude-code harnesses; with neither implemented it opens a
+// window that runs its own sign-in flow separate from the one the user already
+// completed, fails it, and then reports that no models are available. Its four
+// entry points (Cmd+Shift+A, the command palette, the title-bar button and the
+// welcome-page banner) all funnel through OPEN_AGENTS_WINDOW_PRECONDITION, but
+// that constant lives in src/vs/workbench/contrib/chat/, which novel-guard
+// forbids outright. This is the chokepoint outside that directory that reaches
+// the same set. The banner needs no separate entry: canShowAgentsBanner asks
+// CommandsRegistry whether the command exists, and it no longer does.
+const novelWithheldCommands = new Set<string>([
+	'workbench.action.openAgentsWindow',
+	'workbench.action.openWorkspaceInAgentsWindow',
+	'workbench.action.chat.openSessionInAgentsWindow',
+]);
+
 export function registerAction2(ctor: { new(): Action2 }): IDisposable {
 	const disposables: IDisposable[] = []; // not using `DisposableStore` to reduce startup perf cost
 	const action = new ctor();
 
 	const { f1, menu, keybinding, ...command } = action.desc;
+
+	// NOVEL-BUILDER: see novelWithheldCommands above
+	if (novelWithheldCommands.has(command.id)) {
+		return { dispose() { } };
+	}
 
 	if (CommandsRegistry.getCommand(command.id)) {
 		throw new Error(`Cannot register two commands with the same id: ${command.id}`);
