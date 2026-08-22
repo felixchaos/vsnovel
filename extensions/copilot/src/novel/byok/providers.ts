@@ -21,6 +21,7 @@ import { IInstantiationService } from '../../util/vs/platform/instantiation/comm
 import { IBYOKStorageService } from '../../extension/byok/vscode-node/byokStorageService';
 import { DEEPSEEK_MODELS, GLM_MODELS, KIMI_MODELS, MINIMAX_MODELS, QWEN_MODELS } from './catalog';
 import { NovelOpenCompatProvider, PinnedSampling } from './openCompatProvider';
+import { RelayLMProvider } from './relayProvider';
 
 export class DeepSeekLMProvider extends NovelOpenCompatProvider {
 	public static readonly providerName = 'DeepSeek';
@@ -194,11 +195,19 @@ export class MiniMaxLMProvider extends NovelOpenCompatProvider {
 	}
 }
 
-/** Everything this file contributes, in the order the picker should show it. */
+/**
+ * Everything this file contributes, in the order the picker should show it.
+ *
+ * The relay goes last on purpose. An author who holds a vendor's own key is
+ * better served by the entry above that names it — those carry measured
+ * capabilities — and should not have to scroll past a generic option to find it.
+ * The relay is the answer for everyone the five named vendors do not cover.
+ */
 export const NOVEL_BYOK_PROVIDERS = [
 	DeepSeekLMProvider,
 	KimiLMProvider,
 	GLMLMProvider,
 	QwenLMProvider,
 	MiniMaxLMProvider,
+	RelayLMProvider,
 ] as const;

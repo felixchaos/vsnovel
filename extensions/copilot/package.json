@@ -2532,6 +2532,32 @@
 						"apiKey"
 					]
 				}
+			},
+			{
+				"vendor": "novelrelay",
+				"displayName": "中转站 (API Relay)",
+				"configuration": {
+					"type": "object",
+					"properties": {
+						"url": {
+							"type": "string",
+							"pattern": "^https?://.+",
+							"patternErrorMessage": "地址要以 http:// 或 https:// 开头",
+							"title": "中转站地址",
+							"markdownDescription": "中转站的 OpenAI 兼容地址，例如 `https://example.com/v1`。只填到域名也行，会自动补上 `/v1`；后面的 `/chat/completions` 不用填。"
+						},
+						"apiKey": {
+							"type": "string",
+							"secret": true,
+							"description": "中转站签发的 API Key",
+							"title": "API Key"
+						}
+					},
+					"required": [
+						"url",
+						"apiKey"
+					]
+				}
 			}
 		],
 		"interactiveSession": [

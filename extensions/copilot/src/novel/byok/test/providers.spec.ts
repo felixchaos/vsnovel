@@ -6,6 +6,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { isDeepSeekFamily, isKimiFamily, isMinimaxFamily } from '../../../platform/endpoint/common/chatModelCapabilities';
 import { DEEPSEEK_MODELS, GLM_MODELS, KIMI_MODELS, MINIMAX_MODELS, QWEN_MODELS } from '../catalog';
 import { DeepSeekLMProvider, KimiLMProvider, MiniMaxLMProvider, NOVEL_BYOK_PROVIDERS, QwenLMProvider } from '../providers';
+import { RelayLMProvider } from '../relayProvider';
 
 const ALL_CATALOGUES = {
 	DeepSeek: DEEPSEEK_MODELS,
@@ -152,15 +153,58 @@ describe('vendor quirks', () => {
 		}
 	});
 
-	it('gives every vendor a distinct id and an https base', () => {
+	it('gives every vendor a distinct id', () => {
 		const ids = new Set<string>();
 		for (const Ctor of NOVEL_BYOK_PROVIDERS) {
-			const { provider } = createProvider(Ctor as any);
 			const id = (Ctor as any).providerId;
 			expect(ids.has(id), `duplicate provider id ${id}`).toBe(false);
 			ids.add(id);
-			expect((provider as any).getModelsBaseUrl()).toMatch(/^https:\/\//);
 		}
-		expect(ids.size).toBe(5);
+		expect(ids.size).toBe(NOVEL_BYOK_PROVIDERS.length);
+	});
+
+	it('answers at an https host the moment it is constructed, except the relay', () => {
+		// A vendor that owns its host can be asked where it lives before anything
+		// is configured. The relay cannot: its host is the author's to supply, and
+		// answering with a placeholder would send the first request somewhere real.
+		for (const Ctor of NOVEL_BYOK_PROVIDERS) {
+			const { provider } = createProvider(Ctor as any);
+			const base = (provider as any).getModelsBaseUrl();
+			if ((Ctor as any).providerId === RelayLMProvider.providerId) {
+				expect(base).toBeUndefined();
+			} else {
+				expect(base, (Ctor as any).providerId).toMatch(/^https:\/\//);
+			}
+		}
+	});
+
+	it('takes the relay host from the author once they have typed one', () => {
+		const { provider } = createProvider(RelayLMProvider as any);
+		expect((provider as any).getModelsBaseUrl({ url: 'https://ai.example.moe' }))
+			.toBe('https://ai.example.moe/v1');
+	});
+
+	it('keeps tool calling on a relay model nothing has listed yet', () => {
+		// The five table-backed vendors are handed their capabilities in the
+		// constructor; the relay learns them during discovery. Before that has run
+		// — a restart, with the model restored from chat.cachedLanguageModels.v2 —
+		// the inherited path returns resolveModelInfo's defaults, and those say
+		// tool_calls: false. The agent would then be unable to read or edit a
+		// single file, silently, with nothing to connect it to.
+		const { provider } = createProvider(RelayLMProvider as any);
+		expect((provider as any)._knownModels).toBeUndefined();
+
+		const info = (provider as any).getModelInfo('claude-opus-5', 'https://ai.example.moe/v1');
+		expect(info.capabilities.supports.tool_calls).toBe(true);
+		expect(info.capabilities.limits.max_context_window_tokens).toBe(200_000);
+	});
+
+	it('still leaves a non-chat model without capabilities', () => {
+		// The same fallback must not resurrect an embedding model that the listing
+		// deliberately dropped: resolveModelInfo is handed undefined and applies
+		// its own defaults, rather than this inventing capabilities for it.
+		const { provider } = createProvider(RelayLMProvider as any);
+		const info = (provider as any).getModelInfo('bge-m3', 'https://ai.example.moe/v1');
+		expect(info.capabilities.supports.tool_calls).toBe(false);
 	});
 });
