@@ -52,6 +52,35 @@ const EDIT_TOOLS = ['find-replace', 'multi-find-replace'] as const;
 const editTools = [...EDIT_TOOLS];
 
 /**
+ * Grok, from xAI's own model list.
+ *
+ * Recorded rather than guessed because the family default was badly wrong for
+ * it: every documented member is at least 256K and the newest are 500K or 1M,
+ * while the generic floor handed them 128K. An author on `grok-4.6` was being
+ * given a quarter of the context they had paid for, silently.
+ *
+ * Windows are from https://docs.x.ai/docs/models, read 2026-08-23. The `grok-4.6`
+ * row is from its own page, which also states vision, function calling and
+ * reasoning; the rest carry only the window, so their booleans stay at the
+ * family's assumption and are marked as such.
+ *
+ * `maxOutputTokens` is not published for any of them. 32K is this file's own
+ * conservative figure, not xAI's — too low only truncates a reply the author can
+ * continue, while too high is a 400 they cannot read.
+ */
+export const GROK_MODELS: Record<string, BYOKModelCapabilities> = {
+	// Window, vision, tool calling and reasoning all from docs.x.ai/docs/models/grok-4.6.
+	'grok-4.6': { name: 'grok-4.6', contextWindow: 500_000, maxOutputTokens: 32_000, toolCalling: true, vision: true, thinking: true, editTools },
+	// Window sourced; booleans assumed from the family.
+	'grok-4.5': { name: 'grok-4.5', contextWindow: 500_000, maxOutputTokens: 32_000, toolCalling: true, vision: true, editTools },
+	'grok-4.3': { name: 'grok-4.3', contextWindow: 1_000_000, maxOutputTokens: 32_000, toolCalling: true, vision: true, editTools },
+	'grok-4.20-0309-reasoning': { name: 'grok-4.20-0309-reasoning', contextWindow: 1_000_000, maxOutputTokens: 32_000, toolCalling: true, vision: true, thinking: true, editTools },
+	'grok-4.20-0309-non-reasoning': { name: 'grok-4.20-0309-non-reasoning', contextWindow: 1_000_000, maxOutputTokens: 32_000, toolCalling: true, vision: true, editTools },
+	'grok-4.20-multi-agent-0309': { name: 'grok-4.20-multi-agent-0309', contextWindow: 1_000_000, maxOutputTokens: 32_000, toolCalling: true, vision: true, editTools },
+	'grok-build-0.1': { name: 'grok-build-0.1', contextWindow: 256_000, maxOutputTokens: 32_000, toolCalling: true, vision: true, editTools },
+};
+
+/**
  * Everything `catalog.ts` documents, searched on exact match.
  *
  * Keyed by the *lowercased* id, because the two sides disagree about case and
@@ -72,6 +101,7 @@ const DOCUMENTED: Record<string, BYOKModelCapabilities> = Object.fromEntries(
 		...GLM_MODELS,
 		...QWEN_MODELS,
 		...MINIMAX_MODELS,
+		...GROK_MODELS,
 	}).map(([id, caps]) => [id.toLowerCase(), caps])
 );
 
@@ -159,8 +189,12 @@ const FAMILIES: readonly RelayFamily[] = [
 		caps: { contextWindow: 128_000, maxOutputTokens: 32_000, toolCalling: true, vision: true, editTools },
 	},
 	{
+		// 256K rather than the generic floor: every Grok xAI documents today is at
+		// least that, so the floor could only ever be wrong in the wasteful
+		// direction here. Named releases carry their real window through
+		// GROK_MODELS above.
 		test: /^grok[-_]/,
-		caps: { contextWindow: 128_000, maxOutputTokens: 32_000, toolCalling: true, vision: true, editTools },
+		caps: { contextWindow: 256_000, maxOutputTokens: 32_000, toolCalling: true, vision: true, editTools },
 	},
 ];
 

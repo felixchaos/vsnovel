@@ -155,6 +155,19 @@ export const KIMI_MODELS: BYOKKnownModels = {
  * same reasoning as the rest of this file rather than on a precedent.
  */
 export const GLM_MODELS: BYOKKnownModels = {
+	'glm-5.3': {
+		// 1M in, 128K out, tool calling yes, vision no, and thinking that cannot be
+		// switched off — all from docs.bigmodel.cn/cn/guide/models/text/glm-5.3,
+		// read 2026-08-23. Added after a relay was found serving it while this file
+		// stopped at 5.2, which dropped it to the unknown-model floor of 128K.
+		name: 'GLM-5.3',
+		contextWindow: 1_000_000,
+		maxOutputTokens: 131_072,
+		toolCalling: true,
+		vision: false,
+		thinking: true,
+		editTools,
+	},
 	'glm-5.2': {
 		name: 'GLM-5.2',
 		contextWindow: 1_000_000,
@@ -278,7 +291,10 @@ export const QWEN_MODELS: BYOKKnownModels = {
  * One model, and the id is mixed-case (`MiniMax-M3`) where every other vendor
  * here is lowercase — worth stating, because the picker matches on it exactly.
  * The 1M window and the image input are both documented; upstream already
- * recognises this family for the edit-tool tables.
+ * recognises this family for the edit-tool tables. The output ceiling is not:
+ * MiniMax publishes no max_tokens limit anywhere readable, so 64K is this
+ * file's own figure. (A 32K number circulates, but it is the max_tokens used in
+ * their evaluation write-ups, not an API cap — not a source.)
  */
 export const MINIMAX_MODELS: BYOKKnownModels = {
 	'MiniMax-M3': {

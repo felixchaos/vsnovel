@@ -78,6 +78,7 @@ ALLOWED_FILES=(
   "build/darwin-sign.mjs:Developer ID signing, notarisation and stapling for the macOS artifact. New file; zero conflict cost"
   "update-server/*:the update manifest generator and the Cloudflare Worker that serves it. New directory; zero conflict cost"
   "scripts/vsnovel-release.sh:the older manual publish path, superseded by release.yml but kept for a hand-cut release. New file; zero conflict cost"
+  "extensions/copilot/src/extension/byok/vscode-node/xAIProvider.ts:resolveModelCapabilities hands every Grok 4+ a hardcoded 120K in and 120K out. xAI documents 500K for 4.5 and 4.6 and 1M for 4.3 and the 4.20 builds, so an author with their own key silently lost most of the window they pay for \u2014 a context window that is too small truncates rather than errors, so nothing surfaces it. One early return that prefers the published table, which is shared with the relay vendor so the two paths cannot drift; upstream\u2019s heuristic is left intact underneath for ids xAI has not published. vision still comes from the API response, which is better than anything we could record"
   "scripts/novel-manifest.test.sh:tests the update manifest generator. Lives beside the other novel-*.test.sh rather than under update-server/ because that directory has no test runner and this needs none \u2014 it is five assertions on the JSON shape. New file; upstream has no such path and the conflict cost is zero"
   "scripts/vsnovel-sync.sh:pushes this tree to the public repo a release is built from. A new file in a directory upstream also has, so it is listed here rather than under src/novel/ \u2014 it has to live beside the other novel-* scripts to be findable, and it cannot live in the extension because it operates on the repository. Never touched by upstream; the conflict cost is zero"
   "extensions/copilot/src/extension/prompt/node/test/chatMLFetcherRetry.spec.ts:covers the finish-reason fall-through in chatMLFetcher.ts, which is already on this list. The tests live here rather than in a new file because the harness they need \u2014 the fetcher, the mock endpoint, the queued responses \u2014 is local to this spec and not exported. createMockEndpoint gains one optional argument so a test can name the finish reason and the text; without it every completion the stub yields is hardcoded to 'stop', which is why upstream's own tests never reached the branch. Two additive edits and one nested describe"
@@ -185,6 +186,29 @@ FORBIDDEN_DIRS=(
   "src/vs/workbench/contrib/chat/"
 )
 
+# The one file inside a forbidden directory that is allowed anyway.
+#
+# This is a standing exception, not a loophole. `buildModelPickerItems` decides
+# what the model picker shows and how it collapses duplicates, and neither is
+# reachable from an extension — there is no API for "how should the picker
+# de-duplicate", so the two bugs it fixes cannot be fixed anywhere else:
+#
+#   - a signed-out author had no way to add a BYOK key, because the sign-in
+#     prompt was the only action offered;
+#   - the picker de-duplicated on base model id globally, and this product's
+#     hosted catalogue names its models after the vendors' real ids, so an
+#     author's own DeepSeek key was hidden behind the hosted DeepSeek entry.
+#     The collision is specific to us — upstream's hosted ids never match a
+#     BYOK id — which is also why upstream will never fix it.
+#
+# The cost is real and now measured rather than predicted: moving 1.129.1 ->
+# 1.134.0, five of our hunks in this file came back BROKEN or GONE, in a single
+# five-release window. Expect to re-derive this file at every anchor move, and
+# reconsider the exception the first time the re-derivation is not obvious.
+FORBIDDEN_EXCEPTIONS=(
+  "src/vs/workbench/contrib/chat/browser/widget/input/chatModelPicker.ts"
+)
+
 changed="$(git diff --name-only "$ANCHOR" -- . ; git ls-files --others --exclude-standard)"
 changed="$(printf '%s\n' "$changed" | sed '/^$/d' | sort -u)"
 
@@ -201,6 +225,13 @@ while IFS= read -r f; do
   [[ -z "$f" ]] && continue
 
   hit_forbidden=0
+  for e in "${FORBIDDEN_EXCEPTIONS[@]}"; do
+    [[ "$f" == "$e" ]] && { hit_forbidden=2; break; }
+  done
+  if [[ $hit_forbidden -eq 2 ]]; then
+    allowed+=("$f")
+    continue
+  fi
   for d in "${FORBIDDEN_DIRS[@]}"; do
     if [[ "$f" == "$d"* ]]; then
       forbidden+=("$f")

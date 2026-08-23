@@ -1,21 +1,21 @@
 {
 	"anchor": "1.129.1",
 	"anchorCommit": "8a7abeba6e03ea3af87bfbce9a1b7e48fed567b8",
-	"generated": "2026-08-22T17:06:20.375Z",
+	"generated": "2026-08-23T14:39:24.425Z",
 	"seams": [
 		{
 			"path": "README.md",
-			"header": "-1,4 +1",
+			"header": "-1,4 +1,2",
 			"kind": "replace",
 			"preImage": "# Visual Studio Code - Open Source (\"Code - OSS\")\n[![Feature Requests](https://img.shields.io/github/issues/microsoft/vscode/feature-request.svg)](https://github.com/microsoft/vscode/issues?q=is%3Aopen+is%3Aissue+label%3Afeature-request+sort%3Areactions-%2B1-desc)\n[![Bugs](https://img.shields.io/github/issues/microsoft/vscode/bug.svg)](https://github.com/microsoft/vscode/issues?utf8=✓&q=is%3Aissue+is%3Aopen+label%3Abug)\n[![Gitter](https://img.shields.io/badge/chat-on%20gitter-yellow.svg)](https://gitter.im/Microsoft/vscode)",
 			"preImageSha": "8fc96a2a71443dc2",
 			"occurrences": 1,
-			"postImage": "# VS Novel",
-			"postImageSha": "33477d472c60e7b2"
+			"postImage": "<!-- NOVEL-BUILDER: replaced wholesale. Nothing of upstream's readme remains. -->\n# VS Novel",
+			"postImageSha": "8d7d15e35585004f"
 		},
 		{
 			"path": "README.md",
-			"header": "-6 +3",
+			"header": "-6 +4",
 			"kind": "replace",
 			"preImage": "## The Repository",
 			"preImageSha": "d4bb5ad2f993228c",
@@ -25,7 +25,7 @@
 		},
 		{
 			"path": "README.md",
-			"header": "-8 +5,4",
+			"header": "-8 +6,4",
 			"kind": "replace",
 			"preImage": "This repository (\"`Code - OSS`\") is where we (Microsoft) develop the [Visual Studio Code](https://code.visualstudio.com) product together with the community. Not only do we work on code and issues here, but we also publish our [roadmap](https://github.com/microsoft/vscode/wiki/Roadmap), [monthly iteration plans](https://github.com/microsoft/vscode/wiki/Iteration-Plans), and our [endgame plans](https://github.com/microsoft/vscode/wiki/Running-the-Endgame). This source code is available to everyone under the standard [MIT license](https://github.com/microsoft/vscode/blob/main/LICENSE.txt).",
 			"preImageSha": "c7dc0c99d04667e5",
@@ -35,7 +35,7 @@
 		},
 		{
 			"path": "README.md",
-			"header": "-10 +10,4",
+			"header": "-10 +11,4",
 			"kind": "replace",
 			"preImage": "## Visual Studio Code",
 			"preImageSha": "9c413f05759cac34",
@@ -45,7 +45,7 @@
 		},
 		{
 			"path": "README.md",
-			"header": "-12,3 +15,2",
+			"header": "-12,3 +16,2",
 			"kind": "replace",
 			"preImage": "<p align=\"center\">\n  <img alt=\"VS Code in action\" src=\"https://github.com/user-attachments/assets/56af271c-949d-454c-a3ea-16188c063414\">\n</p>",
 			"preImageSha": "2f58115141d210af",
@@ -55,7 +55,7 @@
 		},
 		{
 			"path": "README.md",
-			"header": "-16 +18",
+			"header": "-16 +19",
 			"kind": "replace",
 			"preImage": "[Visual Studio Code](https://code.visualstudio.com) is a distribution of the `Code - OSS` repository with Microsoft-specific customizations released under a traditional [Microsoft product license](https://code.visualstudio.com/License/).",
 			"preImageSha": "03b25d64dbd134f5",
@@ -65,7 +65,7 @@
 		},
 		{
 			"path": "README.md",
-			"header": "-18 +20,4",
+			"header": "-18 +21,4",
 			"kind": "replace",
 			"preImage": "[Visual Studio Code](https://code.visualstudio.com) combines the simplicity of a code editor with what developers need for their core edit-build-debug cycle. It provides comprehensive code editing, navigation, and understanding support along with lightweight debugging, a rich extensibility model, and lightweight integration with existing tools.",
 			"preImageSha": "440066ab83f67c76",
@@ -75,7 +75,7 @@
 		},
 		{
 			"path": "README.md",
-			"header": "-20 +25",
+			"header": "-20 +26",
 			"kind": "replace",
 			"preImage": "Visual Studio Code is updated monthly with new features and bug fixes. You can download it for Windows, macOS, and Linux on [Visual Studio Code's website](https://code.visualstudio.com/Download). To get the latest releases every day, install the [Insiders build](https://code.visualstudio.com/insiders).",
 			"preImageSha": "2bf3f18767588901",
@@ -85,7 +85,7 @@
 		},
 		{
 			"path": "README.md",
-			"header": "-22 +27,2",
+			"header": "-22 +28,2",
 			"kind": "replace",
 			"preImage": "## Contributing",
 			"preImageSha": "47964f2d9e2f904f",
@@ -95,7 +95,7 @@
 		},
 		{
 			"path": "README.md",
-			"header": "-24 +30,5",
+			"header": "-24 +31,5",
 			"kind": "replace",
 			"preImage": "There are many ways in which you can participate in this project, for example:",
 			"preImageSha": "6ba34c5789c68b6e",
@@ -105,7 +105,7 @@
 		},
 		{
 			"path": "README.md",
-			"header": "-26,3 +36,2",
+			"header": "-26,3 +37,2",
 			"kind": "replace",
 			"preImage": "* [Submit bugs and feature requests](https://github.com/microsoft/vscode/issues), and help us verify as they are checked in\n* Review [source code changes](https://github.com/microsoft/vscode/pulls)\n* Review the [documentation](https://github.com/microsoft/vscode-docs) and make pull requests for anything from typos to new content.",
 			"preImageSha": "b9872ca19eaf0351",
@@ -115,7 +115,7 @@
 		},
 		{
 			"path": "README.md",
-			"header": "-30,2 +39",
+			"header": "-30,2 +40",
 			"kind": "replace",
 			"preImage": "If you are interested in fixing issues and contributing directly to the code base,\nplease see the document [How to Contribute](https://github.com/microsoft/vscode/wiki/How-to-Contribute), which covers the following:",
 			"preImageSha": "cdd6e2ccf394cd82",
@@ -125,7 +125,7 @@
 		},
 		{
 			"path": "README.md",
-			"header": "-33,40 +41,4",
+			"header": "-33,40 +42,4",
 			"kind": "replace",
 			"preImage": "* [How to build and run from source](https://github.com/microsoft/vscode/wiki/How-to-Contribute)\n* [The development workflow, including debugging and running tests](https://github.com/microsoft/vscode/wiki/How-to-Contribute#debugging)\n* [Coding guidelines](https://github.com/microsoft/vscode/wiki/Coding-Guidelines)\n* [Submitting pull requests](https://github.com/microsoft/vscode/wiki/How-to-Contribute#pull-requests)\n* [Finding an issue to work on](https://github.com/microsoft/vscode/wiki/How-to-Contribute#where-to-contribute)\n* [Contributing to translations](https://aka.ms/vscodeloc)\n\n## Feedback\n\n* Ask a question on [Stack Overflow](https://stackoverflow.com/questions/tagged/vscode)\n* [Request a new feature](CONTRIBUTING.md)\n* Upvote [popular feature requests](https://github.com/microsoft/vscode/issues?q=is%3Aopen+is%3Aissue+label%3Afeature-request+sort%3Areactions-%2B1-desc)\n* [File an issue](https://github.com/microsoft/vscode/issues)\n* Connect with the extension author community on [GitHub Discussions](https://github.com/microsoft/vscode-discussions/discussions) or [Slack](https://aka.ms/vscode-dev-community)\n* Follow [@code](https://x.com/code) and let us know what you think!\n\nSee our [wiki](https://github.com/microsoft/vscode/wiki/Feedback-Channels) for a description of each of these channels and information on some other available community-driven channels.\n\n## Related Projects\n\nMany of the core components and extensions to VS Code live in their own repositories on GitHub. For example, the [node debug adapter](https://github.com/microsoft/vscode-node-debug) and the [mono debug adapter](https://github.com/microsoft/vscode-mono-debug) repositories are separate from each other. For a complete list, please visit the [Related Projects](https://github.com/microsoft/vscode/wiki/Related-Projects) page on our [wiki](https://github.com/microsoft/vscode/wiki).\n\n## Bundled Extensions\n\nVS Code includes a set of built-in extensions located in the [extensions](extensions) folder, including grammars and snippets for many languages. Extensions that provide rich language support (inline suggestions, Go to Definition) for a language have the suffix `language-features`. For example, the `json` extension provides coloring for `JSON` and the `json-language-features` extension provides rich language support for `JSON`.\n\n## Development Container\n\nThis repository includes a Visual Studio Code Dev Containers / GitHub Codespaces development container.\n\n* For [Dev Containers](https://aka.ms/vscode-remote/download/containers), use the **Dev Containers: Clone Repository in Container Volume...** command which creates a Docker volume for better disk I/O on macOS and Windows.\n  * If you already have VS Code and Docker installed, you can also click [here](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/microsoft/vscode) to get started. This will cause VS Code to automatically install the Dev Containers extension if needed, clone the source code into a container volume, and spin up a dev container for use.\n\n* For Codespaces, install the [GitHub Codespaces](https://marketplace.visualstudio.com/items?itemName=GitHub.codespaces) extension in VS Code, and use the **Codespaces: Create New Codespace** command.\n\nDocker / the Codespace should have at least **4 cores and 6 GB of RAM (8 GB recommended)** to run a full build. See the [development container README](.devcontainer/README.md) for more information.\n\n## Code of Conduct\n\nThis project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.",
 			"preImageSha": "c4908d482d11f7c0",
@@ -135,7 +135,7 @@
 		},
 		{
 			"path": "README.md",
-			"header": "-76,3 +48,4",
+			"header": "-76,3 +49,4",
 			"kind": "replace",
 			"preImage": "Copyright (c) Microsoft Corporation. All rights reserved.\n\nLicensed under the [MIT](LICENSE.txt) license.",
 			"preImageSha": "cae7b733fe767baf",
@@ -205,27 +205,27 @@
 		},
 		{
 			"path": "build/lib/electron.ts",
-			"header": "-145,2 +145,2",
+			"header": "-145,2 +145,4",
 			"kind": "replace",
 			"preImage": "\tcompanyName: 'Microsoft Corporation',\n\tcopyright: 'Copyright (C) 2026 Microsoft. All rights reserved',",
 			"preImageSha": "ec9dca6614c9fe7c",
 			"occurrences": 1,
-			"postImage": "\tcompanyName: 'Felix Chaos',\n\tcopyright: 'Copyright (C) 2026 Felix Chaos. Portions Copyright (C) Microsoft Corporation.',",
-			"postImageSha": "440098c62a587e0c"
+			"postImage": "\t// NOVEL-BUILDER: with the rcedit block in gulpfile.vscode.ts, these two are\n\t// what Windows shows under Properties > Details. Both named Microsoft.\n\tcompanyName: 'Felix Chaos',\n\tcopyright: 'Copyright (C) 2026 Felix Chaos. Portions Copyright (C) Microsoft Corporation.',",
+			"postImageSha": "39bed6b582addd82"
 		},
 		{
 			"path": "build/win32/code.iss",
-			"header": "-11,4 +11,4",
+			"header": "-11,4 +11,9",
 			"kind": "replace",
 			"preImage": "AppPublisher=Microsoft Corporation\nAppPublisherURL=https://code.visualstudio.com/\nAppSupportURL=https://code.visualstudio.com/\nAppUpdatesURL=https://code.visualstudio.com/",
 			"preImageSha": "b7548111bb51ef44",
 			"occurrences": 1,
-			"postImage": "AppPublisher=Felix Chaos\nAppPublisherURL=https://github.com/felixchaos/vsnovel\nAppSupportURL=https://github.com/felixchaos/vsnovel\nAppUpdatesURL=https://github.com/felixchaos/vsnovel",
-			"postImageSha": "a94f96689907fcdd"
+			"postImage": "; NOVEL-BUILDER: publisher, the three support URLs and the output filename.\n; product.json cannot reach any of them — Inno reads them from here — so an\n; installer for this product announced Microsoft and linked to VS Code's site.\n; The publisher string matches the macOS code-signing identity, so it will\n; agree with Authenticode once a Windows certificate exists.\nAppPublisher=Felix Chaos\nAppPublisherURL=https://github.com/felixchaos/vsnovel\nAppSupportURL=https://github.com/felixchaos/vsnovel\nAppUpdatesURL=https://github.com/felixchaos/vsnovel",
+			"postImageSha": "b246c551da105ede"
 		},
 		{
 			"path": "build/win32/code.iss",
-			"header": "-18 +18",
+			"header": "-18 +23",
 			"kind": "replace",
 			"preImage": "OutputBaseFilename=VSCodeSetup",
 			"preImageSha": "eea7c3088af51f8d",
@@ -235,143 +235,143 @@
 		},
 		{
 			"path": "build/win32/code.iss",
-			"header": "-1336 +1336",
+			"header": "-1336 +1341,2",
 			"kind": "replace",
 			"preImage": "      if MsgBox('This User Installer is not meant to be run as an Administrator. If you would like to install VS Code for all users in this system, download the System Installer instead from https://code.visualstudio.com. Are you sure you want to continue?', mbError, MB_OKCANCEL) = IDCANCEL then begin",
 			"preImageSha": "17c1ee5fb255dfd8",
 			"occurrences": 1,
-			"postImage": "      if MsgBox('This User Installer is not meant to be run as an Administrator. If you would like to install VS Novel for all users in this system, download the System Installer instead from https://github.com/felixchaos/vsnovel. Are you sure you want to continue?', mbError, MB_OKCANCEL) = IDCANCEL then begin",
-			"postImageSha": "85405a6ac712fefd"
+			"postImage": "      // NOVEL-BUILDER: product name and download location in the message body.\n      if MsgBox('This User Installer is not meant to be run as an Administrator. If you would like to install VS Novel for all users in this system, download the System Installer instead from https://github.com/felixchaos/vsnovel. Are you sure you want to continue?', mbError, MB_OKCANCEL) = IDCANCEL then begin",
+			"postImageSha": "3e6d6a7b45435906"
 		},
 		{
 			"path": "build/win32/i18n/messages.de.isl",
-			"header": "-10 +10",
+			"header": "-10 +10,3",
 			"kind": "replace",
 			"preImage": "UpdatingVisualStudioCode=Visual Studio Code wird aktualisiert...",
 			"preImageSha": "8fd7b3532f8c5733",
 			"occurrences": 1,
-			"postImage": "UpdatingVisualStudioCode=VS Novel wird aktualisiert...",
-			"postImageSha": "20ff4fac476ffcf8"
+			"postImage": "; NOVEL-BUILDER: product name only. The key is inno_updater.exe's\n; lookup name and must not change; the surrounding language is upstream's.\nUpdatingVisualStudioCode=VS Novel wird aktualisiert...",
+			"postImageSha": "2b2c0b04cdbd1b02"
 		},
 		{
 			"path": "build/win32/i18n/messages.en.isl",
-			"header": "-17 +17",
+			"header": "-17 +17,3",
 			"kind": "replace",
 			"preImage": "UpdatingVisualStudioCode=Updating Visual Studio Code...",
 			"preImageSha": "2dd3ca1234fe4a4b",
 			"occurrences": 1,
-			"postImage": "UpdatingVisualStudioCode=Updating VS Novel...",
-			"postImageSha": "55e7b4960b55c4a2"
+			"postImage": "; NOVEL-BUILDER: product name only. The key is inno_updater.exe's\n; lookup name and must not change; the surrounding language is upstream's.\nUpdatingVisualStudioCode=Updating VS Novel...",
+			"postImageSha": "7c7fb43625d0049b"
 		},
 		{
 			"path": "build/win32/i18n/messages.es.isl",
-			"header": "-10 +10",
+			"header": "-10 +10,3",
 			"kind": "replace",
 			"preImage": "UpdatingVisualStudioCode=Actualizando Visual Studio Code...",
 			"preImageSha": "5bb6aed0424baf9f",
 			"occurrences": 1,
-			"postImage": "UpdatingVisualStudioCode=Actualizando VS Novel...",
-			"postImageSha": "3a1192b5da347aeb"
+			"postImage": "; NOVEL-BUILDER: product name only. The key is inno_updater.exe's\n; lookup name and must not change; the surrounding language is upstream's.\nUpdatingVisualStudioCode=Actualizando VS Novel...",
+			"postImageSha": "f2ab370d162c8953"
 		},
 		{
 			"path": "build/win32/i18n/messages.fr.isl",
-			"header": "-10 +10",
+			"header": "-10 +10,3",
 			"kind": "replace",
 			"preImage": "UpdatingVisualStudioCode=Mise à jour de Visual Studio Code...",
 			"preImageSha": "c85d57a6e7abca4c",
 			"occurrences": 1,
-			"postImage": "UpdatingVisualStudioCode=Mise à jour de VS Novel...",
-			"postImageSha": "c902d18780bb076d"
+			"postImage": "; NOVEL-BUILDER: product name only. The key is inno_updater.exe's\n; lookup name and must not change; the surrounding language is upstream's.\nUpdatingVisualStudioCode=Mise à jour de VS Novel...",
+			"postImageSha": "4a0f4019503aabc7"
 		},
 		{
 			"path": "build/win32/i18n/messages.hu.isl",
-			"header": "-10 +10",
+			"header": "-10 +10,3",
 			"kind": "replace",
 			"preImage": "UpdatingVisualStudioCode=A Visual Studio Code frissítése...",
 			"preImageSha": "f99a25bca8aa39df",
 			"occurrences": 1,
-			"postImage": "UpdatingVisualStudioCode=A VS Novel frissítése...",
-			"postImageSha": "d72da69a19632790"
+			"postImage": "; NOVEL-BUILDER: product name only. The key is inno_updater.exe's\n; lookup name and must not change; the surrounding language is upstream's.\nUpdatingVisualStudioCode=A VS Novel frissítése...",
+			"postImageSha": "b4bcc5ebe3ff90fa"
 		},
 		{
 			"path": "build/win32/i18n/messages.it.isl",
-			"header": "-10 +10",
+			"header": "-10 +10,3",
 			"kind": "replace",
 			"preImage": "UpdatingVisualStudioCode=Aggiornamento di Visual Studio Code...",
 			"preImageSha": "962ab6dd99e01108",
 			"occurrences": 1,
-			"postImage": "UpdatingVisualStudioCode=Aggiornamento di VS Novel...",
-			"postImageSha": "987c661b05c7c023"
+			"postImage": "; NOVEL-BUILDER: product name only. The key is inno_updater.exe's\n; lookup name and must not change; the surrounding language is upstream's.\nUpdatingVisualStudioCode=Aggiornamento di VS Novel...",
+			"postImageSha": "6cd9cedf777fa41f"
 		},
 		{
 			"path": "build/win32/i18n/messages.ja.isl",
-			"header": "-10 +10",
+			"header": "-10 +10,3",
 			"kind": "replace",
 			"preImage": "UpdatingVisualStudioCode=Visual Studio Code を更新しています...",
 			"preImageSha": "028490d9fadc00a0",
 			"occurrences": 1,
-			"postImage": "UpdatingVisualStudioCode=VS Novel を更新しています...",
-			"postImageSha": "1b81d4264cd196f7"
+			"postImage": "; NOVEL-BUILDER: product name only. The key is inno_updater.exe's\n; lookup name and must not change; the surrounding language is upstream's.\nUpdatingVisualStudioCode=VS Novel を更新しています...",
+			"postImageSha": "9251b19ad8eb6a6a"
 		},
 		{
 			"path": "build/win32/i18n/messages.ko.isl",
-			"header": "-10 +10",
+			"header": "-10 +10,3",
 			"kind": "replace",
 			"preImage": "UpdatingVisualStudioCode=Visual Studio Code 업데이트 중...",
 			"preImageSha": "91cd3d350943af79",
 			"occurrences": 1,
-			"postImage": "UpdatingVisualStudioCode=VS Novel 업데이트 중...",
-			"postImageSha": "4f6138aeed415509"
+			"postImage": "; NOVEL-BUILDER: product name only. The key is inno_updater.exe's\n; lookup name and must not change; the surrounding language is upstream's.\nUpdatingVisualStudioCode=VS Novel 업데이트 중...",
+			"postImageSha": "811ef84f7e62f75f"
 		},
 		{
 			"path": "build/win32/i18n/messages.pt-br.isl",
-			"header": "-10 +10",
+			"header": "-10 +10,3",
 			"kind": "replace",
 			"preImage": "UpdatingVisualStudioCode=Atualizando o Visual Studio Code...",
 			"preImageSha": "9871f7980c5c0edb",
 			"occurrences": 1,
-			"postImage": "UpdatingVisualStudioCode=Atualizando o VS Novel...",
-			"postImageSha": "a1c5027f37a1434c"
+			"postImage": "; NOVEL-BUILDER: product name only. The key is inno_updater.exe's\n; lookup name and must not change; the surrounding language is upstream's.\nUpdatingVisualStudioCode=Atualizando o VS Novel...",
+			"postImageSha": "9dda35bf361c7066"
 		},
 		{
 			"path": "build/win32/i18n/messages.ru.isl",
-			"header": "-10 +10",
+			"header": "-10 +10,3",
 			"kind": "replace",
 			"preImage": "UpdatingVisualStudioCode=Обновление Visual Studio Code...",
 			"preImageSha": "86025accf6784dd0",
 			"occurrences": 1,
-			"postImage": "UpdatingVisualStudioCode=Обновление VS Novel...",
-			"postImageSha": "8b1b040475f0a9fb"
+			"postImage": "; NOVEL-BUILDER: product name only. The key is inno_updater.exe's\n; lookup name and must not change; the surrounding language is upstream's.\nUpdatingVisualStudioCode=Обновление VS Novel...",
+			"postImageSha": "2b46c31dff14c3fd"
 		},
 		{
 			"path": "build/win32/i18n/messages.tr.isl",
-			"header": "-10 +10",
+			"header": "-10 +10,3",
 			"kind": "replace",
 			"preImage": "UpdatingVisualStudioCode=Visual Studio Code güncelleniyor...",
 			"preImageSha": "977eb8244b4fd4c0",
 			"occurrences": 1,
-			"postImage": "UpdatingVisualStudioCode=VS Novel güncelleniyor...",
-			"postImageSha": "a1718610672a0562"
+			"postImage": "; NOVEL-BUILDER: product name only. The key is inno_updater.exe's\n; lookup name and must not change; the surrounding language is upstream's.\nUpdatingVisualStudioCode=VS Novel güncelleniyor...",
+			"postImageSha": "c61714328936578f"
 		},
 		{
 			"path": "build/win32/i18n/messages.zh-cn.isl",
-			"header": "-10 +10",
+			"header": "-10 +10,3",
 			"kind": "replace",
 			"preImage": "UpdatingVisualStudioCode=正在更新 Visual Studio Code...",
 			"preImageSha": "e86e2f4b05104db4",
 			"occurrences": 1,
-			"postImage": "UpdatingVisualStudioCode=正在更新 VS Novel...",
-			"postImageSha": "23946689f41bab5d"
+			"postImage": "; NOVEL-BUILDER: product name only. The key is inno_updater.exe's\n; lookup name and must not change; the surrounding language is upstream's.\nUpdatingVisualStudioCode=正在更新 VS Novel...",
+			"postImageSha": "ab5492de07718599"
 		},
 		{
 			"path": "build/win32/i18n/messages.zh-tw.isl",
-			"header": "-10 +10",
+			"header": "-10 +10,3",
 			"kind": "replace",
 			"preImage": "UpdatingVisualStudioCode=正在更新 Visual Studio Code...",
 			"preImageSha": "e86e2f4b05104db4",
 			"occurrences": 1,
-			"postImage": "UpdatingVisualStudioCode=正在更新 VS Novel...",
-			"postImageSha": "23946689f41bab5d"
+			"postImage": "; NOVEL-BUILDER: product name only. The key is inno_updater.exe's\n; lookup name and must not change; the surrounding language is upstream's.\nUpdatingVisualStudioCode=正在更新 VS Novel...",
+			"postImageSha": "ab5492de07718599"
 		},
 		{
 			"path": "extensions/copilot/.esbuild.mts",
@@ -482,6 +482,26 @@
 			"occurrences": 1,
 			"postImage": "\t\t// NOVEL-BUILDER: the open-weight vendors this product's authors actually\n\t\t// hold keys for. Without them the only route to a DeepSeek or Kimi key is\n\t\t// Custom Endpoint, whose form asks a novelist for maxInputTokens and\n\t\t// toolCalling per model — unanswerable, and every wrong answer fails in\n\t\t// its own unreadable way. These contribute a catalogue instead, so the\n\t\t// key is the whole configuration.\n\t\tfor (const Provider of NOVEL_BYOK_PROVIDERS) {\n\t\t\tthis._providers.set(Provider.providerId, instantiationService.createInstance(Provider, this._byokStorageService));\n\t\t}",
 			"postImageSha": "5017ce6f9acfda36"
+		},
+		{
+			"path": "extensions/copilot/src/extension/byok/vscode-node/xAIProvider.ts",
+			"header": "-12,0 +13",
+			"kind": "insert",
+			"preImage": "import { BYOKKnownModels, BYOKModelCapabilities } from '../common/byokProvider';\nimport { AbstractOpenAICompatibleLMProvider } from './abstractLanguageModelChatProvider';\nimport { IBYOKStorageService } from './byokStorageService';",
+			"preImageSha": "5238f5ffbf440f59",
+			"occurrences": 1,
+			"postImage": "import { GROK_MODELS } from '../../../novel/byok/relayCatalog';",
+			"postImageSha": "85afb498c2bda746"
+		},
+		{
+			"path": "extensions/copilot/src/extension/byok/vscode-node/xAIProvider.ts",
+			"header": "-68,0 +70,22",
+			"kind": "insert",
+			"preImage": "\n\tprotected override resolveModelCapabilities(modelData: unknown): BYOKModelCapabilities | undefined {\n\t\tconst xaiModelData = modelData as XAIModelData;",
+			"preImageSha": "6ae2b17d4409bef1",
+			"occurrences": 1,
+			"postImage": "\n\t\t// NOVEL-BUILDER: prefer the window xAI publishes over the guess below.\n\t\t//\n\t\t// The branch that follows gives every Grok 4 and later 120K in and 120K\n\t\t// out. xAI's own model list has grok-4.5 and 4.6 at 500K and the 4.3 and\n\t\t// 4.20 builds at 1M, so an author with their own key was being handed a\n\t\t// quarter of what they pay for — and silently, because a context window\n\t\t// that is too small never errors, it just truncates what gets sent.\n\t\t//\n\t\t// The table is shared with the relay vendor rather than copied, so the\n\t\t// figures cannot drift apart. `vision` still comes from the API response:\n\t\t// that is per-model truth from xAI itself, better than anything recorded\n\t\t// here.\n\t\tconst documented = GROK_MODELS[xaiModelData.id.toLowerCase()];\n\t\tif (documented) {\n\t\t\treturn {\n\t\t\t\t...documented,\n\t\t\t\tname: this.humanizeXAIModelId(xaiModelData.id),\n\t\t\t\tvision: xaiModelData.input_modalities.includes('image'),\n\t\t\t};\n\t\t}",
+			"postImageSha": "2ffa3da7ff8a68ef"
 		},
 		{
 			"path": "extensions/copilot/src/extension/completions-core/vscode-node/lib/src/config.ts",
@@ -765,17 +785,17 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompt/node/test/chatMLFetcherRetry.spec.ts",
-			"header": "-105,0 +106,46",
+			"header": "-105,0 +106,48",
 			"kind": "insert",
 			"preImage": "\t\t};\n\t}",
 			"preImageSha": "61cae277a947b368",
 			"occurrences": 1,
-			"postImage": "\tdescribe('finish reasons with no branch of their own', () => {\n\t\t/** Drives one request through a stub that reports the given completion. */\n\t\tasync function fetchWith(finishReason: string, text: string) {\n\t\t\tendpoint = createMockEndpoint({ finishReason, text });\n\t\t\tmockFetcherService.queueResponse(createSuccessResponse('ignored'));\n\t\t\treturn fetcher.fetchMany(createBaseOpts(), cancellationTokenSource.token);\n\t\t}\n\n\t\tit('keeps the text when the stream ended without a finish_reason', async () => {\n\t\t\t// `ClientDone` is what the SSE processor reports when `[DONE]` arrives\n\t\t\t// and no per-choice finish_reason ever did (stream.ts:661). The author\n\t\t\t// watches the answer stream in, then watches it be replaced by\n\t\t\t// \"Response contained no choices.\" and a stack trace, while the words\n\t\t\t// sit unused in the completion. Throwing them away is never the right\n\t\t\t// answer to a missing field.\n\t\t\tconst result = await fetchWith('DONE', '半夜的雨停了。');\n\t\t\texpect(result.type).toBe(ChatFetchResponseType.Success);\n\t\t\texpect(result.type === ChatFetchResponseType.Success && result.value).toEqual(['半夜的雨停了。']);\n\t\t});\n\n\t\tit('keeps the text when the stream ended without even [DONE]', async () => {\n\t\t\t// `ClientIterationDone`, stream.ts:610.\n\t\t\tconst result = await fetchWith('Iteration Done', '雨停了。');\n\t\t\texpect(result.type).toBe(ChatFetchResponseType.Success);\n\t\t\texpect(result.type === ChatFetchResponseType.Success && result.value).toEqual(['雨停了。']);\n\t\t});\n\n\t\tit('keeps the text on a finish_reason this client has no case for', async () => {\n\t\t\t// The union in stream.ts is a type annotation, not a check: the string\n\t\t\t// is passed through unchanged, so any vendor-specific reason lands on\n\t\t\t// the same unhandled path.\n\t\t\tconst result = await fetchWith('insufficient_system_resource', '风停了。');\n\t\t\texpect(result.type).toBe(ChatFetchResponseType.Success);\n\t\t\texpect(result.type === ChatFetchResponseType.Success && result.value).toEqual(['风停了。']);\n\t\t});\n\n\t\tit('still reports, unchanged, when there is genuinely nothing to return', async () => {\n\t\t\t// xtab compares `reason` to RESPONSE_CONTAINED_NO_CHOICES by equality to\n\t\t\t// detect \"the model had no edits to suggest\", so the empty case has to\n\t\t\t// keep both its type and its exact wording.\n\t\t\tconst result = await fetchWith('DONE', '');\n\t\t\texpect(result.type).toBe(ChatFetchResponseType.Unknown);\n\t\t\texpect(result.type === ChatFetchResponseType.Unknown && result.reason).toBe(RESPONSE_CONTAINED_NO_CHOICES);\n\t\t});\n\t});",
-			"postImageSha": "370fc9ff5d113a88"
+			"postImage": "\t// NOVEL-BUILDER: this block, plus the optional argument on createMockEndpoint\n\t// that lets a test name the finish reason it wants.\n\tdescribe('finish reasons with no branch of their own', () => {\n\t\t/** Drives one request through a stub that reports the given completion. */\n\t\tasync function fetchWith(finishReason: string, text: string) {\n\t\t\tendpoint = createMockEndpoint({ finishReason, text });\n\t\t\tmockFetcherService.queueResponse(createSuccessResponse('ignored'));\n\t\t\treturn fetcher.fetchMany(createBaseOpts(), cancellationTokenSource.token);\n\t\t}\n\n\t\tit('keeps the text when the stream ended without a finish_reason', async () => {\n\t\t\t// `ClientDone` is what the SSE processor reports when `[DONE]` arrives\n\t\t\t// and no per-choice finish_reason ever did (stream.ts:661). The author\n\t\t\t// watches the answer stream in, then watches it be replaced by\n\t\t\t// \"Response contained no choices.\" and a stack trace, while the words\n\t\t\t// sit unused in the completion. Throwing them away is never the right\n\t\t\t// answer to a missing field.\n\t\t\tconst result = await fetchWith('DONE', '半夜的雨停了。');\n\t\t\texpect(result.type).toBe(ChatFetchResponseType.Success);\n\t\t\texpect(result.type === ChatFetchResponseType.Success && result.value).toEqual(['半夜的雨停了。']);\n\t\t});\n\n\t\tit('keeps the text when the stream ended without even [DONE]', async () => {\n\t\t\t// `ClientIterationDone`, stream.ts:610.\n\t\t\tconst result = await fetchWith('Iteration Done', '雨停了。');\n\t\t\texpect(result.type).toBe(ChatFetchResponseType.Success);\n\t\t\texpect(result.type === ChatFetchResponseType.Success && result.value).toEqual(['雨停了。']);\n\t\t});\n\n\t\tit('keeps the text on a finish_reason this client has no case for', async () => {\n\t\t\t// The union in stream.ts is a type annotation, not a check: the string\n\t\t\t// is passed through unchanged, so any vendor-specific reason lands on\n\t\t\t// the same unhandled path.\n\t\t\tconst result = await fetchWith('insufficient_system_resource', '风停了。');\n\t\t\texpect(result.type).toBe(ChatFetchResponseType.Success);\n\t\t\texpect(result.type === ChatFetchResponseType.Success && result.value).toEqual(['风停了。']);\n\t\t});\n\n\t\tit('still reports, unchanged, when there is genuinely nothing to return', async () => {\n\t\t\t// xtab compares `reason` to RESPONSE_CONTAINED_NO_CHOICES by equality to\n\t\t\t// detect \"the model had no edits to suggest\", so the empty case has to\n\t\t\t// keep both its type and its exact wording.\n\t\t\tconst result = await fetchWith('DONE', '');\n\t\t\texpect(result.type).toBe(ChatFetchResponseType.Unknown);\n\t\t\texpect(result.type === ChatFetchResponseType.Unknown && result.reason).toBe(RESPONSE_CONTAINED_NO_CHOICES);\n\t\t});\n\t});",
+			"postImageSha": "95cbcaf785115bc4"
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompt/node/test/chatMLFetcherRetry.spec.ts",
-			"header": "-476 +522,7",
+			"header": "-476 +524,7",
 			"kind": "replace",
 			"preImage": "function createMockEndpoint(): IChatEndpoint {",
 			"preImageSha": "aa91c10ca1c3ae0d",
@@ -785,7 +805,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompt/node/test/chatMLFetcherRetry.spec.ts",
-			"header": "-503 +555",
+			"header": "-503 +557",
 			"kind": "replace",
 			"preImage": "\t\t\tconst text = await response.text();",
 			"preImageSha": "6bd7b2729387c6ec",
@@ -795,7 +815,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompt/node/test/chatMLFetcherRetry.spec.ts",
-			"header": "-525 +577",
+			"header": "-525 +579",
 			"kind": "replace",
 			"preImage": "\t\t\t\t\t\tfinishReason: 'stop',",
 			"preImageSha": "5df05abd3d4c9c76",
@@ -4965,17 +4985,17 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/summarizedConversationHistory.tsx",
-			"header": "-54 +54",
+			"header": "-54 +54,7",
 			"kind": "replace",
 			"preImage": "\tYour task is to create a comprehensive, detailed summary of the entire conversation that captures all essential information needed to seamlessly continue the work without any loss of context. This summary will be used to compact the conversation while preserving critical technical details, decisions, and progress.<br />",
 			"preImageSha": "40de3998a14e8f8d",
 			"occurrences": 1,
-			"postImage": "\t\tYour task is to create a comprehensive, detailed summary of the entire writing session that captures all essential information needed to seamlessly continue the manuscript work without any loss of context. This summary will be used to compact the conversation while preserving critical narrative details, creative decisions, and progress on the manuscript.<br />",
-			"postImageSha": "1989cb2eb7b4ded1"
+			"postImage": "\t\t{/* NOVEL-BUILDER: the compaction prompt, rewritten for a manuscript.\n\t\t    Upstream summarises a coding session — tool executions, code\n\t\t    archaeology, technical inventory — and a summary built from those\n\t\t    headings drops exactly what a long book needs carried across a\n\t\t    compaction: who is in the scene, what was promised, what voice the\n\t\t    chapter is in. Structure and step numbering are upstream's. */}\n\t\tYour task is to create a comprehensive, detailed summary of the entire writing session that captures all essential information needed to seamlessly continue the manuscript work without any loss of context. This summary will be used to compact the conversation while preserving critical narrative details, creative decisions, and progress on the manuscript.<br />",
+			"postImageSha": "994447f17acee922"
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/summarizedConversationHistory.tsx",
-			"header": "-58,4 +58,4",
+			"header": "-58,4 +64,4",
 			"kind": "replace",
 			"preImage": "\tPay special attention to the most recent agent commands and tool executions that led to this summarization being triggered. Include:<br />\n\t- **Last Agent Commands**: What specific actions/tools were just executed<br />\n\t- **Tool Results**: Key outcomes from recent tool calls (truncate if very long, but preserve essential information)<br />\n\t- **Immediate State**: What was the system doing right before summarization<br />",
 			"preImageSha": "90834fde7838c3c4",
@@ -4985,7 +5005,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/summarizedConversationHistory.tsx",
-			"header": "-68,4 +68,4",
+			"header": "-68,4 +74,4",
 			"kind": "replace",
 			"preImage": "\t1. **Chronological Review**: Go through the conversation chronologically, identifying key phases and transitions<br />\n\t2. **Intent Mapping**: Extract all explicit and implicit user requests, goals, and expectations<br />\n\t3. **Technical Inventory**: Catalog all technical concepts, tools, frameworks, and architectural decisions<br />\n\t4. **Code Archaeology**: Document all files, functions, and code patterns that were discussed or modified<br />",
 			"preImageSha": "ad41d2869103de6c",
@@ -4995,7 +5015,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/summarizedConversationHistory.tsx",
-			"header": "-74 +74",
+			"header": "-74 +80",
 			"kind": "replace",
 			"preImage": "\t7. **Recent Commands Analysis**: Document the specific agent commands and tool results from the most recent operations<br />",
 			"preImageSha": "4561fef1ca0d4447",
@@ -5005,7 +5025,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/summarizedConversationHistory.tsx",
-			"header": "-81 +81",
+			"header": "-81 +87",
 			"kind": "replace",
 			"preImage": "\t\t[Chronological Review: Walk through conversation phases: initial request → exploration → implementation → debugging → current state]<br />",
 			"preImageSha": "4d9b085edefb1148",
@@ -5015,7 +5035,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/summarizedConversationHistory.tsx",
-			"header": "-83,2 +83,2",
+			"header": "-83,2 +89,2",
 			"kind": "replace",
 			"preImage": "\t\t[Technical Inventory: Catalog all technologies, patterns, and decisions mentioned]<br />\n\t\t[Code Archaeology: Document every file, function, and code change discussed]<br />",
 			"preImageSha": "5cac72f907e79de0",
@@ -5025,7 +5045,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/summarizedConversationHistory.tsx",
-			"header": "-87 +87",
+			"header": "-87 +93",
 			"kind": "replace",
 			"preImage": "\t\t[Recent Commands Analysis: Last agent commands executed, tool results (truncated if long), immediate pre-summarization state]<br />",
 			"preImageSha": "e68b262633ff9422",
@@ -5035,7 +5055,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/summarizedConversationHistory.tsx",
-			"header": "-92,21 +92,28",
+			"header": "-92,21 +98,28",
 			"kind": "replace",
 			"preImage": "\t\t- Primary Objectives: [All explicit user requests and overarching goals with exact quotes]<br />\n\t\t- Session Context: [High-level narrative of conversation flow and key phases]<br />\n\t\t- User Intent Evolution: [How user's needs or direction changed throughout conversation]<br />\n\n\t\t2. Technical Foundation:<br />\n\t\t- [Core Technology 1]: [Version/details and purpose]<br />\n\t\t- [Framework/Library 2]: [Configuration and usage context]<br />\n\t\t- [Architectural Pattern 3]: [Implementation approach and reasoning]<br />\n\t\t- [Environment Detail 4]: [Setup specifics and constraints]<br />\n\n\t\t3. Codebase Status:<br />\n\t\t- [File Name 1]:<br />\n\t\t- Purpose: [Why this file is important to the project]<br />\n\t\t- Current State: [Summary of recent changes or modifications]<br />\n\t\t- Key Code Segments: [Important functions/classes with brief explanations]<br />\n\t\t- Dependencies: [How this relates to other components]<br />\n\t\t- [File Name 2]:<br />\n\t\t- Purpose: [Role in the project]<br />\n\t\t- Current State: [Modification status]<br />\n\t\t- Key Code Segments: [Critical code blocks]<br />\n\t\t- [Additional files as needed]<br />",
 			"preImageSha": "c1495ebe9a5750b3",
@@ -5045,7 +5065,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/summarizedConversationHistory.tsx",
-			"header": "-115,4 +122,8",
+			"header": "-115,4 +128,8",
 			"kind": "replace",
 			"preImage": "\t\t- Issues Encountered: [Technical problems, bugs, or challenges faced]<br />\n\t\t- Solutions Implemented: [How problems were resolved and reasoning]<br />\n\t\t- Debugging Context: [Ongoing troubleshooting efforts or known issues]<br />\n\t\t- Lessons Learned: [Important insights or patterns discovered]<br />",
 			"preImageSha": "c02add24c225a7de",
@@ -5055,7 +5075,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/summarizedConversationHistory.tsx",
-			"header": "-121,3 +132,6",
+			"header": "-121,3 +138,6",
 			"kind": "replace",
 			"preImage": "\t\t- Completed Tasks: [What has been successfully implemented with status indicators]<br />\n\t\t- Partially Complete Work: [Tasks in progress with current completion status]<br />\n\t\t- Validated Outcomes: [Features or code confirmed working through testing]<br />",
 			"preImageSha": "32c26a65fd0b257b",
@@ -5065,7 +5085,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/summarizedConversationHistory.tsx",
-			"header": "-126 +140,2",
+			"header": "-126 +146,2",
 			"kind": "replace",
 			"preImage": "\t\t- Current Focus: [Precisely what was being worked on in most recent messages]<br />",
 			"preImageSha": "ff59bd21e34c94f0",
@@ -5075,7 +5095,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/summarizedConversationHistory.tsx",
-			"header": "-128,2 +143,4",
+			"header": "-128,2 +149,4",
 			"kind": "replace",
 			"preImage": "\t\t- Working Code: [Code snippets being modified or discussed recently]<br />\n\t\t- Immediate Context: [Specific problem or feature being addressed before summary]<br />",
 			"preImageSha": "99fdd769679a4f17",
@@ -5085,7 +5105,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/summarizedConversationHistory.tsx",
-			"header": "-132,4 +149,8",
+			"header": "-132,4 +155,8",
 			"kind": "replace",
 			"preImage": "\t\t- Last Agent Commands: [Specific tools/actions executed just before summarization with exact command names]<br />\n\t\t- Tool Results Summary: [Key outcomes from recent tool executions - truncate long results but keep essential info]<br />\n\t\t- Pre-Summary State: [What the agent was actively doing when token budget was exceeded]<br />\n\t\t- Operation Context: [Why these specific commands were executed and their relationship to user goals]<br />",
 			"preImageSha": "ef7c95a9c2a656d8",
@@ -5095,7 +5115,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/summarizedConversationHistory.tsx",
-			"header": "-138,3 +159,5",
+			"header": "-138,3 +165,5",
 			"kind": "replace",
 			"preImage": "\t\t- [Pending Task 1]: [Details and specific next steps with verbatim quotes]<br />\n\t\t- [Pending Task 2]: [Requirements and continuation context]<br />\n\t\t- [Priority Information]: [Which tasks are most urgent or logically sequential]<br />",
 			"preImageSha": "8ed2699bedf3824b",
@@ -5105,7 +5125,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/summarizedConversationHistory.tsx",
-			"header": "-146,5 +169,7",
+			"header": "-146,5 +175,7",
 			"kind": "replace",
 			"preImage": "\t- **Precision**: Include exact filenames, function names, variable names, and technical terms<br />\n\t- **Completeness**: Capture all context needed to continue without re-reading the full conversation<br />\n\t- **Clarity**: Write for someone who needs to pick up exactly where the conversation left off<br />\n\t- **Verbatim Accuracy**: Use direct quotes for task specifications and recent work context<br />\n\t- **Technical Depth**: Include enough detail for complex technical decisions and code patterns<br />",
 			"preImageSha": "b26066a7e6404926",
@@ -5115,7 +5135,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/summarizedConversationHistory.tsx",
-			"header": "-153 +178,2",
+			"header": "-153 +184,2",
 			"kind": "replace",
 			"preImage": "\tThis summary should serve as a comprehensive handoff document that enables seamless continuation of all active work streams while preserving the full technical and contextual richness of the original conversation.<br />",
 			"preImageSha": "72deed1b39b05a3e",
@@ -5125,7 +5145,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/summarizedConversationHistory.tsx",
-			"header": "-178 +204",
+			"header": "-178 +210",
 			"kind": "replace",
 			"preImage": "\t\t\t\t\tSummarize the conversation history so far, paying special attention to the most recent agent commands and tool results that triggered this summarization. Structure your summary using the enhanced format provided in the system message.<br />",
 			"preImageSha": "e55857186e5e9010",
@@ -5135,7 +5155,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/summarizedConversationHistory.tsx",
-			"header": "-181 +207",
+			"header": "-181 +213",
 			"kind": "replace",
 			"preImage": "\t\t\t\t\t\tIMPORTANT: Do NOT call any tools. Your only task is to generate a text summary of the conversation. Do not attempt to execute any actions or make any tool calls.<br />",
 			"preImageSha": "a24a0634c4148bb9",
@@ -5145,7 +5165,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/summarizedConversationHistory.tsx",
-			"header": "-184,6 +210,10",
+			"header": "-184,6 +216,10",
 			"kind": "replace",
 			"preImage": "\t\t\t\t\t- The specific agent commands/tools that were just executed<br />\n\t\t\t\t\t- The results returned from these recent tool calls (truncate if very long but preserve key information)<br />\n\t\t\t\t\t- What the agent was actively working on when the token budget was exceeded<br />\n\t\t\t\t\t- How these recent operations connect to the overall user goals<br />\n\n\t\t\t\t\tInclude all important tool calls and their results as part of the appropriate sections, with special emphasis on the most recent operations.",
 			"preImageSha": "90e9d558a92e2f74",
@@ -5155,7 +5175,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/summarizedConversationHistory.tsx",
-			"header": "-644 +674",
+			"header": "-644 +680",
 			"kind": "replace",
 			"preImage": "\t\tthis.progress?.report(new ChatResponseProgressPart2(l10n.t('Compacting conversation...'), async () => {",
 			"preImageSha": "400550fc0a344a17",
@@ -5165,7 +5185,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/summarizedConversationHistory.tsx",
-			"header": "-648 +678",
+			"header": "-648 +684",
 			"kind": "replace",
 			"preImage": "\t\t\treturn l10n.t('Compacted conversation');",
 			"preImageSha": "517ee6f1848e6a74",
@@ -5175,7 +5195,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/summarizedConversationHistory.tsx",
-			"header": "-1444,2 +1474,2",
+			"header": "-1444,2 +1480,2",
 			"kind": "replace",
 			"preImage": "\t\treturn <UserMessage priority={1000}>\n\t\t\tThe conversation has grown too large for the context window and must be compacted now.<br />",
 			"preImageSha": "b55b48756e068f59",
@@ -5185,7 +5205,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/summarizedConversationHistory.tsx",
-			"header": "-1450 +1480",
+			"header": "-1450 +1486",
 			"kind": "replace",
 			"preImage": "\t\t\tIMPORTANT: Output your summary wrapped in {'<summary>'} and {'</summary>'} tags. Do NOT call any tools. Your ONLY task right now is to produce a comprehensive summary of the conversation so far.<br />",
 			"preImageSha": "a3244d6fbe3accbf",
@@ -5195,7 +5215,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/summarizedConversationHistory.tsx",
-			"header": "-1453 +1483",
+			"header": "-1453 +1489",
 			"kind": "replace",
 			"preImage": "\t\t\t\tIMPORTANT: Do NOT call any tools. Your only task is to generate a text summary of the conversation. Do not attempt to execute any actions or make any tool calls.<br />",
 			"preImageSha": "dc28ea5c4bd2f728",
@@ -23295,13 +23315,13 @@
 		},
 		{
 			"path": "src/vs/workbench/browser/media/code-icon.svg",
-			"header": "-1 +1,8",
+			"header": "-1 +1,11",
 			"kind": "replace",
 			"preImage": "<svg id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1024 1024\"><style>.st0{fill:#f6f6f6;fill-opacity:0}.st1{fill:#fff}.st2{fill:#167abf}</style><path class=\"st0\" d=\"M1024 1024H0V0h1024v1024z\"/><path class=\"st1\" d=\"M1024 85.333v853.333H0V85.333h1024z\"/><path class=\"st2\" d=\"M0 85.333h298.667v853.333H0V85.333zm1024 0v853.333H384V85.333h640zm-554.667 160h341.333v-64H469.333v64zm341.334 533.334H469.333v64h341.333l.001-64zm128-149.334H597.333v64h341.333l.001-64zm0-149.333H597.333v64h341.333l.001-64zm0-149.333H597.333v64h341.333l.001-64z\"/></svg>",
 			"preImageSha": "d2625274e6d819a0",
 			"occurrences": 1,
-			"postImage": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1024 1024\" width=\"1024\" height=\"1024\">\n  <rect width=\"1024\" height=\"1024\" rx=\"228\" fill=\"#2f6f4f\"/>\n  <g transform=\"translate(512 540) scale(11.4) translate(-28 -26)\" fill=\"none\" stroke=\"#f6f1e4\" stroke-width=\"3.4\" stroke-linejoin=\"round\" stroke-linecap=\"round\">\n    <path d=\"M8 14C8 12 22 9 28 14L28 44C22 39 8 42 8 44Z\"/>\n    <path d=\"M48 14C48 12 34 9 28 14L28 44C34 39 48 42 48 44Z\"/>\n  </g>\n  <path transform=\"translate(512 540) scale(11.4) translate(-28 -26)\" fill=\"#f6f1e4\" d=\"M28 8L34 20L28 18L22 20Z\"/>\n</svg>",
-			"postImageSha": "013fc9547dc0a311"
+			"postImage": "<!-- NOVEL-BUILDER: the mark in the Windows/Linux title bar. macOS uses the\n     native title bar and has no such slot, which is why upstream's blue\n     glyph survived every check run on a Mac. Same viewBox as upstream. -->\n<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1024 1024\" width=\"1024\" height=\"1024\">\n  <rect width=\"1024\" height=\"1024\" rx=\"228\" fill=\"#2f6f4f\"/>\n  <g transform=\"translate(512 540) scale(11.4) translate(-28 -26)\" fill=\"none\" stroke=\"#f6f1e4\" stroke-width=\"3.4\" stroke-linejoin=\"round\" stroke-linecap=\"round\">\n    <path d=\"M8 14C8 12 22 9 28 14L28 44C22 39 8 42 8 44Z\"/>\n    <path d=\"M48 14C48 12 34 9 28 14L28 44C34 39 48 42 48 44Z\"/>\n  </g>\n  <path transform=\"translate(512 540) scale(11.4) translate(-28 -26)\" fill=\"#f6f1e4\" d=\"M28 8L34 20L28 18L22 20Z\"/>\n</svg>",
+			"postImageSha": "14288e2dd5868ed2"
 		},
 		{
 			"path": "src/vs/workbench/contrib/chat/browser/widget/input/chatModelPicker.ts",

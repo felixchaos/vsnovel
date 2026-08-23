@@ -7,6 +7,7 @@ import { isDeepSeekFamily, isKimiFamily, isMinimaxFamily } from '../../../platfo
 import { DEEPSEEK_MODELS, GLM_MODELS, KIMI_MODELS, MINIMAX_MODELS, QWEN_MODELS } from '../catalog';
 import { DeepSeekLMProvider, KimiLMProvider, MiniMaxLMProvider, NOVEL_BYOK_PROVIDERS, QwenLMProvider } from '../providers';
 import { RelayLMProvider } from '../relayProvider';
+import { XAIBYOKLMProvider } from '../../../extension/byok/vscode-node/xAIProvider';
 
 const ALL_CATALOGUES = {
 	DeepSeek: DEEPSEEK_MODELS,
@@ -182,6 +183,31 @@ describe('vendor quirks', () => {
 		const { provider } = createProvider(RelayLMProvider as any);
 		expect((provider as any).getModelsBaseUrl({ url: 'https://ai.example.moe' }))
 			.toBe('https://ai.example.moe/v1');
+	});
+
+	it('gives the direct xAI vendor the same published Grok windows as the relay', () => {
+		// Upstream's own branch hands every Grok 4+ 120K in and 120K out. xAI
+		// documents 500K for 4.6, so an author with their own key was losing three
+		// quarters of it — silently, because a window that is too small truncates
+		// rather than errors. The table is shared with the relay so the two paths
+		// cannot drift apart.
+		const provider = new (XAIBYOKLMProvider as any)(
+			{},
+			{ getAPIKey: vi.fn(), storeAPIKey: vi.fn(), deleteAPIKey: vi.fn() },
+			{ fetch: vi.fn() }, fakeLogService(),
+			{ createInstance: vi.fn().mockReturnValue({}) },
+			{ isConfigured: vi.fn().mockReturnValue(false), getConfig: vi.fn(), setConfig: vi.fn() },
+			{}
+		);
+		const caps = provider.resolveModelCapabilities({ id: 'grok-4.6', input_modalities: ['text', 'image'] });
+		expect(caps.contextWindow).toBe(500_000);
+		expect(caps.vision).toBe(true);
+
+		// An id xAI has not published still falls through to upstream's heuristic
+		// rather than to nothing.
+		const unknown = provider.resolveModelCapabilities({ id: 'grok-9-hypothetical', input_modalities: ['text'] });
+		expect(unknown.maxInputTokens).toBe(120000);
+		expect(unknown.vision).toBe(false);
 	});
 
 	it('keeps tool calling on a relay model nothing has listed yet', () => {

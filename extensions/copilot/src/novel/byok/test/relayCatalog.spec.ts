@@ -84,11 +84,46 @@ describe('relay capabilities', () => {
 	});
 
 	it('does not lend a documented sibling\'s window to a newer point release', () => {
-		// `glm-5.3` is one release past anything measured, and GLM's documented
-		// members span 131K to 1M — there is no family number to inherit. Landing
-		// on the floor wastes budget; inheriting glm-5.2's 1M would produce a 400.
-		expect(GLM_MODELS['glm-5.3']).toBeUndefined();
-		expect(relayModelCapabilities('glm-5.3')?.contextWindow).toBe(128_000);
+		// GLM's documented members span 131K to 1M, so there is no family number a
+		// release nobody has looked up could inherit. Landing on the floor wastes
+		// budget; inheriting glm-5.3's 1M would produce a 400 the author cannot
+		// read. `glm-5.3` itself used to be the example here and is now recorded
+		// from Zhipu's own page — which is the fix for a floor, not an argument
+		// for guessing.
+		expect(GLM_MODELS['glm-5.4']).toBeUndefined();
+		expect(relayModelCapabilities('glm-5.4')?.contextWindow).toBe(128_000);
+	});
+
+	it('uses the published window for glm-5.3, which a relay actually serves', () => {
+		// docs.bigmodel.cn/cn/guide/models/text/glm-5.3, read 2026-08-23: 1M in,
+		// 128K out, no vision, thinking that cannot be switched off.
+		expect(relayModelCapabilities('glm-5.3')).toEqual(GLM_MODELS['glm-5.3']);
+		expect(relayModelCapabilities('glm-5.3')?.contextWindow).toBe(1_000_000);
+		expect(relayModelCapabilities('glm-5.3')?.vision).toBe(false);
+	});
+
+	it('gives Grok the window xAI publishes, not the generic floor', () => {
+		// The floor handed grok-4.6 128K. xAI documents 500K, so an author was
+		// losing three quarters of the context they had paid for, with nothing on
+		// screen to say so. Numbers from docs.x.ai/docs/models, read 2026-08-23.
+		expect(relayModelCapabilities('grok-4.6')?.contextWindow).toBe(500_000);
+		expect(relayModelCapabilities('grok-4.5')?.contextWindow).toBe(500_000);
+		expect(relayModelCapabilities('grok-4.3')?.contextWindow).toBe(1_000_000);
+		expect(relayModelCapabilities('grok-build-0.1')?.contextWindow).toBe(256_000);
+	});
+
+	it('claims reasoning for grok-4.6, which xAI states, and not for the rest', () => {
+		// Its own model page lists Reasoning: Yes. The others were read off the
+		// index page, which gives the window and nothing else — so they keep the
+		// family's assumption rather than borrowing 4.6's.
+		expect(relayModelCapabilities('grok-4.6')?.thinking).toBe(true);
+		expect(relayModelCapabilities('grok-4.5')?.thinking).toBeFalsy();
+	});
+
+	it('floors an unrecognised Grok at the smallest xAI currently documents', () => {
+		// Not the generic 128K: no Grok in xAI's list today is below 256K, so the
+		// floor can only be wrong in the wasteful direction here.
+		expect(relayModelCapabilities('grok-9-hypothetical')?.contextWindow).toBe(256_000);
 	});
 
 	it('hands back a copy, so one relay cannot edit the shared catalogue', () => {
@@ -125,11 +160,14 @@ describe('relay capabilities', () => {
 		// Claiming it changes what this client expects back, and a relay fronting
 		// a model that does not reason turns that into an error the author reads
 		// as "the relay is broken".
-		for (const id of ['gpt-5.6-sol', 'claude-opus-5', 'grok-4.6', 'ox-alpha']) {
+		for (const id of ['gpt-5.6-sol', 'claude-opus-5', 'grok-9-hypothetical', 'ox-alpha']) {
 			expect(relayModelCapabilities(id)?.thinking, id).toBeFalsy();
 		}
-		// Measured ones still carry it.
+		// Sourced ones still carry it. `grok-4.6` is here rather than in the list
+		// above because xAI's own page states Reasoning: Yes for it — the moment a
+		// figure has a source it stops being a guess.
 		expect(relayModelCapabilities('deepseek-v4-pro')?.thinking).toBe(true);
+		expect(relayModelCapabilities('grok-4.6')?.thinking).toBe(true);
 	});
 
 	it('leaves room for output inside every window it assumes', () => {

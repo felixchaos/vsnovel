@@ -10,6 +10,7 @@ import { IInstantiationService } from '../../../util/vs/platform/instantiation/c
 import { BYOKKnownModels, BYOKModelCapabilities } from '../common/byokProvider';
 import { AbstractOpenAICompatibleLMProvider } from './abstractLanguageModelChatProvider';
 import { IBYOKStorageService } from './byokStorageService';
+import { GROK_MODELS } from '../../../novel/byok/relayCatalog';
 
 // https://docs.x.ai/docs/api-reference#list-language-models
 interface XAIModelData {
@@ -66,6 +67,28 @@ export class XAIBYOKLMProvider extends AbstractOpenAICompatibleLMProvider {
 
 	protected override resolveModelCapabilities(modelData: unknown): BYOKModelCapabilities | undefined {
 		const xaiModelData = modelData as XAIModelData;
+
+		// NOVEL-BUILDER: prefer the window xAI publishes over the guess below.
+		//
+		// The branch that follows gives every Grok 4 and later 120K in and 120K
+		// out. xAI's own model list has grok-4.5 and 4.6 at 500K and the 4.3 and
+		// 4.20 builds at 1M, so an author with their own key was being handed a
+		// quarter of what they pay for — and silently, because a context window
+		// that is too small never errors, it just truncates what gets sent.
+		//
+		// The table is shared with the relay vendor rather than copied, so the
+		// figures cannot drift apart. `vision` still comes from the API response:
+		// that is per-model truth from xAI itself, better than anything recorded
+		// here.
+		const documented = GROK_MODELS[xaiModelData.id.toLowerCase()];
+		if (documented) {
+			return {
+				...documented,
+				name: this.humanizeXAIModelId(xaiModelData.id),
+				vision: xaiModelData.input_modalities.includes('image'),
+			};
+		}
+
 		// Add new model with reasonable defaults
 		let maxInputTokens;
 		let maxOutputTokens;

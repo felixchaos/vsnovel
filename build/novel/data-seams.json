@@ -28,7 +28,8 @@
 			"selector": "contributes.languageModelTools[name=copilot_getErrors].when",
 			"upstream": null,
 			"absent": true,
-			"note": "dev tool, ungated upstream"
+			"note": "upstream gates this tool on nothing, and neither do we — deliberately. It was briefly on the developerTools gate; toolGating.spec.ts now asserts it must not be, because this product's own name and consistency checks publish to Problems and copilot_getErrors is how the agent reads them. Recorded as a dependency rather than an edit: if upstream ever adds a when here, that gate would silently take the diagnostics away from the agent.",
+			"depends": true
 		},
 		{
 			"file": "extensions/copilot/package.json",
@@ -288,12 +289,6 @@
 		},
 		{
 			"file": "extensions/copilot/package.json",
-			"selector": "contributes.configuration[id=stable].properties.novel",
-			"upstream": null,
-			"absent": true
-		},
-		{
-			"file": "extensions/copilot/package.json",
 			"selector": "contributes.languageModelChatProviders[vendor=deepseek]",
 			"upstream": null,
 			"absent": true
@@ -443,12 +438,6 @@
 			"upstream": "GitHub Copilot"
 		},
 		{
-			"file": "extensions/copilot/package.nls.json",
-			"selector": "novel",
-			"upstream": null,
-			"absent": true
-		},
-		{
 			"file": "extensions/copilot/tsconfig.json",
 			"selector": "compilerOptions.paths.@vscode/copilot-api",
 			"upstream": null,
@@ -565,6 +554,76 @@
 			"file": "product.json",
 			"selector": "win32ShellNameShort",
 			"upstream": "C&ode - OSS"
+		},
+		{
+			"file": "extensions/copilot/package.nls.json",
+			"selector": "['novel.category']",
+			"upstream": null,
+			"absent": true,
+			"note": "a string this product adds; upstream has no key by this name"
+		},
+		{
+			"file": "extensions/copilot/package.nls.json",
+			"selector": "['novel.command.openSuggestionsPanel']",
+			"upstream": null,
+			"absent": true,
+			"note": "a string this product adds; upstream has no key by this name"
+		},
+		{
+			"file": "extensions/copilot/package.nls.json",
+			"selector": "['novel.command.toggleStatusMenu']",
+			"upstream": null,
+			"absent": true,
+			"note": "a string this product adds; upstream has no key by this name"
+		},
+		{
+			"file": "extensions/copilot/package.nls.json",
+			"selector": "['novel.command.completions.disable']",
+			"upstream": null,
+			"absent": true,
+			"note": "a string this product adds; upstream has no key by this name"
+		},
+		{
+			"file": "extensions/copilot/package.nls.json",
+			"selector": "['novel.command.completions.enable']",
+			"upstream": null,
+			"absent": true,
+			"note": "a string this product adds; upstream has no key by this name"
+		},
+		{
+			"file": "extensions/copilot/package.nls.json",
+			"selector": "['novel.command.completions.toggle']",
+			"upstream": null,
+			"absent": true,
+			"note": "a string this product adds; upstream has no key by this name"
+		},
+		{
+			"file": "extensions/copilot/package.nls.json",
+			"selector": "['novel.command.openWritingInstructions']",
+			"upstream": null,
+			"absent": true,
+			"note": "a string this product adds; upstream has no key by this name"
+		},
+		{
+			"file": "extensions/copilot/package.nls.json",
+			"selector": "['novel.command.openModelPicker']",
+			"upstream": null,
+			"absent": true,
+			"note": "a string this product adds; upstream has no key by this name"
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "contributes.configuration[id=stable].properties['novel.grokPath']",
+			"upstream": null,
+			"absent": true,
+			"note": "a setting this product adds; upstream has no property by this name"
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "contributes.configuration[id=stable].properties['novel.nameCheck']",
+			"upstream": null,
+			"absent": true,
+			"note": "a setting this product adds; upstream has no property by this name"
 		}
 	]
 }
