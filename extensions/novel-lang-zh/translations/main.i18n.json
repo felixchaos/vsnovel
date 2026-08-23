@@ -442,9 +442,7 @@
 		},
 		"vs/workbench/browser/parts/auxiliarybar/auxiliaryBarActions": {
 			"toggleAuxiliaryBar": "切换次侧边栏显示",
-			"closeSecondarySideBar": "隐藏次侧边栏",
-			"auxiliaryBarHidden": "次侧边栏已隐藏",
-			"auxiliaryBarVisible": "次侧边栏已显示"
+			"closeSecondarySideBar": "隐藏次侧边栏"
 		},
 		"vs/workbench/browser/parts/compositeBarActions": {
 			"additionalViews": "更多视图",
@@ -534,10 +532,14 @@
 		"vs/workbench/contrib/chat/browser/widget/chatWidget": {
 			"agentTitle": "与你的写作助手协作"
 		},
-		"vs/workbench/contrib/chat/browser/widget/input/chatModelPicker": {
+		"vs/workbench/contrib/chat/browser/widget/input/modelPicker/modelPickerItemSections": {
 			"chat.modelPicker.setupRequired": "登录以使用 VS Novel",
 			"chat.modelPicker.setupRequired.signIn": "登录以使用 VS Novel…",
 			"chat.modelPicker.setupRequired.signInTooltip": "登录 VS Novel 以选择模型。"
+		},
+		"vs/workbench/browser/layout": {
+			"auxiliaryBarHidden": "次侧边栏已隐藏",
+			"auxiliaryBarVisible": "次侧边栏已显示"
 		}
 	}
 }

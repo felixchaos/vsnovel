@@ -73,6 +73,9 @@ export enum RequestType {
 	CopilotCustomAgents = 'CopilotCustomAgents',
 	CopilotCustomAgentsDetail = 'CopilotCustomAgentsDetail',
 	AgentTask = 'AgentTask',
+	// NOVEL-BUILDER: added at upstream 1.134.0 by autoV2Fetcher; the usage point
+	// is the authority for this enum, and a missing value is a compile error there.
+	Auto = 'Auto',
 }
 
 /**
@@ -85,7 +88,7 @@ export enum RequestType {
 export type RequestMetadata =
 	| { readonly type: Exclude<RequestType, RequestType.EmbeddingsIndex | RequestType.CodingGuidelines | RequestType.ContentExclusion | RequestType.SearchSkill | RequestType.RemoteAgentChat | RequestType.ModelPolicy | RequestType.ListModel | RequestType.ChatAttachmentUpload | RequestType.CopilotSessionLogs | RequestType.CopilotSessionDetails | RequestType.CopilotSessions | RequestType.CopilotAgentJob | RequestType.CopilotAgentJobEnabled | RequestType.CopilotAgentMemory | RequestType.CopilotCustomAgents | RequestType.CopilotCustomAgentsDetail | RequestType.OrgCustomInstructions | RequestType.AgentTask>; readonly isModelLab?: boolean }
 	| { readonly type: RequestType.EmbeddingsIndex | RequestType.CodingGuidelines; readonly repoWithOwner: string }
-	| { readonly type: RequestType.ContentExclusion; readonly repos: readonly string[] }
+	| { readonly type: RequestType.ContentExclusion; readonly repos: string[] } // NOVEL-BUILDER: not readonly — upstream's mock passes these to a `(repos: string[])` responder
 	| { readonly type: RequestType.SearchSkill; readonly slug: string }
 	| { readonly type: RequestType.RemoteAgentChat; readonly slug?: string }
 	| { readonly type: RequestType.ModelPolicy | RequestType.ListModel; readonly modelId: string }

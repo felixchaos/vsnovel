@@ -138,6 +138,13 @@ export class NovelAuthenticationProvider implements AuthenticationProvider {
 			)
 		);
 
+		// Logged at registration rather than at first use. The packaged smoke test
+		// needs evidence that this provider exists, and every other line in this
+		// file waits for core to ask us something — which is timing, not a fact
+		// about the build. An assertion that fails on a correct build is worse
+		// than no assertion: it teaches you to ignore it.
+		this._log.info(`[novel-auth] registered provider '${NOVEL_AUTH_PROVIDER_ID}' (${NOVEL_AUTH_PROVIDER_LABEL})`);
+
 		// A credential removed in another window is gone here too. Without this
 		// the two windows disagree about whether the author is signed in, and
 		// the stale one keeps making calls that 401.

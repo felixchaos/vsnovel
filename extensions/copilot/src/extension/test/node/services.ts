@@ -17,7 +17,7 @@ import { DiffServiceImpl } from '../../../platform/diff/node/diffServiceImpl';
 import { EmbeddingType, IEmbeddingsComputer } from '../../../platform/embeddings/common/embeddingsComputer';
 import { RemoteEmbeddingsComputer } from '../../../platform/embeddings/common/remoteEmbeddingsComputer';
 import { IEndpointProvider } from '../../../platform/endpoint/common/endpointProvider';
-import { IAutomodeService } from '../../../platform/endpoint/node/automodeService';
+import { AutoModePickerMetadata, IAutomodeService } from '../../../platform/endpoint/node/automodeService';
 import { IModelConfig } from '../../../platform/endpoint/test/node/openaiCompatibleEndpoint';
 import { TestEndpointProvider } from '../../../platform/endpoint/test/node/testEndpointProvider';
 import { IGitCommitMessageService, NoopGitCommitMessageService } from '../../../platform/git/common/gitCommitMessageService';
@@ -51,6 +51,7 @@ import { TestLogService } from '../../../platform/testing/common/testLogService'
 import { ITestProvider } from '../../../platform/testing/common/testProvider';
 import { IGithubAvailableEmbeddingTypesService, MockGithubAvailableEmbeddingTypesService } from '../../../platform/workspaceChunkSearch/common/githubAvailableEmbeddingTypes';
 import { IWorkspaceChunkSearchService, NullWorkspaceChunkSearchService } from '../../../platform/workspaceChunkSearch/node/workspaceChunkSearchService';
+import { Event } from '../../../util/vs/base/common/event';
 import { DisposableStore } from '../../../util/vs/base/common/lifecycle';
 import { SyncDescriptor } from '../../../util/vs/platform/instantiation/common/descriptors';
 import { ILanguageModelServer } from '../../agents/node/langModelServer';
@@ -87,9 +88,6 @@ export interface ISimulationModelConfig {
 	customModelConfigs?: Map<string, IModelConfig>;
 }
 
-// NOVEL-BUILDER: the Claude Code session type is not registered (see
-// contributions.ts), and its npm package is proprietary and no longer
-// installed, so the test container no longer wires its services.
 export function createExtensionUnitTestingServices(disposables: Pick<DisposableStore, 'add'> = new DisposableStore(), currentTestRunInfo?: any, modelConfig?: ISimulationModelConfig): TestingServiceCollection {
 	const testingServiceCollection = createPlatformServices(disposables);
 	testingServiceCollection.define(
@@ -157,7 +155,6 @@ export function createExtensionUnitTestingServices(disposables: Pick<DisposableS
 	return testingServiceCollection;
 }
 
-
 class NullChatHookService implements IChatHookService {
 	declare readonly _serviceBrand: undefined;
 
@@ -183,9 +180,19 @@ class NullAutomodeService implements IAutomodeService {
 		throw new Error('Not implemented');
 	}
 
-	consumeLastRoutingDecision(): undefined {
-		return undefined;
+	async resolveAutoModePickerEndpoint(): Promise<never> {
+		throw new Error('Not implemented');
 	}
+
+	getAutoPickerMetadata(): AutoModePickerMetadata {
+		return { discountRange: { low: 0, high: 0 } };
+	}
+
+	areAutoModeTiersSupported(): boolean {
+		return false;
+	}
+
+	readonly onDidChangeAutoModeTierSupport = Event.None;
 
 	invalidateRouterCache(): void { }
 }

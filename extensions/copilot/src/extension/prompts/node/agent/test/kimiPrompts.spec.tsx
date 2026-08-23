@@ -18,7 +18,7 @@ import { ToolName } from '../../../../tools/common/toolNames';
 import { IToolsService } from '../../../../tools/common/toolsService';
 import { PromptRenderer } from '../../base/promptRenderer';
 import '../allAgentPrompts';
-import { PromptRegistry } from '../promptRegistry';
+import { KimiAgentPrompt } from '../kimiPrompts';
 
 suite('KimiPrompts', () => {
 	let accessor: ITestingServicesAccessor;
@@ -37,8 +37,13 @@ suite('KimiPrompts', () => {
 	async function renderSystemPrompt(family: string, availableTools?: readonly LanguageModelToolInformation[]): Promise<string> {
 		const instantiationService = accessor.get(IInstantiationService);
 		const endpoint = instantiationService.createInstance(MockEndpoint, family);
-		const customizations = await PromptRegistry.resolveAllCustomizations(instantiationService, endpoint);
-		const renderer = PromptRenderer.create(instantiationService, endpoint, customizations.SystemPrompt, {
+		// NOVEL-BUILDER: rendered directly rather than resolved through the
+		// registry. This product registers its own resolver for every Kimi family
+		// and it wins, so the registry hands back NovelWritingAgentPrompt and
+		// these assertions about Kimi's text all failed. The routing itself is
+		// covered by src/novel/prompts/test/kimiPrompt.spec.ts; what is worth
+		// keeping here is upstream's coverage of upstream's own prompt.
+		const renderer = PromptRenderer.create(instantiationService, endpoint, KimiAgentPrompt, {
 			availableTools: availableTools ?? accessor.get(IToolsService).tools,
 			modelFamily: family,
 			codesearchMode: false,
@@ -54,6 +59,7 @@ suite('KimiPrompts', () => {
 		const renderedPrompts = await Promise.all([
 			renderSystemPrompt('kimi-k2.6'),
 			renderSystemPrompt('kimi-k2.7-code'),
+			renderSystemPrompt('kimi-k3'),
 		]);
 
 		for (const renderedPrompt of renderedPrompts) {
@@ -70,7 +76,8 @@ suite('KimiPrompts', () => {
 		const renderedPrompt = await renderSystemPrompt('kimi-k2.7-code', availableTools);
 
 		expect(renderedPrompt).toContain(`Use ${ToolName.ReplaceString} for single string replacements`);
-		expect(renderedPrompt).toContain(`Prefer ${ToolName.MultiReplaceString} for multiple independent replacements`);
+		expect(renderedPrompt).toContain(`batch them into a single ${ToolName.MultiReplaceString} call`);
+		expect(renderedPrompt).toContain(`A single ${ToolName.MultiReplaceString} call is much faster and cheaper`);
 		expect(renderedPrompt).not.toContain(`Use ${ToolName.EditFile}`);
 		expect(renderedPrompt).not.toContain(`Use ${ToolName.ApplyPatch}`);
 	});

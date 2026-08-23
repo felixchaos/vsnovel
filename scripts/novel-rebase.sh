@@ -28,7 +28,7 @@
 set -uo pipefail
 cd "$(dirname "$0")/.." || exit 2
 
-ANCHOR="${NOVEL_ANCHOR_TAG:-1.129.1}"
+ANCHOR="${NOVEL_ANCHOR_TAG:-1.134.0-release}"
 status=0
 
 hdr() { printf '\n\033[1m%s\033[0m\n' "$1"; }

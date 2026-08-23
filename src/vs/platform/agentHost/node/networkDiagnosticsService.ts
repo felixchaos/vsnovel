@@ -11,7 +11,8 @@ import { createDecorator } from '../../instantiation/common/instantiation.js';
 import { ILogService } from '../../log/common/log.js';
 import { IProductService } from '../../product/common/productService.js';
 import { IRequestService, NO_FETCH_TELEMETRY } from '../../request/common/request.js';
-import { IAgentHostDnsResult, IAgentHostNetworkDiagnosticsInfo, IAgentHostNetworkEndpoint, IAgentHostNetworkFetchResult } from '../common/agentService.js';
+import { IAgentHostNetworkEndpoint } from '../common/agent.js';
+import { IAgentHostDnsResult, IAgentHostNetworkDiagnosticsInfo, IAgentHostNetworkFetchResult } from '../common/agentService.js';
 import { IAgentHostProxyResolver } from './agentHostProxyResolver.js';
 
 export const INetworkDiagnosticsService = createDecorator<INetworkDiagnosticsService>('networkDiagnosticsService');
@@ -174,6 +175,21 @@ function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
 	});
 }
 
-function errorMessage(err: unknown): string {
-	return err instanceof Error ? err.message : String(err);
+function errorMessage(error: unknown): string {
+	const seen = new Set<unknown>();
+	function collect(error: unknown): string {
+		if (seen.has(error)) {
+			return '';
+		}
+		seen.add(error);
+		if (!(error instanceof Error)) {
+			return String(error);
+		}
+		const details = [
+			error.cause ? collect(error.cause) : '',
+			...(error instanceof AggregateError ? error.errors.map(collect) : []),
+		].filter(Boolean).join(', ');
+		return details ? `${error.message}: ${details}` : error.message;
+	}
+	return collect(error);
 }

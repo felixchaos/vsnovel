@@ -30,7 +30,7 @@ const path = require('path');
 
 const REPO = path.resolve(__dirname, '..');
 const MANIFEST = path.join(REPO, 'build', 'novel', 'seams.json');
-const ANCHOR = process.env.NOVEL_ANCHOR_TAG || '1.129.1';
+const ANCHOR = process.env.NOVEL_ANCHOR_TAG || '1.134.0-release';
 
 function git(args, opts = {}) {
 	return execFileSync('git', args, {
@@ -402,8 +402,23 @@ function parseJsonc(text) {
 	return JSON.parse(out.replace(/,(\s*[}\]])/g, '$1'));
 }
 
+/**
+ * A key that itself contains a dot must be bracketed, or the route it produces
+ * is indistinguishable from nested objects. Every VS Code settings id is such a
+ * key — `chat.agentHost.allowSignedOutWhenUsable` is one key, not four levels —
+ * so without this any data seam over a settings default resolves to undefined
+ * in `applied` while still string-matching in `check`. The two subcommands then
+ * disagree: `check` calls the seam covered and `applied` calls the edit missing.
+ * `applied` is the one that reports a dropped edit after a rebase, so the whole
+ * class of settings edits was silently unprotected at exactly the moment the
+ * protection is needed. tokenizeSelector already reads the bracket form.
+ */
+function bracketIfDotted(key) {
+	return /[.[\]]/.test(String(key)) ? `['${key}']` : `.${key}`;
+}
+
 function stepKey(container, key) {
-	if (!Array.isArray(container)) { return `.${key}`; }
+	if (!Array.isArray(container)) { return bracketIfDotted(key); }
 	const el = container[key];
 	if (!el || typeof el !== 'object') { return `[${key}]`; }
 	// Identity fields, in the order VS Code's own manifest uses them. `command`
@@ -447,7 +462,7 @@ function seamRoute(anchorDoc, selector) {
 	let route = '';
 	for (const tok of tokenizeSelector(selector)) {
 		if (tok.t === 'key') {
-			route += `.${tok.k}`;
+			route += bracketIfDotted(tok.k);
 			cur = cur === undefined || cur === null ? undefined : cur[tok.k];
 		} else if (tok.t === 'index') {
 			route += Array.isArray(cur) ? stepKey(cur, tok.i) : `[${tok.i}]`;

@@ -86,12 +86,25 @@ export class CAPIClient {
 	 * one: this module deliberately does not know what a socket is, and naming
 	 * the networking layer's type here would invert the dependency.
 	 */
-	createResponsesWebSocket<T = unknown>(options: MakeRequestOptions): T {
-		void this._stampHeaders(options, { type: RequestType.ChatResponses });
+	// NOVEL-BUILDER: upstream 1.134.0 narrowed this from the generic makeRequest
+	// shape — `<T>(options: MakeRequestOptions): T` — to a concrete one taking
+	// only headers and returning a connection promise, and its subclass both
+	// overrides it with that signature and does `return super.…` straight into a
+	// `Promise<WebSocketConnection>`.
+	//
+	// The return type is deliberately loose rather than that concrete type.
+	// `WebSocketConnection` belongs to the extension's networking layer, and the
+	// note above this method is the reason not to name it here: this module is a
+	// stand-in for a package that knows nothing about sockets, and importing the
+	// type would point the dependency the wrong way. A supertype will not do
+	// either — the subclass assigns the result *to* the concrete type, so the
+	// looseness has to sit on this side of the boundary.
+	createResponsesWebSocket(options: { headers?: Record<string, string> }): Promise<any> {
+		void this._stampHeaders(options as MakeRequestOptions, { type: RequestType.ChatResponses });
 		if (!this._fetcher.createWebSocket) {
 			throw new Error('this fetcher cannot open a web socket');
 		}
-		return this._fetcher.createWebSocket(this._domains.capiResponsesURL, options) as T;
+		return this._fetcher.createWebSocket(this._domains.capiResponsesURL, options as MakeRequestOptions) as Promise<unknown>;
 	}
 
 	get dotcomAPIURL(): string { return this._domains.dotComAPIURL; }
@@ -112,6 +125,10 @@ export class CAPIClient {
 	private _urlFor(m: RequestMetadata): string {
 		const d = this._domains;
 		switch (m.type) {
+			// NOVEL-BUILDER: Auto is fetcher metadata, not a CAPI route — autoV2Fetcher
+			// builds its own URL and passes this only for stamping. Throwing rather
+			// than inventing a URL keeps the mistake loud if that ever changes.
+			case RequestType.Auto: throw new Error('RequestType.Auto does not name a CAPI route');
 			case RequestType.CopilotToken: return d.tokenURL;
 			case RequestType.CopilotNLToken: return d.tokenNoAuthURL;
 			case RequestType.CopilotUserInfo: return d.copilotUserInfoURL;

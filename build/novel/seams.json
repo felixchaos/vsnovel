@@ -1,7 +1,7 @@
 {
-	"anchor": "1.129.1",
-	"anchorCommit": "8a7abeba6e03ea3af87bfbce9a1b7e48fed567b8",
-	"generated": "2026-08-23T14:39:24.425Z",
+	"anchor": "1.134.0-release",
+	"anchorCommit": "3e966c9cb3e14fb9adfdacd4ca6c91c24a231754",
+	"generated": "2026-08-23T17:02:16.333Z",
 	"seams": [
 		{
 			"path": "README.md",
@@ -77,8 +77,8 @@
 			"path": "README.md",
 			"header": "-20 +26",
 			"kind": "replace",
-			"preImage": "Visual Studio Code is updated monthly with new features and bug fixes. You can download it for Windows, macOS, and Linux on [Visual Studio Code's website](https://code.visualstudio.com/Download). To get the latest releases every day, install the [Insiders build](https://code.visualstudio.com/insiders).",
-			"preImageSha": "2bf3f18767588901",
+			"preImage": "Visual Studio Code is updated monthly with new features and bug fixes. You can download it for Windows, macOS, and Linux on the [Visual Studio Code website](https://code.visualstudio.com/Download). To get the latest releases every day, install the [Insiders build](https://code.visualstudio.com/insiders).",
+			"preImageSha": "ff32255438fef912",
 			"occurrences": 1,
 			"postImage": "## Building from source",
 			"postImageSha": "4949eab33307c5cf"
@@ -107,35 +107,35 @@
 			"path": "README.md",
 			"header": "-26,3 +37,2",
 			"kind": "replace",
-			"preImage": "* [Submit bugs and feature requests](https://github.com/microsoft/vscode/issues), and help us verify as they are checked in\n* Review [source code changes](https://github.com/microsoft/vscode/pulls)\n* Review the [documentation](https://github.com/microsoft/vscode-docs) and make pull requests for anything from typos to new content.",
-			"preImageSha": "b9872ca19eaf0351",
+			"preImage": "* [Submit bugs and feature requests](https://github.com/microsoft/vscode/issues), and help us verify them as they are checked in\n* Review [source code changes](https://github.com/microsoft/vscode/pulls)\n* Review the [documentation](https://github.com/microsoft/vscode-docs) and make pull requests for anything from typos to new content.",
+			"preImageSha": "ac4f273bd7542be8",
 			"occurrences": 1,
 			"postImage": "The novel-writing features live in `extensions/copilot/src/novel/`; their tests\nrun with `cd extensions/copilot && npx vitest run src/novel`.",
 			"postImageSha": "99b8f8880e4882da"
 		},
 		{
 			"path": "README.md",
-			"header": "-30,2 +40",
+			"header": "-30 +40",
 			"kind": "replace",
-			"preImage": "If you are interested in fixing issues and contributing directly to the code base,\nplease see the document [How to Contribute](https://github.com/microsoft/vscode/wiki/How-to-Contribute), which covers the following:",
-			"preImageSha": "cdd6e2ccf394cd82",
+			"preImage": "If you are interested in fixing issues and contributing directly to the codebase, please see the document [How to Contribute](https://github.com/microsoft/vscode/wiki/How-to-Contribute), which covers the following:",
+			"preImageSha": "28eea3b21b5805f0",
 			"occurrences": 1,
 			"postImage": "## Updates",
 			"postImageSha": "df7af3fd0693c757"
 		},
 		{
 			"path": "README.md",
-			"header": "-33,40 +42,4",
+			"header": "-32,40 +42,4",
 			"kind": "replace",
-			"preImage": "* [How to build and run from source](https://github.com/microsoft/vscode/wiki/How-to-Contribute)\n* [The development workflow, including debugging and running tests](https://github.com/microsoft/vscode/wiki/How-to-Contribute#debugging)\n* [Coding guidelines](https://github.com/microsoft/vscode/wiki/Coding-Guidelines)\n* [Submitting pull requests](https://github.com/microsoft/vscode/wiki/How-to-Contribute#pull-requests)\n* [Finding an issue to work on](https://github.com/microsoft/vscode/wiki/How-to-Contribute#where-to-contribute)\n* [Contributing to translations](https://aka.ms/vscodeloc)\n\n## Feedback\n\n* Ask a question on [Stack Overflow](https://stackoverflow.com/questions/tagged/vscode)\n* [Request a new feature](CONTRIBUTING.md)\n* Upvote [popular feature requests](https://github.com/microsoft/vscode/issues?q=is%3Aopen+is%3Aissue+label%3Afeature-request+sort%3Areactions-%2B1-desc)\n* [File an issue](https://github.com/microsoft/vscode/issues)\n* Connect with the extension author community on [GitHub Discussions](https://github.com/microsoft/vscode-discussions/discussions) or [Slack](https://aka.ms/vscode-dev-community)\n* Follow [@code](https://x.com/code) and let us know what you think!\n\nSee our [wiki](https://github.com/microsoft/vscode/wiki/Feedback-Channels) for a description of each of these channels and information on some other available community-driven channels.\n\n## Related Projects\n\nMany of the core components and extensions to VS Code live in their own repositories on GitHub. For example, the [node debug adapter](https://github.com/microsoft/vscode-node-debug) and the [mono debug adapter](https://github.com/microsoft/vscode-mono-debug) repositories are separate from each other. For a complete list, please visit the [Related Projects](https://github.com/microsoft/vscode/wiki/Related-Projects) page on our [wiki](https://github.com/microsoft/vscode/wiki).\n\n## Bundled Extensions\n\nVS Code includes a set of built-in extensions located in the [extensions](extensions) folder, including grammars and snippets for many languages. Extensions that provide rich language support (inline suggestions, Go to Definition) for a language have the suffix `language-features`. For example, the `json` extension provides coloring for `JSON` and the `json-language-features` extension provides rich language support for `JSON`.\n\n## Development Container\n\nThis repository includes a Visual Studio Code Dev Containers / GitHub Codespaces development container.\n\n* For [Dev Containers](https://aka.ms/vscode-remote/download/containers), use the **Dev Containers: Clone Repository in Container Volume...** command which creates a Docker volume for better disk I/O on macOS and Windows.\n  * If you already have VS Code and Docker installed, you can also click [here](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/microsoft/vscode) to get started. This will cause VS Code to automatically install the Dev Containers extension if needed, clone the source code into a container volume, and spin up a dev container for use.\n\n* For Codespaces, install the [GitHub Codespaces](https://marketplace.visualstudio.com/items?itemName=GitHub.codespaces) extension in VS Code, and use the **Codespaces: Create New Codespace** command.\n\nDocker / the Codespace should have at least **4 cores and 6 GB of RAM (8 GB recommended)** to run a full build. See the [development container README](.devcontainer/README.md) for more information.\n\n## Code of Conduct\n\nThis project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.",
-			"preImageSha": "c4908d482d11f7c0",
+			"preImage": "* [How to build and run from source](https://github.com/microsoft/vscode/wiki/How-to-Contribute)\n* [The development workflow, including debugging and running tests](https://github.com/microsoft/vscode/wiki/How-to-Contribute#debugging)\n* [Coding guidelines](https://github.com/microsoft/vscode/wiki/Coding-Guidelines)\n* [Submitting pull requests](https://github.com/microsoft/vscode/wiki/How-to-Contribute#pull-requests)\n* [Finding an issue to work on](https://github.com/microsoft/vscode/wiki/How-to-Contribute#where-to-contribute)\n* [Contributing to translations](https://aka.ms/vscodeloc)\n\n## Feedback\n\n* Ask a question on [Stack Overflow](https://stackoverflow.com/questions/tagged/vscode)\n* [Request a new feature](CONTRIBUTING.md)\n* Upvote [popular feature requests](https://github.com/microsoft/vscode/issues?q=is%3Aopen+is%3Aissue+label%3Afeature-request+sort%3Areactions-%2B1-desc)\n* [File an issue](https://github.com/microsoft/vscode/issues)\n* Connect with the extension author community on [GitHub Discussions](https://github.com/microsoft/vscode-discussions/discussions) or [Slack](https://aka.ms/vscode-dev-community)\n* Follow [@code](https://x.com/code) and let us know what you think!\n\nSee our [wiki](https://github.com/microsoft/vscode/wiki/Feedback-Channels) for a description of each of these channels and information on some other available community-driven channels.\n\n## Related Projects\n\nMany of the core components and extensions to VS Code live in their own repositories on GitHub. For example, the [node debug adapter](https://github.com/microsoft/vscode-node-debug) and the [mono debug adapter](https://github.com/microsoft/vscode-mono-debug) repositories are separate from each other. For a complete list, please visit the [Related Projects](https://github.com/microsoft/vscode/wiki/Related-Projects) page on our [wiki](https://github.com/microsoft/vscode/wiki).\n\n## Bundled Extensions\n\nVS Code includes a set of built-in extensions located in the [extensions](extensions) folder, including grammars and snippets for many languages. Extensions that provide rich language support (inline suggestions, Go to Definition) for a language have the suffix `language-features`. For example, the `json` extension provides coloring for `JSON` and the `json-language-features` extension provides rich language support for `JSON`.\n\n## Development Container\n\nThis repository includes a Visual Studio Code Dev Containers / GitHub Codespaces development container.\n\n* For [Dev Containers](https://aka.ms/vscode-remote/download/containers), use the **Dev Containers: Clone Repository in Container Volume...** command, which creates a Docker volume for better disk I/O on macOS and Windows.\n  * If you already have VS Code and Docker installed, you can also click [here](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/microsoft/vscode) to get started. This will cause VS Code to automatically install the Dev Containers extension if needed, clone the source code into a container volume, and spin up a dev container for use.\n\n* For Codespaces, install the [GitHub Codespaces](https://marketplace.visualstudio.com/items?itemName=GitHub.codespaces) extension in VS Code, and use the **Codespaces: Create New Codespace** command.\n\nDocker / the Codespace should have at least **4 cores and 6 GB of RAM (8 GB recommended)** to run a full build. See the [development container README](.devcontainer/README.md) for more information.\n\n## Code of Conduct\n\nThis project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information, see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.",
+			"preImageSha": "762c0dd6cf63af18",
 			"occurrences": 1,
 			"postImage": "Released builds update themselves. The editor polls an update server\n(`update-server/`, a small Cloudflare Worker) that maps this repository's GitHub\nReleases to VS Code's update protocol; see that directory and\n`scripts/vsnovel-release.sh` for how a release is cut.",
 			"postImageSha": "709d0890d8b68a5f"
 		},
 		{
 			"path": "README.md",
-			"header": "-76,3 +49,4",
+			"header": "-75,3 +49,4",
 			"kind": "replace",
 			"preImage": "Copyright (c) Microsoft Corporation. All rights reserved.\n\nLicensed under the [MIT](LICENSE.txt) license.",
 			"preImageSha": "cae7b733fe767baf",
@@ -145,7 +145,7 @@
 		},
 		{
 			"path": "build/.moduleignore",
-			"header": "-264,0 +265,21",
+			"header": "-280,0 +281,21",
 			"kind": "insert",
 			"preImage": "# in websocket's browser.js inside a try/catch with a globalThis fallback,\n# so it is unnecessary in the browsers/runtimes VS Code supports.\nes5-ext/**",
 			"preImageSha": "b2ea30a0bec1f0b0",
@@ -155,7 +155,7 @@
 		},
 		{
 			"path": "build/gulpfile.vscode.ts",
-			"header": "-522 +522,6",
+			"header": "-571 +571,6",
 			"kind": "replace",
 			"preImage": "\t\t\tif (quality === 'stable' || quality === 'insider') {",
 			"preImageSha": "8b5db767c7ae6671",
@@ -165,7 +165,7 @@
 		},
 		{
 			"path": "build/gulpfile.vscode.ts",
-			"header": "-612 +617",
+			"header": "-661 +666",
 			"kind": "replace",
 			"preImage": "\t\t\t\t\t'CompanyName': 'Microsoft Corporation',",
 			"preImageSha": "f5634e6003d29084",
@@ -175,7 +175,7 @@
 		},
 		{
 			"path": "build/gulpfile.vscode.ts",
-			"header": "-616 +621",
+			"header": "-665 +670",
 			"kind": "replace",
 			"preImage": "\t\t\t\t\t'LegalCopyright': 'Copyright (C) 2026 Microsoft. All rights reserved',",
 			"preImageSha": "80ba6c47b228dac4",
@@ -185,7 +185,7 @@
 		},
 		{
 			"path": "build/gulpfile.vscode.win32.ts",
-			"header": "-114 +114,5",
+			"header": "-116 +116,5",
 			"kind": "replace",
 			"preImage": "\t\tif (quality === 'stable' || quality === 'insider') {",
 			"preImageSha": "94b12272837d7898",
@@ -195,7 +195,7 @@
 		},
 		{
 			"path": "build/lib/copilot.ts",
-			"header": "-319 +319,9",
+			"header": "-259 +259,9",
 			"kind": "replace",
 			"preImage": "\t\tthrow new Error(`[prepareBuiltInCopilotRipgrepShim] Copilot SDK directory not found at ${copilotSdkBase}`);",
 			"preImageSha": "ffc7dd787ac8820e",
@@ -235,7 +235,7 @@
 		},
 		{
 			"path": "build/win32/code.iss",
-			"header": "-1336 +1341,2",
+			"header": "-1385 +1390,2",
 			"kind": "replace",
 			"preImage": "      if MsgBox('This User Installer is not meant to be run as an Administrator. If you would like to install VS Code for all users in this system, download the System Installer instead from https://code.visualstudio.com. Are you sure you want to continue?', mbError, MB_OKCANCEL) = IDCANCEL then begin",
 			"preImageSha": "17c1ee5fb255dfd8",
@@ -385,7 +385,7 @@
 		},
 		{
 			"path": "extensions/copilot/.esbuild.mts",
-			"header": "-181,0 +189,4",
+			"header": "-164,0 +172,4",
 			"kind": "insert",
 			"preImage": "const nodeExtHostBuildOptions = {\n\t...baseNodeBuildOptions,\n\tentryPoints: [",
 			"preImageSha": "b2f95da1576e72f7",
@@ -395,7 +395,7 @@
 		},
 		{
 			"path": "extensions/copilot/.esbuild.mts",
-			"header": "-186 +196,0",
+			"header": "-169 +179,0",
 			"kind": "replace",
 			"preImage": "\t\t{ in: './src/extension/chatSessions/copilotcli/node/copilotCLITodoWorker.ts', out: 'copilotCLITodoWorker' },",
 			"preImageSha": "b9787a05d4f6b01c",
@@ -405,7 +405,7 @@
 		},
 		{
 			"path": "extensions/copilot/.esbuild.mts",
-			"header": "-188 +197,0",
+			"header": "-171 +180,0",
 			"kind": "replace",
 			"preImage": "\t\t{ in: './src/extension/chatSessions/vscode-node/copilotCLIShim.ts', out: 'copilotCLIShim' },",
 			"preImageSha": "d48c4962130bdc70",
@@ -415,23 +415,13 @@
 		},
 		{
 			"path": "extensions/copilot/script/postinstall.ts",
-			"header": "-281,8 +281,17",
+			"header": "-281,8 +281,20",
 			"kind": "replace",
 			"preImage": "\tconst copilotCliSourceDir = await materializeCopilotCliSdkLayout();\n\tawait removeCopilotCLIShim();\n\tawait removeCopilotCliWorkerFiles();\n\tawait copyCopilotCliDefinitionFiles(copilotCliSourceDir);\n\tawait copyCopilotCliSkillsFiles(copilotCliSourceDir);\n\tawait copyCopilotCliTGrepFiles(copilotCliSourceDir);\n\tawait copyCopilotCliQueryFiles(copilotCliSourceDir);\n\tawait copyCopilotCliPrebuildFiles(copilotCliSourceDir);",
 			"preImageSha": "1121337cb9f5c8d4",
 			"occurrences": 1,
-			"postImage": "\t// NOVEL-BUILDER: the whole Copilot CLI staging pipeline is skipped. It exists\n\t// to unpack @github/copilot into dist, and that package ships under GitHub's\n\t// terms rather than an open licence, so it is not in dependencies and is not\n\t// installed. Left in place this step is the first thing to run after install\n\t// and it throws, which fails the build before anything else is reported.\n\t//\n\t// Guarded rather than deleted so that the functions above stay next to their\n\t// upstream versions and rebase cleanly, and so that restoring the feature is\n\t// one condition rather than a reconstruction.\n\t// const copilotCliSourceDir = await materializeCopilotCliSdkLayout();\n\t// await removeCopilotCLIShim();\n\t// await removeCopilotCliWorkerFiles();\n\t// await copyCopilotCliDefinitionFiles(copilotCliSourceDir);\n\t// await copyCopilotCliSkillsFiles(copilotCliSourceDir);\n\t// await copyCopilotCliTGrepFiles(copilotCliSourceDir);\n\t// await copyCopilotCliQueryFiles(copilotCliSourceDir);\n\t// await copyCopilotCliPrebuildFiles(copilotCliSourceDir);",
-			"postImageSha": "abc02afb41777db9"
-		},
-		{
-			"path": "extensions/copilot/script/postinstall.ts",
-			"header": "-296,3 +305,6",
-			"kind": "replace",
-			"preImage": "\tawait copyStaticAssets([\n\t\t`node_modules/@anthropic-ai/claude-agent-sdk/cli.js`,\n\t], 'dist');",
-			"preImageSha": "c5ccacd5cd48e948",
-			"occurrences": 1,
-			"postImage": "\t// NOVEL-BUILDER: the Claude Code CLI, same reason — a proprietary package this\n\t// product does not depend on. Its only consumer is the Claude agent session\n\t// type, which is not registered.\n\t// await copyStaticAssets([\n\t// \t`node_modules/@anthropic-ai/claude-agent-sdk/cli.js`,\n\t// ], 'dist');",
-			"postImageSha": "1997a7e6b556bcef"
+			"postImage": "\t// NOVEL-BUILDER: the whole Copilot CLI staging pipeline is skipped. It exists\n\t// to unpack @github/copilot into dist, and that package ships under GitHub's\n\t// terms rather than an open licence, so it is not in dependencies and is not\n\t// installed. Left in place this step is the first thing to run after install\n\t// and it throws, which fails the build before anything else is reported.\n\t//\n\t// Guarded rather than deleted so that the functions above stay next to their\n\t// upstream versions and rebase cleanly, and so that restoring the feature is\n\t// one condition rather than a reconstruction.\n\t//\n\t// Dropped by the 1.134.0 rebase and restored by postflight — which is the\n\t// entire reason postflight runs before re-snapshotting.\n\t// const copilotCliSourceDir = await materializeCopilotCliSdkLayout();\n\t// await removeCopilotCLIShim();\n\t// await removeCopilotCliWorkerFiles();\n\t// await copyCopilotCliDefinitionFiles(copilotCliSourceDir);\n\t// await copyCopilotCliSkillsFiles(copilotCliSourceDir);\n\t// await copyCopilotCliTGrepFiles(copilotCliSourceDir);\n\t// await copyCopilotCliQueryFiles(copilotCliSourceDir);\n\t// await copyCopilotCliPrebuildFiles(copilotCliSourceDir);",
+			"postImageSha": "4e058219c325c3f0"
 		},
 		{
 			"path": "extensions/copilot/src/extension/byok/vscode-node/anthropicProvider.ts",
@@ -635,7 +625,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/extension/vscode-node/contributions.ts",
-			"header": "-24,0 +37,8",
+			"header": "-25,0 +38,8",
 			"kind": "insert",
 			"preImage": "import { ConversationFeature } from '../../conversation/vscode-node/conversationFeature';\nimport { FeedbackCommandContribution } from '../../conversation/vscode-node/feedbackContribution';\nimport { LanguageModelAccess } from '../../conversation/vscode-node/languageModelAccess';",
 			"preImageSha": "6fbc88b9afcc0d9b",
@@ -645,7 +635,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/extension/vscode-node/contributions.ts",
-			"header": "-68,0 +89",
+			"header": "-69,0 +90",
 			"kind": "insert",
 			"preImage": "// ###################################################################################################\n\nexport const vscodeNodeContributions: IExtensionContributionFactory[] = [",
 			"preImageSha": "33730ae1f4c93fc1",
@@ -655,7 +645,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/extension/vscode-node/contributions.ts",
-			"header": "-81,0 +103,16",
+			"header": "-82,0 +104,16",
 			"kind": "insert",
 			"preImage": "\tasContributionFactory(CopilotDebugCommandContribution),\n\tasContributionFactory(DebugCommandsContribution),\n\tasContributionFactory(LanguageModelAccess),",
 			"preImageSha": "7d82e6ab28dee3ff",
@@ -665,7 +655,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/extension/vscode-node/contributions.ts",
-			"header": "-102 +138,0",
+			"header": "-104 +140,0",
 			"kind": "replace",
 			"preImage": "\tasContributionFactory(ChatSessionsContrib),",
 			"preImageSha": "c74d26a4f950fd99",
@@ -745,7 +735,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompt/node/chatMLFetcher.ts",
-			"header": "-1815,0 +1816,8",
+			"header": "-1821,0 +1822,8",
 			"kind": "insert",
 			"preImage": "\t\t\t}\n\n\t\t\t// HTTP 5xx Server Error",
 			"preImageSha": "b8cec0c153149a88",
@@ -755,7 +745,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompt/node/chatMLFetcher.ts",
-			"header": "-1820 +1828",
+			"header": "-1826 +1834",
 			"kind": "replace",
 			"preImage": "\t\t\t\treason: reasonNoText,",
 			"preImageSha": "c8156c6e33d08da3",
@@ -765,7 +755,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompt/node/chatMLFetcher.ts",
-			"header": "-1931,0 +1940,45",
+			"header": "-1944,0 +1953,45",
 			"kind": "insert",
 			"preImage": "\t\t\t\t\tstreamError: result.error\n\t\t\t\t};\n\t\t}",
 			"preImageSha": "a7b8a5a1a72626b1",
@@ -825,7 +815,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/agentPrompt.tsx",
-			"header": "-121 +121,2",
+			"header": "-124 +124,2",
 			"kind": "replace",
 			"preImage": "\t\t\t\tYou are an expert AI programming assistant, working with a user in the VS Code editor.<br />",
 			"preImageSha": "481a2e5a15a405ad",
@@ -915,6 +905,16 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/anthropicPrompts.tsx",
+			"header": "-116 +119",
+			"kind": "replace",
+			"preImage": "\t\t\t\t{tools[ToolName.CoreOpenBrowserPage] && tools.hasAgenticBrowserTools && <>Use the browser tools ({ToolName.CoreOpenBrowserPage}, {agenticBrowserTools.find(k => tools[k])}, etc.) when beneficial for front-end tasks, such as when visualizing or validating UI changes.<br /></>}",
+			"preImageSha": "5683651d3ee07043",
+			"occurrences": 3,
+			"postImage": "\t\t\t\t{tools[ToolName.CoreOpenBrowserPage] && tools.hasAgenticBrowserTools && <>Use the browser tools ({ToolName.CoreOpenBrowserPage}, {agenticBrowserTools.find(k => tools[k])}, etc.) when the author needs something looked up or verified outside the manuscript, such as when visualizing or validating UI changes.<br /></>}",
+			"postImageSha": "2e52405b2f66a178"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/agent/anthropicPrompts.tsx",
 			"header": "-141,6 +144,7",
 			"kind": "replace",
 			"preImage": "\t\t\t\tWhen you use the {ToolName.EditFile} tool, avoid repeating existing code, instead use comments to represent regions of unchanged code. The tool prefers that you are as concise as possible. For example:<br />\n\t\t\t\t// {EXISTING_CODE_MARKER}<br />\n\t\t\t\tchanged code<br />\n\t\t\t\t// {EXISTING_CODE_MARKER}<br />\n\t\t\t\tchanged code<br />\n\t\t\t\t// {EXISTING_CODE_MARKER}<br />",
@@ -985,6 +985,26 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/anthropicPrompts.tsx",
+			"header": "-236 +244",
+			"kind": "replace",
+			"preImage": "\t\t\t\t{(tools[ToolName.SearchSubagent] || tools[ToolName.ExploreSubagent]) && <>For codebase exploration, prefer {tools[ToolName.SearchSubagent] ? ToolName.SearchSubagent : ToolName.ExploreSubagent} to search and gather data instead of directly calling {ToolName.FindTextInFiles}, {ToolName.Codebase} or {ToolName.FindFiles}.<br /></>}",
+			"preImageSha": "2a8495f65770a73d",
+			"occurrences": 2,
+			"postImage": "\t\t\t\t{(tools[ToolName.SearchSubagent] || tools[ToolName.ExploreSubagent]) && <>For manuscript exploration, prefer {tools[ToolName.SearchSubagent] ? ToolName.SearchSubagent : ToolName.ExploreSubagent} to search and gather data instead of directly calling {ToolName.FindTextInFiles}, {ToolName.Codebase} or {ToolName.FindFiles}.<br /></>}",
+			"postImageSha": "efe8b20b3e8884c9"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/agent/anthropicPrompts.tsx",
+			"header": "-249 +257",
+			"kind": "replace",
+			"preImage": "\t\t\t\t{tools[ToolName.CoreOpenBrowserPage] && tools.hasAgenticBrowserTools && <>Use the browser tools ({ToolName.CoreOpenBrowserPage}, {agenticBrowserTools.find(k => tools[k])}, etc.) when beneficial for front-end tasks, such as when visualizing or validating UI changes.<br /></>}",
+			"preImageSha": "5683651d3ee07043",
+			"occurrences": 3,
+			"postImage": "\t\t\t\t{tools[ToolName.CoreOpenBrowserPage] && tools.hasAgenticBrowserTools && <>Use the browser tools ({ToolName.CoreOpenBrowserPage}, {agenticBrowserTools.find(k => tools[k])}, etc.) when the author needs something looked up or verified outside the manuscript, such as when visualizing or validating UI changes.<br /></>}",
+			"postImageSha": "2e52405b2f66a178"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/agent/anthropicPrompts.tsx",
 			"header": "-262,3 +270,4",
 			"kind": "replace",
 			"preImage": "\t\t\t\t\tUser: `which directory has the server code?`<br />\n\t\t\t\t\tAssistant: [searches workspace and finds backend/]<br />\n\t\t\t\t\t`backend/`<br />",
@@ -1009,7 +1029,7 @@
 			"kind": "replace",
 			"preImage": "\t\t\t\tYou are a highly sophisticated automated coding agent with expert-level knowledge across many different programming languages and frameworks and software engineering tasks.<br />",
 			"preImageSha": "515b288ac228bc76",
-			"occurrences": 2,
+			"occurrences": 1,
 			"postImage": "\t\t\t\t{/* NOVEL-BUILDER: \"highly sophisticated automated coding agent\" -> \"highly sophisticated automated writing agent\". The surrounding per-family prompt engineering is upstream's and must survive the rebase. */}\n\t\t\t\tYou are a highly sophisticated automated writing agent with expert-level knowledge across many different genres and narrative forms and long-form storytelling.<br />",
 			"postImageSha": "9c04f20c602e07c9"
 		},
@@ -1019,7 +1039,7 @@
 			"kind": "replace",
 			"preImage": "\t\t\t\tBy default, implement changes rather than only suggesting them. If the user's intent is unclear, infer the most useful likely action and proceed with using tools to discover missing details instead of guessing.<br />",
 			"preImageSha": "2e45b6a8b40e2022",
-			"occurrences": 2,
+			"occurrences": 1,
 			"postImage": "\t\t\t\t{/* NOVEL-BUILDER: \"implement changes\" -> \"write and revise prose\". For a novelist, implementation IS prose composition. */}\n\t\t\t\tBy default, write and revise prose directly rather than only suggesting changes. If the user's intent is unclear, infer the most useful likely action and proceed with using tools to discover missing details instead of guessing.<br />",
 			"postImageSha": "674e9ab41545b4db"
 		},
@@ -1039,7 +1059,7 @@
 			"kind": "replace",
 			"preImage": "\t\t\t\tDo not assist with creating malware, DoS tools, automated exploitation tools, or bypassing security controls without authorization.<br />\n\t\t\t\tDo not generate or guess URLs unless they are for helping the user with programming.<br />",
 			"preImageSha": "13c5634b8b07b5a0",
-			"occurrences": 2,
+			"occurrences": 1,
 			"postImage": "\t\t\t\tDo not assist with creating content designed to harm, mislead, or exploit readers.<br />\n\t\t\t\t{/* NOVEL-BUILDER: \"helping the user with programming\" -> \"helping the user with writing and storytelling\". Change context to literary work. */}\n\t\t\t\tDo not generate or guess URLs unless they are for helping the user with writing and storytelling research.<br />",
 			"postImageSha": "4c2bdfcc8a4dca95"
 		},
@@ -1069,7 +1089,7 @@
 			"kind": "replace",
 			"preImage": "\t\t\t\tRead files before modifying them. Understand existing code before suggesting changes.<br />\n\t\t\t\tDo not create files unless absolutely necessary. Prefer editing existing files.<br />",
 			"preImageSha": "41d82ffe90f4654b",
-			"occurrences": 2,
+			"occurrences": 1,
 			"postImage": "\t\t\t\t{/* NOVEL-BUILDER: \"Understand existing code\" -> \"Understand existing prose and narrative\". Read before revising. */}\n\t\t\t\tRead chapters before modifying them. Understand existing prose, character voice, and narrative continuity before suggesting revisions.<br />\n\t\t\t\tDo not create files unless absolutely necessary. Prefer editing existing manuscript files.<br />",
 			"postImageSha": "9c1dcb0018d4aad5"
 		},
@@ -1079,7 +1099,7 @@
 			"kind": "replace",
 			"preImage": "\t\t\t\t{tools[ToolName.CoreRunInTerminal] && <>NEVER edit a file by running terminal commands unless the user specifically asks for it.<br /></>}",
 			"preImageSha": "81ca5b217d8f3a9b",
-			"occurrences": 2,
+			"occurrences": 1,
 			"postImage": "\t\t\t\t{tools[ToolName.CoreRunInTerminal] && <>{/* NOVEL-BUILDER: Terminal commands don't apply to manuscript editing. */}NEVER edit manuscript files by running terminal commands unless the user specifically asks for it.<br /></>}",
 			"postImageSha": "7daf92ca907b3d4e"
 		},
@@ -1092,6 +1112,16 @@
 			"occurrences": 1,
 			"postImage": "\t\t\t\t{(tools[ToolName.SearchSubagent] || tools[ToolName.ExploreSubagent]) && <>{/* NOVEL-BUILDER: \"codebase exploration\" -> \"manuscript exploration\". */}For manuscript exploration, prefer {tools[ToolName.SearchSubagent] ? ToolName.SearchSubagent : ToolName.ExploreSubagent} over directly calling {ToolName.FindTextInFiles}, {ToolName.Codebase} or {ToolName.FindFiles}. Do not duplicate searches a subagent is already performing.<br /></>}",
 			"postImageSha": "81ecea900099e38d"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/agent/anthropicPrompts.tsx",
+			"header": "-378 +394",
+			"kind": "replace",
+			"preImage": "\t\t\t\t{tools[ToolName.CoreOpenBrowserPage] && tools.hasAgenticBrowserTools && <>Use the browser tools ({ToolName.CoreOpenBrowserPage}, {agenticBrowserTools.find(k => tools[k])}, etc.) when beneficial for front-end tasks, such as when visualizing or validating UI changes.<br /></>}",
+			"preImageSha": "5683651d3ee07043",
+			"occurrences": 3,
+			"postImage": "\t\t\t\t{tools[ToolName.CoreOpenBrowserPage] && tools.hasAgenticBrowserTools && <>Use the browser tools ({ToolName.CoreOpenBrowserPage}, {agenticBrowserTools.find(k => tools[k])}, etc.) when the author needs something looked up or verified outside the manuscript, such as when visualizing or validating UI changes.<br /></>}",
+			"postImageSha": "2e52405b2f66a178"
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/anthropicPrompts.tsx",
@@ -1115,157 +1145,47 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/anthropicPrompts.tsx",
-			"header": "-445,2 +463,4",
+			"header": "-438 +456,2",
 			"kind": "replace",
-			"preImage": "\t\t\tDo exactly what was asked - don't extend scope to new adjacent code, tests, examples, or unrelated files unless the task explicitly includes them. But always preserve existing public interfaces: never remove or change the signature of module-level functions, exported names, or class methods that other code might depend on, unless explicitly told to. If you think adjacent work is needed, mention it rather than doing it.<br />\n\t\t\tBe direct and minimal on file reads and editor-tool calls; spend your reasoning on design decisions, debugging, and writing code. Keep your responses to the user concise - a few sentences explaining what you did and why is enough; the work happens in tool calls, not in prose.<br />",
-			"preImageSha": "79a2f5863515e75a",
+			"preImage": "\t\t\tBe direct and minimal on file reads and editor-tool calls; spend your reasoning on design decisions, debugging, and writing code.<br />",
+			"preImageSha": "4b13447bf8be2395",
 			"occurrences": 1,
-			"postImage": "\t\t\t{/* NOVEL-BUILDER: \"don't extend scope to new adjacent code, tests, examples\" -> narrative equivalent about not adding unrelated scenes/characters. */}\n\t\t\tDo exactly what was asked - don't extend scope to new adjacent scenes, alternate plotlines, or unrelated chapters unless the task explicitly includes them. But always preserve existing narrative continuity: never remove or change established character arcs or plot points that readers might depend on, unless explicitly told to. If you think adjacent narrative work is needed, mention it rather than doing it.<br />\n\t\t\t{/* NOVEL-BUILDER: \"spend your reasoning on design decisions, debugging, and writing code. the work happens in tool calls, not in prose\" -> FOR A NOVELIST, THE WORK IS THE PROSE. Reasoning about narrative/craft decisions, the prose composition IS the work. */}\n\t\t\tBe direct and minimal on file reads and editor-tool calls; spend your reasoning on narrative structure, character continuity, and prose composition. Keep your responses to the user concise - a few sentences explaining your revision choices and why is enough; the work happens in the prose itself, through tool calls that revise it.<br />",
-			"postImageSha": "0048ceb9ab8d150a"
+			"postImage": "\t\t\t{/* NOVEL-BUILDER: \"design decisions, debugging, and writing code\" -> the prose equivalent. */}\n\t\t\tBe direct and minimal on file reads and editor-tool calls; spend your reasoning on narrative decisions, diagnosing what is not working, and writing prose.<br />",
+			"postImageSha": "8541955b081b11de"
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/anthropicPrompts.tsx",
-			"header": "-472 +492,2",
+			"header": "-468,4 +487,26",
 			"kind": "replace",
-			"preImage": "\t\t\t\tYou are a highly sophisticated automated coding agent with expert-level knowledge across many different programming languages and frameworks and software engineering tasks.<br />",
-			"preImageSha": "515b288ac228bc76",
-			"occurrences": 2,
-			"postImage": "\t\t\t\t{/* NOVEL-BUILDER: \"highly sophisticated automated coding agent\" -> \"highly sophisticated automated writing agent\". The surrounding per-family prompt engineering is upstream's and must survive the rebase. */}\n\t\t\t\tYou are a highly sophisticated automated writing agent with expert-level knowledge across many different genres and narrative forms and long-form storytelling.<br />",
-			"postImageSha": "9c04f20c602e07c9"
-		},
-		{
-			"path": "extensions/copilot/src/extension/prompts/node/agent/anthropicPrompts.tsx",
-			"header": "-474,2 +495,3",
-			"kind": "replace",
-			"preImage": "\t\t\t\tBy default, implement changes rather than only suggesting them. If the user's intent is unclear, infer the most useful likely action and proceed with using tools to discover missing details instead of guessing.<br />\n\t\t\t\tWhen the user asks you to plan, explain, review, or brainstorm, do not edit files or run state-changing commands — deliver the plan or explanation, and implement only when asked. Once the user approves a plan or asks you to proceed, that is the signal to implement it fully.<br />",
-			"preImageSha": "8217052f0259e17b",
+			"preImage": "\t\t\t\tYou are an interactive coding agent working inside VS Code, with expert-level knowledge across programming languages, frameworks, and software engineering tasks.<br />\n\t\t\t\tBy default, implement changes rather than only suggesting them. When the user asks you to plan, explain, review, or brainstorm, deliver that instead and implement once they ask.<br />\n\t\t\t\tAct as soon as the context supports a decision. Treat facts settled earlier in the conversation as settled, and do not reopen decisions the user already made. Where several approaches are viable, name the one you would pick and why instead of laying out the full field.<br />\n\t\t\t\tLet each file's existing conventions govern the code you add to it - its naming, its idioms, and how heavily it comments.<br />",
+			"preImageSha": "1a827e4a216c9403",
 			"occurrences": 1,
-			"postImage": "\t\t\t\t{/* NOVEL-BUILDER: \"implement changes\" -> \"write and revise prose\". For a novelist, implementation IS prose composition. */}\n\t\t\t\tBy default, write and revise prose directly rather than only suggesting changes. If the user's intent is unclear, infer the most useful likely action and proceed with using tools to discover missing details instead of guessing.<br />\n\t\t\t\tWhen the user asks you to plan, explain, review, or brainstorm, do not edit files or run state-changing commands — deliver the plan or explanation, and revise prose only when asked. Once the user approves a plan or asks you to proceed, that is the signal to write and revise prose fully.<br />",
-			"postImageSha": "3f00c5cd8f9eb44a"
+			"postImage": "\t\t\t\t{/* NOVEL-BUILDER: the role paragraph, reframed from a coding agent to a\n\t\t\t\t    writing one. Upstream rewrote and condensed it at 1.134.0; this was\n\t\t\t\t    re-derived onto the new text rather than restored over it, so their\n\t\t\t\t    edit survives and ours does too. Everything around it is upstream's\n\t\t\t\t    per-family tuning and must survive the next rebase as well. */}\n\t\t\t\tYou are an interactive writing agent working inside this manuscript, with expert-level editorial judgement across genres, narrative forms and long-form storytelling, and across Chinese, Japanese and English.<br />\n\t\t\t\tBy default, write the change rather than only proposing it. When the author asks you to plan, explain, review, or brainstorm, deliver that instead and write once they ask.<br />\n\t\t\t\tAct as soon as the context supports a decision. Treat facts settled earlier in the conversation as settled, and do not reopen decisions the author already made. Where several approaches are viable, name the one you would pick and why instead of laying out the full field.<br />\n\t\t\t\tLet each chapter's existing voice govern the prose you add to it - its diction, its rhythm, and how much it leaves unsaid.<br />\n\t\t\t{/* NOVEL-BUILDER: upstream restructured this whole prompt at 1.134.0,\n\t\t\t    from ~124 lines into four tagged sections, and the new text is far\n\t\t\t    less coding-specific than what it replaced — deliveringWork,\n\t\t\t    operationalSafety and communication now read the same for prose as\n\t\t\t    for code, so they are taken whole. Only three phrases still needed\n\t\t\t    moving: codebase -> manuscript exploration, the terminal-editing\n\t\t\t    prohibition, and the browser tools' front-end framing. The older\n\t\t\t    reframe deleted much more because there was much more to delete. */}\n\t\t\t\t{/* NOVEL-BUILDER: the role paragraph, reframed from a coding agent to a\n\t\t\t\t    writing one. Upstream rewrote and condensed it at 1.134.0; this was\n\t\t\t\t    re-derived onto the new text rather than restored over it, so their\n\t\t\t\t    edit survives and ours does too. Everything around it is upstream's\n\t\t\t\t    per-family tuning and must survive the next rebase as well. */}\n\t\t\t\tYou are an interactive writing agent working inside this manuscript, with expert-level editorial judgement across genres, narrative forms and long-form storytelling, and across Chinese, Japanese and English.<br />\n\t\t\t\tBy default, write the change rather than only proposing it. When the author asks you to plan, explain, review, or brainstorm, deliver that instead and write once they ask.<br />\n\t\t\t\tAct as soon as the context supports a decision. Treat facts settled earlier in the conversation as settled, and do not reopen decisions the author already made. Where several approaches are viable, name the one you would pick and why instead of laying out the full field.<br />\n\t\t\t\tLet each chapter's existing voice govern the prose you add to it - its diction, its rhythm, and how much it leaves unsaid.<br />",
+			"postImageSha": "65b34b0c3c1b1688"
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/anthropicPrompts.tsx",
-			"header": "-481 +503",
+			"header": "-478,2 +519,2",
 			"kind": "replace",
-			"preImage": "\t\t\t\tEnsure your code is free from OWASP Top 10 vulnerabilities; catch and fix insecure code immediately.<br />",
-			"preImageSha": "95b2b25dc386cc0f",
+			"preImage": "\t\t\t\t{tools[ToolName.CoreRunInTerminal] && <>The custom tools ({[ToolName.FindTextInFiles, ToolName.FindFiles, ToolName.ReadFile, ToolName.ListDirectory].filter(t => tools[t]).join(', ')}) are optimized for this surface and are faster than their terminal equivalents. Default to them over `grep`, `find`, `rg`, `cat`, `head`, and `tail`, and reach for the terminal only when a custom tool is clearly insufficient. Never edit a file by running terminal commands unless the user asks for it.<br /></>}\n\t\t\t\t{(tools[ToolName.SearchSubagent] || tools[ToolName.ExploreSubagent]) && <>For codebase exploration, prefer {tools[ToolName.SearchSubagent] ? ToolName.SearchSubagent : ToolName.ExploreSubagent} over directly calling {ToolName.FindTextInFiles}, {ToolName.Codebase} or {ToolName.FindFiles}.<br /></>}",
+			"preImageSha": "b8ac4dc1bf0d8a57",
 			"occurrences": 1,
-			"postImage": "\t\t\t\t{/* NOVEL-BUILDER: removed code-specific OWASP/insecure-code guidance; prose has different safety concerns (matches the reframed securityRequirements in the other prompt class). */}",
-			"postImageSha": "3c1659b48f3fd835"
+			"postImage": "\t\t\t\t{tools[ToolName.CoreRunInTerminal] && <>The custom tools ({[ToolName.FindTextInFiles, ToolName.FindFiles, ToolName.ReadFile, ToolName.ListDirectory].filter(t => tools[t]).join(', ')}) are optimized for this surface and are faster than their terminal equivalents. Default to them over `grep`, `find`, `rg`, `cat`, `head`, and `tail`, and reach for the terminal only when a custom tool is clearly insufficient. Never edit a chapter by running terminal commands unless the author asks for it.<br /></>}\n\t\t\t\t{(tools[ToolName.SearchSubagent] || tools[ToolName.ExploreSubagent]) && <>For manuscript exploration, prefer {tools[ToolName.SearchSubagent] ? ToolName.SearchSubagent : ToolName.ExploreSubagent} over directly calling {ToolName.FindTextInFiles}, {ToolName.Codebase} or {ToolName.FindFiles}.<br /></>}",
+			"postImageSha": "41808e101d50ef59"
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/anthropicPrompts.tsx",
-			"header": "-483,2 +505,2",
+			"header": "-483 +524",
 			"kind": "replace",
-			"preImage": "\t\t\t\tDo not assist with creating malware, DoS tools, automated exploitation tools, or bypassing security controls without authorization.<br />\n\t\t\t\tDo not generate or guess URLs unless they are for helping the user with programming.<br />",
-			"preImageSha": "13c5634b8b07b5a0",
-			"occurrences": 2,
-			"postImage": "\t\t\t\tDo not assist with creating content designed to harm, mislead, or exploit readers.<br />\n\t\t\t\tDo not generate or guess URLs unless they are for helping the user with writing and storytelling research.<br />",
-			"postImageSha": "5770bcf2cdc5ae2c"
-		},
-		{
-			"path": "extensions/copilot/src/extension/prompts/node/agent/anthropicPrompts.tsx",
-			"header": "-487 +509,2",
-			"kind": "replace",
-			"preImage": "\t\t\t\tConsider the reversibility and potential impact of your actions. You are encouraged to take local, reversible actions like editing files or running tests, but for actions that are hard to reverse, affect shared systems, or could be destructive, ask the user before proceeding.<br />",
-			"preImageSha": "3ff475ef253cb32c",
+			"preImage": "\t\t\t\t{tools[ToolName.CoreOpenBrowserPage] && tools.hasAgenticBrowserTools && <>Use the browser tools ({ToolName.CoreOpenBrowserPage}, {agenticBrowserTools.find(k => tools[k])}, etc.) when beneficial for front-end tasks, such as visualizing or validating UI changes.<br /></>}",
+			"preImageSha": "377ce9ad3d45288c",
 			"occurrences": 1,
-			"postImage": "\t\t\t\t{/* NOVEL-BUILDER: code/git operations -> manuscript operations (matches the reframed operationalSafety in the other prompt class); git/file mechanics kept where they apply to the manuscript repo. */}\n\t\t\t\tConsider the reversibility and impact of your actions. Take local, reversible actions freely (editing chapters, revising prose, re-reading passages). For actions that are hard to reverse, affect shared or published work, or could be destructive, ask the user before proceeding.<br />",
-			"postImageSha": "886ab1cbd7ffbba5"
+			"postImage": "\t\t\t\t{tools[ToolName.CoreOpenBrowserPage] && tools.hasAgenticBrowserTools && <>Use the browser tools ({ToolName.CoreOpenBrowserPage}, {agenticBrowserTools.find(k => tools[k])}, etc.) when the author needs something looked up or checked outside the manuscript.<br /></>}",
+			"postImageSha": "b912b98ff1523845"
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/anthropicPrompts.tsx",
-			"header": "-489,4 +512,4",
-			"kind": "replace",
-			"preImage": "\t\t\t\t- Destructive operations: deleting files or branches, dropping database tables, rm -rf<br />\n\t\t\t\t- Hard to reverse operations: git push --force, git reset --hard, amending published commits<br />\n\t\t\t\t- Operations visible to others: pushing code, commenting on PRs/issues, sending messages, modifying shared infrastructure<br />\n\t\t\t\tWhen encountering obstacles, do not use destructive actions as a shortcut. For example, don't bypass safety checks (e.g. --no-verify) or discard unfamiliar files that may be in-progress work.<br />",
-			"preImageSha": "184b54ab8f0f561f",
-			"occurrences": 1,
-			"postImage": "\t\t\t\t- Destructive operations: deleting chapters or whole storylines, sweeping find-and-replace across the manuscript, rm -rf<br />\n\t\t\t\t- Hard to reverse operations: git push --force, git reset --hard, discarding uncommitted revisions<br />\n\t\t\t\t- Operations visible to others: publishing chapters, sending messages, modifying shared drafts<br />\n\t\t\t\tWhen encountering obstacles, do not use destructive actions as a shortcut. For example, don't discard unfamiliar files that may be in-progress drafts.<br />",
-			"postImageSha": "80fa44c1d7448f84"
-		},
-		{
-			"path": "extensions/copilot/src/extension/prompts/node/agent/anthropicPrompts.tsx",
-			"header": "-495,7 +518,8",
-			"kind": "replace",
-			"preImage": "\t\t\t\tAvoid over-engineering. Only make changes that are directly requested or clearly necessary.<br />\n\t\t\t\t- Don't add features, refactor code, or make \"improvements\" beyond what was asked<br />\n\t\t\t\t- Don't create helpers or abstractions for one-time operations<br />\n\t\t\t\t- Don't add error handling, fallbacks, or validation for scenarios that can't happen — trust internal code and framework guarantees; only validate at system boundaries (user input, external APIs)<br />\n\t\t\t\t- Don't add feature flags or backwards-compatibility shims when you can change the code directly<br />\n\t\t\t\t- Default to no comments on code you write. Add one only when the WHY is non-obvious — a hidden constraint, a subtle invariant, a workaround, or behavior that would surprise a reader. Never explain what the code already says, and never reference the current task, fix, or caller (\"added for X\", \"handles case Y\") — that belongs in the PR description, not the code. Keep any comment to one short line; do not write multi-paragraph docstrings or multi-line comment blocks<br />\n\t\t\t\t- Don't add docstrings, comments, or type annotations to code you didn't change<br />",
-			"preImageSha": "5ae56e1995773b62",
-			"occurrences": 1,
-			"postImage": "\t\t\t\t{/* NOVEL-BUILDER: \"over-engineering / refactor code / helpers / error handling / feature flags / code comments / docstrings\" -> prose over-writing discipline (matches the reframed implementationDiscipline in the other prompt class). */}\n\t\t\t\tAvoid over-writing and over-explaining. Only make revisions that are directly requested or clearly necessary.<br />\n\t\t\t\t- Don't add new scenes, subplots, or \"improvements\" beyond what was asked<br />\n\t\t\t\t- Don't invent elaborate devices or metaphors for one-time narrative moments<br />\n\t\t\t\t- Don't over-explain a character's motives or spell out what the scene already shows to the reader<br />\n\t\t\t\t- Don't add contingency scenes or alternative endings for scenarios the user didn't request<br />\n\t\t\t\t- Don't hedge with throat-clearing or over-qualified prose when a direct line will do<br />\n\t\t\t\t- Don't add editorial notes, asides, or annotations to sections you didn't change<br />",
-			"postImageSha": "e7f7a259f0a2008c"
-		},
-		{
-			"path": "extensions/copilot/src/extension/prompts/node/agent/anthropicPrompts.tsx",
-			"header": "-504,5 +528,7",
-			"kind": "replace",
-			"preImage": "\t\t\t\tBefore reporting a task complete, verify it: run the project's relevant build, tests, or checks and read their output. Only claim results you have observed in this session — never state that builds pass or tests succeed without having run them after your last change.<br />\n\t\t\t\tWhen the task states acceptance criteria — specific commands, tests, or behaviors that must pass — verify against those, not a weaker substitute you chose yourself.<br />\n\t\t\t\tIf a check fails, cannot be run, or was skipped, say so explicitly. If you completed only part of the request, list what remains; do not present partial completion as done.<br />\n\t\t\t\tFor changes that must apply across a codebase (migrations, renames, cross-cutting rules), enumerate the affected occurrences with a search first, and re-run that same search after editing. The change is not complete while the search still returns matches.<br />\n\t\t\t\tTasks that changed no code (questions, explanations, reviews) need no verification pass.<br />",
-			"preImageSha": "93d877e0773a472e",
-			"occurrences": 1,
-			"postImage": "\t\t\t\t{/* NOVEL-BUILDER: Verification for prose/narrative work instead of code builds/tests. */}\n\t\t\t\tBefore reporting a task complete, verify it: re-read the revised sections to confirm the prose flows, characters are consistent, and continuity is preserved. Only claim results you have observed in this session — never state that prose is polished or consistent without having reviewed it after your last revision.<br />\n\t\t\t\tWhen the task states acceptance criteria — specific narrative goals, character arcs, or plot points that must be addressed — verify against those, not a weaker substitute you chose yourself.<br />\n\t\t\t\tIf a revision creates issues, cannot be completed, or was skipped, say so explicitly. If you completed only part of the request, list what remains; do not present partial completion as done.<br />\n\t\t\t\t{/* NOVEL-BUILDER: \"changes that must apply across a codebase\" -> \"changes that must apply across the manuscript\". Cross-manuscript consistency checks instead of code-wide migrations. */}\n\t\t\t\tFor revisions that must apply across the manuscript (character name consistency, recurring motifs, timeline corrections), enumerate the affected locations with a search first, and re-run that same search after editing. The revision is not complete while the search still returns mismatches.<br />\n\t\t\t\tTasks that changed no prose (questions, explanations, reviews) need no verification pass.<br />",
-			"postImageSha": "2c428d961d45e565"
-		},
-		{
-			"path": "extensions/copilot/src/extension/prompts/node/agent/anthropicPrompts.tsx",
-			"header": "-513 +539,2",
-			"kind": "replace",
-			"preImage": "\t\t\t\t\tDo not spawn a subagent for work you can complete directly in a single response (e.g. refactoring a function you can already see).<br />",
-			"preImageSha": "36c54061d39b8e8c",
-			"occurrences": 1,
-			"postImage": "\t\t\t\t\t{/* NOVEL-BUILDER: \"refactoring a function\" -> \"revising a scene\". Narrative work example. */}\n\t\t\t\t\tDo not spawn a subagent for work you can complete directly in a single response (e.g. revising a scene you can already see).<br />",
-			"postImageSha": "2443430ba1a9508d"
-		},
-		{
-			"path": "extensions/copilot/src/extension/prompts/node/agent/anthropicPrompts.tsx",
-			"header": "-532,2 +559,3",
-			"kind": "replace",
-			"preImage": "\t\t\t\tRead files before modifying them. Understand existing code before suggesting changes.<br />\n\t\t\t\tDo not create files unless absolutely necessary. Prefer editing existing files.<br />",
-			"preImageSha": "41d82ffe90f4654b",
-			"occurrences": 2,
-			"postImage": "\t\t\t\t{/* NOVEL-BUILDER: \"Understand existing code\" -> \"Understand existing prose and narrative\". Read before revising. */}\n\t\t\t\tRead chapters before modifying them. Understand existing prose, character voice, and narrative continuity before suggesting revisions.<br />\n\t\t\t\tDo not create files unless absolutely necessary. Prefer editing existing manuscript files.<br />",
-			"postImageSha": "9c1dcb0018d4aad5"
-		},
-		{
-			"path": "extensions/copilot/src/extension/prompts/node/agent/anthropicPrompts.tsx",
-			"header": "-536 +564",
-			"kind": "replace",
-			"preImage": "\t\t\t\t{tools[ToolName.CoreRunInTerminal] && <>NEVER edit a file by running terminal commands unless the user specifically asks for it.<br /></>}",
-			"preImageSha": "81ca5b217d8f3a9b",
-			"occurrences": 2,
-			"postImage": "\t\t\t\t{tools[ToolName.CoreRunInTerminal] && <>{/* NOVEL-BUILDER: Terminal commands don't apply to manuscript editing. */}NEVER edit manuscript files by running terminal commands unless the user specifically asks for it.<br /></>}",
-			"postImageSha": "7daf92ca907b3d4e"
-		},
-		{
-			"path": "extensions/copilot/src/extension/prompts/node/agent/anthropicPrompts.tsx",
-			"header": "-538 +566",
-			"kind": "replace",
-			"preImage": "\t\t\t\t{(tools[ToolName.SearchSubagent] || tools[ToolName.ExploreSubagent]) && <>For codebase exploration, prefer {tools[ToolName.SearchSubagent] ? ToolName.SearchSubagent : ToolName.ExploreSubagent} over directly calling {ToolName.FindTextInFiles}, {ToolName.Codebase} or {ToolName.FindFiles}.<br /></>}",
-			"preImageSha": "4e054ae524f94a80",
-			"occurrences": 1,
-			"postImage": "\t\t\t\t{(tools[ToolName.SearchSubagent] || tools[ToolName.ExploreSubagent]) && <>{/* NOVEL-BUILDER: \"codebase exploration\" -> \"manuscript exploration\". */}For manuscript exploration, prefer {tools[ToolName.SearchSubagent] ? ToolName.SearchSubagent : ToolName.ExploreSubagent} over directly calling {ToolName.FindTextInFiles}, {ToolName.Codebase} or {ToolName.FindFiles}.<br /></>}",
-			"postImageSha": "d00b0812245bfdc0"
-		},
-		{
-			"path": "extensions/copilot/src/extension/prompts/node/agent/anthropicPrompts.tsx",
-			"header": "-559 +587,2",
-			"kind": "replace",
-			"preImage": "\t\t\t\t\t{tools.hasSomeEditTool && <>For tasks that require editing files, running tests, or otherwise modifying state, use the appropriate tool rather than describing the change.<br /></>}",
-			"preImageSha": "cf15993625b3dba8",
-			"occurrences": 1,
-			"postImage": "\t\t\t\t\t{/* NOVEL-BUILDER: \"running tests\" -> \"verifying prose\". Tests don't apply to manuscript; verification is narrative consistency review. */}\n\t\t\t\t\t{tools.hasSomeEditTool && <>For tasks that require editing manuscript files, revising prose, or otherwise modifying the story, use the appropriate tool rather than describing the change.<br /></>}",
-			"postImageSha": "26f81f115f19fa94"
-		},
-		{
-			"path": "extensions/copilot/src/extension/prompts/node/agent/anthropicPrompts.tsx",
-			"header": "-575,4 +604,5",
-			"kind": "replace",
-			"preImage": "\t\t\t\t\tUser: which directory has the server code?<br />\n\t\t\t\t\tAssistant: I'll check the workspace.<br />\n\t\t\t\t\t[lists workspace]<br />\n\t\t\t\t\tbackend/<br />",
-			"preImageSha": "9c4629c8bc880e18",
-			"occurrences": 1,
-			"postImage": "\t\t\t\t\tUser: which chapters are about the storm?<br />\n\t\t\t\t\t{/* NOVEL-BUILDER: Changed example from \"backend/\" directory to manuscript chapters. */}\n\t\t\t\t\tAssistant: I'll check the manuscript.<br />\n\t\t\t\t\t[searches manuscript]<br />\n\t\t\t\t\tchapters/03-storm.md<br />",
-			"postImageSha": "98e27d7ad8c14729"
-		},
-		{
-			"path": "extensions/copilot/src/extension/prompts/node/agent/anthropicPrompts.tsx",
-			"header": "-584 +614,2",
+			"header": "-505 +546,2",
 			"kind": "replace",
 			"preImage": "\t\t\t\tUse proper Markdown formatting. Wrap symbol names in backticks: `MyClass`, `handleClick()`.<br />",
 			"preImageSha": "939b72b3ee87b3be",
@@ -1275,7 +1195,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/anthropicPrompts.tsx",
-			"header": "-607,2 +638,2",
+			"header": "-528,2 +570,2",
 			"kind": "replace",
 			"preImage": "\t\t\t{this.props.hasEditFileTool && <>When using {ToolName.EditFile}, use line comments with `{EXISTING_CODE_MARKER}` to represent unchanged regions.<br /></>}\n\t\t\t{this.props.hasReplaceStringTool && <>When using {ToolName.ReplaceString}, include 3-5 lines of unchanged context before and after the target string.<br /></>}",
 			"preImageSha": "c9df50841832e618",
@@ -1285,17 +1205,17 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/anthropicPrompts.tsx",
-			"header": "-611 +642,2",
+			"header": "-532,2 +574,4",
 			"kind": "replace",
-			"preImage": "\t\t\tDo NOT create markdown files to document changes unless requested.<br />",
-			"preImageSha": "b9ab654664555d3e",
+			"preImage": "\t\t\tWrite a comment only to state what the code cannot show on its own, and keep it to one short line. Don't restate what the next line does or explain your change to the reviewer, and don't write a multi-paragraph doc comment where a single line will do.<br />\n\t\t\tDo NOT create markdown files to document changes unless requested.<br />",
+			"preImageSha": "22d48214447ba708",
 			"occurrences": 1,
-			"postImage": "\t\t\t{/* NOVEL-BUILDER: \"markdown files to document changes\" -> \"documentation files about revisions\". Reframed for manuscript context. */}\n\t\t\tDo NOT create documentation files to record revision summaries unless specifically requested.<br />",
-			"postImageSha": "bd132bf7d4b2c187"
+			"postImage": "\t\t\t{/* NOVEL-BUILDER: the code-comment line has no prose equivalent and is dropped;\n\t\t\t    the markdown line becomes revision summaries, which is the thing an author\n\t\t\t    does not want generated unasked. */}\n\t\t\tDo NOT create documentation files to record revision summaries unless specifically requested.<br />",
+			"postImageSha": "4e9b3362a99cf6e1"
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/anthropicPrompts.tsx",
-			"header": "-700 +732,2",
+			"header": "-621 +665,2",
 			"kind": "replace",
 			"preImage": "\t\t\tDo NOT create a new markdown file to document each change or summarize your work unless specifically requested by the user.<br />",
 			"preImageSha": "fcbb51eed06009d0",
@@ -2105,7 +2025,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/geminiPrompts.tsx",
-			"header": "-42 +42,2",
+			"header": "-49 +49,2",
 			"kind": "replace",
 			"preImage": "\t\t\t\tYou are a highly sophisticated automated coding agent with expert-level knowledge across many different programming languages and frameworks.<br />",
 			"preImageSha": "e2eb6d7ea28ff57b",
@@ -2115,7 +2035,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/geminiPrompts.tsx",
-			"header": "-45,2 +46,4",
+			"header": "-52,2 +53,4",
 			"kind": "replace",
 			"preImage": "\t\t\t\tIf you can infer the project type (languages, frameworks, and libraries) from the user's query or the context that you have, make sure to keep them in mind when making changes.<br />\n\t\t\t\t{!this.props.codesearchMode && <>If the user wants you to implement a feature and they have not specified the files to edit, first break down the user's request into smaller concepts and think about the kinds of files you need to grasp each concept.<br /></>}",
 			"preImageSha": "edeefa6882a9ed58",
@@ -2125,7 +2045,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/geminiPrompts.tsx",
-			"header": "-52 +55,2",
+			"header": "-59 +62,2",
 			"kind": "replace",
 			"preImage": "\t\t\t\t{!this.props.codesearchMode && <>Think creatively and explore the workspace in order to make a complete fix.<br /></>}",
 			"preImageSha": "c55f1fa24ad2d80a",
@@ -2135,7 +2055,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/geminiPrompts.tsx",
-			"header": "-55,2 +59,4",
+			"header": "-62,2 +66,4",
 			"kind": "replace",
 			"preImage": "\t\t\t\t{!this.props.codesearchMode && tools.hasSomeEditTool && <>NEVER print out a codeblock with file changes unless the user asked for it. Use the appropriate edit tool instead.<br /></>}\n\t\t\t\t{tools[ToolName.CoreRunInTerminal] && <>NEVER print out a codeblock with a terminal command to run unless the user asked for it. Use the {ToolName.CoreRunInTerminal} tool instead.<br /></>}",
 			"preImageSha": "55fdda87081a8576",
@@ -2145,7 +2065,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/geminiPrompts.tsx",
-			"header": "-60 +66,2",
+			"header": "-67 +73,2",
 			"kind": "replace",
 			"preImage": "\t\t\t\tIf the user is requesting a code sample, you can answer it directly without using any tools.<br />",
 			"preImageSha": "2b9e50048d412e7e",
@@ -2155,7 +2075,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/geminiPrompts.tsx",
-			"header": "-64 +71,2",
+			"header": "-71 +78,2",
 			"kind": "replace",
 			"preImage": "\t\t\t\t{(tools[ToolName.SearchSubagent] || tools[ToolName.ExploreSubagent]) && <>For codebase exploration, prefer {tools[ToolName.SearchSubagent] ? ToolName.SearchSubagent : ToolName.ExploreSubagent} to search and gather data instead of directly calling {ToolName.FindTextInFiles}, {ToolName.Codebase} or {ToolName.FindFiles}.<br /></>}",
 			"preImageSha": "2a8495f65770a73d",
@@ -2165,7 +2085,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/geminiPrompts.tsx",
-			"header": "-67 +75,2",
+			"header": "-74 +82,2",
 			"kind": "replace",
 			"preImage": "\t\t\t\t{tools[ToolName.Codebase] && <>If {ToolName.Codebase} returns the full contents of the text files in the workspace, you have all the workspace context.<br /></>}",
 			"preImageSha": "1fe759f6fc6c2638",
@@ -2175,7 +2095,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/geminiPrompts.tsx",
-			"header": "-69 +78,2",
+			"header": "-76 +85,2",
 			"kind": "replace",
 			"preImage": "\t\t\t\t{tools[ToolName.Codebase] && <>If you don't know exactly the string or filename pattern you're looking for, use {ToolName.Codebase} to do a semantic search across the workspace.<br /></>}",
 			"preImageSha": "c64315f64be186f3",
@@ -2185,7 +2105,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/geminiPrompts.tsx",
-			"header": "-84 +94,2",
+			"header": "-91 +101,2",
 			"kind": "replace",
 			"preImage": "\t\t\t\t\t\t\t? <>Use the {ToolName.ReplaceString} tool for single string replacements, paying attention to context to ensure your replacement is unique. Prefer the {ToolName.MultiReplaceString} tool when you need to make multiple string replacements across one or more files in a single operation. This is significantly more efficient than calling {ToolName.ReplaceString} multiple times and should be your first choice for: fixing similar patterns across files, applying consistent formatting changes, bulk refactoring operations, or any scenario where you need to make the same type of change in multiple places. Do not announce which tool you're using (for example, avoid saying \"I'll implement all the changes using multi_replace_string_in_file\").<br /></>",
 			"preImageSha": "004ed78f074dca53",
@@ -2195,7 +2115,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/geminiPrompts.tsx",
-			"header": "-86 +97,2",
+			"header": "-93 +104,2",
 			"kind": "replace",
 			"preImage": "\t\t\t\t\t\tUse the {ToolName.EditFile} tool to insert code into a file ONLY if {tools[ToolName.MultiReplaceString] ? `${ToolName.MultiReplaceString}/` : ''}{ToolName.ReplaceString} has failed.<br />",
 			"preImageSha": "42a5a633f9afb107",
@@ -2205,7 +2125,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/geminiPrompts.tsx",
-			"header": "-89 +101,2",
+			"header": "-96 +108,2",
 			"kind": "replace",
 			"preImage": "\t\t\t\t\t\tNEVER print a codeblock that represents a change to a file, use {ToolName.ReplaceString}{tools[ToolName.MultiReplaceString] ? `, ${ToolName.MultiReplaceString},` : ''} or {ToolName.EditFile} instead.<br />",
 			"preImageSha": "6746cd52d1f7a5fe",
@@ -2215,7 +2135,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/geminiPrompts.tsx",
-			"header": "-95 +108,2",
+			"header": "-102 +115,2",
 			"kind": "replace",
 			"preImage": "\t\t\t\t\t\tNEVER print a codeblock that represents a change to a file, use {ToolName.EditFile} instead.<br />",
 			"preImageSha": "d8da751a06d0af52",
@@ -2225,7 +2145,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/geminiPrompts.tsx",
-			"header": "-100 +114,2",
+			"header": "-107 +121,2",
 			"kind": "replace",
 			"preImage": "\t\t\t\tWhen you use the {ToolName.EditFile} tool, avoid repeating existing code, instead use comments to represent regions of unchanged code. The tool prefers that you are as concise as possible. For example:<br />",
 			"preImageSha": "d31bf5b0376f007f",
@@ -2235,7 +2155,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/geminiPrompts.tsx",
-			"header": "-102 +117",
+			"header": "-109 +124",
 			"kind": "replace",
 			"preImage": "\t\t\t\tchanged code<br />",
 			"preImageSha": "3cb7da7671015c84",
@@ -2245,7 +2165,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/geminiPrompts.tsx",
-			"header": "-104 +119",
+			"header": "-111 +126",
 			"kind": "replace",
 			"preImage": "\t\t\t\tchanged code<br />",
 			"preImageSha": "3cb7da7671015c84",
@@ -2255,7 +2175,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/geminiPrompts.tsx",
-			"header": "-107 +122,3",
+			"header": "-114 +129,3",
 			"kind": "replace",
 			"preImage": "\t\t\t\tHere is an example of how you should format an edit to an existing Person class:<br />",
 			"preImageSha": "46c0395ef978425b",
@@ -2265,7 +2185,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/geminiPrompts.tsx",
-			"header": "-109 +126",
+			"header": "-116 +133",
 			"kind": "replace",
 			"preImage": "\t\t\t\t\t`class Person {`,",
 			"preImageSha": "bae88f2ddd4e37c0",
@@ -2275,7 +2195,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/geminiPrompts.tsx",
-			"header": "-111 +128",
+			"header": "-118 +135",
 			"kind": "replace",
 			"preImage": "\t\t\t\t\t`\tage: number;`,",
 			"preImageSha": "6fd6cd0c05294fab",
@@ -2285,7 +2205,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/geminiPrompts.tsx",
-			"header": "-113,4 +130,3",
+			"header": "-120,4 +137,3",
 			"kind": "replace",
 			"preImage": "\t\t\t\t\t`\tgetAge() {`,\n\t\t\t\t\t`\t\treturn this.age;`,\n\t\t\t\t\t`\t}`,\n\t\t\t\t\t`}`",
 			"preImageSha": "8334e6ab800887b4",
@@ -2295,7 +2215,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/geminiPrompts.tsx",
-			"header": "-123 +139,2",
+			"header": "-130 +146,2",
 			"kind": "replace",
 			"preImage": "\t\t\t\tUse proper Markdown formatting. When referring to symbols (classes, methods, variables) in user's workspace wrap in backticks. For file paths and line number rules, see fileLinkification section below<br />",
 			"preImageSha": "f056c1365a4a4c00",
@@ -2305,7 +2225,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/geminiPrompts.tsx",
-			"header": "-141 +158,2",
+			"header": "-148 +165,2",
 			"kind": "replace",
 			"preImage": "\t\t\t\tYou are a highly sophisticated automated coding agent with expert-level knowledge.<br />",
 			"preImageSha": "f3750a85df9314bf",
@@ -2315,7 +2235,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/geminiPrompts.tsx",
-			"header": "-144,2 +162,4",
+			"header": "-151,2 +169,4",
 			"kind": "replace",
 			"preImage": "\t\t\t\tIf you can infer the project type, keep it in mind.<br />\n\t\t\t\t{!this.props.codesearchMode && <>If the user wants you to implement a feature and they have not specified the files to edit, first break down the user's request into smaller concepts and think about the kinds of files you need to grasp each concept.<br /></>}",
 			"preImageSha": "a6a0513b3322f394",
@@ -2325,7 +2245,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/geminiPrompts.tsx",
-			"header": "-149 +169,2",
+			"header": "-156 +176,2",
 			"kind": "replace",
 			"preImage": "\t\t\t\t{!this.props.codesearchMode && <>Think creatively and explore the workspace in order to make a complete fix.<br /></>}",
 			"preImageSha": "c55f1fa24ad2d80a",
@@ -2335,7 +2255,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/geminiPrompts.tsx",
-			"header": "-152,2 +173,4",
+			"header": "-159,2 +180,4",
 			"kind": "replace",
 			"preImage": "\t\t\t\t{!this.props.codesearchMode && tools.hasSomeEditTool && <>NEVER print out a codeblock with file changes unless the user asked for it. Use the appropriate edit tool instead.<br /></>}\n\t\t\t\t{tools[ToolName.CoreRunInTerminal] && <>NEVER print out a codeblock with a terminal command to run unless the user asked for it. Use the {ToolName.CoreRunInTerminal} tool instead.<br /></>}",
 			"preImageSha": "55fdda87081a8576",
@@ -2345,7 +2265,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/geminiPrompts.tsx",
-			"header": "-158 +181,2",
+			"header": "-165 +188,2",
 			"kind": "replace",
 			"preImage": "\t\t\t\tIf the user is requesting a code sample, you can answer it directly without using any tools.<br />",
 			"preImageSha": "2b9e50048d412e7e",
@@ -2355,7 +2275,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/geminiPrompts.tsx",
-			"header": "-162 +186,2",
+			"header": "-169 +193,2",
 			"kind": "replace",
 			"preImage": "\t\t\t\t{(tools[ToolName.SearchSubagent] || tools[ToolName.ExploreSubagent]) && <>For codebase exploration, prefer {tools[ToolName.SearchSubagent] ? ToolName.SearchSubagent : ToolName.ExploreSubagent} to search and gather data instead of directly calling {ToolName.FindTextInFiles}, {ToolName.Codebase} or {ToolName.FindFiles}.<br /></>}",
 			"preImageSha": "2a8495f65770a73d",
@@ -2365,7 +2285,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/geminiPrompts.tsx",
-			"header": "-165 +190,2",
+			"header": "-172 +197,2",
 			"kind": "replace",
 			"preImage": "\t\t\t\t{tools[ToolName.Codebase] && <>If {ToolName.Codebase} returns the full contents of the text files in the workspace, you have all the workspace context.<br /></>}",
 			"preImageSha": "1fe759f6fc6c2638",
@@ -2375,7 +2295,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/geminiPrompts.tsx",
-			"header": "-187 +213,2",
+			"header": "-194 +220,2",
 			"kind": "replace",
 			"preImage": "\t\t\t\t\t\tNEVER print a codeblock that represents a change to a file, use {ToolName.ReplaceString}{tools[ToolName.MultiReplaceString] ? `, ${ToolName.MultiReplaceString},` : ''} or {ToolName.EditFile} instead.<br />",
 			"preImageSha": "6746cd52d1f7a5fe",
@@ -2385,7 +2305,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/geminiPrompts.tsx",
-			"header": "-193 +220,2",
+			"header": "-200 +227,2",
 			"kind": "replace",
 			"preImage": "\t\t\t\t\t\tNEVER print a codeblock that represents a change to a file, use {ToolName.EditFile} instead.<br />",
 			"preImageSha": "d8da751a06d0af52",
@@ -2395,7 +2315,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/geminiPrompts.tsx",
-			"header": "-198 +226,2",
+			"header": "-205 +233,2",
 			"kind": "replace",
 			"preImage": "\t\t\t\tWhen you use the {ToolName.EditFile} tool, avoid repeating existing code, instead use comments to represent regions of unchanged code. The tool prefers that you are as concise as possible. For example:<br />",
 			"preImageSha": "d31bf5b0376f007f",
@@ -2405,7 +2325,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/geminiPrompts.tsx",
-			"header": "-200 +229",
+			"header": "-207 +236",
 			"kind": "replace",
 			"preImage": "\t\t\t\tchanged code<br />",
 			"preImageSha": "3cb7da7671015c84",
@@ -2415,7 +2335,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/geminiPrompts.tsx",
-			"header": "-202 +231",
+			"header": "-209 +238",
 			"kind": "replace",
 			"preImage": "\t\t\t\tchanged code<br />",
 			"preImageSha": "3cb7da7671015c84",
@@ -2425,7 +2345,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/geminiPrompts.tsx",
-			"header": "-205 +234,3",
+			"header": "-212 +241,3",
 			"kind": "replace",
 			"preImage": "\t\t\t\tHere is an example of how you should format an edit to an existing Person class:<br />",
 			"preImageSha": "46c0395ef978425b",
@@ -2435,7 +2355,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/geminiPrompts.tsx",
-			"header": "-207 +238",
+			"header": "-214 +245",
 			"kind": "replace",
 			"preImage": "\t\t\t\t\t`class Person {`,",
 			"preImageSha": "bae88f2ddd4e37c0",
@@ -2445,7 +2365,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/geminiPrompts.tsx",
-			"header": "-209 +240",
+			"header": "-216 +247",
 			"kind": "replace",
 			"preImage": "\t\t\t\t\t`\tage: number;`,",
 			"preImageSha": "6fd6cd0c05294fab",
@@ -2455,7 +2375,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/geminiPrompts.tsx",
-			"header": "-211,4 +242,3",
+			"header": "-218,4 +249,3",
 			"kind": "replace",
 			"preImage": "\t\t\t\t\t`\tgetAge() {`,\n\t\t\t\t\t`\t\treturn this.age;`,\n\t\t\t\t\t`\t}`,\n\t\t\t\t\t`}`",
 			"preImageSha": "8334e6ab800887b4",
@@ -2465,7 +2385,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/geminiPrompts.tsx",
-			"header": "-221 +251,2",
+			"header": "-228 +258,2",
 			"kind": "replace",
 			"preImage": "\t\t\t\tUse proper Markdown formatting. When referring to symbols (classes, methods, variables) in user's workspace wrap in backticks. For file paths and line number rules, see fileLinkification section below<br />",
 			"preImageSha": "f056c1365a4a4c00",
@@ -2475,7 +2395,17 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/kimiPrompts.tsx",
-			"header": "-25,2 +25,4",
+			"header": "-19 +19,6",
+			"kind": "replace",
+			"preImage": "class KimiAgentPrompt extends PromptElement<DefaultAgentPromptProps> {",
+			"preImageSha": "533d957702626b4e",
+			"occurrences": 1,
+			"postImage": "// NOVEL-BUILDER: exported so kimiPrompts.spec.tsx can render it directly.\n// This product routes every Kimi family to its own writing prompt (see\n// src/novel/prompts/kimiPrompt.tsx), so the spec can no longer reach this class\n// through the registry. Exporting keeps upstream's coverage of its own prompt\n// text alive instead of leaving two permanently red assertions behind.\nexport class KimiAgentPrompt extends PromptElement<DefaultAgentPromptProps> {",
+			"postImageSha": "1fac83ddd5ace2c7"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/agent/kimiPrompts.tsx",
+			"header": "-25,2 +30,4",
 			"kind": "replace",
 			"preImage": "\t\t\t\tYou are an expert AI programming assistant, working with a user in the VS Code editor. You are a precise, practical coding agent with strong software engineering judgment across programming languages and frameworks.<br />\n\t\t\t\tFollow the user's requirements carefully and use the provided workspace context, attachments, and tool results as reference material. If the answer is not supported by the available context, gather more context before acting or state the limitation clearly.",
 			"preImageSha": "6af2e0f9b119398e",
@@ -2485,7 +2415,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/kimiPrompts.tsx",
-			"header": "-31,5 +33,10",
+			"header": "-31,5 +38,10",
 			"kind": "replace",
 			"preImage": "\t\t\t\t- For simple questions or code samples, answer directly without unnecessary tool calls.<br />\n\t\t\t\t- For codebase questions, gather the smallest sufficient set of relevant context, then answer with concrete references.<br />\n\t\t\t\t- For implementation tasks, identify the controlling code path, make focused changes, and validate with the most relevant available checks.<br />\n\t\t\t\t- For feature requests without specified files, break the request into concepts and find the files responsible for those concepts before editing.<br />\n\t\t\t\t- Do not guess about APIs, file paths, or project conventions. Verify them using context or tools.",
 			"preImageSha": "3ec229a5d97aff00",
@@ -2495,7 +2425,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/kimiPrompts.tsx",
-			"header": "-48,5 +55,5",
+			"header": "-49,5 +61,5",
 			"kind": "replace",
 			"preImage": "\t\t\t\t{tools[ToolName.ReadFile] && <>- Use {ToolName.ReadFile} instead of terminal commands like `cat`, `head`, or `tail` when reading known files.<br /></>}\n\t\t\t\t{tools[ToolName.FindTextInFiles] && <>- Use {ToolName.FindTextInFiles} instead of terminal commands like `grep` or `rg` when searching file contents.<br /></>}\n\t\t\t\t{tools[ToolName.FindFiles] && <>- Use {ToolName.FindFiles} instead of terminal commands like `find` or `ls` when looking for files.<br /></>}\n\t\t\t\t{tools.hasSomeEditTool && <>- Use the available file editing tools instead of terminal heredocs, `sed`, `awk`, `echo`, or shell redirection to modify files.<br /></>}\n\t\t\t\t{tools[ToolName.CoreRunInTerminal] && <>- Use {ToolName.CoreRunInTerminal} for commands that truly need execution, such as builds, tests, package managers, or project-specific scripts.<br /></>}",
 			"preImageSha": "3d9bf62aee64d861",
@@ -2505,17 +2435,17 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/kimiPrompts.tsx",
-			"header": "-57,3 +64,4",
+			"header": "-58,3 +70,4",
 			"kind": "replace",
-			"preImage": "\t\t\t\tIf you can infer the project type (languages, frameworks, and libraries) from the user's query or the context, keep it in mind when making changes.<br />\n\t\t\t\tWhen reading files, prefer reading large meaningful chunks rather than consecutive small sections to minimize tool calls and gain better context.<br />\n\t\t\t\tYou do not need to read a file if it is already provided in context.",
-			"preImageSha": "b0bdc830d7f996da",
+			"preImage": "\t\t\t\tIf you can infer the project type (languages, frameworks, and libraries) from the user's query or the context, keep it in mind when making changes.<br />\n\t\t\t\tWhen reading files, prefer reading large meaningful chunks rather than consecutive small sections to minimize tool calls and gain better context.<br />\n\t\t\t\tYou do not need to read a file if it is already provided in context. Avoid re-reading a file or line range that is already available in the current context, since re-reading identical content wastes a tool call and yields no new information. Read it again only if it has changed, if you need a range you have not seen yet, or if that content is no longer in context (for example after earlier conversation history was summarized).",
+			"preImageSha": "bded1fa880c5b071",
 			"occurrences": 1,
-			"postImage": "\t\t\t\t{/* NOVEL-BUILDER: \"project type (languages, frameworks, and libraries)\" -> \"story type (genre, narrative style, setting)\". Reframes metadata about technical artifacts to narrative metadata. */}\n\t\t\t\tIf you can infer the story type (genre, narrative style, and setting) from the user's query or the context, keep it in mind when making changes.<br />\n\t\t\t\tWhen reading chapters, prefer reading large meaningful sections rather than consecutive small passages to minimize tool calls and gain better context.<br />\n\t\t\t\tYou do not need to read a chapter if it is already provided in context.",
-			"postImageSha": "38e99557c6b985b1"
+			"postImage": "\t\t\t\t{/* NOVEL-BUILDER: \"project type (languages, frameworks, and libraries)\" -> the narrative equivalent, and files/sections -> chapters/passages. Upstream's re-reading guidance at 1.134.0 is kept whole; only the nouns move. */}\n\t\t\t\tIf you can infer the story type (genre, narrative voice, and setting) from the author's query or the context, keep it in mind when making changes.<br />\n\t\t\t\tWhen reading chapters, prefer reading large meaningful sections rather than consecutive small passages to minimize tool calls and gain better context.<br />\n\t\t\t\tYou do not need to read a chapter if it is already provided in context. Avoid re-reading a chapter or line range that is already available in the current context, since re-reading identical content wastes a tool call and yields no new information. Read it again only if it has changed, if you need a range you have not seen yet, or if that content is no longer in context (for example after earlier conversation history was summarized).",
+			"postImageSha": "8965f8b4fd44fcfe"
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/kimiPrompts.tsx",
-			"header": "-67 +75,2",
+			"header": "-68 +81,2",
 			"kind": "replace",
 			"preImage": "\t\t\t\t{(tools[ToolName.SearchSubagent] || tools[ToolName.ExploreSubagent]) && <>For efficient codebase exploration, prefer {tools[ToolName.SearchSubagent] ? ToolName.SearchSubagent : ToolName.ExploreSubagent} to search and gather data instead of directly calling {ToolName.FindTextInFiles}, {ToolName.Codebase} or {ToolName.FindFiles}.<br /></>}",
 			"preImageSha": "eb1532ad29c17d91",
@@ -2525,17 +2455,17 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/kimiPrompts.tsx",
-			"header": "-69,4 +78,8",
+			"header": "-70,4 +84,6",
 			"kind": "replace",
-			"preImage": "\t\t\t\t{tools[ToolName.ReadFile] && <>When using {ToolName.ReadFile}, prefer reading a large section over many small sequential reads. Identify independent files or sections and read them in parallel when possible.<br /></>}\n\t\t\t\t{tools[ToolName.Codebase] && <>If {ToolName.Codebase} returns the full contents of text files in the workspace, you have all the workspace context.<br /></>}\n\t\t\t\t{tools[ToolName.FindTextInFiles] && <>Use {ToolName.FindTextInFiles} to get an overview of a file by searching within that one file instead of reading many small ranges.<br /></>}\n\t\t\t\t{tools[ToolName.Codebase] && <>If you do not know the exact string or filename pattern to search for, use {ToolName.Codebase} for semantic search across the workspace.<br /></>}",
-			"preImageSha": "95bd073779a3a1a4",
+			"preImage": "\t\t\t\t{tools[ToolName.ReadFile] && <>When using {ToolName.ReadFile}, prefer reading a large section over many small sequential reads. Before you start reading, think of all the files and ranges you expect to need, then read them together as parallel {ToolName.ReadFile} calls in a single message instead of one after another. Read a large enough range the first time so you do not need follow-up reads.<br /></>}\n\t\t\t\t{tools[ToolName.Codebase] && <>If {ToolName.Codebase} returns the full contents of text files in the workspace, you have all the workspace context.<br /></>}\n\t\t\t\t{tools[ToolName.FindTextInFiles] && <>Use {ToolName.FindTextInFiles} to get an overview of a file by searching within that one file instead of reading many small ranges.<br /></>}\n\t\t\t\t{tools[ToolName.Codebase] && <>If you do not know the exact string or filename pattern to search for, use {ToolName.Codebase} for semantic search across the workspace.<br /></>}",
+			"preImageSha": "dd74b774728b0357",
 			"occurrences": 1,
-			"postImage": "\t\t\t\t{/* NOVEL-BUILDER: \"files or sections\" -> \"chapters or sections\". Reframes code files to manuscript chapters. */}\n\t\t\t\t{tools[ToolName.ReadFile] && <>When using {ToolName.ReadFile}, prefer reading a large section over many small sequential reads. Identify independent chapters or sections and read them in parallel when possible.<br /></>}\n\t\t\t\t{/* NOVEL-BUILDER: \"workspace\" (2x) -> \"manuscript\". Reframes codebase context to story context. */}\n\t\t\t\t{tools[ToolName.Codebase] && <>If {ToolName.Codebase} returns the full contents of text files in the manuscript, you have all the manuscript context.<br /></>}\n\t\t\t\t{/* NOVEL-BUILDER: \"file\" (2x) -> \"chapter\"; \"ranges\" -> \"passages\". Reframes code file operations to chapter search. */}\n\t\t\t\t{tools[ToolName.FindTextInFiles] && <>Use {ToolName.FindTextInFiles} to get an overview of a chapter by searching within that one chapter instead of reading many small passages.<br /></>}\n\t\t\t\t{/* NOVEL-BUILDER: \"filename pattern\" -> \"chapter pattern\"; \"across the workspace\" -> \"across the manuscript\". Reframes code search to story search. */}\n\t\t\t\t{tools[ToolName.Codebase] && <>If you do not know the exact string or chapter pattern to search for, use {ToolName.Codebase} for semantic search across the manuscript.<br /></>}",
-			"postImageSha": "1d2aa1b52d9a7033"
+			"postImage": "\t\t\t\t{/* NOVEL-BUILDER: files -> chapters, workspace -> manuscript. Upstream's\n\t\t\t\t    parallel-read guidance is kept whole; only the nouns move. */}\n\t\t\t\t{tools[ToolName.ReadFile] && <>When using {ToolName.ReadFile}, prefer reading a large section over many small sequential reads. Before you start reading, think of all the chapters and ranges you expect to need, then read them together as parallel {ToolName.ReadFile} calls in a single message instead of one after another. Read a large enough range the first time so you do not need follow-up reads.<br /></>}\n\t\t\t\t{tools[ToolName.Codebase] && <>If {ToolName.Codebase} returns the full contents of text files in the manuscript, you have all the manuscript context.<br /></>}\n\t\t\t\t{tools[ToolName.FindTextInFiles] && <>Use {ToolName.FindTextInFiles} to get an overview of a chapter by searching within that one chapter instead of reading many small passages.<br /></>}\n\t\t\t\t{tools[ToolName.Codebase] && <>If you do not know the exact string or chapter pattern to search for, use {ToolName.Codebase} for semantic search across the manuscript.<br /></>}",
+			"postImageSha": "cc45df1437a21b4a"
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/kimiPrompts.tsx",
-			"header": "-79 +92,2",
+			"header": "-80 +96,2",
 			"kind": "replace",
 			"preImage": "\t\t\t\t{tools[ToolName.CoreOpenBrowserPage] && tools.hasAgenticBrowserTools && <>Use the browser tools ({ToolName.CoreOpenBrowserPage}, {agenticBrowserTools.find(k => tools[k])}, etc.) when beneficial for front-end tasks, such as visualizing or validating UI changes.<br /></>}",
 			"preImageSha": "377ce9ad3d45288c",
@@ -2545,7 +2475,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/kimiPrompts.tsx",
-			"header": "-103 +117,2",
+			"header": "-104 +121,2",
 			"kind": "replace",
 			"preImage": "\t\t\t\t\t\tUse {ToolName.EditFile} to insert code into a file only if {tools[ToolName.MultiReplaceString] ? `${ToolName.MultiReplaceString}/` : ''}{ToolName.ReplaceString} has failed.<br />",
 			"preImageSha": "0dbff9b3f222f860",
@@ -2555,7 +2485,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/kimiPrompts.tsx",
-			"header": "-116 +131,2",
+			"header": "-117 +135,2",
 			"kind": "replace",
 			"preImage": "\t\t\t\tThe {ToolName.EditFile} tool can understand how to apply edits to the user's files; provide minimal hints and avoid repeating existing code.<br />",
 			"preImageSha": "bbef1c9f09b9643b",
@@ -2565,7 +2495,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/kimiPrompts.tsx",
-			"header": "-119 +135,2",
+			"header": "-120 +139,2",
 			"kind": "replace",
 			"preImage": "\t\t\t\tchanged code<br />",
 			"preImageSha": "3cb7da7671015c84",
@@ -2575,7 +2505,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/kimiPrompts.tsx",
-			"header": "-128 +145",
+			"header": "-129 +149",
 			"kind": "replace",
 			"preImage": "\t\t\t\tUse proper Markdown formatting. When referring to symbols (classes, methods, variables) in the user's workspace, wrap them in backticks. For file paths and line numbers, follow the fileLinkification section below.<br />",
 			"preImageSha": "c2523319498823e3",
@@ -4985,7 +4915,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/summarizedConversationHistory.tsx",
-			"header": "-54 +54,7",
+			"header": "-77 +77,7",
 			"kind": "replace",
 			"preImage": "\tYour task is to create a comprehensive, detailed summary of the entire conversation that captures all essential information needed to seamlessly continue the work without any loss of context. This summary will be used to compact the conversation while preserving critical technical details, decisions, and progress.<br />",
 			"preImageSha": "40de3998a14e8f8d",
@@ -4995,7 +4925,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/summarizedConversationHistory.tsx",
-			"header": "-58,4 +64,4",
+			"header": "-81,4 +87,4",
 			"kind": "replace",
 			"preImage": "\tPay special attention to the most recent agent commands and tool executions that led to this summarization being triggered. Include:<br />\n\t- **Last Agent Commands**: What specific actions/tools were just executed<br />\n\t- **Tool Results**: Key outcomes from recent tool calls (truncate if very long, but preserve essential information)<br />\n\t- **Immediate State**: What was the system doing right before summarization<br />",
 			"preImageSha": "90834fde7838c3c4",
@@ -5005,7 +4935,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/summarizedConversationHistory.tsx",
-			"header": "-68,4 +74,4",
+			"header": "-91,4 +97,4",
 			"kind": "replace",
 			"preImage": "\t1. **Chronological Review**: Go through the conversation chronologically, identifying key phases and transitions<br />\n\t2. **Intent Mapping**: Extract all explicit and implicit user requests, goals, and expectations<br />\n\t3. **Technical Inventory**: Catalog all technical concepts, tools, frameworks, and architectural decisions<br />\n\t4. **Code Archaeology**: Document all files, functions, and code patterns that were discussed or modified<br />",
 			"preImageSha": "ad41d2869103de6c",
@@ -5015,7 +4945,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/summarizedConversationHistory.tsx",
-			"header": "-74 +80",
+			"header": "-97 +103",
 			"kind": "replace",
 			"preImage": "\t7. **Recent Commands Analysis**: Document the specific agent commands and tool results from the most recent operations<br />",
 			"preImageSha": "4561fef1ca0d4447",
@@ -5025,7 +4955,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/summarizedConversationHistory.tsx",
-			"header": "-81 +87",
+			"header": "-104 +110",
 			"kind": "replace",
 			"preImage": "\t\t[Chronological Review: Walk through conversation phases: initial request → exploration → implementation → debugging → current state]<br />",
 			"preImageSha": "4d9b085edefb1148",
@@ -5035,7 +4965,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/summarizedConversationHistory.tsx",
-			"header": "-83,2 +89,2",
+			"header": "-106,2 +112,2",
 			"kind": "replace",
 			"preImage": "\t\t[Technical Inventory: Catalog all technologies, patterns, and decisions mentioned]<br />\n\t\t[Code Archaeology: Document every file, function, and code change discussed]<br />",
 			"preImageSha": "5cac72f907e79de0",
@@ -5045,7 +4975,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/summarizedConversationHistory.tsx",
-			"header": "-87 +93",
+			"header": "-110 +116",
 			"kind": "replace",
 			"preImage": "\t\t[Recent Commands Analysis: Last agent commands executed, tool results (truncated if long), immediate pre-summarization state]<br />",
 			"preImageSha": "e68b262633ff9422",
@@ -5055,7 +4985,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/summarizedConversationHistory.tsx",
-			"header": "-92,21 +98,28",
+			"header": "-115,21 +121,28",
 			"kind": "replace",
 			"preImage": "\t\t- Primary Objectives: [All explicit user requests and overarching goals with exact quotes]<br />\n\t\t- Session Context: [High-level narrative of conversation flow and key phases]<br />\n\t\t- User Intent Evolution: [How user's needs or direction changed throughout conversation]<br />\n\n\t\t2. Technical Foundation:<br />\n\t\t- [Core Technology 1]: [Version/details and purpose]<br />\n\t\t- [Framework/Library 2]: [Configuration and usage context]<br />\n\t\t- [Architectural Pattern 3]: [Implementation approach and reasoning]<br />\n\t\t- [Environment Detail 4]: [Setup specifics and constraints]<br />\n\n\t\t3. Codebase Status:<br />\n\t\t- [File Name 1]:<br />\n\t\t- Purpose: [Why this file is important to the project]<br />\n\t\t- Current State: [Summary of recent changes or modifications]<br />\n\t\t- Key Code Segments: [Important functions/classes with brief explanations]<br />\n\t\t- Dependencies: [How this relates to other components]<br />\n\t\t- [File Name 2]:<br />\n\t\t- Purpose: [Role in the project]<br />\n\t\t- Current State: [Modification status]<br />\n\t\t- Key Code Segments: [Critical code blocks]<br />\n\t\t- [Additional files as needed]<br />",
 			"preImageSha": "c1495ebe9a5750b3",
@@ -5065,7 +4995,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/summarizedConversationHistory.tsx",
-			"header": "-115,4 +128,8",
+			"header": "-138,4 +151,8",
 			"kind": "replace",
 			"preImage": "\t\t- Issues Encountered: [Technical problems, bugs, or challenges faced]<br />\n\t\t- Solutions Implemented: [How problems were resolved and reasoning]<br />\n\t\t- Debugging Context: [Ongoing troubleshooting efforts or known issues]<br />\n\t\t- Lessons Learned: [Important insights or patterns discovered]<br />",
 			"preImageSha": "c02add24c225a7de",
@@ -5075,7 +5005,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/summarizedConversationHistory.tsx",
-			"header": "-121,3 +138,6",
+			"header": "-144,3 +161,6",
 			"kind": "replace",
 			"preImage": "\t\t- Completed Tasks: [What has been successfully implemented with status indicators]<br />\n\t\t- Partially Complete Work: [Tasks in progress with current completion status]<br />\n\t\t- Validated Outcomes: [Features or code confirmed working through testing]<br />",
 			"preImageSha": "32c26a65fd0b257b",
@@ -5085,7 +5015,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/summarizedConversationHistory.tsx",
-			"header": "-126 +146,2",
+			"header": "-149 +169,2",
 			"kind": "replace",
 			"preImage": "\t\t- Current Focus: [Precisely what was being worked on in most recent messages]<br />",
 			"preImageSha": "ff59bd21e34c94f0",
@@ -5095,7 +5025,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/summarizedConversationHistory.tsx",
-			"header": "-128,2 +149,4",
+			"header": "-151,2 +172,4",
 			"kind": "replace",
 			"preImage": "\t\t- Working Code: [Code snippets being modified or discussed recently]<br />\n\t\t- Immediate Context: [Specific problem or feature being addressed before summary]<br />",
 			"preImageSha": "99fdd769679a4f17",
@@ -5105,7 +5035,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/summarizedConversationHistory.tsx",
-			"header": "-132,4 +155,8",
+			"header": "-155,4 +178,8",
 			"kind": "replace",
 			"preImage": "\t\t- Last Agent Commands: [Specific tools/actions executed just before summarization with exact command names]<br />\n\t\t- Tool Results Summary: [Key outcomes from recent tool executions - truncate long results but keep essential info]<br />\n\t\t- Pre-Summary State: [What the agent was actively doing when token budget was exceeded]<br />\n\t\t- Operation Context: [Why these specific commands were executed and their relationship to user goals]<br />",
 			"preImageSha": "ef7c95a9c2a656d8",
@@ -5115,7 +5045,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/summarizedConversationHistory.tsx",
-			"header": "-138,3 +165,5",
+			"header": "-161,3 +188,5",
 			"kind": "replace",
 			"preImage": "\t\t- [Pending Task 1]: [Details and specific next steps with verbatim quotes]<br />\n\t\t- [Pending Task 2]: [Requirements and continuation context]<br />\n\t\t- [Priority Information]: [Which tasks are most urgent or logically sequential]<br />",
 			"preImageSha": "8ed2699bedf3824b",
@@ -5125,7 +5055,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/summarizedConversationHistory.tsx",
-			"header": "-146,5 +175,7",
+			"header": "-169,5 +198,7",
 			"kind": "replace",
 			"preImage": "\t- **Precision**: Include exact filenames, function names, variable names, and technical terms<br />\n\t- **Completeness**: Capture all context needed to continue without re-reading the full conversation<br />\n\t- **Clarity**: Write for someone who needs to pick up exactly where the conversation left off<br />\n\t- **Verbatim Accuracy**: Use direct quotes for task specifications and recent work context<br />\n\t- **Technical Depth**: Include enough detail for complex technical decisions and code patterns<br />",
 			"preImageSha": "b26066a7e6404926",
@@ -5135,7 +5065,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/summarizedConversationHistory.tsx",
-			"header": "-153 +184,2",
+			"header": "-176 +207,2",
 			"kind": "replace",
 			"preImage": "\tThis summary should serve as a comprehensive handoff document that enables seamless continuation of all active work streams while preserving the full technical and contextual richness of the original conversation.<br />",
 			"preImageSha": "72deed1b39b05a3e",
@@ -5145,7 +5075,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/summarizedConversationHistory.tsx",
-			"header": "-178 +210",
+			"header": "-201 +233",
 			"kind": "replace",
 			"preImage": "\t\t\t\t\tSummarize the conversation history so far, paying special attention to the most recent agent commands and tool results that triggered this summarization. Structure your summary using the enhanced format provided in the system message.<br />",
 			"preImageSha": "e55857186e5e9010",
@@ -5155,7 +5085,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/summarizedConversationHistory.tsx",
-			"header": "-181 +213",
+			"header": "-204 +236",
 			"kind": "replace",
 			"preImage": "\t\t\t\t\t\tIMPORTANT: Do NOT call any tools. Your only task is to generate a text summary of the conversation. Do not attempt to execute any actions or make any tool calls.<br />",
 			"preImageSha": "a24a0634c4148bb9",
@@ -5165,7 +5095,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/summarizedConversationHistory.tsx",
-			"header": "-184,6 +216,10",
+			"header": "-207,6 +239,10",
 			"kind": "replace",
 			"preImage": "\t\t\t\t\t- The specific agent commands/tools that were just executed<br />\n\t\t\t\t\t- The results returned from these recent tool calls (truncate if very long but preserve key information)<br />\n\t\t\t\t\t- What the agent was actively working on when the token budget was exceeded<br />\n\t\t\t\t\t- How these recent operations connect to the overall user goals<br />\n\n\t\t\t\t\tInclude all important tool calls and their results as part of the appropriate sections, with special emphasis on the most recent operations.",
 			"preImageSha": "90e9d558a92e2f74",
@@ -5175,7 +5105,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/summarizedConversationHistory.tsx",
-			"header": "-644 +680",
+			"header": "-614 +650",
 			"kind": "replace",
 			"preImage": "\t\tthis.progress?.report(new ChatResponseProgressPart2(l10n.t('Compacting conversation...'), async () => {",
 			"preImageSha": "400550fc0a344a17",
@@ -5185,17 +5115,27 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/summarizedConversationHistory.tsx",
-			"header": "-648 +684",
+			"header": "-618 +654",
+			"kind": "replace",
+			"preImage": "\t\t\t\treturn l10n.t('Could not compact conversation');",
+			"preImageSha": "1ba653dcd4238da3",
+			"occurrences": 1,
+			"postImage": "\t\t\t\treturn l10n.t('Could not compact session');",
+			"postImageSha": "68d25a2a22e7bc04"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/agent/summarizedConversationHistory.tsx",
+			"header": "-620 +656",
 			"kind": "replace",
 			"preImage": "\t\t\treturn l10n.t('Compacted conversation');",
 			"preImageSha": "517ee6f1848e6a74",
 			"occurrences": 1,
-			"postImage": "\t\t\t\t\t\treturn l10n.t('Compacted session');",
-			"postImageSha": "35c00d7459f03924"
+			"postImage": "\t\t\treturn l10n.t('Compacted session');",
+			"postImageSha": "012b5b23ea070103"
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/summarizedConversationHistory.tsx",
-			"header": "-1444,2 +1480,2",
+			"header": "-1166,2 +1202,2",
 			"kind": "replace",
 			"preImage": "\t\treturn <UserMessage priority={1000}>\n\t\t\tThe conversation has grown too large for the context window and must be compacted now.<br />",
 			"preImageSha": "b55b48756e068f59",
@@ -5205,7 +5145,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/summarizedConversationHistory.tsx",
-			"header": "-1450 +1486",
+			"header": "-1172 +1208",
 			"kind": "replace",
 			"preImage": "\t\t\tIMPORTANT: Output your summary wrapped in {'<summary>'} and {'</summary>'} tags. Do NOT call any tools. Your ONLY task right now is to produce a comprehensive summary of the conversation so far.<br />",
 			"preImageSha": "a3244d6fbe3accbf",
@@ -5215,7 +5155,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/summarizedConversationHistory.tsx",
-			"header": "-1453 +1489",
+			"header": "-1175 +1211",
 			"kind": "replace",
 			"preImage": "\t\t\t\tIMPORTANT: Do NOT call any tools. Your only task is to generate a text summary of the conversation. Do not attempt to execute any actions or make any tool calls.<br />",
 			"preImageSha": "dc28ea5c4bd2f728",
@@ -5275,7 +5215,17 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/test/__snapshots__/agentPrompts-claude-haiku-4.5/all_non_edit_tools.spec.snap",
-			"header": "-55,3 +55,3",
+			"header": "-32 +32",
+			"kind": "replace",
+			"preImage": "For codebase exploration, prefer search_subagent to search and gather data instead of directly calling grep_search, semantic_search or file_search.",
+			"preImageSha": "cdeedd63d3467392",
+			"occurrences": 1,
+			"postImage": "For manuscript exploration, prefer search_subagent to search and gather data instead of directly calling grep_search, semantic_search or file_search.",
+			"postImageSha": "4554d72d90bc434c"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/agent/test/__snapshots__/agentPrompts-claude-haiku-4.5/all_non_edit_tools.spec.snap",
+			"header": "-95,3 +95,3",
 			"kind": "replace",
 			"preImage": "User: `which directory has the server code?`\nAssistant: [searches workspace and finds backend/]\n`backend/`",
 			"preImageSha": "526c7d6f4943aa55",
@@ -5285,7 +5235,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/test/__snapshots__/agentPrompts-claude-haiku-4.5/all_non_edit_tools.spec.snap",
-			"header": "-62,3 +62,3",
+			"header": "-102,3 +102,3",
 			"kind": "replace",
 			"preImage": "User: `what files are in src/utils/?`\nAssistant: [lists directory and sees helpers.ts, validators.ts, constants.ts]\n`helpers.ts, validators.ts, constants.ts`",
 			"preImageSha": "2ed62d04706a9f04",
@@ -5295,7 +5245,27 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/test/__snapshots__/agentPrompts-claude-haiku-4.5/all_non_edit_tools.spec.snap",
-			"header": "-185 +185",
+			"header": "-225,0 +226,2",
+			"kind": "insert",
+			"preImage": "github_repo\ngithub_text_search\ninstall_extension",
+			"preImageSha": "88a1c032b24b2b02",
+			"occurrences": 1,
+			"postImage": "look_up_reference\nnovel_check",
+			"postImageSha": "633e3e1d8fad46e7"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/agent/test/__snapshots__/agentPrompts-claude-haiku-4.5/all_non_edit_tools.spec.snap",
+			"header": "-230,0 +233",
+			"kind": "insert",
+			"preImage": "resolve_memory_file_uri\nrun_notebook_cell\nrun_vscode_command",
+			"preImageSha": "d9a0c20d43caa034",
+			"occurrences": 1,
+			"postImage": "search_manuscript",
+			"postImageSha": "9c690bef38729d87"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/agent/test/__snapshots__/agentPrompts-claude-haiku-4.5/all_non_edit_tools.spec.snap",
+			"header": "-244 +247",
 			"kind": "replace",
 			"preImage": "Do NOT create a new markdown file to document each change or summarize your work unless specifically requested by the user.",
 			"preImageSha": "8ed1ae4b75b00dc6",
@@ -5355,7 +5325,17 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/test/__snapshots__/agentPrompts-claude-haiku-4.5/all_tools.spec.snap",
-			"header": "-54,3 +54,3",
+			"header": "-32 +32",
+			"kind": "replace",
+			"preImage": "For codebase exploration, prefer search_subagent to search and gather data instead of directly calling grep_search, semantic_search or file_search.",
+			"preImageSha": "cdeedd63d3467392",
+			"occurrences": 1,
+			"postImage": "For manuscript exploration, prefer search_subagent to search and gather data instead of directly calling grep_search, semantic_search or file_search.",
+			"postImageSha": "4554d72d90bc434c"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/agent/test/__snapshots__/agentPrompts-claude-haiku-4.5/all_tools.spec.snap",
+			"header": "-94,3 +94,3",
 			"kind": "replace",
 			"preImage": "User: `which directory has the server code?`\nAssistant: [searches workspace and finds backend/]\n`backend/`",
 			"preImageSha": "526c7d6f4943aa55",
@@ -5365,7 +5345,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/test/__snapshots__/agentPrompts-claude-haiku-4.5/all_tools.spec.snap",
-			"header": "-61,3 +61,3",
+			"header": "-101,3 +101,3",
 			"kind": "replace",
 			"preImage": "User: `what files are in src/utils/?`\nAssistant: [lists directory and sees helpers.ts, validators.ts, constants.ts]\n`helpers.ts, validators.ts, constants.ts`",
 			"preImageSha": "2ed62d04706a9f04",
@@ -5375,7 +5355,27 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/test/__snapshots__/agentPrompts-claude-haiku-4.5/all_tools.spec.snap",
-			"header": "-189 +189",
+			"header": "-226,0 +227,2",
+			"kind": "insert",
+			"preImage": "github_repo\ngithub_text_search\ninstall_extension",
+			"preImageSha": "88a1c032b24b2b02",
+			"occurrences": 1,
+			"postImage": "look_up_reference\nnovel_check",
+			"postImageSha": "633e3e1d8fad46e7"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/agent/test/__snapshots__/agentPrompts-claude-haiku-4.5/all_tools.spec.snap",
+			"header": "-231,0 +234",
+			"kind": "insert",
+			"preImage": "resolve_memory_file_uri\nrun_notebook_cell\nrun_vscode_command",
+			"preImageSha": "d9a0c20d43caa034",
+			"occurrences": 1,
+			"postImage": "search_manuscript",
+			"postImageSha": "9c690bef38729d87"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/agent/test/__snapshots__/agentPrompts-claude-haiku-4.5/all_tools.spec.snap",
+			"header": "-248 +251",
 			"kind": "replace",
 			"preImage": "It is much faster to edit using the replace_string_in_file or multi_replace_string_in_file tools. Prefer the replace_string_in_file or multi_replace_string_in_file tools for making edits and only fall back to insert_edit_into_file if it fails.Do NOT create a new markdown file to document each change or summarize your work unless specifically requested by the user.",
 			"preImageSha": "1bb38dd2ec33d28a",
@@ -6045,6 +6045,16 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/test/__snapshots__/agentPrompts-claude-opus-4.5/all_non_edit_tools.spec.snap",
+			"header": "-32 +32",
+			"kind": "replace",
+			"preImage": "For codebase exploration, prefer search_subagent to search and gather data instead of directly calling grep_search, semantic_search or file_search.",
+			"preImageSha": "cdeedd63d3467392",
+			"occurrences": 1,
+			"postImage": "For manuscript exploration, prefer search_subagent to search and gather data instead of directly calling grep_search, semantic_search or file_search.",
+			"postImageSha": "4554d72d90bc434c"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/agent/test/__snapshots__/agentPrompts-claude-opus-4.5/all_non_edit_tools.spec.snap",
 			"header": "-95,3 +95,3",
 			"kind": "replace",
 			"preImage": "User: `which directory has the server code?`\nAssistant: [searches workspace and finds backend/]\n`backend/`",
@@ -6142,6 +6152,16 @@
 			"occurrences": 1,
 			"postImage": "If the user is requesting a prose sample or narrative example, you can answer it directly without using any tools.",
 			"postImageSha": "aaae4008e3c27fb3"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/agent/test/__snapshots__/agentPrompts-claude-opus-4.5/all_tools.spec.snap",
+			"header": "-32 +32",
+			"kind": "replace",
+			"preImage": "For codebase exploration, prefer search_subagent to search and gather data instead of directly calling grep_search, semantic_search or file_search.",
+			"preImageSha": "cdeedd63d3467392",
+			"occurrences": 1,
+			"postImage": "For manuscript exploration, prefer search_subagent to search and gather data instead of directly calling grep_search, semantic_search or file_search.",
+			"postImageSha": "4554d72d90bc434c"
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/test/__snapshots__/agentPrompts-claude-opus-4.5/all_tools.spec.snap",
@@ -6945,10 +6965,10 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/test/__snapshots__/agentPrompts-claude-opus-4.6/all_non_edit_tools.spec.snap",
-			"header": "-197 +198",
+			"header": "-197,2 +198",
 			"kind": "replace",
-			"preImage": "Do NOT create markdown files to document changes unless requested.",
-			"preImageSha": "1635ba53b72345e6",
+			"preImage": "Write a comment only to state what the code cannot show on its own, and keep it to one short line. Don't restate what the next line does or explain your change to the reviewer, and don't write a multi-paragraph doc comment where a single line will do.\nDo NOT create markdown files to document changes unless requested.",
+			"preImageSha": "8e17cddcdb73f3d3",
 			"occurrences": 1,
 			"postImage": "Do NOT create documentation files to record revision summaries unless specifically requested.",
 			"postImageSha": "b5f556b0e1908d09"
@@ -7105,10 +7125,10 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/test/__snapshots__/agentPrompts-claude-opus-4.6/all_tools.spec.snap",
-			"header": "-203 +204",
+			"header": "-203,2 +204",
 			"kind": "replace",
-			"preImage": "Do NOT create markdown files to document changes unless requested.",
-			"preImageSha": "1635ba53b72345e6",
+			"preImage": "Write a comment only to state what the code cannot show on its own, and keep it to one short line. Don't restate what the next line does or explain your change to the reviewer, and don't write a multi-paragraph doc comment where a single line will do.\nDo NOT create markdown files to document changes unless requested.",
+			"preImageSha": "8e17cddcdb73f3d3",
 			"occurrences": 1,
 			"postImage": "Do NOT create documentation files to record revision summaries unless specifically requested.",
 			"postImageSha": "b5f556b0e1908d09"
@@ -7225,10 +7245,10 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/test/__snapshots__/agentPrompts-claude-opus-4.6/cache_BPs.spec.snap",
-			"header": "-164 +162",
+			"header": "-164,2 +162",
 			"kind": "replace",
-			"preImage": "Do NOT create markdown files to document changes unless requested.",
-			"preImageSha": "1635ba53b72345e6",
+			"preImage": "Write a comment only to state what the code cannot show on its own, and keep it to one short line. Don't restate what the next line does or explain your change to the reviewer, and don't write a multi-paragraph doc comment where a single line will do.\nDo NOT create markdown files to document changes unless requested.",
+			"preImageSha": "8e17cddcdb73f3d3",
 			"occurrences": 1,
 			"postImage": "Do NOT create documentation files to record revision summaries unless specifically requested.",
 			"postImageSha": "b5f556b0e1908d09"
@@ -7345,10 +7365,10 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/test/__snapshots__/agentPrompts-claude-opus-4.6/cache_BPs_multi_round.spec.snap",
-			"header": "-214 +212",
+			"header": "-214,2 +212",
 			"kind": "replace",
-			"preImage": "Do NOT create markdown files to document changes unless requested.",
-			"preImageSha": "1635ba53b72345e6",
+			"preImage": "Write a comment only to state what the code cannot show on its own, and keep it to one short line. Don't restate what the next line does or explain your change to the reviewer, and don't write a multi-paragraph doc comment where a single line will do.\nDo NOT create markdown files to document changes unless requested.",
+			"preImageSha": "8e17cddcdb73f3d3",
 			"occurrences": 1,
 			"postImage": "Do NOT create documentation files to record revision summaries unless specifically requested.",
 			"postImageSha": "b5f556b0e1908d09"
@@ -7475,10 +7495,10 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/test/__snapshots__/agentPrompts-claude-opus-4.6/custom_instructions_not_in_system_message.spec.snap",
-			"header": "-163 +161",
+			"header": "-163,2 +161",
 			"kind": "replace",
-			"preImage": "Do NOT create markdown files to document changes unless requested.",
-			"preImageSha": "1635ba53b72345e6",
+			"preImage": "Write a comment only to state what the code cannot show on its own, and keep it to one short line. Don't restate what the next line does or explain your change to the reviewer, and don't write a multi-paragraph doc comment where a single line will do.\nDo NOT create markdown files to document changes unless requested.",
+			"preImageSha": "8e17cddcdb73f3d3",
 			"occurrences": 1,
 			"postImage": "Do NOT create documentation files to record revision summaries unless specifically requested.",
 			"postImageSha": "b5f556b0e1908d09"
@@ -7495,10 +7515,10 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/test/__snapshots__/agentPrompts-claude-opus-4.6/edited_file_events_grouped_by_kind.spec.snap",
-			"header": "-45 +45",
+			"header": "-45,2 +45",
 			"kind": "replace",
-			"preImage": "Do NOT create markdown files to document changes unless requested.",
-			"preImageSha": "1635ba53b72345e6",
+			"preImage": "Write a comment only to state what the code cannot show on its own, and keep it to one short line. Don't restate what the next line does or explain your change to the reviewer, and don't write a multi-paragraph doc comment where a single line will do.\nDo NOT create markdown files to document changes unless requested.",
+			"preImageSha": "8e17cddcdb73f3d3",
 			"occurrences": 1,
 			"postImage": "Do NOT create documentation files to record revision summaries unless specifically requested.",
 			"postImageSha": "b5f556b0e1908d09"
@@ -7515,10 +7535,10 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/test/__snapshots__/agentPrompts-claude-opus-4.6/omit_base_agent_instructions.spec.snap",
-			"header": "-39 +39",
+			"header": "-39,2 +39",
 			"kind": "replace",
-			"preImage": "Do NOT create markdown files to document changes unless requested.",
-			"preImageSha": "1635ba53b72345e6",
+			"preImage": "Write a comment only to state what the code cannot show on its own, and keep it to one short line. Don't restate what the next line does or explain your change to the reviewer, and don't write a multi-paragraph doc comment where a single line will do.\nDo NOT create markdown files to document changes unless requested.",
+			"preImageSha": "8e17cddcdb73f3d3",
 			"occurrences": 1,
 			"postImage": "Do NOT create documentation files to record revision summaries unless specifically requested.",
 			"postImageSha": "b5f556b0e1908d09"
@@ -7635,10 +7655,10 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/test/__snapshots__/agentPrompts-claude-opus-4.6/one_attachment.spec.snap",
-			"header": "-162 +160",
+			"header": "-162,2 +160",
 			"kind": "replace",
-			"preImage": "Do NOT create markdown files to document changes unless requested.",
-			"preImageSha": "1635ba53b72345e6",
+			"preImage": "Write a comment only to state what the code cannot show on its own, and keep it to one short line. Don't restate what the next line does or explain your change to the reviewer, and don't write a multi-paragraph doc comment where a single line will do.\nDo NOT create markdown files to document changes unless requested.",
+			"preImageSha": "8e17cddcdb73f3d3",
 			"occurrences": 1,
 			"postImage": "Do NOT create documentation files to record revision summaries unless specifically requested.",
 			"postImageSha": "b5f556b0e1908d09"
@@ -7755,10 +7775,10 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/test/__snapshots__/agentPrompts-claude-opus-4.6/simple_case.spec.snap",
-			"header": "-152 +150",
+			"header": "-152,2 +150",
 			"kind": "replace",
-			"preImage": "Do NOT create markdown files to document changes unless requested.",
-			"preImageSha": "1635ba53b72345e6",
+			"preImage": "Write a comment only to state what the code cannot show on its own, and keep it to one short line. Don't restate what the next line does or explain your change to the reviewer, and don't write a multi-paragraph doc comment where a single line will do.\nDo NOT create markdown files to document changes unless requested.",
+			"preImageSha": "8e17cddcdb73f3d3",
 			"occurrences": 1,
 			"postImage": "Do NOT create documentation files to record revision summaries unless specifically requested.",
 			"postImageSha": "b5f556b0e1908d09"
@@ -7875,10 +7895,10 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/test/__snapshots__/agentPrompts-claude-opus-4.6/summarization_no_cache_bps.spec.snap",
-			"header": "-162 +160",
+			"header": "-162,2 +160",
 			"kind": "replace",
-			"preImage": "Do NOT create markdown files to document changes unless requested.",
-			"preImageSha": "1635ba53b72345e6",
+			"preImage": "Write a comment only to state what the code cannot show on its own, and keep it to one short line. Don't restate what the next line does or explain your change to the reviewer, and don't write a multi-paragraph doc comment where a single line will do.\nDo NOT create markdown files to document changes unless requested.",
+			"preImageSha": "8e17cddcdb73f3d3",
 			"occurrences": 1,
 			"postImage": "Do NOT create documentation files to record revision summaries unless specifically requested.",
 			"postImageSha": "b5f556b0e1908d09"
@@ -7995,10 +8015,10 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/test/__snapshots__/agentPrompts-claude-opus-4.6/tool_use.spec.snap",
-			"header": "-162 +160",
+			"header": "-162,2 +160",
 			"kind": "replace",
-			"preImage": "Do NOT create markdown files to document changes unless requested.",
-			"preImageSha": "1635ba53b72345e6",
+			"preImage": "Write a comment only to state what the code cannot show on its own, and keep it to one short line. Don't restate what the next line does or explain your change to the reviewer, and don't write a multi-paragraph doc comment where a single line will do.\nDo NOT create markdown files to document changes unless requested.",
+			"preImageSha": "8e17cddcdb73f3d3",
 			"occurrences": 1,
 			"postImage": "Do NOT create documentation files to record revision summaries unless specifically requested.",
 			"postImageSha": "b5f556b0e1908d09"
@@ -8052,6 +8072,16 @@
 			"occurrences": 1,
 			"postImage": "If the user is requesting a prose sample or narrative example, you can answer it directly without using any tools.",
 			"postImageSha": "aaae4008e3c27fb3"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/agent/test/__snapshots__/agentPrompts-claude-sonnet-4.5/all_non_edit_tools.spec.snap",
+			"header": "-32 +32",
+			"kind": "replace",
+			"preImage": "For codebase exploration, prefer search_subagent to search and gather data instead of directly calling grep_search, semantic_search or file_search.",
+			"preImageSha": "cdeedd63d3467392",
+			"occurrences": 1,
+			"postImage": "For manuscript exploration, prefer search_subagent to search and gather data instead of directly calling grep_search, semantic_search or file_search.",
+			"postImageSha": "4554d72d90bc434c"
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/test/__snapshots__/agentPrompts-claude-sonnet-4.5/all_non_edit_tools.spec.snap",
@@ -8152,6 +8182,16 @@
 			"occurrences": 1,
 			"postImage": "If the user is requesting a prose sample or narrative example, you can answer it directly without using any tools.",
 			"postImageSha": "aaae4008e3c27fb3"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/agent/test/__snapshots__/agentPrompts-claude-sonnet-4.5/all_tools.spec.snap",
+			"header": "-32 +32",
+			"kind": "replace",
+			"preImage": "For codebase exploration, prefer search_subagent to search and gather data instead of directly calling grep_search, semantic_search or file_search.",
+			"preImageSha": "cdeedd63d3467392",
+			"occurrences": 1,
+			"postImage": "For manuscript exploration, prefer search_subagent to search and gather data instead of directly calling grep_search, semantic_search or file_search.",
+			"postImageSha": "4554d72d90bc434c"
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/test/__snapshots__/agentPrompts-claude-sonnet-4.5/all_tools.spec.snap",
@@ -8955,10 +8995,10 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/test/__snapshots__/agentPrompts-claude-sonnet-4.6/all_non_edit_tools.spec.snap",
-			"header": "-197 +198",
+			"header": "-197,2 +198",
 			"kind": "replace",
-			"preImage": "Do NOT create markdown files to document changes unless requested.",
-			"preImageSha": "1635ba53b72345e6",
+			"preImage": "Write a comment only to state what the code cannot show on its own, and keep it to one short line. Don't restate what the next line does or explain your change to the reviewer, and don't write a multi-paragraph doc comment where a single line will do.\nDo NOT create markdown files to document changes unless requested.",
+			"preImageSha": "8e17cddcdb73f3d3",
 			"occurrences": 1,
 			"postImage": "Do NOT create documentation files to record revision summaries unless specifically requested.",
 			"postImageSha": "b5f556b0e1908d09"
@@ -9115,10 +9155,10 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/test/__snapshots__/agentPrompts-claude-sonnet-4.6/all_tools.spec.snap",
-			"header": "-203 +204",
+			"header": "-203,2 +204",
 			"kind": "replace",
-			"preImage": "Do NOT create markdown files to document changes unless requested.",
-			"preImageSha": "1635ba53b72345e6",
+			"preImage": "Write a comment only to state what the code cannot show on its own, and keep it to one short line. Don't restate what the next line does or explain your change to the reviewer, and don't write a multi-paragraph doc comment where a single line will do.\nDo NOT create markdown files to document changes unless requested.",
+			"preImageSha": "8e17cddcdb73f3d3",
 			"occurrences": 1,
 			"postImage": "Do NOT create documentation files to record revision summaries unless specifically requested.",
 			"postImageSha": "b5f556b0e1908d09"
@@ -9235,10 +9275,10 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/test/__snapshots__/agentPrompts-claude-sonnet-4.6/cache_BPs.spec.snap",
-			"header": "-164 +162",
+			"header": "-164,2 +162",
 			"kind": "replace",
-			"preImage": "Do NOT create markdown files to document changes unless requested.",
-			"preImageSha": "1635ba53b72345e6",
+			"preImage": "Write a comment only to state what the code cannot show on its own, and keep it to one short line. Don't restate what the next line does or explain your change to the reviewer, and don't write a multi-paragraph doc comment where a single line will do.\nDo NOT create markdown files to document changes unless requested.",
+			"preImageSha": "8e17cddcdb73f3d3",
 			"occurrences": 1,
 			"postImage": "Do NOT create documentation files to record revision summaries unless specifically requested.",
 			"postImageSha": "b5f556b0e1908d09"
@@ -9355,10 +9395,10 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/test/__snapshots__/agentPrompts-claude-sonnet-4.6/cache_BPs_multi_round.spec.snap",
-			"header": "-214 +212",
+			"header": "-214,2 +212",
 			"kind": "replace",
-			"preImage": "Do NOT create markdown files to document changes unless requested.",
-			"preImageSha": "1635ba53b72345e6",
+			"preImage": "Write a comment only to state what the code cannot show on its own, and keep it to one short line. Don't restate what the next line does or explain your change to the reviewer, and don't write a multi-paragraph doc comment where a single line will do.\nDo NOT create markdown files to document changes unless requested.",
+			"preImageSha": "8e17cddcdb73f3d3",
 			"occurrences": 1,
 			"postImage": "Do NOT create documentation files to record revision summaries unless specifically requested.",
 			"postImageSha": "b5f556b0e1908d09"
@@ -9485,10 +9525,10 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/test/__snapshots__/agentPrompts-claude-sonnet-4.6/custom_instructions_not_in_system_message.spec.snap",
-			"header": "-163 +161",
+			"header": "-163,2 +161",
 			"kind": "replace",
-			"preImage": "Do NOT create markdown files to document changes unless requested.",
-			"preImageSha": "1635ba53b72345e6",
+			"preImage": "Write a comment only to state what the code cannot show on its own, and keep it to one short line. Don't restate what the next line does or explain your change to the reviewer, and don't write a multi-paragraph doc comment where a single line will do.\nDo NOT create markdown files to document changes unless requested.",
+			"preImageSha": "8e17cddcdb73f3d3",
 			"occurrences": 1,
 			"postImage": "Do NOT create documentation files to record revision summaries unless specifically requested.",
 			"postImageSha": "b5f556b0e1908d09"
@@ -9505,10 +9545,10 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/test/__snapshots__/agentPrompts-claude-sonnet-4.6/edited_file_events_grouped_by_kind.spec.snap",
-			"header": "-45 +45",
+			"header": "-45,2 +45",
 			"kind": "replace",
-			"preImage": "Do NOT create markdown files to document changes unless requested.",
-			"preImageSha": "1635ba53b72345e6",
+			"preImage": "Write a comment only to state what the code cannot show on its own, and keep it to one short line. Don't restate what the next line does or explain your change to the reviewer, and don't write a multi-paragraph doc comment where a single line will do.\nDo NOT create markdown files to document changes unless requested.",
+			"preImageSha": "8e17cddcdb73f3d3",
 			"occurrences": 1,
 			"postImage": "Do NOT create documentation files to record revision summaries unless specifically requested.",
 			"postImageSha": "b5f556b0e1908d09"
@@ -9525,10 +9565,10 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/test/__snapshots__/agentPrompts-claude-sonnet-4.6/omit_base_agent_instructions.spec.snap",
-			"header": "-39 +39",
+			"header": "-39,2 +39",
 			"kind": "replace",
-			"preImage": "Do NOT create markdown files to document changes unless requested.",
-			"preImageSha": "1635ba53b72345e6",
+			"preImage": "Write a comment only to state what the code cannot show on its own, and keep it to one short line. Don't restate what the next line does or explain your change to the reviewer, and don't write a multi-paragraph doc comment where a single line will do.\nDo NOT create markdown files to document changes unless requested.",
+			"preImageSha": "8e17cddcdb73f3d3",
 			"occurrences": 1,
 			"postImage": "Do NOT create documentation files to record revision summaries unless specifically requested.",
 			"postImageSha": "b5f556b0e1908d09"
@@ -9645,10 +9685,10 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/test/__snapshots__/agentPrompts-claude-sonnet-4.6/one_attachment.spec.snap",
-			"header": "-162 +160",
+			"header": "-162,2 +160",
 			"kind": "replace",
-			"preImage": "Do NOT create markdown files to document changes unless requested.",
-			"preImageSha": "1635ba53b72345e6",
+			"preImage": "Write a comment only to state what the code cannot show on its own, and keep it to one short line. Don't restate what the next line does or explain your change to the reviewer, and don't write a multi-paragraph doc comment where a single line will do.\nDo NOT create markdown files to document changes unless requested.",
+			"preImageSha": "8e17cddcdb73f3d3",
 			"occurrences": 1,
 			"postImage": "Do NOT create documentation files to record revision summaries unless specifically requested.",
 			"postImageSha": "b5f556b0e1908d09"
@@ -9765,10 +9805,10 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/test/__snapshots__/agentPrompts-claude-sonnet-4.6/simple_case.spec.snap",
-			"header": "-152 +150",
+			"header": "-152,2 +150",
 			"kind": "replace",
-			"preImage": "Do NOT create markdown files to document changes unless requested.",
-			"preImageSha": "1635ba53b72345e6",
+			"preImage": "Write a comment only to state what the code cannot show on its own, and keep it to one short line. Don't restate what the next line does or explain your change to the reviewer, and don't write a multi-paragraph doc comment where a single line will do.\nDo NOT create markdown files to document changes unless requested.",
+			"preImageSha": "8e17cddcdb73f3d3",
 			"occurrences": 1,
 			"postImage": "Do NOT create documentation files to record revision summaries unless specifically requested.",
 			"postImageSha": "b5f556b0e1908d09"
@@ -9885,10 +9925,10 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/test/__snapshots__/agentPrompts-claude-sonnet-4.6/summarization_no_cache_bps.spec.snap",
-			"header": "-162 +160",
+			"header": "-162,2 +160",
 			"kind": "replace",
-			"preImage": "Do NOT create markdown files to document changes unless requested.",
-			"preImageSha": "1635ba53b72345e6",
+			"preImage": "Write a comment only to state what the code cannot show on its own, and keep it to one short line. Don't restate what the next line does or explain your change to the reviewer, and don't write a multi-paragraph doc comment where a single line will do.\nDo NOT create markdown files to document changes unless requested.",
+			"preImageSha": "8e17cddcdb73f3d3",
 			"occurrences": 1,
 			"postImage": "Do NOT create documentation files to record revision summaries unless specifically requested.",
 			"postImageSha": "b5f556b0e1908d09"
@@ -10005,10 +10045,10 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/test/__snapshots__/agentPrompts-claude-sonnet-4.6/tool_use.spec.snap",
-			"header": "-162 +160",
+			"header": "-162,2 +160",
 			"kind": "replace",
-			"preImage": "Do NOT create markdown files to document changes unless requested.",
-			"preImageSha": "1635ba53b72345e6",
+			"preImage": "Write a comment only to state what the code cannot show on its own, and keep it to one short line. Don't restate what the next line does or explain your change to the reviewer, and don't write a multi-paragraph doc comment where a single line will do.\nDo NOT create markdown files to document changes unless requested.",
+			"preImageSha": "8e17cddcdb73f3d3",
 			"occurrences": 1,
 			"postImage": "Do NOT create documentation files to record revision summaries unless specifically requested.",
 			"postImageSha": "b5f556b0e1908d09"
@@ -21944,6 +21984,26 @@
 			"postImageSha": "cb5516484238faed"
 		},
 		{
+			"path": "extensions/copilot/src/extension/prompts/node/agent/test/kimiPrompts.spec.tsx",
+			"header": "-21 +21",
+			"kind": "replace",
+			"preImage": "import { PromptRegistry } from '../promptRegistry';",
+			"preImageSha": "f0ad7b931d634cf1",
+			"occurrences": 1,
+			"postImage": "import { KimiAgentPrompt } from '../kimiPrompts';",
+			"postImageSha": "9e361d7ea42470f6"
+		},
+		{
+			"path": "extensions/copilot/src/extension/prompts/node/agent/test/kimiPrompts.spec.tsx",
+			"header": "-40,2 +40,7",
+			"kind": "replace",
+			"preImage": "\t\tconst customizations = await PromptRegistry.resolveAllCustomizations(instantiationService, endpoint);\n\t\tconst renderer = PromptRenderer.create(instantiationService, endpoint, customizations.SystemPrompt, {",
+			"preImageSha": "b2c5c7ad6b185cd0",
+			"occurrences": 1,
+			"postImage": "\t\t// NOVEL-BUILDER: rendered directly rather than resolved through the\n\t\t// registry. This product registers its own resolver for every Kimi family\n\t\t// and it wins, so the registry hands back NovelWritingAgentPrompt and\n\t\t// these assertions about Kimi's text all failed. The routing itself is\n\t\t// covered by src/novel/prompts/test/kimiPrompt.spec.ts; what is worth\n\t\t// keeping here is upstream's coverage of upstream's own prompt.\n\t\tconst renderer = PromptRenderer.create(instantiationService, endpoint, KimiAgentPrompt, {",
+			"postImageSha": "b77f4046820dbd82"
+		},
+		{
 			"path": "extensions/copilot/src/extension/prompts/node/agent/vscModelPrompts.tsx",
 			"header": "-20,0 +21",
 			"kind": "insert",
@@ -22984,56 +23044,6 @@
 			"postImageSha": "87e90c090bb53358"
 		},
 		{
-			"path": "extensions/copilot/src/extension/test/node/services.ts",
-			"header": "-58,11 +57,0",
-			"kind": "replace",
-			"preImage": "import { IClaudeRuntimeDataService } from '../../chatSessions/claude/common/claudeRuntimeDataService';\nimport { ClaudePlanFileTracker, IClaudePlanFileTracker } from '../../chatSessions/claude/common/claudePlanFileTracker';\nimport { IClaudeSessionStateService } from '../../chatSessions/claude/common/claudeSessionStateService';\nimport { IClaudeToolPermissionService } from '../../chatSessions/claude/common/claudeToolPermissionService';\nimport { ClaudeCodeModels, IClaudeCodeModels } from '../../chatSessions/claude/node/claudeCodeModels';\nimport { IClaudeCodeSdkService } from '../../chatSessions/claude/node/claudeCodeSdkService';\nimport { ClaudeRuntimeDataService } from '../../chatSessions/claude/node/claudeRuntimeDataService';\nimport { ClaudeSessionStateService } from '../../chatSessions/claude/node/claudeSessionStateService';\nimport { IClaudePluginService } from '../../chatSessions/claude/node/claudeSkills';\nimport { MockClaudeCodeSdkService } from '../../chatSessions/claude/node/test/mockClaudeCodeSdkService';\nimport { MockClaudeToolPermissionService } from '../../chatSessions/claude/node/test/mockClaudeToolPermissionService';",
-			"preImageSha": "6989f07be7bbdc0e",
-			"occurrences": 1,
-			"postImage": "",
-			"postImageSha": null
-		},
-		{
-			"path": "extensions/copilot/src/extension/test/node/services.ts",
-			"header": "-100,0 +90,3",
-			"kind": "insert",
-			"preImage": "\tcustomModelConfigs?: Map<string, IModelConfig>;\n}",
-			"preImageSha": "fea5dabcdc250569",
-			"occurrences": 1,
-			"postImage": "// NOVEL-BUILDER: the Claude Code session type is not registered (see\n// contributions.ts), and its npm package is proprietary and no longer\n// installed, so the test container no longer wires its services.",
-			"postImageSha": "b6b5326afc889082"
-		},
-		{
-			"path": "extensions/copilot/src/extension/test/node/services.ts",
-			"header": "-128,6 +119,0",
-			"kind": "replace",
-			"preImage": "\ttestingServiceCollection.define(IClaudeCodeSdkService, new SyncDescriptor(MockClaudeCodeSdkService));\n\ttestingServiceCollection.define(IClaudeToolPermissionService, new SyncDescriptor(MockClaudeToolPermissionService));\n\ttestingServiceCollection.define(IClaudePlanFileTracker, new SyncDescriptor(ClaudePlanFileTracker));\n\ttestingServiceCollection.define(IClaudeCodeModels, new SyncDescriptor(ClaudeCodeModels));\n\ttestingServiceCollection.define(IClaudeSessionStateService, new SyncDescriptor(ClaudeSessionStateService));\n\ttestingServiceCollection.define(IClaudeRuntimeDataService, new SyncDescriptor(ClaudeRuntimeDataService));",
-			"preImageSha": "fecd1d12c4a1c718",
-			"occurrences": 1,
-			"postImage": "",
-			"postImageSha": null
-		},
-		{
-			"path": "extensions/copilot/src/extension/test/node/services.ts",
-			"header": "-171 +156,0",
-			"kind": "replace",
-			"preImage": "\ttestingServiceCollection.define(IClaudePluginService, new NullClaudePluginService());",
-			"preImageSha": "59bc58aca1b0e1d7",
-			"occurrences": 1,
-			"postImage": "",
-			"postImageSha": null
-		},
-		{
-			"path": "extensions/copilot/src/extension/test/node/services.ts",
-			"header": "-175,7 +159,0",
-			"kind": "replace",
-			"preImage": "class NullClaudePluginService implements IClaudePluginService {\n\tdeclare readonly _serviceBrand: undefined;\n\n\tasync getPluginLocations(): Promise<never[]> {\n\t\treturn [];\n\t}\n}",
-			"preImageSha": "00a42e879c8215c5",
-			"occurrences": 1,
-			"postImage": "",
-			"postImageSha": null
-		},
-		{
 			"path": "extensions/copilot/src/extension/tools/common/toolNames.ts",
 			"header": "-30,0 +31,5",
 			"kind": "insert",
@@ -23135,7 +23145,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/lib/node/chatLibMain.ts",
-			"header": "-442 +442,2",
+			"header": "-443 +443,2",
 			"kind": "replace",
 			"preImage": "\t\trejectionMessage: 'Sorry, but I can only assist with programming related questions.',",
 			"preImageSha": "d797747ce716927c",
@@ -23155,7 +23165,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/platform/chat/common/commonTypes.ts",
-			"header": "-419 +419,7",
+			"header": "-424 +424,7",
 			"kind": "replace",
 			"preImage": "\t\t\tdetails = { message: l10n.t('Sorry, but I can only assist with programming related questions.') };",
 			"preImageSha": "130ce05313da3afe",
@@ -23165,7 +23175,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/platform/chat/common/commonTypes.ts",
-			"header": "-462 +468,5",
+			"header": "-473 +479,5",
 			"kind": "replace",
 			"preImage": "\t\t\tdetails = { message: l10n.t(`Sorry, the response hit the length limit. Please rephrase your prompt.`) };",
 			"preImageSha": "a66862251d01ac58",
@@ -23185,7 +23195,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/platform/configuration/common/configurationService.ts",
-			"header": "-950,0 +957,4",
+			"header": "-972,0 +979,4",
 			"kind": "insert",
 			"preImage": "\t\texport const AzureAuthType = defineSetting<AzureAuthMode>('chat.azureAuthType', ConfigType.Simple, AzureAuthMode.EntraId);\n\t}",
 			"preImageSha": "20bbd5ad443a7c02",
@@ -23195,7 +23205,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/platform/configuration/common/configurationService.ts",
-			"header": "-953,2 +963,2",
+			"header": "-975,2 +985,2",
 			"kind": "replace",
 			"preImage": "\t\t'plaintext': false,\n\t\t'markdown': false,",
 			"preImageSha": "a93ebac7543be99b",
@@ -23217,11 +23227,11 @@
 			"path": "extensions/copilot/src/platform/endpoint/common/chatModelCapabilities.ts",
 			"header": "-170 +170,8",
 			"kind": "replace",
-			"preImage": "\t\treturn normalized.includes('kimi-k2.6') || normalized.includes('kimi-k2.7-code');",
-			"preImageSha": "933b58b416fca97d",
+			"preImage": "\t\treturn normalized.includes('kimi-k2.6') || normalized.includes('kimi-k2.7-code') || normalized.includes('kimi-k3');",
+			"preImageSha": "413d8c863c033466",
 			"occurrences": 1,
-			"postImage": "\t\t// NOVEL-BUILDER: + the bare `kimi` family and kimi-k3. Upstream names two\n\t\t// model ids literally, so this product's K3 — labelled with the family\n\t\t// `kimi` — matched nothing and lost both of the things this predicate\n\t\t// gates: the edit-tool tables below (leaving it on the whole-file rewrite\n\t\t// path) and the forced temperature=1/top_p=0.95 in chatEndpoint that\n\t\t// every Moonshot model 400s without.\n\t\treturn normalized === 'kimi' || normalized.startsWith('kimi-k3') ||\n\t\t\tnormalized.includes('kimi-k2.6') || normalized.includes('kimi-k2.7-code');",
-			"postImageSha": "b1336018e984a2f0"
+			"postImage": "\t\t// NOVEL-BUILDER: + the bare `kimi` family. Upstream now names k2.6, k2.7-code\n\t\t// and k3 literally, but this product labels its K3 offering with the family\n\t\t// `kimi` alone, which matches none of them — and losing this predicate loses\n\t\t// both things it gates: the edit-tool tables below (leaving the model on the\n\t\t// whole-file rewrite path) and the forced temperature=1/top_p=0.95 that every\n\t\t// Moonshot model 400s without.\n\t\treturn normalized === 'kimi' ||\n\t\t\tnormalized.includes('kimi-k2.6') || normalized.includes('kimi-k2.7-code') || normalized.includes('kimi-k3');",
+			"postImageSha": "785143d37f4ecfd4"
 		},
 		{
 			"path": "extensions/copilot/src/platform/endpoint/common/chatModelCapabilities.ts",
@@ -23235,17 +23245,17 @@
 		},
 		{
 			"path": "extensions/copilot/src/platform/endpoint/common/chatModelCapabilities.ts",
-			"header": "-289 +296",
+			"header": "-289 +296,2",
 			"kind": "replace",
-			"preImage": "\treturn isAnthropicFamily(model) || isHiddenModelE(model) || isVSCModelReplaceStringSet(model) || isMinimaxFamily(model) || isHiddenFamilyH(model) || isKimiFamily(model);",
-			"preImageSha": "d032299a592f3c9b",
+			"preImage": "\treturn isAnthropicFamily(model) || isXAiFamily(model) || isHiddenModelE(model) || isVSCModelReplaceStringSet(model) || isMinimaxFamily(model) || isHiddenFamilyH(model) || isKimiFamily(model);",
+			"preImageSha": "c8a903d191fb6499",
 			"occurrences": 1,
-			"postImage": "\treturn isAnthropicFamily(model) || isHiddenModelE(model) || isVSCModelReplaceStringSet(model) || isMinimaxFamily(model) || isHiddenFamilyH(model) || isKimiFamily(model) || isDeepSeekFamily(model); // NOVEL-BUILDER: + DeepSeek",
-			"postImageSha": "6f213d7262f66d79"
+			"postImage": "\t// NOVEL-BUILDER: + isDeepSeekFamily. isXAiFamily is upstream's, added at 1.134.0.\n\treturn isAnthropicFamily(model) || isXAiFamily(model) || isHiddenModelE(model) || isVSCModelReplaceStringSet(model) || isMinimaxFamily(model) || isHiddenFamilyH(model) || isKimiFamily(model) || isDeepSeekFamily(model);",
+			"postImageSha": "df333970fe4ba1f6"
 		},
 		{
 			"path": "extensions/copilot/src/platform/endpoint/common/chatModelCapabilities.ts",
-			"header": "-297 +304",
+			"header": "-297 +305",
 			"kind": "replace",
 			"preImage": "\treturn isAnthropicFamily(model) || isXAiFamily(model) || isHiddenModelE(model) || model.family.toLowerCase().includes('gemini-3') || isVSCModelReplaceStringSet(model) || isHiddenModelF(model) || isMinimaxFamily(model) || isHiddenFamilyH(model) || isKimiFamily(model);",
 			"preImageSha": "aaeeec178f0cce36",
@@ -23255,7 +23265,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/platform/endpoint/common/chatModelCapabilities.ts",
-			"header": "-378,0 +386,13",
+			"header": "-378,0 +387,13",
 			"kind": "insert",
 			"preImage": "\treturn model.family.toLowerCase().includes('minimax');\n}",
 			"preImageSha": "dd8daa315eb27e89",
@@ -23265,7 +23275,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/platform/endpoint/node/chatEndpoint.ts",
-			"header": "-405,0 +406,12",
+			"header": "-476,0 +477,12",
 			"kind": "insert",
 			"preImage": "\t\t\tbody.top_p = 0.95;\n\t\t}",
 			"preImageSha": "6c123e5f08fb51eb",
@@ -23285,7 +23295,7 @@
 		},
 		{
 			"path": "src/vs/platform/actions/common/actions.ts",
-			"header": "-719,0 +720,23",
+			"header": "-726,0 +727,23",
 			"kind": "insert",
 			"preImage": "\tabstract run(accessor: ServicesAccessor, ...args: unknown[]): void;\n}",
 			"preImageSha": "7ff0af11e8efc915",
@@ -23295,7 +23305,7 @@
 		},
 		{
 			"path": "src/vs/platform/actions/common/actions.ts",
-			"header": "-725,0 +749,5",
+			"header": "-732,0 +756,5",
 			"kind": "insert",
 			"preImage": "\n\tconst { f1, menu, keybinding, ...command } = action.desc;",
 			"preImageSha": "aaf5cd5e1ea84bd5",
@@ -23324,58 +23334,8 @@
 			"postImageSha": "14288e2dd5868ed2"
 		},
 		{
-			"path": "src/vs/workbench/contrib/chat/browser/widget/input/chatModelPicker.ts",
-			"header": "-555,0 +556,17",
-			"kind": "insert",
-			"preImage": "\t\t\tdisabled: !onRequestSetup,\n\t\t\thideIcon: false,\n\t\t});",
-			"preImageSha": "c15e758f062aebc8",
-			"occurrences": 1,
-			"postImage": "\t\t// NOVEL-BUILDER: BYOK never reports SetupRequired once a model exists\n\t\t// (isSetupRequired: \"BYOK and anonymous access never report this state\"),\n\t\t// but a signed-out author with none configured yet had no entry to add\n\t\t// their first key — the sign-in prompt was the only action. Surface\n\t\t// \"Manage Models...\" here so bring-your-own-key is reachable before, or\n\t\t// instead of, signing in to the hosted service.\n\t\tif (manageModelsAction) {\n\t\t\titems.push({ kind: ActionListItemKind.Separator });\n\t\t\titems.push({\n\t\t\t\titem: manageModelsAction,\n\t\t\t\tkind: ActionListItemKind.Action,\n\t\t\t\tlabel: manageModelsAction.label,\n\t\t\t\tgroup: { title: '', icon: Codicon.blank },\n\t\t\t\thideIcon: false,\n\t\t\t\tshowAlways: true,\n\t\t\t});\n\t\t}",
-			"postImageSha": "c10fd87e865b91ec"
-		},
-		{
-			"path": "src/vs/workbench/contrib/chat/browser/widget/input/chatModelPicker.ts",
-			"header": "-630,0 +648,13",
-			"kind": "insert",
-			"preImage": "\n\t\t\tconst placed = new Set<string>();",
-			"preImageSha": "794c6bb6db19f830",
-			"occurrences": 1,
-			"postImage": "\t\t\t// NOVEL-BUILDER: dedup base model ids per-vendor, not globally. Our\n\t\t\t// hosted catalog names models after the vendors' real ids (e.g.\n\t\t\t// \"deepseek-v4-pro\"), so a user's BYOK model for the same provider\n\t\t\t// carries the same base id as the hosted one — different models under\n\t\t\t// different vendors. A global base-id dedup hid the BYOK model behind\n\t\t\t// the hosted one. Scoping the key by vendor lets both appear while\n\t\t\t// still collapsing same-vendor duplicates (e.g. agent-host copies).\n\t\t\tconst vendorFromIdentifier = (identifier: string) => {\n\t\t\t\tconst slash = identifier.indexOf('/');\n\t\t\t\treturn slash >= 0 ? identifier.slice(0, slash) : identifier;\n\t\t\t};\n\t\t\tconst vendorBaseKey = (identifier: string, baseId: string) => `${vendorFromIdentifier(identifier)}\u0000${baseId}`;",
-			"postImageSha": "149891948f790623"
-		},
-		{
-			"path": "src/vs/workbench/contrib/chat/browser/widget/input/chatModelPicker.ts",
-			"header": "-634 +664",
-			"kind": "replace",
-			"preImage": "\t\t\t\t\tplaced.add(metadataId);",
-			"preImageSha": "3219aef551f7f5b6",
-			"occurrences": 1,
-			"postImage": "\t\t\t\t\tplaced.add(vendorBaseKey(identifierOrId, metadataId));",
-			"postImageSha": "f6fde5f3950c763c"
-		},
-		{
-			"path": "src/vs/workbench/contrib/chat/browser/widget/input/chatModelPicker.ts",
-			"header": "-661 +691",
-			"kind": "replace",
-			"preImage": "\t\t\t\tif (placed.has(model.identifier) || placed.has(model.metadata.id)) {",
-			"preImageSha": "67b30cf0af7ea4d4",
-			"occurrences": 1,
-			"postImage": "\t\t\t\tif (placed.has(model.identifier) || placed.has(vendorBaseKey(model.identifier, model.metadata.id))) {",
-			"postImageSha": "dbfb1ef66be129f8"
-		},
-		{
-			"path": "src/vs/workbench/contrib/chat/browser/widget/input/chatModelPicker.ts",
-			"header": "-822 +852",
-			"kind": "replace",
-			"preImage": "\t\t\totherModels = models.filter(m => !placed.has(m.identifier) && !placed.has(m.metadata.id));",
-			"preImageSha": "308dd2f9d2508ab2",
-			"occurrences": 1,
-			"postImage": "\t\t\totherModels = models.filter(m => !placed.has(m.identifier) && !placed.has(vendorBaseKey(m.identifier, m.metadata.id)));",
-			"postImageSha": "2330891eaf7a0fa6"
-		},
-		{
 			"path": "src/vs/workbench/contrib/extensions/browser/extensions.contribution.ts",
-			"header": "-333 +333,12",
+			"header": "-334 +334,12",
 			"kind": "replace",
 			"preImage": "\t\t\t\tdefault: true,",
 			"preImageSha": "8dbb62b475edf8ae",
@@ -23405,7 +23365,7 @@
 		},
 		{
 			"path": "src/vs/workbench/services/extensionManagement/browser/extensionEnablementService.ts",
-			"header": "-158,0 +159,27",
+			"header": "-159,0 +160,27",
 			"kind": "insert",
 			"preImage": "\t\t\treturn;\n\t\t}",
 			"preImageSha": "b70eb4ae95589908",

@@ -15,7 +15,7 @@
 
 set -uo pipefail
 
-ANCHOR="${NOVEL_ANCHOR_TAG:-1.129.1}"
+ANCHOR="${NOVEL_ANCHOR_TAG:-1.134.0-release}"
 VERBOSE=0
 [[ "${1:-}" == "--verbose" ]] && VERBOSE=1
 
@@ -186,28 +186,6 @@ FORBIDDEN_DIRS=(
   "src/vs/workbench/contrib/chat/"
 )
 
-# The one file inside a forbidden directory that is allowed anyway.
-#
-# This is a standing exception, not a loophole. `buildModelPickerItems` decides
-# what the model picker shows and how it collapses duplicates, and neither is
-# reachable from an extension — there is no API for "how should the picker
-# de-duplicate", so the two bugs it fixes cannot be fixed anywhere else:
-#
-#   - a signed-out author had no way to add a BYOK key, because the sign-in
-#     prompt was the only action offered;
-#   - the picker de-duplicated on base model id globally, and this product's
-#     hosted catalogue names its models after the vendors' real ids, so an
-#     author's own DeepSeek key was hidden behind the hosted DeepSeek entry.
-#     The collision is specific to us — upstream's hosted ids never match a
-#     BYOK id — which is also why upstream will never fix it.
-#
-# The cost is real and now measured rather than predicted: moving 1.129.1 ->
-# 1.134.0, five of our hunks in this file came back BROKEN or GONE, in a single
-# five-release window. Expect to re-derive this file at every anchor move, and
-# reconsider the exception the first time the re-derivation is not obvious.
-FORBIDDEN_EXCEPTIONS=(
-  "src/vs/workbench/contrib/chat/browser/widget/input/chatModelPicker.ts"
-)
 
 changed="$(git diff --name-only "$ANCHOR" -- . ; git ls-files --others --exclude-standard)"
 changed="$(printf '%s\n' "$changed" | sed '/^$/d' | sort -u)"
@@ -225,13 +203,6 @@ while IFS= read -r f; do
   [[ -z "$f" ]] && continue
 
   hit_forbidden=0
-  for e in "${FORBIDDEN_EXCEPTIONS[@]}"; do
-    [[ "$f" == "$e" ]] && { hit_forbidden=2; break; }
-  done
-  if [[ $hit_forbidden -eq 2 ]]; then
-    allowed+=("$f")
-    continue
-  fi
   for d in "${FORBIDDEN_DIRS[@]}"; do
     if [[ "$f" == "$d"* ]]; then
       forbidden+=("$f")

@@ -287,6 +287,9 @@ async function main() {
 	// Guarded rather than deleted so that the functions above stay next to their
 	// upstream versions and rebase cleanly, and so that restoring the feature is
 	// one condition rather than a reconstruction.
+	//
+	// Dropped by the 1.134.0 rebase and restored by postflight — which is the
+	// entire reason postflight runs before re-snapshotting.
 	// const copilotCliSourceDir = await materializeCopilotCliSdkLayout();
 	// await removeCopilotCLIShim();
 	// await removeCopilotCliWorkerFiles();
@@ -302,12 +305,6 @@ async function main() {
 		console.warn(`Warning: Base cache file does not exist at ${baseCachePath}. Please ensure that you have git lfs installed and initialized before the repository is cloned.`);
 	}
 
-	// NOVEL-BUILDER: the Claude Code CLI, same reason — a proprietary package this
-	// product does not depend on. Its only consumer is the Claude agent session
-	// type, which is not registered.
-	// await copyStaticAssets([
-	// 	`node_modules/@anthropic-ai/claude-agent-sdk/cli.js`,
-	// ], 'dist');
 }
 
 main();

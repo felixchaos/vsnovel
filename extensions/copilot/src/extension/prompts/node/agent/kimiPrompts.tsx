@@ -12,11 +12,16 @@ import { ResponseTranslationRules } from '../base/responseTranslationRules';
 import { Tag } from '../base/tag';
 import { EXISTING_CODE_MARKER } from '../panel/codeBlockFormattingRules';
 import { ResponseRenderingRules } from '../panel/editorIntegrationRules';
-import { ApplyPatchInstructions, CodesearchModeInstructions, DefaultAgentPromptProps, DefaultReminderInstructions, detectToolCapabilities, GenericEditingTips, McpToolInstructions, NotebookInstructions } from './defaultAgentInstructions';
+import { ApplyPatchInstructions, CodesearchModeInstructions, DefaultAgentPromptProps, DefaultReminderInstructions, detectToolCapabilities, GenericEditingTips, McpToolInstructions, NotebookInstructions, ReminderInstructionsProps } from './defaultAgentInstructions';
 import { FileLinkificationInstructions } from './fileLinkificationInstructions';
 import { IAgentPrompt, PromptRegistry, ReminderInstructionsConstructor, SystemPrompt } from './promptRegistry';
 
-class KimiAgentPrompt extends PromptElement<DefaultAgentPromptProps> {
+// NOVEL-BUILDER: exported so kimiPrompts.spec.tsx can render it directly.
+// This product routes every Kimi family to its own writing prompt (see
+// src/novel/prompts/kimiPrompt.tsx), so the spec can no longer reach this class
+// through the registry. Exporting keeps upstream's coverage of its own prompt
+// text alive instead of leaving two permanently red assertions behind.
+export class KimiAgentPrompt extends PromptElement<DefaultAgentPromptProps> {
 	async render(state: void, sizing: PromptSizing) {
 		const tools = detectToolCapabilities(this.props.availableTools);
 
@@ -47,6 +52,7 @@ class KimiAgentPrompt extends PromptElement<DefaultAgentPromptProps> {
 				- If you find yourself running similar commands or re-editing the same files without clear progress, stop and reassess rather than continuing to loop.<br />
 				- If an action fails or does not work as expected, do not retry it unchanged. Understand why it failed, then try a different approach.<br />
 				- Never call the same tool with the same arguments more than twice in a row.<br />
+				- When running build, test, or debug commands, do not repeat the same edit-run-inspect cycle many times hoping for a different result. After a couple of failed attempts, read the relevant code or the full error output and form a specific hypothesis about the root cause before making more changes.<br />
 				- If you are stuck or no longer making progress, end the turn with a concise summary of what you tried, what is blocked, and any clarifying question needed.
 			</Tag>
 
@@ -61,10 +67,10 @@ class KimiAgentPrompt extends PromptElement<DefaultAgentPromptProps> {
 
 			<Tag name='contextHandling'>
 				You will be given context and attachments along with the user prompt. Use relevant context and ignore irrelevant context.{tools[ToolName.ReadFile] && <> Some attachments may be summarized with omitted sections like `/* Lines 123-456 omitted */`. Use {ToolName.ReadFile} to read more context if needed. Never pass this omitted line marker to an edit tool.</>}<br />
-				{/* NOVEL-BUILDER: "project type (languages, frameworks, and libraries)" -> "story type (genre, narrative style, setting)". Reframes metadata about technical artifacts to narrative metadata. */}
-				If you can infer the story type (genre, narrative style, and setting) from the user's query or the context, keep it in mind when making changes.<br />
+				{/* NOVEL-BUILDER: "project type (languages, frameworks, and libraries)" -> the narrative equivalent, and files/sections -> chapters/passages. Upstream's re-reading guidance at 1.134.0 is kept whole; only the nouns move. */}
+				If you can infer the story type (genre, narrative voice, and setting) from the author's query or the context, keep it in mind when making changes.<br />
 				When reading chapters, prefer reading large meaningful sections rather than consecutive small passages to minimize tool calls and gain better context.<br />
-				You do not need to read a chapter if it is already provided in context.
+				You do not need to read a chapter if it is already provided in context. Avoid re-reading a chapter or line range that is already available in the current context, since re-reading identical content wastes a tool call and yields no new information. Read it again only if it has changed, if you need a range you have not seen yet, or if that content is no longer in context (for example after earlier conversation history was summarized).
 			</Tag>
 
 			<Tag name='toolUseInstructions'>
@@ -75,13 +81,11 @@ class KimiAgentPrompt extends PromptElement<DefaultAgentPromptProps> {
 				{/* NOVEL-BUILDER: "efficient codebase exploration" -> "efficient manuscript exploration". Reframes code search to story search. */}
 				{(tools[ToolName.SearchSubagent] || tools[ToolName.ExploreSubagent]) && <>For efficient manuscript exploration, prefer {tools[ToolName.SearchSubagent] ? ToolName.SearchSubagent : ToolName.ExploreSubagent} to search and gather data instead of directly calling {ToolName.FindTextInFiles}, {ToolName.Codebase} or {ToolName.FindFiles}.<br /></>}
 				{tools[ToolName.ExecutionSubagent] && <>For most execution tasks and terminal commands, use {ToolName.ExecutionSubagent} to run commands and get relevant portions of the output instead of using {ToolName.CoreRunInTerminal}. Use {ToolName.CoreRunInTerminal} only when you need the entire output of a single command without truncation.<br /></>}
-				{/* NOVEL-BUILDER: "files or sections" -> "chapters or sections". Reframes code files to manuscript chapters. */}
-				{tools[ToolName.ReadFile] && <>When using {ToolName.ReadFile}, prefer reading a large section over many small sequential reads. Identify independent chapters or sections and read them in parallel when possible.<br /></>}
-				{/* NOVEL-BUILDER: "workspace" (2x) -> "manuscript". Reframes codebase context to story context. */}
+				{/* NOVEL-BUILDER: files -> chapters, workspace -> manuscript. Upstream's
+				    parallel-read guidance is kept whole; only the nouns move. */}
+				{tools[ToolName.ReadFile] && <>When using {ToolName.ReadFile}, prefer reading a large section over many small sequential reads. Before you start reading, think of all the chapters and ranges you expect to need, then read them together as parallel {ToolName.ReadFile} calls in a single message instead of one after another. Read a large enough range the first time so you do not need follow-up reads.<br /></>}
 				{tools[ToolName.Codebase] && <>If {ToolName.Codebase} returns the full contents of text files in the manuscript, you have all the manuscript context.<br /></>}
-				{/* NOVEL-BUILDER: "file" (2x) -> "chapter"; "ranges" -> "passages". Reframes code file operations to chapter search. */}
 				{tools[ToolName.FindTextInFiles] && <>Use {ToolName.FindTextInFiles} to get an overview of a chapter by searching within that one chapter instead of reading many small passages.<br /></>}
-				{/* NOVEL-BUILDER: "filename pattern" -> "chapter pattern"; "across the workspace" -> "across the manuscript". Reframes code search to story search. */}
 				{tools[ToolName.Codebase] && <>If you do not know the exact string or chapter pattern to search for, use {ToolName.Codebase} for semantic search across the manuscript.<br /></>}
 				{tools[ToolName.CoreRunInTerminal] && <>Do not call {ToolName.CoreRunInTerminal} multiple times in parallel. Run one command and wait for the output before running the next command.<br /></>}
 				{tools[ToolName.ExecutionSubagent] && <>Do not call {ToolName.ExecutionSubagent} multiple times in parallel. Invoke one execution subagent and wait for its response before running the next command.<br /></>}
@@ -99,7 +103,7 @@ class KimiAgentPrompt extends PromptElement<DefaultAgentPromptProps> {
 			{tools[ToolName.ReplaceString] && !tools[ToolName.EditFile] && <Tag name='replaceStringInstructions'>
 				Before editing an existing file, make sure it is already in context or read it with {ToolName.ReadFile}.<br />
 				{tools[ToolName.MultiReplaceString]
-					? <>Use {ToolName.ReplaceString} for single string replacements with enough context to ensure uniqueness. Prefer {ToolName.MultiReplaceString} for multiple independent replacements across one or more files. Do not announce which tool you're using.<br /></>
+					? <>Use {ToolName.ReplaceString} for single string replacements with enough context to ensure uniqueness. Whenever you have multiple independent edits across one or more files, always batch them into a single {ToolName.MultiReplaceString} call instead of issuing {ToolName.ReplaceString} repeatedly. A single {ToolName.MultiReplaceString} call is much faster and cheaper. Because each replacement is prepared against the original file, edits that overlap or depend on each other will conflict — combine those into one replacement or make them in separate calls. Do not announce which tool you're using.<br /></>
 					: <>Use {ToolName.ReplaceString} to edit files. Include sufficient surrounding context so the replacement is unique. You can use this tool multiple times per file.<br /></>}
 				Group changes by file.<br />
 				NEVER show the changes to the user; call the edit tool and the edits will be applied and shown to the user.<br />
@@ -151,6 +155,15 @@ class KimiAgentPrompt extends PromptElement<DefaultAgentPromptProps> {
 	}
 }
 
+class KimiReminderInstructions extends PromptElement<ReminderInstructionsProps> {
+	render() {
+		return <>
+			<DefaultReminderInstructions {...this.props} />
+			<br />Don't re-read a file or line range that is still available in your current context — re-reading it only wastes a tool call. Read it again only if it has changed, if you need a range you have not seen yet, or if that content is no longer in context (for example after the history was summarized).
+		</>;
+	}
+}
+
 class KimiPromptResolver implements IAgentPrompt {
 	static readonly familyPrefixes: string[] = [];
 
@@ -163,7 +176,7 @@ class KimiPromptResolver implements IAgentPrompt {
 	}
 
 	resolveReminderInstructions(endpoint: IChatEndpoint): ReminderInstructionsConstructor | undefined {
-		return DefaultReminderInstructions;
+		return KimiReminderInstructions;
 	}
 }
 

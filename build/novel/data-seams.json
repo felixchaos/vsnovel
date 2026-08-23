@@ -1,13 +1,12 @@
 {
-	"anchor": "1.129.1",
+	"anchor": "1.134.0-release",
 	"note": "Semantic seams for structured-data files. Each entry records the value UPSTREAM holds at the anchor tag, not the value we write. Verification asks: does upstream still hold this? If not, our edit was written against a fact that no longer exists — re-derive it. Hunk-level text fingerprints are useless here because JSON boilerplate repeats hundreds of times.",
 	"seams": [
 		{
 			"file": "extensions/copilot/package.json",
 			"selector": "contributes.languageModelTools[name=copilot_searchCodebase].when",
-			"upstream": null,
-			"absent": true,
-			"note": "dev tool, ungated upstream; we add the novelBuilder.developerTools gate"
+			"upstream": "config.github.copilot.chat.semanticSearchTool.mode != disabled",
+			"note": "upstream had no gate here when we wrote ours, so ours replaced nothing. It has since added semanticSearchTool.mode != disabled — and this seam is what caught our gate quietly overriding it. The two are ANDed now: hidden from authors, and still off when upstream says off. Any future upstream condition here needs the same treatment rather than a straight replacement."
 		},
 		{
 			"file": "extensions/copilot/package.json",
@@ -415,17 +414,20 @@
 		{
 			"file": "extensions/copilot/package.json",
 			"selector": "dependencies.@anthropic-ai/claude-agent-sdk",
-			"upstream": "0.2.112"
+			"upstream": null,
+			"absent": true,
+			"note": "upstream carried this at 1.129.1 and dropped it by 1.134.0, so there is nothing left for us to remove. Kept as a dependency record rather than deleted: if upstream brings it back, we want to be told.",
+			"depends": true
 		},
 		{
 			"file": "extensions/copilot/package.json",
 			"selector": "dependencies.@github/copilot",
-			"upstream": "^1.0.70-0"
+			"upstream": "^1.0.73"
 		},
 		{
 			"file": "extensions/copilot/package.json",
 			"selector": "dependencies.@vscode/copilot-api",
-			"upstream": "^0.4.3"
+			"upstream": "^0.5.2"
 		},
 		{
 			"file": "extensions/copilot/package.json",
@@ -624,6 +626,25 @@
 			"upstream": null,
 			"absent": true,
 			"note": "a setting this product adds; upstream has no property by this name"
+		},
+		{
+			"file": "extensions/copilot/package.json",
+			"selector": "contributes.configurationDefaults['chat.agentHost.allowSignedOutWhenUsable']",
+			"upstream": null,
+			"absent": true,
+			"note": "upstream ships no default here, so the agent host refuses to run while the chat session is signed out. Our auth is a different provider and the host's signed-in probe does not see it; without this default the agent silently declines to start for an author who is in fact signed in. If upstream ever ships its own default, re-derive rather than keep ours."
+		},
+		{
+			"file": "product.json",
+			"selector": "builtInExtensions[name=ms-vscode.vscode-js-profile-table].version",
+			"upstream": "1.0.11",
+			"note": "upstream ships 1.0.11. We build against open-vsx, not Microsoft's marketplace, and open-vsx does not mirror Microsoft's 1.0.11 .vsix — it serves its own rebuild (604KB unpacked against 2.4MB, no ThirdPartyNotices), so the sha256 upstream records can never match and the build dies on a checksum mismatch. 1.0.10 on open-vsx IS byte-identical to Microsoft's, so pinning there keeps a checksum we can actually verify against an independent record rather than blessing bytes nobody else vouches for. Re-derive when open-vsx mirrors a later version, or when we decide a novel editor should not be shipping a JavaScript CPU-profile viewer at all."
+		},
+		{
+			"file": "product.json",
+			"selector": "builtInExtensions[name=ms-vscode.vscode-js-profile-table].sha256",
+			"upstream": "a962a1e6a3baf74c9354b7f47fa96e6d6f0423a63bff55d7f976b6134a748ae9",
+			"note": "upstream ships 1.0.11. We build against open-vsx, not Microsoft's marketplace, and open-vsx does not mirror Microsoft's 1.0.11 .vsix — it serves its own rebuild (604KB unpacked against 2.4MB, no ThirdPartyNotices), so the sha256 upstream records can never match and the build dies on a checksum mismatch. 1.0.10 on open-vsx IS byte-identical to Microsoft's, so pinning there keeps a checksum we can actually verify against an independent record rather than blessing bytes nobody else vouches for. Re-derive when open-vsx mirrors a later version, or when we decide a novel editor should not be shipping a JavaScript CPU-profile viewer at all."
 		}
 	]
 }

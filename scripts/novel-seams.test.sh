@@ -122,13 +122,30 @@ restore
 # Against the anchor everything is intact by construction. Against a tag six
 # releases away real breakage exists. A detector that reports the same for both
 # is not measuring anything.
-near="$(node "$SEAMS" verify 1.128.1 2>&1 | grep -cE '^\s+(BROKEN|GONE)\s+.*\s[1-9][0-9]*$')"
-far="$(node "$SEAMS" verify 1.123.0 2>&1 | grep -cE '^\s+(BROKEN|GONE)\s+.*\s[1-9][0-9]*$')"
-if [[ "$near" -eq 0 && "$far" -gt 0 ]]; then
-  echo "  ok    verify separates a near tag (clean) from a far one (breakage)"
+# Derived from the anchor, not written down. These were hardcoded as 1.128.1
+# and 1.123.0 — correct while the anchor was 1.129.1, and quietly wrong the
+# moment it moved: 1.128.1 became six releases away and started reporting the
+# breakage the test demands only from the far tag. A test whose meaning depends
+# on a number that goes stale at every rebase fails for the wrong reason and
+# gets waved through.
+ANCHOR="${NOVEL_ANCHOR_TAG:-1.134.0}"
+_tags="$(git tag -l '1.1[0-9][0-9].*' | sort -V)"
+_pos="$(printf '%s\n' "$_tags" | grep -n "^${ANCHOR%%-*}$" | cut -d: -f1)"
+NEAR_TAG="$(printf '%s\n' "$_tags" | sed -n "$((_pos - 1))p")"
+FAR_TAG="$(printf '%s\n' "$_tags" | sed -n "$((_pos > 6 ? _pos - 6 : 1))p")"
+# Counted, not categorised. The old metric was "how many of the BROKEN/GONE
+# rows are non-zero", which is at most 2 no matter how far back you go — near
+# and far both scored 1 and the assertion could not tell them apart. What
+# actually carries the signal is how MANY seams break: 4 one release back
+# against 42 five releases back.
+broken() { node "$SEAMS" verify "$1" 2>&1 | grep -E '^\s+(BROKEN|GONE)\s' | grep -oE '[0-9]+$' | paste -sd+ - | bc; }
+near="$(broken "$NEAR_TAG")"
+far="$(broken "$FAR_TAG")"
+if [[ "$far" -gt "$near" ]]; then
+  echo "  ok    verify scales with distance ($NEAR_TAG: $near broken, $FAR_TAG: $far)"
   pass=$((pass + 1))
 else
-  echo "  FAIL  verify did not discriminate: 1.128.1 -> $near broken kinds, 1.123.0 -> $far"
+  echo "  FAIL  verify did not scale with distance: $NEAR_TAG -> $near broken, $FAR_TAG -> $far"
   fail=$((fail + 1))
 fi
 

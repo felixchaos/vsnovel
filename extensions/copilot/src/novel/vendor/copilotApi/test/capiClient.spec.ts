@@ -174,7 +174,9 @@ describe('updateDomains', () => {
 describe('web socket', () => {
 	it('opens against the responses endpoint and keeps the fetcher connection type', () => {
 		const { client: c, calls } = client();
-		const connection = c.createResponsesWebSocket<{ socket: boolean }>({ headers: {} });
+		// Upstream 1.134.0 made this concrete: no type argument, and the result is
+		// the fetcher's connection promise rather than the connection itself.
+		const connection = c.createResponsesWebSocket({ headers: {} }) as unknown as { socket: boolean };
 		expect(connection.socket).toBe(true);
 		expect(calls[0].url).toMatch(/\/responses$/);
 	});

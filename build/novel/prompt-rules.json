@@ -1,5 +1,5 @@
 {
-	"anchor": "1.129.1",
+	"anchor": "1.134.0-release",
 	"note": "Generated from the committed diff, then annotated by hand. Regenerate ONLY when adding a rule deliberately — this file is the source of truth for what the transform does, not a cache.",
 	"delegations": [
 		{
@@ -216,6 +216,8 @@
 		],
 		"outOfScopeWhy": "Prompts belonging to code-only features: commit messages, dev containers, notebooks, the code mapper, terminal, debugging, inline code generation. They call themselves programming assistants because that is what they are, and the product gates the features that reach them. Rewriting their text is churn against upstream with no user-visible effect. If any of these ever becomes reachable to an author, delete it from this list — it then belongs in the scan."
 	},
-	"unclassifiedCeiling": 33,
-	"unclassifiedCeilingNote": "The backlog as of the first run in which the review patterns actually worked — they had been double-escaped and matched nothing, so this check reported clean while testing zero lines. Every entry is upstream prompt text that predates the scan and has not been judged. This number may only go down: triage an item into accepted with its reason, or transform it with a rule, then lower this by one. Raising it means accepting that nobody looked."
+	"unclassifiedCeiling": 12,
+	"unclassifiedCeilingNote": "The backlog as of the first run in which the review patterns actually worked — they had been double-escaped and matched nothing, so this check reported clean while testing zero lines. Every entry is upstream prompt text that predates the scan and has not been judged. This number may only go down: triage an item into accepted with its reason, or transform it with a rule, then lower this by one. Raising it means accepting that nobody looked. Lowered 33 -> 12 at the 1.134.0 re-anchor: the actual backlog was 13 and the 20 lines of slack were not neutral. The test that injects software-specific prompt text and demands it be reported was passing on the injection hiding under the ceiling — a ceiling with room in it does not record a backlog, it silences the check.",
+	"replayGapCeiling": 150,
+	"replayGapCeilingNote": "How many lines of gpt51Prompt.tsx `apply` cannot put back after the file is reverted to upstream. Rules replay; hand-written prose does not, and most of the reframing is prose — 19 of the 21 rule-covered files fail to come back byte for byte, this one by 150 lines. The old test asserted byte-for-byte equality, which this system has never had, so it was red from the day it was written and carried no signal. This number may only go down: turn a hand edit into a rule and lower it. Raising it is a decision someone has to make out loud."
 }

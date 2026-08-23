@@ -175,6 +175,7 @@ export interface ILogTarget {
 export interface ITelemetrySender {
 	sendTelemetryEvent(eventName: string, properties?: Record<string, string | undefined>, measurements?: Record<string, number | undefined>): void;
 	sendEnhancedTelemetryEvent?(eventName: string, properties?: Record<string, string | undefined>, measurements?: Record<string, number | undefined>): void;
+	setExperimentProperty?(name: string, value: string): void;
 }
 
 export interface INESProviderOptions {
@@ -680,6 +681,9 @@ class SimpleTelemetryService implements ITelemetryService {
 		return;
 	}
 	setSharedProperty(name: string, value: string): void {
+		if (name === 'capi.assignmentcontext') {
+			this._telemetrySender.setExperimentProperty?.(name, value);
+		}
 		return;
 	}
 	setAdditionalExpAssignments(expAssignments: string[]): void {
@@ -878,6 +882,10 @@ class UnwrappingTelemetrySender implements ITelemetrySender {
 		if (this.sender.sendEnhancedTelemetryEvent) {
 			this.sender.sendEnhancedTelemetryEvent(this.normalizeEventName(eventName), properties, measurements);
 		}
+	}
+
+	setExperimentProperty(name: string, value: string): void {
+		this.sender.setExperimentProperty?.(name, value);
 	}
 
 	private normalizeEventName(eventName: string): string {
