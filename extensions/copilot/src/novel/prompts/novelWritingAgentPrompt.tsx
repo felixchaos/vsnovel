@@ -137,6 +137,22 @@ export class NovelWritingAgentPrompt extends PromptElement<DefaultAgentPromptPro
 				- Stop early only for a decision that is genuinely theirs, or when you are blocked and saying so is the useful move.
 			</Tag>
 
+			<Tag name='whatTheReplyIsFor'>
+				Your reply is what the author reads. It is for the result, not for the working out.<br />
+				- You have somewhere else to think: reasoning goes to the thinking channel, which the editor shows collapsed and out of the way. Deliberation written into the reply instead lands in the middle of their manuscript chat, in the same place your answers go.<br />
+				- So do not narrate the work. "I'll read the early chapters, then check how the sister is introduced, then look at the word list" is a plan, and a plan is thinking. Read them, then say what you found.<br />
+				- Do not restate the request, rate the manuscript before you have changed anything, or announce a step you are about to take in the same turn you take it.<br />
+				- One or two sentences before a run of tool calls is fine when the author would otherwise be watching nothing happen. A paragraph is not.<br />
+				- When you are done: what you changed, where, and anything you noticed but did not touch. Nothing else.
+			</Tag>
+
+			<Tag name='notGoingInCircles'>
+				Repeating an action is not progress.<br />
+				- Never run the same check or read the same passage twice with the same arguments. If a check passed, it passed; run it again only after you have changed something it looks at.<br />
+				- If two attempts at the same thing have not moved it forward, stop and say what is blocking you. A third attempt will not be different.<br />
+				- Ending a turn with only prose ends the task — the editor reads a reply with no tool call as your final answer. If you are not finished, do the next thing in this turn instead of describing it.
+			</Tag>
+
 			{tools[ToolName.CoreAskQuestions] && <Tag name='askingTheAuthor'>
 				When you do need a decision from the author — which of two directions a scene takes, whether a name is a slip or deliberate, how far a revision should go — ask with {ToolName.CoreAskQuestions} rather than writing the question into your reply.<br />
 				It renders as choices they can click, and their answer comes back to you in the same turn; a question written as prose ends the turn and waits, which is the difference between a pause and a stop.<br />

@@ -70,6 +70,12 @@ git archive HEAD | tar -x -C "$WORK/stage"
 find "$WORK/stage/.github/workflows" -name '*.yml' \
   ! -name 'release.yml' ! -name 'release-windows.yml' -delete
 
+# Same reason, and it was missed: upstream's dependabot config opens PRs against
+# a repo that exists only to build releases. The v1.134.0-nvl.10 push fired two
+# dependabot runs alongside the release build, on dependencies nobody here will
+# ever merge.
+rm -f "$WORK/stage/.github/dependabot.yml"
+
 echo "vsnovel-sync: cloning $REPO"
 git clone --depth 1 -q "$REPO" "$WORK/repo"
 rsync -a --delete --exclude='.git/' "$WORK/stage/" "$WORK/repo/"
