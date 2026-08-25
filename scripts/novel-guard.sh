@@ -175,7 +175,7 @@ ALLOWED_NEW_UNDER=(
 # any coding-scope or coding-identity phrasing. This entry permits the edits;
 # that gate decides whether they are correct.
 ALLOWED_MODIFY_UNDER=(
-  "extensions/copilot/src/extension/prompts/node/agent/:per-family identity sentences, inlined and unreachable from the registry slots; plus imports in allAgentPrompts.ts registering the deepseek, grok and kimi families onto the shared writing prompt. deepseek has no upstream prompt and would fall through to the coding default; grok and kimi are claimed upstream by matchesModel predicates, so their imports must precede './xAIPrompts' and './kimiPrompts' to win the registry's first-registered-predicate race (asserted by grokPrompt.spec.ts / kimiPrompt.spec.ts)"
+  "extensions/copilot/src/extension/prompts/node/agent/:per-family prompt text rewritten for a novelist, inlined and unreachable from the registry slots; plus an additive slot on PromptRegistry (registerAdditionalInstructions) and its two render sites in agentPrompt.tsx. The slot exists because the registry resolves exactly one prompt per model, which is right for the per-family tunings but wrong for instructions that belong to every model equally — where the story bible lives, that a search must be told which chapter is being written. Expressing those through the existing slot meant replacing a family's tuning in order to add to it, which is what this product used to do for deepseek, grok and kimi and no longer does. One import in allAgentPrompts.ts registers the layer; order is irrelevant because nothing competes"
 )
 
 # Directories that must never be touched.

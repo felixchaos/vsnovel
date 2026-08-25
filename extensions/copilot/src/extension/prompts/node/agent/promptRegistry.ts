@@ -54,6 +54,39 @@ export const PromptRegistry = new class {
 	private readonly promptsWithMatcher: PromptWithMatcher[] = [];
 	private readonly familyPrefixList: { prefix: string; prompt: IAgentPromptCtor }[] = [];
 
+	// NOVEL-BUILDER: an additive slot, alongside the per-family resolvers above.
+	//
+	// The registry resolves exactly one prompt per model, which is right for what
+	// it was built for: the per-family tunings are alternatives to each other. But
+	// this product also has instructions that belong to every model equally —
+	// where the story bible lives, that a search must be told which chapter is
+	// being written, how a translation glossary binds — and expressing those
+	// through the existing slot means replacing a family's tuning to add to it.
+	// That is the trade this list exists to avoid: what is registered here is
+	// appended after whichever prompt won, so Copilot's per-model prompt
+	// engineering survives and the product's own instructions still reach every
+	// model. Global rather than per-endpoint, because none of it varies by model.
+	private readonly appendedSystemInstructions: SystemPrompt[] = [];
+	private readonly appendedReminderInstructions: ReminderInstructionsConstructor[] = [];
+
+	get additionalSystemInstructions(): readonly SystemPrompt[] {
+		return this.appendedSystemInstructions;
+	}
+
+	get additionalReminderInstructions(): readonly ReminderInstructionsConstructor[] {
+		return this.appendedReminderInstructions;
+	}
+
+	// NOVEL-BUILDER: see appendedSystemInstructions.
+	registerAdditionalInstructions(instructions: { system?: SystemPrompt; reminder?: ReminderInstructionsConstructor }): void {
+		if (instructions.system) {
+			this.appendedSystemInstructions.push(instructions.system);
+		}
+		if (instructions.reminder) {
+			this.appendedReminderInstructions.push(instructions.reminder);
+		}
+	}
+
 	registerPrompt(prompt: IAgentPromptCtor): void {
 		if (prompt.matchesModel) {
 			this.promptsWithMatcher.push(prompt as PromptWithMatcher);

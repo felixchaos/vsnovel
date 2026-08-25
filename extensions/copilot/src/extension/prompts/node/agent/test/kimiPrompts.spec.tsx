@@ -18,7 +18,7 @@ import { ToolName } from '../../../../tools/common/toolNames';
 import { IToolsService } from '../../../../tools/common/toolsService';
 import { PromptRenderer } from '../../base/promptRenderer';
 import '../allAgentPrompts';
-import { KimiAgentPrompt } from '../kimiPrompts';
+import { PromptRegistry } from '../promptRegistry';
 
 suite('KimiPrompts', () => {
 	let accessor: ITestingServicesAccessor;
@@ -37,13 +37,8 @@ suite('KimiPrompts', () => {
 	async function renderSystemPrompt(family: string, availableTools?: readonly LanguageModelToolInformation[]): Promise<string> {
 		const instantiationService = accessor.get(IInstantiationService);
 		const endpoint = instantiationService.createInstance(MockEndpoint, family);
-		// NOVEL-BUILDER: rendered directly rather than resolved through the
-		// registry. This product registers its own resolver for every Kimi family
-		// and it wins, so the registry hands back NovelWritingAgentPrompt and
-		// these assertions about Kimi's text all failed. The routing itself is
-		// covered by src/novel/prompts/test/kimiPrompt.spec.ts; what is worth
-		// keeping here is upstream's coverage of upstream's own prompt.
-		const renderer = PromptRenderer.create(instantiationService, endpoint, KimiAgentPrompt, {
+		const customizations = await PromptRegistry.resolveAllCustomizations(instantiationService, endpoint);
+		const renderer = PromptRenderer.create(instantiationService, endpoint, customizations.SystemPrompt, {
 			availableTools: availableTools ?? accessor.get(IToolsService).tools,
 			modelFamily: family,
 			codesearchMode: false,

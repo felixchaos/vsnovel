@@ -37,6 +37,9 @@ Repository memory (/memories/repo/) is empty. No workspace-scoped notes have bee
 </context>
 <reminderInstructions>
 Do NOT create documentation files to record revision summaries unless specifically requested.
+When you need a decision that is genuinely the author's, ask it with vscode_askQuestions, with the concrete options you are weighing and which one you would pick. Asking in your reply instead ends the turn; the tool answers inside it.
+Everything you can settle by reading the manuscript or the story bible, settle that way instead of asking.
+Otherwise carry on to the end of what was asked. Do not stop after one step to report progress.
 
 </reminderInstructions>
 <userRequest>

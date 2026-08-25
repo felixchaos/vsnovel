@@ -3,13 +3,6 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-// NOVEL-BUILDER: Grok and Kimi are claimed upstream by `matchesModel` predicates
-// (xAIPrompts, kimiPrompts). The registry checks predicate resolvers before any
-// prefix and, among predicates, the first registered wins — so ours must be
-// imported before those two files to shadow their coding prompts with the shared
-// writing prompt. Order is asserted by grokPrompt.spec.ts / kimiPrompt.spec.ts.
-import '../../../../novel/prompts/grokPrompt';
-import '../../../../novel/prompts/kimiPrompt';
 import './anthropicPrompts';
 import './familyHPrompts';
 import './geminiPrompts';
@@ -29,8 +22,15 @@ import './openai/gpt5CodexPrompt';
 import './openai/gpt5Prompt';
 import './xAIPrompts';
 import './zaiPrompts';
-// NOVEL-BUILDER: DeepSeek is the product's own model family and has no upstream
-// prompt, so without this registration `family: 'deepseek'` matches no prefix and
-// falls through to DefaultAgentPrompt — a prompt that assumes a codebase
-// throughout. Imported last so it cannot be shadowed by a prefix registered above.
-import '../../../../novel/prompts/deepseekPrompt';
+// NOVEL-BUILDER: this product's own instructions, registered into the registry's
+// additive slot rather than as a family resolver. Nothing here competes with the
+// imports above — it is appended after whichever of them wins, so every model
+// keeps Copilot's per-family tuning and also hears about the story bible, the
+// chapter-scoped search and the translation glossary. Import order is therefore
+// irrelevant, which is the point: the three family registrations this replaced
+// had to be ordered against xAIPrompts and kimiPrompts to shadow them.
+//
+// DeepSeek still matches no prefix here and resolves to DefaultAgentPrompt. That
+// is now correct rather than a fallback to be avoided: that prompt was rewritten
+// for a novelist on 2026-08-22, which is what made the shadowing obsolete.
+import '../../../../novel/prompts/novelInstructions';

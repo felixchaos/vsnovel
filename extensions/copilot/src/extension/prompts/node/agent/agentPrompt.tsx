@@ -47,7 +47,7 @@ import { AgentMultirootWorkspaceStructure } from '../panel/workspace/workspaceSt
 import { AgentConversationHistory, AgentUserMessageInHistory } from './agentConversationHistory';
 import './allAgentPrompts';
 import { AlternateGPTPrompt, DefaultReminderInstructions, DefaultToolReferencesHint, ReminderInstructionsProps, ToolReferencesHintProps } from './defaultAgentInstructions';
-import { AgentPromptCustomizations, ReminderInstructionsConstructor, ToolReferencesHintConstructor } from './promptRegistry';
+import { AgentPromptCustomizations, PromptRegistry, ReminderInstructionsConstructor, ToolReferencesHintConstructor } from './promptRegistry';
 import { PreferSemanticSearchInstructions } from './semanticSearchInstructions';
 import { SummarizedConversationHistory } from './summarizedConversationHistory';
 import { DeferredToolListReminder } from './toolSearchInstructions';
@@ -197,20 +197,37 @@ export class AgentPrompt extends PromptElement<AgentPromptProps> {
 	private async getSystemPrompt(customizations: AgentPromptCustomizations) {
 		const modelFamily = this.props.endpoint.family ?? 'unknown';
 
-		if (this.props.endpoint.family.startsWith('gpt-') && this.configurationService.getExperimentBasedConfig(ConfigKey.EnableAlternateGptPrompt, this.experimentationService)) {
-			return <AlternateGPTPrompt
-				availableTools={this.props.promptContext.tools?.availableTools}
-				modelFamily={this.props.endpoint.family}
-				codesearchMode={this.props.codesearchMode}
-			/>;
-		}
-
-		const PromptClass = customizations.SystemPrompt!;
-		return <PromptClass
+		// NOVEL-BUILDER: the product's own instructions, appended to whichever
+		// per-family prompt the registry resolved rather than replacing it. Both
+		// branches below get them, including the alternate GPT prompt — a model
+		// that does not hear about the story bible cannot use it, and which
+		// branch rendered is not a reason to be told or not told.
+		const appended = PromptRegistry.additionalSystemInstructions.map(Appended => <Appended
 			availableTools={this.props.promptContext.tools?.availableTools}
 			modelFamily={modelFamily}
 			codesearchMode={this.props.codesearchMode}
-		/>;
+		/>);
+
+		if (this.props.endpoint.family.startsWith('gpt-') && this.configurationService.getExperimentBasedConfig(ConfigKey.EnableAlternateGptPrompt, this.experimentationService)) {
+			return <>
+				<AlternateGPTPrompt
+					availableTools={this.props.promptContext.tools?.availableTools}
+					modelFamily={this.props.endpoint.family}
+					codesearchMode={this.props.codesearchMode}
+				/>
+				{appended}
+			</>;
+		}
+
+		const PromptClass = customizations.SystemPrompt!;
+		return <>
+			<PromptClass
+				availableTools={this.props.promptContext.tools?.availableTools}
+				modelFamily={modelFamily}
+				codesearchMode={this.props.codesearchMode}
+			/>
+			{appended}
+		</>;
 	}
 
 	private async getAgentCustomInstructions(frozenCustomizationsIndex?: { value: string; toolReferences: readonly ChatLanguageModelToolReference[] | undefined }) {
@@ -545,6 +562,8 @@ export class AgentUserMessage extends PromptElement<AgentUserMessageProps> {
 					<Tag name='reminderInstructions'>
 						{/* Critical reminders that are effective when repeated right next to the user message */}
 						<ReminderInstructionsClass {...reminderProps} />
+						{/* NOVEL-BUILDER: appended, not substituted — the per-family reminder above still carries the edit-tool wording. */}
+						{PromptRegistry.additionalReminderInstructions.map(Appended => <Appended {...reminderProps} />)}
 						<NotebookReminderInstructions chatVariables={this.props.chatVariables} query={this.props.request} />
 						{this.configurationService.getNonExtensionConfig<boolean>(USE_SKILL_ADHERENCE_PROMPT_SETTING) && <SkillAdherenceReminder chatVariables={this.props.chatVariables} />}
 					</Tag>

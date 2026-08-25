@@ -16,12 +16,7 @@ import { ApplyPatchInstructions, CodesearchModeInstructions, DefaultAgentPromptP
 import { FileLinkificationInstructions } from './fileLinkificationInstructions';
 import { IAgentPrompt, PromptRegistry, ReminderInstructionsConstructor, SystemPrompt } from './promptRegistry';
 
-// NOVEL-BUILDER: exported so kimiPrompts.spec.tsx can render it directly.
-// This product routes every Kimi family to its own writing prompt (see
-// src/novel/prompts/kimiPrompt.tsx), so the spec can no longer reach this class
-// through the registry. Exporting keeps upstream's coverage of its own prompt
-// text alive instead of leaving two permanently red assertions behind.
-export class KimiAgentPrompt extends PromptElement<DefaultAgentPromptProps> {
+class KimiAgentPrompt extends PromptElement<DefaultAgentPromptProps> {
 	async render(state: void, sizing: PromptSizing) {
 		const tools = detectToolCapabilities(this.props.availableTools);
 

@@ -185,12 +185,12 @@ const RULES: Rule[] = [
  * above defensible: a prompt no shipped model resolves to is never rendered, and
  * its text cannot reach an author.
  *
- * All three resolve to the one shared writing prompt. Grok and Kimi are the
- * families upstream also claims — by predicate — so their entries here double as
- * proof that our resolvers win that race; the dedicated grokPrompt.spec.ts and
- * kimiPrompt.spec.ts check it directly.
+ * Every one of them resolves to Copilot's own prompt for that family — upstream's
+ * for grok, kimi and gemini, the shared default for deepseek, which upstream has
+ * no family for. That is the arrangement this product wants: the per-model prompt
+ * engineering is the reason to be built on Copilot at all.
  */
-const SHIPPED_FAMILY_PREFIXES = ['deepseek', 'grok', 'kimi'];
+const SHIPPED_FAMILY_PREFIXES = ['deepseek', 'grok', 'kimi', 'gemini'];
 
 function extensionRoot(): string {
 	// This file is at <ext>/src/novel/prompts/test/.
@@ -271,16 +271,21 @@ describe('novel prompt lint', () => {
 	}
 
 	/**
-	 * The premise the narrow scope rests on.
+	 * The premise the narrow scope rests on, and the shape of the fix.
 	 *
-	 * The upstream family prompts are left half-migrated — a writing identity over
-	 * a body that still discusses codebases — and that is tolerable only for as
-	 * long as no shipped model resolves to one of them. This checks the premise
-	 * instead of assuming it, so adding a model family to the catalog without
-	 * writing a prompt for it fails here rather than shipping a coding agent to an
-	 * author.
+	 * This test used to assert the opposite: that every shipped family resolved to
+	 * a prompt *this product wrote*, because in July the upstream family prompts
+	 * were still coding prompts with a writing identity pasted on top, and routing
+	 * an author to one of them would have handed them an agent that assumed a
+	 * repository. On 2026-08-22 those prompts were themselves rewritten for a
+	 * novelist and the scan above now covers all of them, which removed the reason
+	 * and left three families on a hand-written prompt for no stated cause.
+	 *
+	 * So the invariant is inverted. Copilot's per-family prompt must win — it is
+	 * the per-model tuning this product is built on — and what this product knows
+	 * and Copilot cannot must arrive appended to it, never in its place.
 	 */
-	it('every family this product ships resolves to a prompt written for it', async () => {
+	it('every family this product ships keeps Copilot\'s own prompt for that family', async () => {
 		const ours = new Set(
 			walk(path.join(extensionRoot(), NOVEL_PROMPTS))
 				.flatMap(f => [...fs.readFileSync(f, 'utf8').matchAll(/class (\w+) extends PromptElement/g)].map(m => m[1]))
@@ -299,9 +304,33 @@ describe('novel prompt lint', () => {
 			);
 			expect(
 				[...ours],
-				`${prefix}: resolves to ${resolved.SystemPrompt.name}, which this product did not write`
-			).toContain(resolved.SystemPrompt.name);
+				`${prefix}: resolves to ${resolved.SystemPrompt.name}, which this product wrote. ` +
+				`Substituting a family prompt discards the per-model tuning; add to the registry's ` +
+				`additive slot instead (PromptRegistry.registerAdditionalInstructions).`
+			).not.toContain(resolved.SystemPrompt.name);
 		}
+	});
+
+	/**
+	 * The other half of the same invariant. A family prompt left intact is only
+	 * correct if the product's own instructions still reach the model, and they
+	 * reach it through the registry's additive slot rather than the resolver.
+	 * Registration happens as an import side effect, so the failure this catches
+	 * is an import quietly dropped from allAgentPrompts.ts — after which every
+	 * model still answers, and none of them has heard of the story bible.
+	 */
+	it('the product\'s own instructions are appended for every model', async () => {
+		const { PromptRegistry } = await import('../../../extension/prompts/node/agent/promptRegistry');
+		await import('../../../extension/prompts/node/agent/allAgentPrompts');
+
+		expect(
+			PromptRegistry.additionalSystemInstructions.map(c => c.name),
+			'nothing is registered in the additive slot: no model is told where the story bible lives'
+		).toContain('NovelInstructions');
+		expect(
+			PromptRegistry.additionalReminderInstructions.map(c => c.name),
+			'the per-turn novel reminders are not registered'
+		).toContain('NovelReminderInstructions');
 	});
 
 	it('every shared safety and identity class delegates to the novel rules', () => {

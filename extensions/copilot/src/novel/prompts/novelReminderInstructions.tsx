@@ -27,19 +27,22 @@
  * that somehow is not there — the model asks in prose — is exactly what happens
  * without this text anyway.
  *
- * Everything upstream put in this slot is kept: getEditingReminder is the
- * edit-tool wording, and dropping it would quietly cost every model the edit
- * discipline this slot exists to repeat.
+ * Appended rather than substituted, since 2026-08-25. This class used to be the
+ * whole slot for three families, so it had to re-emit getEditingReminder itself
+ * or those models would have lost the edit-tool wording. It is now rendered
+ * after the per-family reminder, which already emits that wording tuned for the
+ * model in question — Gemini's asks for the strong replace-string hint, and
+ * re-emitting a second copy with the hint off would argue with it. So only the
+ * two behaviours above remain here.
  */
 
 import { PromptElement, PromptSizing } from '@vscode/prompt-tsx';
-import { getEditingReminder, ReminderInstructionsProps } from '../../extension/prompts/node/agent/defaultAgentInstructions';
+import { ReminderInstructionsProps } from '../../extension/prompts/node/agent/defaultAgentInstructions';
 import { ToolName } from '../../extension/tools/common/toolNames';
 
 export class NovelReminderInstructions extends PromptElement<ReminderInstructionsProps> {
 	async render(state: void, sizing: PromptSizing) {
 		return <>
-			{getEditingReminder(this.props.hasEditFileTool, this.props.hasReplaceStringTool, false /* useStrongReplaceStringHint */, this.props.hasMultiReplaceStringTool)}
 			When you need a decision that is genuinely the author's, ask it with {ToolName.CoreAskQuestions}, with the concrete options you are weighing and which one you would pick. Asking in your reply instead ends the turn; the tool answers inside it.<br />
 			Everything you can settle by reading the manuscript or the story bible, settle that way instead of asking.<br />
 			Otherwise carry on to the end of what was asked. Do not stop after one step to report progress.<br />

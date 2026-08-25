@@ -45,9 +45,9 @@ Everything you can settle by reading the manuscript or the story bible, settle t
 Otherwise carry on to the end of what was asked. Do not stop after one step to report progress.
 
 </reminderInstructions>
-<userRequest>
+<user_query>
 hello
-</userRequest>
+</user_query>
 
 
 [copilot_cache_control: { type: 'ephemeral' }]
