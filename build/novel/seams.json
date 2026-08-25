@@ -1,7 +1,7 @@
 {
 	"anchor": "1.134.0-release",
 	"anchorCommit": "3e966c9cb3e14fb9adfdacd4ca6c91c24a231754",
-	"generated": "2026-08-24T07:28:03.578Z",
+	"generated": "2026-08-25T06:55:21.022Z",
 	"seams": [
 		{
 			"path": "README.md",
@@ -23322,6 +23322,26 @@
 			"occurrences": 1,
 			"postImage": "\t\t\t// NOVEL-BUILDER: the fallback is false, not true. The signatures this\n\t\t\t// checks are Microsoft's, issued through a marketplace whose terms\n\t\t\t// restrict it to official VS Code builds — one this paid product\n\t\t\t// cannot use. Against Open VSX, which does not sign, every install\n\t\t\t// fails with \"Signature verification was not executed\" and the\n\t\t\t// extension pane is dead, including the official Chinese language\n\t\t\t// pack.\n\t\t\t//\n\t\t\t// It has to be here rather than only on the setting's registered\n\t\t\t// default: that default is registered by a workbench contribution,\n\t\t\t// and `--install-extension` runs without a workbench, so the setting\n\t\t\t// reads as undefined and this line decides. Changing only the\n\t\t\t// declared default fixes the UI and leaves the CLI failing.\n\t\t\tverifySignature = isBoolean(value) ? value : false;",
 			"postImageSha": "0573a547d27fef48"
+		},
+		{
+			"path": "src/vs/platform/update/common/update.config.contribution.ts",
+			"header": "-65,0 +66,20",
+			"kind": "insert",
+			"preImage": "\t\t\tdescription: localize('updateMode', \"Configure whether you receive automatic updates. The updates are fetched from a Microsoft online service.\"),\n\t\t\tdeprecationMessage: localize('deprecated', \"This setting is deprecated, please use '{0}' instead.\", 'update.mode')\n\t\t},",
+			"preImageSha": "c48bffffbf900119",
+			"occurrences": 1,
+			"postImage": "\t\t// NOVEL-BUILDER: one default value. Windows background updates go off.\n\t\t// The background path installs into {app}\\_ and then has inno_updater\n\t\t// rename the running exe out of the way, the new one into place, and\n\t\t// roll back if that fails (code.iss GetDestDir/GetExeBasename, gated on\n\t\t// the /update= flag doApplyUpdate passes). All three renames can lose to\n\t\t// a virus scanner holding a handle on a freshly written exe, and this\n\t\t// product's Windows chain is unsigned end to end, so that is not a rare\n\t\t// race. When it loses, the old exe is already gone and the new one never\n\t\t// lands: the install directory is left with no executable at all, the\n\t\t// Start-menu shortcut reports that the item it points to has been\n\t\t// changed or moved, and the editor cannot start to report anything. Seen\n\t\t// on 1.129.1 -> 1.134.0. With this off the pending update goes to Ready\n\t\t// instead, and doQuitAndInstall runs the installer with /silent and no\n\t\t// /update= -- IsBackgroundUpdate() is then false, Inno installs into\n\t\t// {app} directly, and inno_updater is never invoked. Slower (the author\n\t\t// restarts into a visible installer) but a failure is visible and\n\t\t// recoverable rather than silently unbootable. Not movable into an\n\t\t// extension's configurationDefaults: this property is APPLICATION-scoped\n\t\t// and configurationExtensionPoint.ts drops defaults for that scope with\n\t\t// only a warning, exactly as for security.workspace.trust.enabled.",
+			"postImageSha": "8782145723abde35"
+		},
+		{
+			"path": "src/vs/platform/update/common/update.config.contribution.ts",
+			"header": "-68 +88",
+			"kind": "replace",
+			"preImage": "\t\t\tdefault: true,",
+			"preImageSha": "357d1523252c521d",
+			"occurrences": 3,
+			"postImage": "\t\t\tdefault: false,",
+			"postImageSha": "aa7d7ddd81697da7"
 		},
 		{
 			"path": "src/vs/workbench/browser/media/code-icon.svg",
