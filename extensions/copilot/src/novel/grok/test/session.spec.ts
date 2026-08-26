@@ -108,7 +108,7 @@ describe('streaming a turn', () => {
 		const session = await GrokAgentSession.start({ process, cwd: '/work', log, onPermission: denyAll });
 		const out = sink();
 
-		const turn = session.prompt('写一句', out.sink, () => false);
+		const turn = session.prompt([{ type: 'text', text: '写一句' }], out.sink, () => false);
 		for (const [kind, text] of [['agent_thought_chunk', 'The'], ['agent_message_chunk', '我'], ['agent_message_chunk', '是']] as const) {
 			emit({
 				jsonrpc: '2.0', method: 'session/update',
@@ -143,7 +143,7 @@ describe('streaming a turn', () => {
 		const { process, emit } = fakeProcess(HANDSHAKE);
 		const session = await GrokAgentSession.start({ process, cwd: '/work', log, onPermission: denyAll });
 		const out = sink();
-		const turn = session.prompt('x', out.sink, () => false);
+		const turn = session.prompt([{ type: 'text', text: 'x' }], out.sink, () => false);
 		for (const kind of ['user_message_chunk', 'available_commands_update', 'plan', 'something_from_2027']) {
 			emit({
 				jsonrpc: '2.0', method: 'session/update',
@@ -160,7 +160,7 @@ describe('streaming a turn', () => {
 		// dead agent from a slow model.
 		const { process, exit } = fakeProcess(HANDSHAKE);
 		const session = await GrokAgentSession.start({ process, cwd: '/work', log, onPermission: denyAll });
-		const turn = session.prompt('x', sink().sink, () => false);
+		const turn = session.prompt([{ type: 'text', text: 'x' }], sink().sink, () => false);
 		exit('the grok agent exited with code 1');
 		await expect(turn).rejects.toThrow(/exited with code 1/);
 	});
@@ -201,5 +201,103 @@ describe('permission', () => {
 		emit({ jsonrpc: '2.0', id: 102, method: 'fs/read_text_file', params: { path: '/x' } });
 		await new Promise(r => setTimeout(r, 0));
 		expect(sent.find(m => m.id === 102)?.error?.code).toBe(-32601);
+	});
+});
+
+describe('resuming', () => {
+
+	/**
+	 * A process that replays a conversation before answering `session/load`,
+	 * which is the order `grok 1.0.5` uses. A client that captures after the
+	 * answer captures nothing.
+	 */
+	function resumingProcess(replay: readonly unknown[]) {
+		let lineListener: ((chunk: string) => void) | undefined;
+		const sent: any[] = [];
+		const emit = (message: unknown) => lineListener?.(JSON.stringify(message) + '\n');
+
+		const process: GrokAgentProcess = {
+			onLine: listener => { lineListener = listener; },
+			onExit: () => { },
+			write: line => {
+				const message = JSON.parse(line);
+				sent.push(message);
+				queueMicrotask(() => {
+					if (message.method === 'initialize') {
+						emit({ jsonrpc: '2.0', id: message.id, result: { protocolVersion: 1 } });
+					} else if (message.method === 'session/load') {
+						for (const update of replay) {
+							emit({ jsonrpc: '2.0', method: 'session/update', params: { sessionId: 'sess-1', update } });
+						}
+						emit({ jsonrpc: '2.0', id: message.id, result: { models: { currentModelId: 'grok-4.6', availableModels: [{ modelId: 'grok-4.6', name: 'Grok 4.6' }] } } });
+					}
+				});
+			},
+			kill: () => { },
+		};
+		return { process, sent };
+	}
+
+	it('attaches to an existing conversation instead of opening a new one', async () => {
+		const { process, sent } = resumingProcess([]);
+		const session = await GrokAgentSession.start({ process, cwd: '/work', log, onPermission: denyAll, resumeSessionId: 'sess-1' });
+
+		expect(session.sessionId).toBe('sess-1');
+		expect(sent.map(m => m.method)).toEqual(['initialize', 'session/load']);
+		expect(sent[1].params).toEqual({ sessionId: 'sess-1', cwd: '/work', mcpServers: [] });
+	});
+
+	it('captures the replay for the transcript', async () => {
+		const replay = [
+			{ sessionUpdate: 'user_message_chunk', content: { text: '写一句' } },
+			{ sessionUpdate: 'agent_message_chunk', content: { text: '雪停了' } },
+			{ sessionUpdate: 'turn_completed' },
+		];
+		const { process } = resumingProcess(replay);
+		const session = await GrokAgentSession.start({ process, cwd: '/work', log, onPermission: denyAll, resumeSessionId: 'sess-1' });
+		expect(session.replay).toEqual(replay);
+	});
+
+	it('does not stream the replay into a response', async () => {
+		// The updates a resume replays are transcript, not a turn in progress.
+		// Streaming them would repeat the whole conversation into whatever
+		// response happened to be open.
+		const out = sink();
+		const { process } = resumingProcess([{ sessionUpdate: 'agent_message_chunk', content: { text: 'old' } }]);
+		await GrokAgentSession.start({ process, cwd: '/work', log, onPermission: denyAll, resumeSessionId: 'sess-1' });
+		expect(out.text).toEqual([]);
+	});
+
+	it('reports a session the agent no longer has, distinctly', async () => {
+		// The caller opens a fresh conversation for this; treating it like any
+		// other failure would leave an author unable to use a chat they can see.
+		let lineListener: ((chunk: string) => void) | undefined;
+		const process: GrokAgentProcess = {
+			onLine: listener => { lineListener = listener; },
+			onExit: () => { },
+			write: line => {
+				const message = JSON.parse(line);
+				queueMicrotask(() => lineListener?.(JSON.stringify(message.method === 'initialize'
+					? { jsonrpc: '2.0', id: message.id, result: { protocolVersion: 1 } }
+					: { jsonrpc: '2.0', id: message.id, error: { code: -32602, message: 'unknown session id' } }) + '\n'));
+			},
+			kill: () => { },
+		};
+		await expect(
+			GrokAgentSession.start({ process, cwd: '/work', log, onPermission: denyAll, resumeSessionId: 'gone' })
+		).rejects.toMatchObject({ name: 'GrokSessionGone' });
+	});
+});
+
+describe('surviving the process', () => {
+	it('stops claiming to be alive once the agent exits', async () => {
+		// A dead process is not an ended conversation — the agent keeps it, and
+		// the provider reconnects with `session/load`. But it has to be able to
+		// tell that the process went, or it writes into a closed pipe.
+		const { process, exit } = fakeProcess(HANDSHAKE);
+		const session = await GrokAgentSession.start({ process, cwd: '/work', log, onPermission: denyAll });
+		expect(session.alive).toBe(true);
+		exit('the grok agent exited with code 1');
+		expect(session.alive).toBe(false);
 	});
 });

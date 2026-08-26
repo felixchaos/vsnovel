@@ -5,6 +5,7 @@
 import * as vscode from 'vscode';
 import { IVSCodeExtensionContext } from '../../platform/extContext/common/extensionContext';
 import { ILogService } from '../../platform/log/common/logService';
+import { IToolsService } from '../../extension/tools/common/toolsService';
 import { Disposable } from '../../util/vs/base/common/lifecycle';
 import { IExtensionContribution } from '../../extension/common/contributions';
 import { GROK_SESSION_TYPE, GrokChatSessionContentProvider } from './sessionProvider';
@@ -53,10 +54,20 @@ export class GrokAgentContribution extends Disposable implements IExtensionContr
 	constructor(
 		@ILogService logService: ILogService,
 		@IVSCodeExtensionContext extensionContext: IVSCodeExtensionContext,
+		@IToolsService toolsService: IToolsService,
 	) {
 		super();
 
-		const contentProvider = new GrokChatSessionContentProvider(logService, extensionContext.globalState);
+		// `workspaceState`, not `globalState`, for the session map: an agent
+		// session is opened against a working directory, and carrying the ids
+		// from one book's folder into another's would resume conversations about
+		// files that are not there.
+		const contentProvider = new GrokChatSessionContentProvider(
+			logService,
+			extensionContext.globalState,
+			extensionContext.workspaceState,
+			toolsService,
+		);
 		this._register({ dispose: () => contentProvider.dispose() });
 
 		const participant = vscode.chat.createChatParticipant(

@@ -622,6 +622,13 @@
 		},
 		{
 			"file": "extensions/copilot/package.json",
+			"selector": "contributes.configuration[id=stable].properties['novel.grok.autoApprove']",
+			"upstream": null,
+			"absent": true,
+			"note": "a setting this product adds; upstream has no property by this name"
+		},
+		{
+			"file": "extensions/copilot/package.json",
 			"selector": "contributes.configuration[id=stable].properties['novel.nameCheck']",
 			"upstream": null,
 			"absent": true,

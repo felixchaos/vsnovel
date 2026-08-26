@@ -12,13 +12,26 @@
  * `params.sessionUpdate`) in a way that fails as a silently empty response.
  *
  * The editor is deliberately absent from this file. It streams into a
- * {@link ResponseSink}, a four-method interface the provider adapts to a real
+ * {@link ResponseSink}, a small interface the provider adapts to a real
  * `ChatResponseStream`, so the protocol can be tested without a workbench.
+ *
+ * ## A session outlives its process
+ *
+ * The agent stores conversations itself and answers `agentCapabilities.
+ * loadSession: true`. So the durable identity of a conversation is the agent's
+ * `sessionId`, not this object and not the child process — {@link resume}
+ * attaches to one that already exists, and the agent replays the whole
+ * transcript before answering. Treating the process as the conversation is what
+ * made a window reload, or one failed turn, look like amnesia.
  */
 
-import { AcpConnection, AcpError, methodNotFound } from './acp/connection';
+import { AcpConnection, AcpError } from './acp/connection';
 import { GrokModelCatalogue, readCatalogue, setModelParams } from './options';
 import { GrokAgentProcess } from './agentProcess';
+import { PermissionRequest, permissionOutcome, readPermissionRequest } from './approval';
+import { PromptBlock } from './prompt';
+
+export type { PermissionRequest } from './approval';
 
 /** Where a streamed turn goes. The editor side of this is one small adapter. */
 export interface ResponseSink {
@@ -28,12 +41,6 @@ export interface ResponseSink {
 	thought(value: string): void;
 	/** A tool started, or changed state. Rendered as progress. */
 	progress(value: string): void;
-}
-
-/** What the agent needs a human to decide before it may act. */
-export interface PermissionRequest {
-	readonly title: string;
-	readonly options: ReadonlyArray<{ readonly optionId: string; readonly name: string; readonly kind?: string }>;
 }
 
 /** Resolves to the chosen option id, or `undefined` when the author declined. */
@@ -57,6 +64,13 @@ export interface StartOptions {
 	readonly onPermission: PermissionResponder;
 	/** Called when the agent renames the session, which it does after the first turn. */
 	readonly onTitle?: (title: string) => void;
+	/**
+	 * An agent-side session to attach to instead of opening a new one.
+	 *
+	 * When set, the agent replays the conversation before answering, and
+	 * {@link GrokAgentSession.replay} holds what it sent.
+	 */
+	readonly resumeSessionId?: string;
 }
 
 /** The protocol version this client speaks. The agent answered 1. */
@@ -76,6 +90,14 @@ export class GrokNotAuthenticated extends Error {
 	}
 }
 
+/** Raised when the agent no longer has the session we were told to resume. */
+export class GrokSessionGone extends Error {
+	constructor(readonly sessionId: string) {
+		super(`the grok agent no longer has session ${sessionId}`);
+		this.name = 'GrokSessionGone';
+	}
+}
+
 export class GrokAgentSession {
 
 	private _sessionId: string | undefined;
@@ -85,6 +107,10 @@ export class GrokAgentSession {
 	private _currentEffort: string | undefined;
 	private _catalogue: GrokModelCatalogue = { models: [] };
 	private _title: string | undefined;
+	private _alive = true;
+	/** Updates captured while the agent was replaying a resumed conversation. */
+	private _replay: unknown[] | undefined;
+	private _replayed: unknown[] = [];
 
 	private constructor(
 		private readonly _connection: AcpConnection,
@@ -98,11 +124,15 @@ export class GrokAgentSession {
 	get currentEffort(): string | undefined { return this._currentEffort; }
 	/** What the agent said it offers, with each model's own thinking ladder. */
 	get catalogue(): GrokModelCatalogue { return this._catalogue; }
+	/** False once the process or the connection has gone. */
+	get alive(): boolean { return this._alive; }
+	/** The conversation the agent replayed when this session was resumed. */
+	get replay(): readonly unknown[] { return this._replayed; }
 
 	/**
-	 * Start the agent, shake hands, and open a session.
+	 * Start the agent, shake hands, and open or attach to a session.
 	 *
-	 * `initialize` is local and free; `session/new` is where a missing
+	 * `initialize` is local and free; the session call is where a missing
 	 * credential surfaces, which is why the two are not collapsed.
 	 */
 	static async start(options: StartOptions): Promise<GrokAgentSession> {
@@ -120,7 +150,10 @@ export class GrokAgentSession {
 
 		session = new GrokAgentSession(connection, options);
 		options.process.onLine(chunk => connection.receive(chunk));
-		options.process.onExit(reason => connection.close(reason));
+		options.process.onExit(reason => {
+			session._alive = false;
+			connection.close(reason);
+		});
 
 		const initialized = await connection.request('initialize', {
 			protocolVersion: PROTOCOL_VERSION,
@@ -131,29 +164,73 @@ export class GrokAgentSession {
 		}) as { authMethods?: Array<{ id: string; name: string }> };
 
 		try {
-			const created = await connection.request('session/new', {
-				cwd: options.cwd,
-				mcpServers: [],
-			}) as {
-				sessionId?: string;
-				models?: { currentModelId?: string; availableModels?: GrokModel[] };
-			};
-			if (!created?.sessionId) {
-				throw new Error('the grok agent opened a session without giving it an id');
+			if (options.resumeSessionId) {
+				await session._resume(options.resumeSessionId);
+			} else {
+				await session._open();
 			}
-			session._sessionId = created.sessionId;
-			session._models = created.models?.availableModels ?? [];
-			session._currentModelId = created.models?.currentModelId;
-			session._catalogue = readCatalogue(created.models);
-			options.log.info(`[novel-grok] session ${created.sessionId} on ${session._currentModelId ?? 'an unnamed model'}`);
+			options.log.info(`[novel-grok] session ${session._sessionId} on ${session._currentModelId ?? 'an unnamed model'}`);
 			return session;
 		} catch (err) {
+			session._alive = false;
 			connection.close('session could not be opened');
 			if (looksUnauthenticated(err)) {
 				throw new GrokNotAuthenticated(initialized?.authMethods ?? []);
 			}
 			throw err;
 		}
+	}
+
+	private async _open(): Promise<void> {
+		const created = await this._connection.request('session/new', {
+			cwd: this._options.cwd,
+			mcpServers: [],
+		}) as { sessionId?: string; models?: unknown };
+		if (!created?.sessionId) {
+			throw new Error('the grok agent opened a session without giving it an id');
+		}
+		this._sessionId = created.sessionId;
+		this._adoptModels(created.models);
+	}
+
+	/**
+	 * Attach to a conversation the agent already has.
+	 *
+	 * The replay arrives as ordinary `session/update` notifications *before*
+	 * `session/load` answers, so capture is armed around the request and closed
+	 * when it resolves. Anything that arrives afterwards is live traffic and
+	 * must not be folded into the transcript a second time.
+	 */
+	private async _resume(sessionId: string): Promise<void> {
+		this._sessionId = sessionId;
+		this._replay = [];
+		try {
+			const loaded = await this._connection.request('session/load', {
+				sessionId,
+				cwd: this._options.cwd,
+				mcpServers: [],
+			}) as { models?: unknown };
+			this._replayed = this._replay;
+			this._adoptModels(loaded?.models);
+		} catch (err) {
+			this._sessionId = undefined;
+			if (err instanceof AcpError && !looksUnauthenticated(err)) {
+				// The agent prunes old sessions, and an author who deleted one
+				// out from under us is not an error to shout about — the caller
+				// opens a fresh one.
+				throw new GrokSessionGone(sessionId);
+			}
+			throw err;
+		} finally {
+			this._replay = undefined;
+		}
+	}
+
+	private _adoptModels(models: unknown): void {
+		const shape = models as { currentModelId?: string; availableModels?: GrokModel[] } | undefined;
+		this._models = shape?.availableModels ?? [];
+		this._currentModelId = shape?.currentModelId;
+		this._catalogue = readCatalogue(models);
 	}
 
 	/**
@@ -163,7 +240,7 @@ export class GrokAgentSession {
 	 * happens through the sink as notifications arrive, not through the return
 	 * value — `session/prompt` answers only at the end.
 	 */
-	async prompt(text: string, sink: ResponseSink, isCancelled: () => boolean): Promise<string> {
+	async prompt(blocks: readonly PromptBlock[], sink: ResponseSink, isCancelled: () => boolean): Promise<string> {
 		if (!this._sessionId) {
 			throw new Error('this session was never opened');
 		}
@@ -171,7 +248,7 @@ export class GrokAgentSession {
 		try {
 			const result = await this._connection.request('session/prompt', {
 				sessionId: this._sessionId,
-				prompt: [{ type: 'text', text }],
+				prompt: blocks,
 			}) as { stopReason?: string };
 			return result?.stopReason ?? 'end_turn';
 		} finally {
@@ -206,6 +283,7 @@ export class GrokAgentSession {
 	}
 
 	dispose(): void {
+		this._alive = false;
 		this._connection.close('the session was closed');
 	}
 
@@ -218,19 +296,10 @@ export class GrokAgentSession {
 	 */
 	async handleRequest(method: string, params: unknown): Promise<unknown> {
 		if (method !== 'session/request_permission') {
-			throw methodNotFound(method);
+			throw new AcpError(-32601, `this client does not implement ${method}`);
 		}
-		const request = params as {
-			toolCall?: { title?: string; rawInput?: unknown };
-			options?: Array<{ optionId: string; name: string; kind?: string }>;
-		};
-		const chosen = await this._options.onPermission({
-			title: request?.toolCall?.title ?? 'The agent wants to run a tool.',
-			options: request?.options ?? [],
-		});
-		return chosen
-			? { outcome: { outcome: 'selected', optionId: chosen } }
-			: { outcome: { outcome: 'cancelled' } };
+		const request = readPermissionRequest(params, 'The agent wants to run a tool.');
+		return permissionOutcome(await this._options.onPermission(request));
 	}
 
 	/**
@@ -250,6 +319,15 @@ export class GrokAgentSession {
 		}
 		const update = (params as { update?: { sessionUpdate?: string; content?: { text?: string }; title?: string } })?.update;
 		if (!update?.sessionUpdate) {
+			return;
+		}
+		if (this._replay) {
+			// Replaying: this is transcript, not a turn in progress. It must not
+			// be streamed into whatever response happens to be open.
+			this._replay.push(update);
+			if (update.sessionUpdate === 'session_info_update' && update.title) {
+				this._title = update.title;
+			}
 			return;
 		}
 		switch (update.sessionUpdate) {

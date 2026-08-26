@@ -3747,6 +3747,14 @@
               "novel"
             ]
           },
+          "novel.grok.autoApprove": {
+            "type": "boolean",
+            "default": false,
+            "markdownDescription": "Let the Grok agent run its tools without asking. Off by default, and it only ever answers the agent's *allow once* option — a step the agent marks as irreversible still stops for you. Leave this off and each request appears as a confirmation inside the chat, where the editor's own auto-approve settings apply to it.",
+            "tags": [
+              "novel"
+            ]
+          },
           "novel.nameCheck": {
             "type": "string",
             "enum": [
