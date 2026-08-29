@@ -197,6 +197,25 @@
 		},
 		{
 			"file": "product.json",
+			"selector": "defaultChatAgent.accountUrl",
+			"upstream": null,
+			"absent": true,
+			"note": "Additive key upstream has no concept of: the address of this product's own account page. resolveGitHubUrl in workbench/services/accounts/browser/defaultAccount.ts reads it and answers the three GitHubPaths with it, which is what puts an author on our balance-and-usage page rather than on github.com/settings/copilot/features."
+		},
+		{
+			"file": "product.json",
+			"selector": "defaultChatAgent.managePlanUrl",
+			"upstream": "https://aka.ms/github-copilot-manage-plan",
+			"note": "Points at our account page. Core declares the field but reads it nowhere at this anchor \u2014 recorded so that if upstream starts using it, it opens ours rather than a GitHub subscription page."
+		},
+		{
+			"file": "product.json",
+			"selector": "defaultChatAgent.upgradePlanUrl",
+			"upstream": "https://aka.ms/github-copilot-upgrade-plan",
+			"note": "Points at our account page. Read by chatEntitlementService when it offers an upgrade; this product sells credits rather than plans, so the account page is where that offer has to land."
+		},
+		{
+			"file": "product.json",
 			"selector": "defaultChatAgent.extensionId",
 			"upstream": "GitHub.copilot",
 			"note": "Deliberately unchanged, same reason as chatExtensionId. Also dereferenced without a guard at extensionGalleryService.ts:1992.",

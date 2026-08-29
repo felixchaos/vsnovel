@@ -20,7 +20,7 @@ import { Action2, registerAction2 } from '../../../../platform/actions/common/ac
 import { ICommandService } from '../../../../platform/commands/common/commands.js';
 import { IConfigurationService } from '../../../../platform/configuration/common/configuration.js';
 import { IContextKey, IContextKeyService, RawContextKey } from '../../../../platform/contextkey/common/contextkey.js';
-import { IDefaultAccountProvider, IDefaultAccountService, IManagedSettingsCompatibilityError, MANAGED_SETTINGS_UPDATE_REQUIRED_ERROR_CODE, ManagedSettingsFetchStatus } from '../../../../platform/defaultAccount/common/defaultAccount.js';
+import { GitHubPaths, IDefaultAccountProvider, IDefaultAccountService, IManagedSettingsCompatibilityError, MANAGED_SETTINGS_UPDATE_REQUIRED_ERROR_CODE, ManagedSettingsFetchStatus } from '../../../../platform/defaultAccount/common/defaultAccount.js';
 import { IInstantiationService, ServicesAccessor } from '../../../../platform/instantiation/common/instantiation.js';
 import { ILogService } from '../../../../platform/log/common/log.js';
 import { IProductService } from '../../../../platform/product/common/productService.js';
@@ -53,6 +53,8 @@ interface IDefaultAccountConfig {
 	readonly entitlementUrl: string;
 	readonly mcpRegistryDataUrl: string;
 	readonly managedSettingsUrl: string;
+	// NOVEL-BUILDER: see resolveAccountUrl below.
+	readonly accountUrl?: string;
 }
 
 export const DEFAULT_ACCOUNT_SIGN_IN_COMMAND = 'workbench.actions.accounts.signIn';
@@ -111,7 +113,44 @@ function toDefaultAccountConfig(defaultChatAgent: IDefaultChatAgent): IDefaultAc
 		tokenEntitlementUrl: defaultChatAgent.tokenEntitlementUrl,
 		mcpRegistryDataUrl: defaultChatAgent.mcpRegistryDataUrl,
 		managedSettingsUrl: defaultChatAgent.managedSettingsUrl,
+		// NOVEL-BUILDER: see resolveAccountUrl below.
+		accountUrl: defaultChatAgent.accountUrl,
 	};
+}
+
+/**
+ * NOVEL-BUILDER: the account links this product answers itself.
+ *
+ * `resolveGitHubUrl` is the single place the workbench turns a well-known
+ * account path into a URL, and every "manage settings", "manage budget" and
+ * "upgrade" entry point goes through it: the chat status dashboard, the title
+ * bar menu, the model picker, the sign-in dialog footer and the onboarding
+ * disclaimer. This product has no GitHub account behind any of them — balance,
+ * usage and top-up live on its own account page — so those three paths resolve
+ * there instead. Redirecting at this one method is also the only route
+ * available: five of the seven call sites are under contrib/chat, which this
+ * fork does not edit.
+ *
+ * Only the three known paths are claimed. An empty path asks for the GitHub
+ * Enterprise base URL, which is a different question, and a path upstream adds
+ * later falls through to github.com rather than being silently rewritten to a
+ * page that cannot answer it.
+ *
+ * Returns `undefined` when the deployment has no account page configured, which
+ * is upstream's own product.json — the caller then behaves exactly as upstream.
+ */
+function resolveAccountUrl(path: string, accountUrl: string | undefined): string | undefined {
+	if (!accountUrl) {
+		return undefined;
+	}
+	switch (path) {
+		case GitHubPaths.copilotSettings:
+		case GitHubPaths.billingBudgets:
+		case GitHubPaths.copilotUpgrade:
+			return accountUrl;
+		default:
+			return undefined;
+	}
 }
 
 export class DefaultAccountService extends Disposable implements IDefaultAccountService {
@@ -212,7 +251,8 @@ export class DefaultAccountService extends Disposable implements IDefaultAccount
 			return this.defaultAccountProvider.resolveGitHubUrl(path);
 		}
 
-		return `https://github.com/${path}`;
+		// NOVEL-BUILDER: our own account page answers the three account paths.
+		return resolveAccountUrl(path, this.defaultAccountConfig.accountUrl) ?? `https://github.com/${path}`;
 	}
 
 	private setDefaultAccount(account: IDefaultAccount | null): void {
@@ -1205,6 +1245,12 @@ export class DefaultAccountProvider extends Disposable implements IDefaultAccoun
 	}
 
 	resolveGitHubUrl(path: string): string {
+		// NOVEL-BUILDER: our own account page answers the three account paths.
+		const accountUrl = resolveAccountUrl(path, this.defaultAccountConfig.accountUrl);
+		if (accountUrl) {
+			return accountUrl;
+		}
+
 		if (this.getDefaultAccountAuthenticationProvider().enterprise) {
 			try {
 				const enterpriseUrl = this.getEnterpriseUrl();

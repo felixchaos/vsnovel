@@ -15,8 +15,8 @@ import {
 	env,
 	window
 } from 'vscode';
-import { join } from 'path';
 import type { ExtensionContext, LogOutputChannel } from 'vscode';
+import { entitlementUrl, serverOrigin } from '../config/product';
 
 /**
  * Must equal `defaultChatAgent.provider.default.id` in product.json.
@@ -60,26 +60,6 @@ export const GRANTED_SCOPES = ['novel', 'read:user', 'user:email', 'repo', 'work
 /** Where the credential is kept. SecretStorage, never globalState. */
 const SECRET_KEY = 'novel-builder.credential';
 const ACCOUNT_KEY = 'novel-builder.account';
-
-/**
- * The account endpoint, used only to check that a credential is real before we
- * store it.
- *
- * Read from product.json rather than from a constant here, so the deployment's
- * address has one definition and a build pointed at staging checks the key
- * against staging. Resolved through `env.appRoot`, which is how the rest of the
- * extension reaches product.json (microsoftExperimentationService.ts:167) — a
- * path relative to this file works from source and breaks in a bundle.
- */
-function entitlementUrl(): string | undefined {
-	try {
-		// eslint-disable-next-line @typescript-eslint/no-var-requires
-		const product = require(join(env.appRoot, 'product.json'));
-		return product?.defaultChatAgent?.entitlementUrl;
-	} catch {
-		return undefined;
-	}
-}
 
 interface StoredAccount {
 	readonly id: string;
@@ -317,15 +297,7 @@ export class NovelAuthenticationProvider implements AuthenticationProvider {
 
 	/** The server's public origin, derived from the entitlement URL. */
 	private _serverOrigin(): string | undefined {
-		const url = entitlementUrl();
-		if (!url) {
-			return undefined;
-		}
-		try {
-			return new URL(url).origin;
-		} catch {
-			return undefined;
-		}
+		return serverOrigin();
 	}
 
 	async removeSession(sessionId: string): Promise<void> {

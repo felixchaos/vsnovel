@@ -431,6 +431,14 @@ export interface IDefaultChatAgent {
 	readonly publicCodeMatchesUrl: string;
 	readonly managePlanUrl: string;
 	readonly upgradePlanUrl: string;
+
+	// NOVEL-BUILDER: this product's own account page — balance, usage and
+	// top-up. Read by resolveGitHubUrl in
+	// workbench/services/accounts/browser/defaultAccount.ts, which is where the
+	// workbench's manage-settings / manage-budget / upgrade links are resolved.
+	// Optional, so a build against upstream's product.json keeps upstream's
+	// behaviour and those links go on resolving against github.com.
+	readonly accountUrl?: string;
 	readonly signUpUrl: string;
 	readonly termsStatementUrl: string;
 	readonly privacyStatementUrl: string;

@@ -43,6 +43,7 @@ import { GlossaryCommandsContrib } from '../../../novel/glossary/enforceCommand'
 import { AuthoringCommandsContrib } from '../../../novel/authoring/authoringCommands';
 import { WritingInstructionsContrib } from '../../../novel/authoring/writingInstructions';
 import { GrokAgentContribution } from '../../../novel/grok/contribution';
+import { BalanceStatusContrib } from '../../../novel/status/balanceStatus';
 import { LogWorkspaceStateContribution } from '../../conversation/vscode-node/logWorkspaceState';
 import { RemoteAgentContribution } from '../../conversation/vscode-node/remoteAgents';
 import { DiagnosticsContextContribution } from '../../diagnosticsContext/vscode/diagnosticsContextProvider';
@@ -91,6 +92,10 @@ export const vscodeNodeContributions: IExtensionContributionFactory[] = [
 	...vscodeContributions,
 	asContributionFactory(ExtensionStateCommandContribution),
 	asContributionFactory(ConversationFeature),
+	// NOVEL-BUILDER: the credit balance, as a row in the chat status popup.
+	// First among the contributed rows because they render in registration
+	// order and this is the one an author opens the popup to read.
+	asContributionFactory(BalanceStatusContrib),
 	asContributionFactory(AuthenticationContrib),
 	chatBlockLanguageContribution,
 	asContributionFactory(LoggingActionsContrib),

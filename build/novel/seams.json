@@ -1,7 +1,7 @@
 {
 	"anchor": "1.134.0-release",
 	"anchorCommit": "3e966c9cb3e14fb9adfdacd4ca6c91c24a231754",
-	"generated": "2026-08-25T08:31:55.207Z",
+	"generated": "2026-08-29T13:08:27.951Z",
 	"seams": [
 		{
 			"path": "README.md",
@@ -625,17 +625,17 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/extension/vscode-node/contributions.ts",
-			"header": "-25,0 +38,8",
+			"header": "-25,0 +38,9",
 			"kind": "insert",
 			"preImage": "import { ConversationFeature } from '../../conversation/vscode-node/conversationFeature';\nimport { FeedbackCommandContribution } from '../../conversation/vscode-node/feedbackContribution';\nimport { LanguageModelAccess } from '../../conversation/vscode-node/languageModelAccess';",
 			"preImageSha": "6fbc88b9afcc0d9b",
 			"occurrences": 1,
-			"postImage": "// NOVEL-BUILDER: see the registration below.\nimport { NameDiagnosticsContrib } from '../../../novel/names/nameDiagnostics';\nimport { ConsistencyDiagnosticsContrib } from '../../../novel/consistency/consistencyDiagnostics';\nimport { GlossaryDiagnosticsContrib } from '../../../novel/glossary/glossaryDiagnostics';\nimport { GlossaryCommandsContrib } from '../../../novel/glossary/enforceCommand';\nimport { AuthoringCommandsContrib } from '../../../novel/authoring/authoringCommands';\nimport { WritingInstructionsContrib } from '../../../novel/authoring/writingInstructions';\nimport { GrokAgentContribution } from '../../../novel/grok/contribution';",
-			"postImageSha": "41da14b3509a324b"
+			"postImage": "// NOVEL-BUILDER: see the registration below.\nimport { NameDiagnosticsContrib } from '../../../novel/names/nameDiagnostics';\nimport { ConsistencyDiagnosticsContrib } from '../../../novel/consistency/consistencyDiagnostics';\nimport { GlossaryDiagnosticsContrib } from '../../../novel/glossary/glossaryDiagnostics';\nimport { GlossaryCommandsContrib } from '../../../novel/glossary/enforceCommand';\nimport { AuthoringCommandsContrib } from '../../../novel/authoring/authoringCommands';\nimport { WritingInstructionsContrib } from '../../../novel/authoring/writingInstructions';\nimport { GrokAgentContribution } from '../../../novel/grok/contribution';\nimport { BalanceStatusContrib } from '../../../novel/status/balanceStatus';",
+			"postImageSha": "8eeaf1522671315e"
 		},
 		{
 			"path": "extensions/copilot/src/extension/extension/vscode-node/contributions.ts",
-			"header": "-69,0 +90",
+			"header": "-69,0 +91",
 			"kind": "insert",
 			"preImage": "// ###################################################################################################\n\nexport const vscodeNodeContributions: IExtensionContributionFactory[] = [",
 			"preImageSha": "33730ae1f4c93fc1",
@@ -645,7 +645,17 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/extension/vscode-node/contributions.ts",
-			"header": "-82,0 +104,16",
+			"header": "-72,0 +95,4",
+			"kind": "insert",
+			"preImage": "\t...vscodeContributions,\n\tasContributionFactory(ExtensionStateCommandContribution),\n\tasContributionFactory(ConversationFeature),",
+			"preImageSha": "b34ece70c2e29697",
+			"occurrences": 1,
+			"postImage": "\t// NOVEL-BUILDER: the credit balance, as a row in the chat status popup.\n\t// First among the contributed rows because they render in registration\n\t// order and this is the one an author opens the popup to read.\n\tasContributionFactory(BalanceStatusContrib),",
+			"postImageSha": "b2073bc2824d6334"
+		},
+		{
+			"path": "extensions/copilot/src/extension/extension/vscode-node/contributions.ts",
+			"header": "-82,0 +109,16",
 			"kind": "insert",
 			"preImage": "\tasContributionFactory(CopilotDebugCommandContribution),\n\tasContributionFactory(DebugCommandsContribution),\n\tasContributionFactory(LanguageModelAccess),",
 			"preImageSha": "7d82e6ab28dee3ff",
@@ -655,7 +665,7 @@
 		},
 		{
 			"path": "extensions/copilot/src/extension/extension/vscode-node/contributions.ts",
-			"header": "-104 +140,0",
+			"header": "-104 +145,0",
 			"kind": "replace",
 			"preImage": "\tasContributionFactory(ChatSessionsContrib),",
 			"preImageSha": "c74d26a4f950fd99",
@@ -26424,6 +26434,16 @@
 			"postImageSha": "c5c6882f1bab1adf"
 		},
 		{
+			"path": "src/vs/base/common/product.ts",
+			"header": "-433,0 +434,8",
+			"kind": "insert",
+			"preImage": "\treadonly publicCodeMatchesUrl: string;\n\treadonly managePlanUrl: string;\n\treadonly upgradePlanUrl: string;",
+			"preImageSha": "0f42122ace86be44",
+			"occurrences": 1,
+			"postImage": "\n\t// NOVEL-BUILDER: this product's own account page — balance, usage and\n\t// top-up. Read by resolveGitHubUrl in\n\t// workbench/services/accounts/browser/defaultAccount.ts, which is where the\n\t// workbench's manage-settings / manage-budget / upgrade links are resolved.\n\t// Optional, so a build against upstream's product.json keeps upstream's\n\t// behaviour and those links go on resolving against github.com.\n\treadonly accountUrl?: string;",
+			"postImageSha": "43288fea861d0ca2"
+		},
+		{
 			"path": "src/vs/platform/actions/common/actions.ts",
 			"header": "-726,0 +727,23",
 			"kind": "insert",
@@ -26512,6 +26532,66 @@
 			"occurrences": 2,
 			"postImage": "\t\t\t\t// NOVEL-BUILDER: default false. Workspace Trust exists because\n\t\t\t\t// opening a folder of source code can execute code from it — tasks,\n\t\t\t\t// debug configs, extensions that auto-run. A folder of chapters\n\t\t\t\t// executes nothing, so the protection has nothing to protect.\n\t\t\t\t//\n\t\t\t\t// What it does instead is meet an author with \"Restricted Mode is\n\t\t\t\t// intended for safe code browsing\" the first time they open their\n\t\t\t\t// own manuscript, and put a padlock in the status bar that stays\n\t\t\t\t// there. For someone who has never used an editor, that reads as a\n\t\t\t\t// warning about their own writing. The setting is kept so a user\n\t\t\t\t// who does open code here can turn it back on.\n\t\t\t\tdefault: false,",
 			"postImageSha": "441af0b4ad2568c0"
+		},
+		{
+			"path": "src/vs/workbench/services/accounts/browser/defaultAccount.ts",
+			"header": "-23 +23",
+			"kind": "replace",
+			"preImage": "import { IDefaultAccountProvider, IDefaultAccountService, IManagedSettingsCompatibilityError, MANAGED_SETTINGS_UPDATE_REQUIRED_ERROR_CODE, ManagedSettingsFetchStatus } from '../../../../platform/defaultAccount/common/defaultAccount.js';",
+			"preImageSha": "9acfb1dfa05e199a",
+			"occurrences": 1,
+			"postImage": "import { GitHubPaths, IDefaultAccountProvider, IDefaultAccountService, IManagedSettingsCompatibilityError, MANAGED_SETTINGS_UPDATE_REQUIRED_ERROR_CODE, ManagedSettingsFetchStatus } from '../../../../platform/defaultAccount/common/defaultAccount.js';",
+			"postImageSha": "fbc60a9beeb89369"
+		},
+		{
+			"path": "src/vs/workbench/services/accounts/browser/defaultAccount.ts",
+			"header": "-55,0 +56,2",
+			"kind": "insert",
+			"preImage": "\treadonly entitlementUrl: string;\n\treadonly mcpRegistryDataUrl: string;\n\treadonly managedSettingsUrl: string;",
+			"preImageSha": "a72d62f8bb5747d6",
+			"occurrences": 1,
+			"postImage": "\t// NOVEL-BUILDER: see resolveAccountUrl below.\n\treadonly accountUrl?: string;",
+			"postImageSha": "65aa7f0e29bae1b0"
+		},
+		{
+			"path": "src/vs/workbench/services/accounts/browser/defaultAccount.ts",
+			"header": "-113,0 +116,2",
+			"kind": "insert",
+			"preImage": "\t\ttokenEntitlementUrl: defaultChatAgent.tokenEntitlementUrl,\n\t\tmcpRegistryDataUrl: defaultChatAgent.mcpRegistryDataUrl,\n\t\tmanagedSettingsUrl: defaultChatAgent.managedSettingsUrl,",
+			"preImageSha": "76062a12a6586c57",
+			"occurrences": 1,
+			"postImage": "\t\t// NOVEL-BUILDER: see resolveAccountUrl below.\n\t\taccountUrl: defaultChatAgent.accountUrl,",
+			"postImageSha": "724e95e777484dde"
+		},
+		{
+			"path": "src/vs/workbench/services/accounts/browser/defaultAccount.ts",
+			"header": "-116,0 +121,35",
+			"kind": "insert",
+			"preImage": "\t};\n}",
+			"preImageSha": "0422ccc89ecd6e8d",
+			"occurrences": 2,
+			"postImage": "/**\n * NOVEL-BUILDER: the account links this product answers itself.\n *\n * `resolveGitHubUrl` is the single place the workbench turns a well-known\n * account path into a URL, and every \"manage settings\", \"manage budget\" and\n * \"upgrade\" entry point goes through it: the chat status dashboard, the title\n * bar menu, the model picker, the sign-in dialog footer and the onboarding\n * disclaimer. This product has no GitHub account behind any of them — balance,\n * usage and top-up live on its own account page — so those three paths resolve\n * there instead. Redirecting at this one method is also the only route\n * available: five of the seven call sites are under contrib/chat, which this\n * fork does not edit.\n *\n * Only the three known paths are claimed. An empty path asks for the GitHub\n * Enterprise base URL, which is a different question, and a path upstream adds\n * later falls through to github.com rather than being silently rewritten to a\n * page that cannot answer it.\n *\n * Returns `undefined` when the deployment has no account page configured, which\n * is upstream's own product.json — the caller then behaves exactly as upstream.\n */\nfunction resolveAccountUrl(path: string, accountUrl: string | undefined): string | undefined {\n\tif (!accountUrl) {\n\t\treturn undefined;\n\t}\n\tswitch (path) {\n\t\tcase GitHubPaths.copilotSettings:\n\t\tcase GitHubPaths.billingBudgets:\n\t\tcase GitHubPaths.copilotUpgrade:\n\t\t\treturn accountUrl;\n\t\tdefault:\n\t\t\treturn undefined;\n\t}\n}",
+			"postImageSha": "4fa8214dbf1e9619"
+		},
+		{
+			"path": "src/vs/workbench/services/accounts/browser/defaultAccount.ts",
+			"header": "-215 +254,2",
+			"kind": "replace",
+			"preImage": "\t\treturn `https://github.com/${path}`;",
+			"preImageSha": "263659b69638e2b1",
+			"occurrences": 2,
+			"postImage": "\t\t// NOVEL-BUILDER: our own account page answers the three account paths.\n\t\treturn resolveAccountUrl(path, this.defaultAccountConfig.accountUrl) ?? `https://github.com/${path}`;",
+			"postImageSha": "2ab02bf63c2318a0"
+		},
+		{
+			"path": "src/vs/workbench/services/accounts/browser/defaultAccount.ts",
+			"header": "-1207,0 +1248,6",
+			"kind": "insert",
+			"preImage": "\t}\n\n\tresolveGitHubUrl(path: string): string {",
+			"preImageSha": "a603f61f2de99032",
+			"occurrences": 2,
+			"postImage": "\t\t// NOVEL-BUILDER: our own account page answers the three account paths.\n\t\tconst accountUrl = resolveAccountUrl(path, this.defaultAccountConfig.accountUrl);\n\t\tif (accountUrl) {\n\t\t\treturn accountUrl;\n\t\t}",
+			"postImageSha": "7eba493e1a6911b1"
 		},
 		{
 			"path": "src/vs/workbench/services/extensionManagement/browser/extensionEnablementService.ts",

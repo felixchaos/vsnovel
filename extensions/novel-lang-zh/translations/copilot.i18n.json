@@ -55,9 +55,11 @@
 			"Grok is installed but not signed in. Run `grok login` in a terminal to sign in with your Grok account, then try again.": "Grok 已安装但还没登录。在终端里执行 `grok login` 用你的 Grok 账号登录，然后重试。",
 			"The Grok agent could not start: {0}": "Grok 智能体启动失败：{0}",
 			"The Grok agent stopped: {0}": "Grok 智能体中断了：{0}",
-			"The Grok agent is waiting for your decision": "Grok 智能体在等你决定",
 			"Model": "模型",
-			"Thinking": "思考深度"
+			"Thinking": "思考深度",
+			"Balance": "余额",
+			"{0} credits": "{0} 点",
+			"Open the account page to see usage and top up.": "打开账户页查看用量与充值。"
 		}
 	}
 }

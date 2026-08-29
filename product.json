@@ -100,8 +100,9 @@
 		"skusDocumentationUrl": "https://aka.ms/github-copilot-plans",
 		"optimizeUsageDocumentationUrl": "https://aka.ms/token-usage-tips",
 		"publicCodeMatchesUrl": "https://aka.ms/github-copilot-match-public-code",
-		"managePlanUrl": "https://aka.ms/github-copilot-manage-plan",
-		"upgradePlanUrl": "https://aka.ms/github-copilot-upgrade-plan",
+		"accountUrl": "https://nb-api.stellatrix.icu/account/",
+		"managePlanUrl": "https://nb-api.stellatrix.icu/account/",
+		"upgradePlanUrl": "https://nb-api.stellatrix.icu/account/",
 		"signUpUrl": "https://aka.ms/github-sign-up",
 		"provider": {
 			"default": {
