@@ -1063,7 +1063,14 @@ export namespace ConfigKey {
 	export const AutomaticRenameSuggestions = defineSetting('renameSuggestions.triggerAutomatically', ConfigType.Simple, true);
 	export const TerminalToDebuggerEnabled = defineSetting('chat.copilotDebugCommand.enabled', ConfigType.Simple, true);
 	export const CodeSearchAgentEnabled = defineSetting<boolean>('chat.codesearch.enabled', ConfigType.Simple, false);
-	export const InlineEditsEnabled = defineSetting<boolean>('nextEditSuggestions.enabled', ConfigType.ExperimentBased, true);
+	// NOVEL-BUILDER: off. The model name NES asks for is hardcoded upstream
+	// (`nes-callisto`, inlineEditsModelService.ts) and this product's catalog has
+	// no such model, so the feature has only ever produced a 404 every few
+	// seconds. Its prompting is built for code besides. Kept as a setting the
+	// author can turn on; see src/novel/completions/test/nextEditSuggestionsOff.spec.ts.
+	// This default and package.json's must agree — the registry throws on a
+	// mismatch at load, which takes the whole extension down.
+	export const InlineEditsEnabled = defineSetting<boolean>('nextEditSuggestions.enabled', ConfigType.ExperimentBased, false);
 	export const CompletionsInChatEnabled = defineSetting<boolean>('completions.chat.enabled', ConfigType.Simple, false);
 	export const InlineEditsEnableDiagnosticsProvider = defineSetting<boolean>('nextEditSuggestions.fixes', ConfigType.ExperimentBased, true);
 	export const InlineEditsAllowWhitespaceOnlyChanges = defineSetting<boolean>('nextEditSuggestions.allowWhitespaceOnlyChanges', ConfigType.ExperimentBased, true);

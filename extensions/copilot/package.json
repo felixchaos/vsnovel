@@ -3528,7 +3528,7 @@
           },
           "github.copilot.nextEditSuggestions.enabled": {
             "type": "boolean",
-            "default": true,
+            "default": false,
             "tags": [
               "nextEditSuggestions",
               "onExp"

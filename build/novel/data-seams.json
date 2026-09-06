@@ -116,6 +116,12 @@
 			"note": "we flip plaintext/markdown to true; if upstream restructures this default our flip may drop a key it added"
 		},
 		{
+			"file": "extensions/copilot/package.json",
+			"selector": "contributes.configuration[0].properties['github.copilot.nextEditSuggestions.enabled'].default",
+			"upstream": true,
+			"note": "we ship NES off. Upstream has it on, and the model it asks for is hardcoded (nes-callisto, inlineEditsModelService.ts) with no entry in this product's catalog, so on means a 404 every few seconds and nothing on screen. If upstream restructures or renames this key, the flip is silently lost and the 404s come back — the same default is also declared in configurationService.ts and the registry throws when the two disagree, so both move together. See src/novel/completions/test/nextEditSuggestionsOff.spec.ts"
+		},
+		{
 			"file": "product.json",
 			"selector": "defaultChatAgent.chatExtensionId",
 			"upstream": "GitHub.copilot-chat",
@@ -206,7 +212,7 @@
 			"file": "product.json",
 			"selector": "defaultChatAgent.managePlanUrl",
 			"upstream": "https://aka.ms/github-copilot-manage-plan",
-			"note": "Points at our account page. Core declares the field but reads it nowhere at this anchor \u2014 recorded so that if upstream starts using it, it opens ours rather than a GitHub subscription page."
+			"note": "Points at our account page. Core declares the field but reads it nowhere at this anchor — recorded so that if upstream starts using it, it opens ours rather than a GitHub subscription page."
 		},
 		{
 			"file": "product.json",

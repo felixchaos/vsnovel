@@ -1,7 +1,7 @@
 {
 	"anchor": "1.134.0-release",
 	"anchorCommit": "3e966c9cb3e14fb9adfdacd4ca6c91c24a231754",
-	"generated": "2026-09-06T08:32:29.307Z",
+	"generated": "2026-09-06T08:51:36.385Z",
 	"seams": [
 		{
 			"path": "README.md",
@@ -26432,6 +26432,16 @@
 			"occurrences": 1,
 			"postImage": "\t\t'plaintext': true,\n\t\t'markdown': true,",
 			"postImageSha": "234f0c3b09be9927"
+		},
+		{
+			"path": "extensions/copilot/src/platform/configuration/common/configurationService.ts",
+			"header": "-1056 +1066,8",
+			"kind": "replace",
+			"preImage": "\texport const InlineEditsEnabled = defineSetting<boolean>('nextEditSuggestions.enabled', ConfigType.ExperimentBased, true);",
+			"preImageSha": "c2eb6f802a2504f7",
+			"occurrences": 1,
+			"postImage": "\t// NOVEL-BUILDER: off. The model name NES asks for is hardcoded upstream\n\t// (`nes-callisto`, inlineEditsModelService.ts) and this product's catalog has\n\t// no such model, so the feature has only ever produced a 404 every few\n\t// seconds. Its prompting is built for code besides. Kept as a setting the\n\t// author can turn on; see src/novel/completions/test/nextEditSuggestionsOff.spec.ts.\n\t// This default and package.json's must agree — the registry throws on a\n\t// mismatch at load, which takes the whole extension down.\n\texport const InlineEditsEnabled = defineSetting<boolean>('nextEditSuggestions.enabled', ConfigType.ExperimentBased, false);",
+			"postImageSha": "456d5c0bce3481e1"
 		},
 		{
 			"path": "extensions/copilot/src/platform/configuration/vscode/configurationServiceImpl.ts",
