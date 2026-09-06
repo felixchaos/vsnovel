@@ -1,7 +1,7 @@
 {
 	"anchor": "1.134.0-release",
 	"anchorCommit": "3e966c9cb3e14fb9adfdacd4ca6c91c24a231754",
-	"generated": "2026-08-29T13:08:27.951Z",
+	"generated": "2026-09-06T08:32:29.307Z",
 	"seams": [
 		{
 			"path": "README.md",
@@ -604,6 +604,26 @@
 			"postImageSha": "2f0afc58a33196a8"
 		},
 		{
+			"path": "extensions/copilot/src/extension/completions-core/vscode-node/lib/src/prompt/components/recentEdits.tsx",
+			"header": "-9,0 +10",
+			"kind": "insert",
+			"preImage": "\nimport { Chunk, ComponentContext, PromptElementProps, Text } from '../../../../prompt/src/components/components';\nimport { newLineEnded } from '../../../../prompt/src/languageMarker';",
+			"preImageSha": "9b01939e17e30bf0",
+			"occurrences": 1,
+			"postImage": "import { recentEditsBelongInPrompt } from '../../../../../../../novel/completions/proseContext'; // NOVEL-BUILDER",
+			"postImageSha": "859706a255a91666"
+		},
+		{
+			"path": "extensions/copilot/src/extension/completions-core/vscode-node/lib/src/prompt/components/recentEdits.tsx",
+			"header": "-63,0 +65,8",
+			"kind": "insert",
+			"preImage": "\tcontext.useData(isCompletionRequestData, async (request: CompletionRequestData) => {\n\t\tif (!request.document) { return; }",
+			"preImageSha": "3ecdfb515a99ee3f",
+			"occurrences": 1,
+			"postImage": "\t\t// NOVEL-BUILDER: a diff of the chapter the author edited last, sitting\n\t\t// immediately before the caret, is what the model continues — measured,\n\t\t// see src/novel/completions/proseContext.ts.\n\t\tif (!recentEditsBelongInPrompt(request.document.detectedLanguageId)) {\n\t\t\tsetPrompt(undefined);\n\t\t\treturn;\n\t\t}",
+			"postImageSha": "a52aedcfd73fb825"
+		},
+		{
 			"path": "extensions/copilot/src/extension/completions-core/vscode-node/lib/src/prompt/prompt.ts",
 			"header": "-185 +185,2",
 			"kind": "replace",
@@ -612,6 +632,66 @@
 			"occurrences": 1,
 			"postImage": "\t// NOVEL-BUILDER: prose needs a longer window than a code completion. The surrounding per-family prompt engineering is upstream's and must survive the rebase.\n\tconst maxPromptLength = maxTokens - getMaxSolutionTokens(languageId);",
 			"postImageSha": "03c280a829e7be1c"
+		},
+		{
+			"path": "extensions/copilot/src/extension/completions-core/vscode-node/lib/src/prompt/similarFiles/neighborFiles.ts",
+			"header": "-12,0 +13",
+			"kind": "insert",
+			"preImage": "import { ICompletionsLogTargetService } from '../../logger';\nimport { TelemetryWithExp } from '../../telemetry';\nimport { ICompletionsTextDocumentManagerService } from '../../textDocumentManager';",
+			"preImageSha": "faff161192320294",
+			"occurrences": 1,
+			"postImage": "import { percentDecode } from '../../util/uri'; // NOVEL-BUILDER",
+			"postImageSha": "fb43dacabef04c81"
+		},
+		{
+			"path": "extensions/copilot/src/extension/completions-core/vscode-node/lib/src/prompt/similarFiles/neighborFiles.ts",
+			"header": "-203 +204,5",
+			"kind": "replace",
+			"preImage": "\t\t\treturn fileUri.toString().slice(parentURI.length);",
+			"preImageSha": "ca0ea70d9e49a7e1",
+			"occurrences": 1,
+			"postImage": "\t\t\t// NOVEL-BUILDER: decoded for the same reason the basename branch\n\t\t\t// below is — this path is a headline in the prompt, and a\n\t\t\t// manuscript's paths are non-ASCII. See\n\t\t\t// textDocumentManager.getRelativePath.\n\t\t\treturn percentDecode(fileUri.toString().slice(parentURI.length));",
+			"postImageSha": "ecafd26da809995c"
+		},
+		{
+			"path": "extensions/copilot/src/extension/completions-core/vscode-node/lib/src/textDocumentManager.ts",
+			"header": "-19 +19",
+			"kind": "replace",
+			"preImage": "import { basename, normalizeUri } from './util/uri';",
+			"preImageSha": "cfb7aa115bd56245",
+			"occurrences": 1,
+			"postImage": "import { basename, normalizeUri, percentDecode } from './util/uri';",
+			"postImageSha": "a5923ca3b7c3f085"
+		},
+		{
+			"path": "extensions/copilot/src/extension/completions-core/vscode-node/lib/src/textDocumentManager.ts",
+			"header": "-263,0 +264,9",
+			"kind": "insert",
+			"preImage": "\t * Get the path of the given document relative to one of the workspace folders,\n\t * or its basename if it is not under any of the workspace folders.\n\t * Returns `undefined` if the file is untitled.",
+			"preImageSha": "585a5e68046b649e",
+			"occurrences": 2,
+			"postImage": "\t *\n\t * NOVEL-BUILDER: the relative path is sliced out of a URI, so any non-ASCII\n\t * character in it arrives percent-encoded. Every caller puts the result in\n\t * the prompt — the `Path:` marker, the headline on a similar-file snippet,\n\t * the file name on a recent edit — so for a Chinese or Japanese manuscript\n\t * the one line that tells the model what kind of document this is read\n\t * `Path: %E8%AE%BE%E5%AE%9A/%E8%A7%92%E8%89%B2.md`, and paid tokens on every\n\t * keystroke to say nothing. The `basename` fallback below already decodes;\n\t * only the slice was missed.",
+			"postImageSha": "1ad3d35e05a4f907"
+		},
+		{
+			"path": "extensions/copilot/src/extension/completions-core/vscode-node/lib/src/textDocumentManager.ts",
+			"header": "-277 +286",
+			"kind": "replace",
+			"preImage": "\t\t\t\treturn uri.slice(parentURI.length);",
+			"preImageSha": "19026fd44a81a4f0",
+			"occurrences": 1,
+			"postImage": "\t\t\t\treturn percentDecode(uri.slice(parentURI.length)); // NOVEL-BUILDER",
+			"postImageSha": "e98608dc2fbcebf3"
+		},
+		{
+			"path": "extensions/copilot/src/extension/completions-core/vscode-node/lib/src/util/uri.ts",
+			"header": "-26 +26,4",
+			"kind": "replace",
+			"preImage": "function percentDecode(str: string): string {",
+			"preImageSha": "53ac22f9fc26fb69",
+			"occurrences": 1,
+			"postImage": "// NOVEL-BUILDER: exported. `basename` below already decodes; the two callers\n// that slice a relative path out of a URI did not, and a manuscript's paths are\n// entirely non-ASCII. See textDocumentManager.getRelativePath.\nexport function percentDecode(str: string): string {",
+			"postImageSha": "5cac3613881214c3"
 		},
 		{
 			"path": "extensions/copilot/src/extension/extension/vscode-node/contributions.ts",

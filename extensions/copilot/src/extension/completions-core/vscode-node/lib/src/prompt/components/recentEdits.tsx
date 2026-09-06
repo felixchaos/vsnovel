@@ -7,6 +7,7 @@
 
 import { Chunk, ComponentContext, PromptElementProps, Text } from '../../../../prompt/src/components/components';
 import { newLineEnded } from '../../../../prompt/src/languageMarker';
+import { recentEditsBelongInPrompt } from '../../../../../../../novel/completions/proseContext'; // NOVEL-BUILDER
 import { ICompletionsTextDocumentManagerService } from '../../textDocumentManager';
 import {
 	CompletionRequestData,
@@ -60,6 +61,14 @@ export const RecentEdits = (props: RecentEditsProps, context: ComponentContext) 
 
 	context.useData(isCompletionRequestData, async (request: CompletionRequestData) => {
 		if (!request.document) { return; }
+
+		// NOVEL-BUILDER: a diff of the chapter the author edited last, sitting
+		// immediately before the caret, is what the model continues — measured,
+		// see src/novel/completions/proseContext.ts.
+		if (!recentEditsBelongInPrompt(request.document.detectedLanguageId)) {
+			setPrompt(undefined);
+			return;
+		}
 
 		const recentEditProvider = props.recentEditsProvider;
 

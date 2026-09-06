@@ -16,7 +16,7 @@ import {
 } from './textDocument';
 import { isDocumentValid } from './util/documentEvaluation';
 import { Event } from './util/event';
-import { basename, normalizeUri } from './util/uri';
+import { basename, normalizeUri, percentDecode } from './util/uri';
 
 /**
  * An interface describing an individual change in the text of a document.
@@ -261,6 +261,15 @@ export abstract class TextDocumentManager implements ICompletionsTextDocumentMan
 	 * Get the path of the given document relative to one of the workspace folders,
 	 * or its basename if it is not under any of the workspace folders.
 	 * Returns `undefined` if the file is untitled.
+	 *
+	 * NOVEL-BUILDER: the relative path is sliced out of a URI, so any non-ASCII
+	 * character in it arrives percent-encoded. Every caller puts the result in
+	 * the prompt — the `Path:` marker, the headline on a similar-file snippet,
+	 * the file name on a recent edit — so for a Chinese or Japanese manuscript
+	 * the one line that tells the model what kind of document this is read
+	 * `Path: %E8%AE%BE%E5%AE%9A/%E8%A7%92%E8%89%B2.md`, and paid tokens on every
+	 * keystroke to say nothing. The `basename` fallback below already decodes;
+	 * only the slice was missed.
 	 */
 	getRelativePath(doc: TextDocumentIdentifier): string | undefined {
 		if (doc.uri.startsWith('untitled:')) {
@@ -274,7 +283,7 @@ export abstract class TextDocumentManager implements ICompletionsTextDocumentMan
 				.replace(/[#?].*/, '')
 				.replace(/\/?$/, '/');
 			if (uri.startsWith(parentURI)) {
-				return uri.slice(parentURI.length);
+				return percentDecode(uri.slice(parentURI.length)); // NOVEL-BUILDER
 			}
 		}
 		return basename(uri);

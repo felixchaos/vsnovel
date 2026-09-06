@@ -10,6 +10,7 @@ import { ICompletionsFeaturesService } from '../../experiments/featuresService';
 import { ICompletionsLogTargetService } from '../../logger';
 import { TelemetryWithExp } from '../../telemetry';
 import { ICompletionsTextDocumentManagerService } from '../../textDocumentManager';
+import { percentDecode } from '../../util/uri'; // NOVEL-BUILDER
 import { OpenTabFiles } from './openTabFiles';
 import { getRelatedFilesAndTraits, relatedFilesLogger, RelatedFileTrait } from './relatedFiles';
 
@@ -200,7 +201,11 @@ export class NeighborSource {
 			.replace(/[#?].*/, '')
 			.replace(/\/?$/, '/');
 		if (fileUri.toString().startsWith(parentURI)) {
-			return fileUri.toString().slice(parentURI.length);
+			// NOVEL-BUILDER: decoded for the same reason the basename branch
+			// below is — this path is a headline in the prompt, and a
+			// manuscript's paths are non-ASCII. See
+			// textDocumentManager.getRelativePath.
+			return percentDecode(fileUri.toString().slice(parentURI.length));
 		}
 		return NeighborSource.basename(fileUri);
 	}

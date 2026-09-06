@@ -23,7 +23,10 @@ function decodeURIComponentGraceful(str: string): string {
 	}
 }
 const _rEncodedAsHex = /(%[0-9A-Za-z][0-9A-Za-z])+/g;
-function percentDecode(str: string): string {
+// NOVEL-BUILDER: exported. `basename` below already decodes; the two callers
+// that slice a relative path out of a URI did not, and a manuscript's paths are
+// entirely non-ASCII. See textDocumentManager.getRelativePath.
+export function percentDecode(str: string): string {
 	if (!str.match(_rEncodedAsHex)) {
 		return str;
 	}
